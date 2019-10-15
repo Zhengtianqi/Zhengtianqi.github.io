@@ -6,25 +6,25 @@
   <meta name="keywords" content=" java , 多线程 ">
   <meta name="description" content="池化之线程池 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta name="description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 <meta name="keywords" content="并发,线程安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SimpleDateFormat引发的线程安全问题">
 <meta property="og:url" content="https://zhengtianqi.github.io/2019/10/12/SimpleDateFormat引发的线程安全问题/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta property="og:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-12T12:08:31.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SimpleDateFormat引发的线程安全问题">
-<meta name="twitter:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta name="twitter:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 
 
 <link rel="icon" href="/img/avatar.jpg">
 
 <link href="/css/style.css?v=1.0.1" rel="stylesheet">
 
-<link href="/css/hl_theme/github.css?v=1.0.1" rel="stylesheet">
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
 
 <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -183,7 +183,7 @@
     <div></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="22.8k">
+<input type="hidden" id="yelog_site_word_count" value="22.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -233,15 +233,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">maven</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">锁</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -319,11 +319,27 @@
         </a>
         
         <a  class="网络 "
+           href="/2019/08/30/TCP握手、挥手协议/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+        </a>
+        
+        <a  class="网络 "
            href="/2019/08/30/TCP-IP四层网络模型/"
            data-tag="TCP/IP"
            data-author="" >
             <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
             <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/mysql表设计及优化/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
         </a>
         
         <a  class="软件管理 "
@@ -342,28 +358,28 @@
             <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/TCP握手、挥手协议/"
-           data-tag="TCP/IP"
-           data-author="" >
-            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
-            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/mysql表设计及优化/"
-           data-tag="mysql"
-           data-author="" >
-            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
-            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/偏向锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="偏向锁">偏向锁</span>
             <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="可信 "
@@ -382,44 +398,12 @@
             <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
-        </a>
-        
         <a  class="可信 "
            href="/2019/09/28/可信与可信计算/"
            data-tag="可信计算"
            data-author="" >
             <span class="post-title" title="可信与可信计算">可信与可信计算</span>
             <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
-           data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
-           data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="锁,mysql"
-           data-author="" >
-            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
-            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -431,11 +415,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/数字签名/"
-           data-tag="可信,加密算法"
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
            data-author="" >
-            <span class="post-title" title="数字签名">数字签名</span>
-            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="可信 "
@@ -444,6 +428,22 @@
            data-author="" >
             <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
             <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/悲观锁、乐观锁/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/数字签名/"
+           data-tag="可信,加密算法"
+           data-author="" >
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -470,36 +470,12 @@
             <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/04/重放攻击/"
-           data-tag="可信,网络安全"
-           data-author="" >
-            <span class="post-title" title="重放攻击">重放攻击</span>
-            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/自旋锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="自旋锁">自旋锁</span>
             <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/轻量级锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="轻量级锁">轻量级锁</span>
-            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/阻塞锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="阻塞锁">阻塞锁</span>
-            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -511,11 +487,35 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/轻量级锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/04/重放攻击/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/锁粗化/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="锁粗化">锁粗化</span>
             <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/阻塞锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -561,7 +561,7 @@
     </div>
     <div class="article-meta">
         
-        <span>字数:556</span>
+        <span>字数:557</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -614,9 +614,17 @@
 <p>进程池、线程池：先启动若干数量的线程，并让这些线程都处于睡眠状态，当需要一个开辟一个线程去做具体的工作时，就会唤醒线程池中的某一个睡眠线程，让它去做具体工作，当工作完成后，线程又处于睡眠状态，而不是将线程销毁。当线程数达到一定数量时，可以在队列中等待。</p>
 <p>内存池：内存池是指程序预先从操作系统申请一块足够大内存，此后，当程序中需要申请内存的时候，不是直接向操作系统申请，而是直接从内存池中获取；同理，当程序释放内存的时候，并不真正将内存返回给操作系统，而是返回内存池。当程序退出(或者特定时间)时，内存池才将之前申请的内存真正释放。</p>
 <h2>2、线程池的创建</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建线程工厂实例</span></span><br><span class="line">ThreadFactory namedThreadFactory = <span class="keyword">new</span> ThreadFactoryBuilder().setNameFormat(<span class="string">"demo-pool-%d"</span>).build();</span><br><span class="line"><span class="comment">// 创建线程池，核心线程数、最大线程数、空闲保持时间、队列长度、拒绝策略可自行定义</span></span><br><span class="line">ExecutorService pool = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>, <span class="number">20</span>, <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">            <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">1024</span>), namedThreadFactory, <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">// 创建线程工厂实例
+ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat(&quot;demo-pool-%d&quot;).build();
+// 创建线程池，核心线程数、最大线程数、空闲保持时间、队列长度、拒绝策略可自行定义
+ExecutorService pool = new ThreadPoolExecutor(5, 20, 0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue&lt;Runnable&gt;(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+</code></pre>
 <h2>3、线程池的关闭</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService pool=...；</span><br><span class="line">pool.shutdown();   <span class="comment">//用于线程内无迭代，且预期在短时间内能执行完毕的线程任务；</span></span><br><span class="line">pool.shutdownNow();<span class="comment">//用于线程内有迭代逻辑，或执行完成时间无法预估的场景（此类线程任务代码必须进行中断信号的处理）；</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">ExecutorService pool=...；
+pool.shutdown();   //用于线程内无迭代，且预期在短时间内能执行完毕的线程任务；
+pool.shutdownNow();//用于线程内有迭代逻辑，或执行完成时间无法预估的场景（此类线程任务代码必须进行中断信号的处理）；
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -631,7 +639,7 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>池化之线程池</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">556</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">557</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
     <p><span class="copy-title">发布时间:</span>2019-09-01, 10:14:00</p>
     <p><span class="copy-title">最后更新:</span>2019-10-15, 18:04:50</p>
@@ -717,7 +725,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#并发','#线程安全','#TCP/IP','#maven','#锁','#mysql','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
+            'data': ['#git','#并发','#线程安全','#TCP/IP','#mysql','#maven','#锁','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
@@ -883,16 +891,6 @@
     }
     
 
-    
-    .post .pjax article :not(pre) > code {
-        color: #24292e;
-        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-        background-color: rgba(27,31,35,.05);
-        border-radius: 3px;
-        font-size: 85%;
-        margin: 0;
-        padding: .2em .4em;
-    }
     
 </style>
 

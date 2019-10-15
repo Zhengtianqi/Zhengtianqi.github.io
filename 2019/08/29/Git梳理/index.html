@@ -6,25 +6,25 @@
   <meta name="keywords" content=" git ">
   <meta name="description" content="Git梳理 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta name="description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 <meta name="keywords" content="并发,线程安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SimpleDateFormat引发的线程安全问题">
 <meta property="og:url" content="https://zhengtianqi.github.io/2019/10/12/SimpleDateFormat引发的线程安全问题/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta property="og:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-12T12:08:31.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SimpleDateFormat引发的线程安全问题">
-<meta name="twitter:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 123456789101112131415161718192021222324252627282930import java.text.ParseException;import java.text.SimpleDateFormat;import java.util.Date;/** * @author zhengtianqi * @da">
+<meta name="twitter:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
 
 
 <link rel="icon" href="/img/avatar.jpg">
 
 <link href="/css/style.css?v=1.0.1" rel="stylesheet">
 
-<link href="/css/hl_theme/github.css?v=1.0.1" rel="stylesheet">
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
 
 <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -183,7 +183,7 @@
     <div></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="22.8k">
+<input type="hidden" id="yelog_site_word_count" value="22.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -233,15 +233,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">maven</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">锁</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -319,11 +319,27 @@
         </a>
         
         <a  class="网络 "
+           href="/2019/08/30/TCP握手、挥手协议/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+        </a>
+        
+        <a  class="网络 "
            href="/2019/08/30/TCP-IP四层网络模型/"
            data-tag="TCP/IP"
            data-author="" >
             <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
             <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/mysql表设计及优化/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
         </a>
         
         <a  class="软件管理 "
@@ -342,28 +358,28 @@
             <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/TCP握手、挥手协议/"
-           data-tag="TCP/IP"
-           data-author="" >
-            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
-            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/mysql表设计及优化/"
-           data-tag="mysql"
-           data-author="" >
-            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
-            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/偏向锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="偏向锁">偏向锁</span>
             <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="可信 "
@@ -382,44 +398,12 @@
             <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
-        </a>
-        
         <a  class="可信 "
            href="/2019/09/28/可信与可信计算/"
            data-tag="可信计算"
            data-author="" >
             <span class="post-title" title="可信与可信计算">可信与可信计算</span>
             <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
-           data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
-           data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="锁,mysql"
-           data-author="" >
-            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
-            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -431,11 +415,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/数字签名/"
-           data-tag="可信,加密算法"
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
            data-author="" >
-            <span class="post-title" title="数字签名">数字签名</span>
-            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="可信 "
@@ -444,6 +428,22 @@
            data-author="" >
             <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
             <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/悲观锁、乐观锁/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/数字签名/"
+           data-tag="可信,加密算法"
+           data-author="" >
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -470,36 +470,12 @@
             <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/04/重放攻击/"
-           data-tag="可信,网络安全"
-           data-author="" >
-            <span class="post-title" title="重放攻击">重放攻击</span>
-            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/自旋锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="自旋锁">自旋锁</span>
             <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/轻量级锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="轻量级锁">轻量级锁</span>
-            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/阻塞锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="阻塞锁">阻塞锁</span>
-            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -511,11 +487,35 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/轻量级锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/04/重放攻击/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/锁粗化/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="锁粗化">锁粗化</span>
             <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/阻塞锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -637,18 +637,34 @@
 <p>​    配置个人的用户名称和电子邮件地址：</p>
 <p>​    右键打开git bash命令行（如果设置了git的系统环境变量，就可以直接使用cmd命令行进行git操作）</p>
 <p>​        a）设置Git端上的用户名和用户邮箱（公司邮箱）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"yourname"</span></span><br><span class="line">$ git config --global user.email       <span class="string">"yourname@xxxx.com"</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">$ git config --global user.name &quot;yourname&quot;
+$ git config --global user.email       &quot;yourname@xxxx.com&quot;
+</code></pre>
 <p>​        b）生成ssh公钥和私钥</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -keygen -t rsa -C       <span class="string">"yourname@xxxx.com"</span></span><br><span class="line">一路回车</span><br><span class="line">C:/Users/admin/.ssh会生成一个id_rsa.pub公钥文件</span><br><span class="line">word打开id_rsa.pub将公钥添加进GitLab -&gt; Profile Settings -&gt; SSH Keys</span><br><span class="line">添加成功钉邮中会收到SSH key was added to your account邮件</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">$ ssh -keygen -t rsa -C       &quot;yourname@xxxx.com&quot;
+一路回车
+C:/Users/admin/.ssh会生成一个id_rsa.pub公钥文件
+word打开id_rsa.pub将公钥添加进GitLab -&gt; Profile Settings -&gt; SSH Keys
+添加成功钉邮中会收到SSH key was added to your account邮件
+</code></pre>
 <h3>2）查看配置</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">        $ git config --list 
+</code></pre>
 <h3>3）创建仓库</h3>
 <p>​        a）$ git clone：这是一种较为简单的初始化方式，当你已经有一个远程的Git版本库，只需要在本地克隆一份。</p>
 <p>例：$ git  clone  http://zzzzz.git   // 'http://zzzzzz.git'  这个URL地址的远程版本库，完全克隆到本地demo目录下</p>
 <p>​	注：git clone 时，可以所用不同的协议，包括 ssh, git, https 等，其中最常用的是 ssh，因为速度较快，还可以配置公钥免输入密码。</p>
 <p>​        b）$ git init 和 $  git remote：这种方式稍微复杂一些，当你本地创建了一个工作目录，你可以进入这个目录，使用'git init'命令进行初始化；Git以后就会对该目录下的文件进行版本控制，</p>
 <p>​	这时候如果你需要将它放到远程服务器上，可以在远程服务器gitlab上创建一个目录，并把可访问的URL记录下来，此时你就可以利用'git remote add'命令来增加一个远程服务器端。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">$ git init   <span class="comment">// 该命令执行完后会在当前目录生成一个 .git 目录。 </span></span><br><span class="line">$ git add .   <span class="comment">// 是将当前更改或者新增的文件加入到Git的索引中，加入到Git的索引中就表示记入了版本历史中，这也是提交之前所需要执行的一步 </span></span><br><span class="line">$ touch README.md   <span class="comment">// 初始化一个README.md文件 </span></span><br><span class="line">$ git commit -m <span class="string">"初始化项目版本"</span>   <span class="comment">// 提交当前工作空间的修改内容 </span></span><br><span class="line">$ git remote add origin  git<span class="meta">@git</span>.gag.cn:yourname/demo.git   <span class="comment">// 关联远程仓库 </span></span><br><span class="line">$ git push -u origin master   <span class="comment">// 将操作提交到gitlab </span></span><br><span class="line">$ git log   <span class="comment">// 查看历史日志</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">例：
+$ git init   // 该命令执行完后会在当前目录生成一个 .git 目录。 
+$ git add .   // 是将当前更改或者新增的文件加入到Git的索引中，加入到Git的索引中就表示记入了版本历史中，这也是提交之前所需要执行的一步 
+$ touch README.md   // 初始化一个README.md文件 
+$ git commit -m &quot;初始化项目版本&quot;   // 提交当前工作空间的修改内容 
+$ git remote add origin  git@git.gag.cn:yourname/demo.git   // 关联远程仓库 
+$ git push -u origin master   // 将操作提交到gitlab 
+$ git log   // 查看历史日志 
+</code></pre>
 <h3>4）基本操作</h3>
 <h4>a）远程仓库相关命令</h4>
 <p>检出仓库： $ git clone http:/zzzzzzzz.git</p>
@@ -659,7 +675,10 @@
 <p>拉取远程仓库：$ git pull [remoteName]       [localBranchName]   // 从其他的版本库（既可以是远程的也可以是本地的）将代码更新到本地，例如：'git pull origin master'就是将origin这个版本库的代码更新到本地的master主枝</p>
 <p>推送远程仓库：$ git push [remoteName]       [localBranchName]    // 将本地commit的代码更新到远程版本库中，例如'git push origin'就会将本地的代码更新到名为orgin的远程版本库中</p>
 <p>如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git push origin test:master    <span class="comment">// 提交本地test分支作为远程的master分支 </span></span><br><span class="line"></span><br><span class="line">$git push origin test:test    <span class="comment">// 提交本地test分支作为远程的test分支</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">$git push origin test:master    // 提交本地test分支作为远程的master分支 
+
+$git push origin test:test    // 提交本地test分支作为远程的test分支 
+</code></pre>
 <h4>b）分支(branch)操作相关命令</h4>
 <p>查看本地分支：$ git branch          // 列出本地所有的分支 对分支的增、删、查等操作，例如'git branch       new_branch'会从当前的工作版本创建一个叫做new_branch的新分支，'git branch -D new_branch'就会强制删除叫做new_branch的分支</p>
 <p>查看远程分支：$ git branch -r</p>
@@ -690,7 +709,14 @@ $git clean -fdx</p>
 <p>初始化子模块：$ git submodule init        ----只在首次检出仓库时运行一次就行</p>
 <p>更新子模块：$ git submodule update ----每次更新或切换分支后都需要运行一下</p>
 <p>删除子模块：（分4步走）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>)$ git rm --cached [path]</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>)编辑“.gitmodules”文件，将子模块的相关配置节点删除掉</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>)编辑“ .git/config”文件，将子模块的相关配置节点删除掉</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>)手动删除子模块残留的目录</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">	1)$ git rm --cached [path]
+
+	2)编辑“.gitmodules”文件，将子模块的相关配置节点删除掉
+
+	3)编辑“ .git/config”文件，将子模块的相关配置节点删除掉
+
+	4)手动删除子模块残留的目录
+</code></pre>
 <h4>e）补充</h4>
 <p>更改或者新增的文件：$ git add          // 是将当前更改或者新增的文件加入到Git的索引中，加入到Git的索引中就表示记入了版本历史中，这也是提交之前所需要执行的一步，例如'git       add app/model/user.rb'就会增加app/model/user.rb文件到Git的索引中</p>
 <p>删除文件：$ git rm    // 从当前的工作空间中和索引中删除文件，例如'git rm app/model/user.rb'</p>
@@ -698,12 +724,18 @@ $git clean -fdx</p>
 <p>还原：$ git revert          // 还原一个版本的修改，必须提供一个具体的Git版本号，例如'git revert bbaf6fb5060b4875b18ff9ff637ce118256d6f20'，Git的版本号都是生成的一个哈希值</p>
 <p>提交：$ git commit    //       当前工作空间的修改内容</p>
 <p>强制pull</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all </span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">git fetch --all 
+git reset --hard origin/master
+git pull
+</code></pre>
 <p>强制push</p>
 <p>push -u [url]</p>
 <h4>f）忽略一些文件、文件夹不提交</h4>
 <p>​              在仓库根目录下创建名称为“.gitignore”的文件，写入不需要的文件夹名或文件，每个元素占一行即可，如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target</span><br><span class="line">bin</span><br><span class="line">*.db</span><br></pre></td></tr></table></figure>
+<pre><code class="language-java">target
+bin
+*.db
+</code></pre>
 <h3>5)解决冲突</h3>
 <p>​        IDEA  -&gt;   VCS  -&gt; git  -&gt;  Branches  -&gt;   选中需要合并的远程分支  - &gt;  Rebase current onto selected</p>
 
@@ -806,7 +838,7 @@ $git clean -fdx</p>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#并发','#线程安全','#TCP/IP','#maven','#锁','#mysql','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
+            'data': ['#git','#并发','#线程安全','#TCP/IP','#mysql','#maven','#锁','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
@@ -972,16 +1004,6 @@ $git clean -fdx</p>
     }
     
 
-    
-    .post .pjax article :not(pre) > code {
-        color: #24292e;
-        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-        background-color: rgba(27,31,35,.05);
-        border-radius: 3px;
-        font-size: 85%;
-        margin: 0;
-        padding: .2em .4em;
-    }
     
 </style>
 
