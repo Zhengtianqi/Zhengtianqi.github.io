@@ -6,18 +6,18 @@
   <meta name="keywords" content=" 锁 ">
   <meta name="description" content="偏向锁 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
-<meta name="keywords" content="并发,线程安全">
+<meta name="description" content="​	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话： 一、Stream（流） Stream（流）是一个来自数据源的元素队列并支持聚合操作 数据源是流的来源。 数据源可以是集合，数组，I/O channel等 优点：  内部迭代：通过访问者模式(Visitor)实现 Pipelining：中间操作都会返回流对象本身 聚合操作：类似SQL语句一样的操作">
+<meta name="keywords" content="JDK1.8新特性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SimpleDateFormat引发的线程安全问题">
-<meta property="og:url" content="https://zhengtianqi.github.io/2019/10/12/SimpleDateFormat引发的线程安全问题/index.html">
+<meta property="og:title" content="java8新特性">
+<meta property="og:url" content="https://zhengtianqi.github.io/2019/11/14/java8新特性/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
+<meta property="og:description" content="​	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话： 一、Stream（流） Stream（流）是一个来自数据源的元素队列并支持聚合操作 数据源是流的来源。 数据源可以是集合，数组，I/O channel等 优点：  内部迭代：通过访问者模式(Visitor)实现 Pipelining：中间操作都会返回流对象本身 聚合操作：类似SQL语句一样的操作">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-12T12:08:31.315Z">
+<meta property="og:updated_time" content="2019-11-14T08:19:33.368Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SimpleDateFormat引发的线程安全问题">
-<meta name="twitter:description" content="一、问题产生 ​	在写java程序时，有时间戳转换的操作。 import java.text.ParseException; import java.text.SimpleDateFormat; import java.util.Date;  /**  * @author zhengtianqi  * @date 2019/10/12  */ public class DateTrans {">
+<meta name="twitter:title" content="java8新特性">
+<meta name="twitter:description" content="​	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话： 一、Stream（流） Stream（流）是一个来自数据源的元素队列并支持聚合操作 数据源是流的来源。 数据源可以是集合，数组，I/O channel等 优点：  内部迭代：通过访问者模式(Visitor)实现 Pipelining：中间操作都会返回流对象本身 聚合操作：类似SQL语句一样的操作">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -122,7 +122,15 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(27)</small></div></li>
+    <li><div class="all active">全部文章<small>(28)</small></div></li>
+    
+        
+            
+            <li><div data-rel="网络">网络<small>(3)</small></div>
+                
+            </li>
+            
+        
     
         
             
@@ -134,15 +142,7 @@
     
         
             
-            <li><div data-rel="java基础">java基础<small>(12)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="网络">网络<small>(3)</small></div>
+            <li><div data-rel="java基础">java基础<small>(13)</small></div>
                 
             </li>
             
@@ -158,7 +158,7 @@
     
         
             
-            <li><div data-rel="可信">可信<small>(7)</small></div>
+            <li><div data-rel="分布式">分布式<small>(1)</small></div>
                 
             </li>
             
@@ -166,7 +166,7 @@
     
         
             
-            <li><div data-rel="分布式">分布式<small>(1)</small></div>
+            <li><div data-rel="可信">可信<small>(7)</small></div>
                 
             </li>
             
@@ -182,8 +182,8 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="22.7k">
+<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_word_count" value="24k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -217,19 +217,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">TCP/IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">git</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">线程安全</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">TCP/IP</a>
+        <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -238,6 +234,10 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">分布式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -253,7 +253,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">分布式</a>
+        <a href="javascript:" class="color3">并发</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">线程安全</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -302,22 +306,6 @@
     
     <nav id="title-list-nav">
         
-        <a  class="软件管理 "
-           href="/2019/08/29/Git梳理/"
-           data-tag="git"
-           data-author="" >
-            <span class="post-title" title="Git梳理">Git梳理</span>
-            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
-           data-tag="并发,线程安全"
-           data-author="" >
-            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
-            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
-        </a>
-        
         <a  class="网络 "
            href="/2019/08/30/TCP握手、挥手协议/"
            data-tag="TCP/IP"
@@ -326,12 +314,28 @@
             <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
         </a>
         
+        <a  class="软件管理 "
+           href="/2019/08/29/Git梳理/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
+        </a>
+        
         <a  class="网络 "
            href="/2019/08/30/TCP-IP四层网络模型/"
            data-tag="TCP/IP"
            data-author="" >
             <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
             <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/11/14/java8新特性/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
         </a>
         
         <a  class="数据库 "
@@ -348,6 +352,14 @@
            data-author="" >
             <span class="post-title" title="maven梳理">maven梳理</span>
             <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+        </a>
+        
+        <a  class="分布式 "
+           href="/2019/10/09/分布式全局唯一ID生成策略/"
+           data-tag="分布式"
+           data-author="" >
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
         <a  class="java基础 "
@@ -375,6 +387,22 @@
         </a>
         
         <a  class="可信 "
+           href="/2019/09/02/加密解密/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
+           data-tag="并发,线程安全"
+           data-author="" >
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
+        </a>
+        
+        <a  class="可信 "
            href="/2019/09/01/可信基本概念/"
            data-tag="可信"
            data-author="" >
@@ -383,27 +411,19 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/02/加密解密/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="加密解密">加密解密</span>
-            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
-        </a>
-        
-        <a  class="分布式 "
-           href="/2019/10/09/分布式全局唯一ID生成策略/"
-           data-tag="分布式"
-           data-author="" >
-            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
-            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
-        </a>
-        
-        <a  class="可信 "
            href="/2019/09/28/可信与可信计算/"
            data-tag="可信计算"
            data-author="" >
             <span class="post-title" title="可信与可信计算">可信与可信计算</span>
             <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/24/图解公钥与私钥/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="java基础 "
@@ -420,14 +440,6 @@
            data-author="" >
             <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
             <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/24/图解公钥与私钥/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
-            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="数据库 "
@@ -462,20 +474,12 @@
             <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/理解IO阻塞与非阻塞/"
-           data-tag="IO,阻塞与非阻塞"
-           data-author="" >
-            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
-            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
-        </a>
-        
         <a  class="java基础 "
-           href="/2019/08/31/自旋锁/"
+           href="/2019/08/31/轻量级锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="自旋锁">自旋锁</span>
-            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -487,11 +491,19 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/轻量级锁/"
+           href="/2019/08/31/自旋锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="轻量级锁">轻量级锁</span>
-            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+            <span class="post-title" title="自旋锁">自旋锁</span>
+            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2019/08/30/理解IO阻塞与非阻塞/"
+           data-tag="IO,阻塞与非阻塞"
+           data-author="" >
+            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
+            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
         <a  class="可信 "
@@ -554,7 +566,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-08-31 13:41:58'>2019-08-31 13:22</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-15 20:55:26'>2019-08-31 13:22</time>
         
     </div>
     <div class="article-meta">
@@ -633,16 +645,12 @@ LockObject lockObject = new LockObject();
  }
 </code></pre>
 <p>​    **1）**当我们创建一个对象LockObject时，该对象的部分Markword关键数据如下。</p>
-<p>| <strong>bit fields</strong> | <strong>是否偏向锁</strong> | <strong>锁标志位</strong> |
-| -------------- | -------------- | ------------ |
-| hash           | 0              | 01           |</p>
+<p><img src="/img/%E9%94%81%E7%9A%84%E5%88%9B%E5%BB%BA.png" alt="1571144064662"></p>
 <p>​         从图中可以看出，偏向锁的标志位是“01”，状态是“0”，表示该对象还没有被加上偏向锁。（“1”是表示被加上偏向锁）。</p>
 <p>​         该对象被创建出来的那一刻，就有了偏向锁的标志位，这也说明了所有对象都是可偏向的，但所有对象的状态都为“0”，也同时说明所有被创建的对象的偏向锁并没有生效。</p>
 <p>​    **2）**不过，当线程执行到临界区（critical section）时，此时会利用CAS(Compare and Swap)操作，将线程ID插入到Markword中，同时修改偏向锁的标志位。</p>
 <p>​          此时的Mark word的结构信息如下：</p>
-<p>| <strong>bit fields</strong> |       | <strong>是否偏向锁</strong> | <strong>锁标志位</strong> |
-| -------------- | ----- | -------------- | ------------ |
-| hash           | epoch | 1              | 01           |</p>
+<p><img src="/img/%E9%94%81%E7%9A%84%E5%88%9B%E5%BB%BA2.png" alt="1571144092579"></p>
 <p>​          此时偏向锁的状态为“1”，说明对象的偏向锁生效了，同时也可以看到，哪个线程获得了该对象的锁。</p>
 <p>​    **3）**这个锁会偏向于第一个获得它的线程，在接下来的执行过程中，假如该锁没有被其他线程所获取，没有其他线程来竞争该锁，那么持有偏向锁的线程将永远不需要进行同步操作。</p>
 <p>​    **4）**在此线程之后的执行过程中，如果再次进入或者退出同一段同步块代码，并不再需要去进行加锁或者解锁操作，而是会做以下的步骤：</p>
@@ -669,7 +677,7 @@ LockObject lockObject = new LockObject();
     <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
     <p><span class="copy-title">发布时间:</span>2019-08-31, 13:22:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-08-31, 13:41:58</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-15, 20:55:26</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/31/偏向锁/" title="偏向锁">https://zhengtianqi.github.io/2019/08/31/偏向锁/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -752,7 +760,7 @@ LockObject lockObject = new LockObject();
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#并发','#线程安全','#TCP/IP','#mysql','#maven','#锁','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
+            'data': ['#TCP/IP','#git','#JDK1.8新特性','#mysql','#maven','#分布式','#锁','#可信','#密码学','#并发','#线程安全','#可信计算','#可靠','#容错','#加密算法','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
