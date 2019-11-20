@@ -6,12 +6,13 @@
   <meta name="keywords" content=" TCP/IP ">
   <meta name="description" content="TCP IP四层网络模型 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
+<meta name="description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="君莫笑">
+<meta property="og:title" content="mysql排序">
 <meta property="og:url" content="https://zhengtianqi.github.io/2019/11/20/mysql排序/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
+<meta property="og:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F1.png">
 <meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F2.png">
@@ -19,10 +20,10 @@
 <meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F4.png">
 <meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F5.png">
 <meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F6.png">
-<meta property="og:updated_time" content="2019-11-20T12:57:59.718Z">
+<meta property="og:updated_time" content="2019-11-20T13:00:51.883Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="君莫笑">
-<meta name="twitter:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
+<meta name="twitter:title" content="mysql排序">
+<meta name="twitter:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分">
 <meta name="twitter:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F1.png">
 
 
@@ -132,14 +133,6 @@
     
         
             
-            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="java基础">java基础<small>(16)</small></div>
                 
             </li>
@@ -156,7 +149,7 @@
     
         
             
-            <li><div data-rel="数据库">数据库<small>(2)</small></div>
+            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
                 
             </li>
             
@@ -164,7 +157,7 @@
     
         
             
-            <li><div data-rel="分布式">分布式<small>(1)</small></div>
+            <li><div data-rel="数据库">数据库<small>(3)</small></div>
                 
             </li>
             
@@ -173,6 +166,14 @@
         
             
             <li><div data-rel="可信">可信<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="分布式">分布式<small>(1)</small></div>
                 
             </li>
             
@@ -223,23 +224,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">git</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">spring</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">线程安全</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">TCP/IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">git</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -251,11 +244,23 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">锁</a>
+        <a href="javascript:" class="color3">并发</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">线程安全</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">锁</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">可信计算</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -264,10 +269,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">可信</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">可信计算</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -295,6 +296,14 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">多线程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">IO</a>
     </li>
     
@@ -307,14 +316,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">java</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">多线程</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">网络安全</a>
     </li>
     
@@ -324,14 +325,6 @@
     
     <nav id="title-list-nav">
         
-        <a  class="软件管理 "
-           href="/2019/08/29/Git梳理/"
-           data-tag="git"
-           data-author="" >
-            <span class="post-title" title="Git梳理">Git梳理</span>
-            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/11/14/Spring-Bean生命周期/"
            data-tag="spring"
@@ -340,20 +333,20 @@
             <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
-           data-tag="并发,线程安全"
-           data-author="" >
-            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
-            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
-        </a>
-        
         <a  class="网络 "
            href="/2019/08/30/TCP-IP四层网络模型/"
            data-tag="TCP/IP"
            data-author="" >
             <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
             <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="软件管理 "
+           href="/2019/08/29/Git梳理/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
         </a>
         
         <a  class="网络 "
@@ -381,19 +374,19 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/互斥锁/"
-           data-tag="锁"
+           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
+           data-tag="并发,线程安全"
            data-author="" >
-            <span class="post-title" title="互斥锁">互斥锁</span>
-            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
         </a>
         
-        <a  class=""
+        <a  class="数据库 "
            href="/2019/11/20/mysql排序/"
-           data-tag=""
+           data-tag="mysql"
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2019-11-20 20:35:29">2019/11/20</span>
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
         </a>
         
         <a  class="数据库 "
@@ -413,6 +406,22 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/互斥锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/28/可信与可信计算/"
+           data-tag="可信计算"
+           data-author="" >
+            <span class="post-title" title="可信与可信计算">可信与可信计算</span>
+            <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/公平锁、非公平锁/"
            data-tag="锁"
            data-author="" >
@@ -429,22 +438,6 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
-           data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/28/可信与可信计算/"
-           data-tag="可信计算"
-           data-author="" >
-            <span class="post-title" title="可信与可信计算">可信与可信计算</span>
-            <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
-        </a>
-        
-        <a  class="可信 "
            href="/2019/09/02/加密解密/"
            data-tag="可信,密码学"
            data-author="" >
@@ -453,11 +446,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
            data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -469,11 +462,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/24/图解公钥与私钥/"
-           data-tag="可信,密码学"
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
            data-author="" >
-            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
-            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="可信 "
@@ -482,6 +475,14 @@
            data-author="" >
             <span class="post-title" title="数字签名">数字签名</span>
             <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/24/图解公钥与私钥/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="java基础 "
@@ -494,7 +495,7 @@
         
         <a  class="数据库 "
            href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="锁,mysql"
+           data-tag="mysql,锁"
            data-author="" >
             <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
             <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
@@ -506,6 +507,14 @@
            data-author="" >
             <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
             <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/09/01/池化之线程池/"
+           data-tag="java,多线程"
+           data-author="" >
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
         </a>
         
         <a  class="网络 "
@@ -533,27 +542,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/09/01/池化之线程池/"
-           data-tag="java,多线程"
-           data-author="" >
-            <span class="post-title" title="池化之线程池">池化之线程池</span>
-            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
-        </a>
-        
-        <a  class="java基础 "
            href="/2019/08/31/读写锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="读写锁">读写锁</span>
             <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/阻塞锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="阻塞锁">阻塞锁</span>
-            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -578,6 +571,14 @@
            data-author="" >
             <span class="post-title" title="锁粗化">锁粗化</span>
             <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/阻塞锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -786,7 +787,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#spring','#并发','#线程安全','#TCP/IP','#JDK1.8新特性','#maven','#锁','#mysql','#分布式','#可信','#可信计算','#密码学','#可靠','#容错','#加密算法','#内存模型','#文件上传','#IO','#阻塞与非阻塞','#线程','#java','#多线程','#网络安全',],
+            'data': ['#spring','#TCP/IP','#git','#JDK1.8新特性','#maven','#并发','#线程安全','#mysql','#锁','#可信计算','#分布式','#可信','#密码学','#可靠','#容错','#加密算法','#内存模型','#文件上传','#java','#多线程','#IO','#阻塞与非阻塞','#线程','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
