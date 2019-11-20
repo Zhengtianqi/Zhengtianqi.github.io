@@ -6,26 +6,24 @@
   <meta name="keywords" content=" 分布式 ">
   <meta name="description" content="分布式全局唯一ID生成策略 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="​	我们知道在Java中基本数据类型的大小，例如int类型占4个字节、long类型占8个字节，那么Integer对象和Long对象会占用多少内存呢？ ​	一、对象存储： ​	一个Java对象在内存中包括对象头、实例数据和补齐填充3个部分：  ​ ​	(1) 对齐填充 : ​	Java对象占用空间是8字节对齐的，即所有Java对象占用bytes数必须是8的倍数。 ​	例如，一个包含两个属性的对象：i">
-<meta name="keywords" content="内存模型">
+<meta name="description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对象存储与指针压缩">
-<meta property="og:url" content="https://zhengtianqi.github.io/2019/11/20/对象存储与指针压缩/index.html">
+<meta property="og:title" content="君莫笑">
+<meta property="og:url" content="https://zhengtianqi.github.io/2019/11/20/mysql排序/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="​	我们知道在Java中基本数据类型的大小，例如int类型占4个字节、long类型占8个字节，那么Integer对象和Long对象会占用多少内存呢？ ​	一、对象存储： ​	一个Java对象在内存中包括对象头、实例数据和补齐填充3个部分：  ​ ​	(1) 对齐填充 : ​	Java对象占用空间是8字节对齐的，即所有Java对象占用bytes数必须是8的倍数。 ​	例如，一个包含两个属性的对象：i">
+<meta property="og:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A81.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A82.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A83.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A91.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A92.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A93.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A94.png">
-<meta property="og:updated_time" content="2019-11-20T12:03:43.218Z">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F1.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F2.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F3.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F4.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F5.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F6.png">
+<meta property="og:updated_time" content="2019-11-20T12:57:59.718Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对象存储与指针压缩">
-<meta name="twitter:description" content="​	我们知道在Java中基本数据类型的大小，例如int类型占4个字节、long类型占8个字节，那么Integer对象和Long对象会占用多少内存呢？ ​	一、对象存储： ​	一个Java对象在内存中包括对象头、实例数据和补齐填充3个部分：  ​ ​	(1) 对齐填充 : ​	Java对象占用空间是8字节对齐的，即所有Java对象占用bytes数必须是8的倍数。 ​	例如，一个包含两个属性的对象：i">
-<meta name="twitter:image" content="https://zhengtianqi.github.io/img/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A81.png">
+<meta name="twitter:title" content="君莫笑">
+<meta name="twitter:description" content="title: mysql排序 author: 郑天祺 tags:  mysql categories: 数据库 date: 2019-11-20 20:35:00  1、正常的数字排序  2、 当我们需要排序中文时，就是出现问题  ​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。 3、 现在改成gbk_chinese_ci，ci是不区分大">
+<meta name="twitter:image" content="https://zhengtianqi.github.io/img/mysql%E6%8E%92%E5%BA%8F1.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -130,7 +128,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    <li><div class="all active">全部文章<small>(32)</small></div></li>
     
         
             
@@ -190,8 +188,8 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="31">
-<input type="hidden" id="yelog_site_word_count" value="27.2k">
+<input type="hidden" id="yelog_site_posts_number" value="32">
+<input type="hidden" id="yelog_site_word_count" value="27.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -229,6 +227,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">并发</a>
     </li>
     
@@ -241,10 +243,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">spring</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
@@ -253,11 +251,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color2">锁</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">锁</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -269,11 +267,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">密码学</a>
+        <a href="javascript:" class="color5">可信计算</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">可信计算</a>
+        <a href="javascript:" class="color4">密码学</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -285,19 +283,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">内存模型</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">加密算法</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">java</a>
+        <a href="javascript:" class="color5">内存模型</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">多线程</a>
+        <a href="javascript:" class="color5">文件上传</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -309,11 +303,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">文件上传</a>
+        <a href="javascript:" class="color3">线程</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">线程</a>
+        <a href="javascript:" class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">多线程</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -335,6 +333,14 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/11/14/Spring-Bean生命周期/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
+            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
            data-tag="并发,线程安全"
            data-author="" >
@@ -348,14 +354,6 @@
            data-author="" >
             <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
             <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/11/14/Spring-Bean生命周期/"
-           data-tag="spring"
-           data-author="" >
-            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
-            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
         <a  class="网络 "
@@ -382,6 +380,22 @@
             <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
         </a>
         
+        <a  class="java基础 "
+           href="/2019/08/31/互斥锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/11/20/mysql排序/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2019-11-20 20:35:29">2019/11/20</span>
+        </a>
+        
         <a  class="数据库 "
            href="/2019/08/31/mysql表设计及优化/"
            data-tag="mysql"
@@ -391,19 +405,19 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/互斥锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="互斥锁">互斥锁</span>
-            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
            href="/2019/08/31/偏向锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="偏向锁">偏向锁</span>
             <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
         </a>
         
         <a  class="分布式 "
@@ -415,19 +429,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/02/加密解密/"
-           data-tag="可信,密码学"
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
            data-author="" >
-            <span class="post-title" title="加密解密">加密解密</span>
-            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="可信 "
@@ -439,11 +445,19 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
+           href="/2019/09/02/加密解密/"
+           data-tag="可信,密码学"
            data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
+           data-author="" >
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="java基础 "
@@ -463,11 +477,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
+           href="/2019/09/01/数字签名/"
+           data-tag="可信,加密算法"
            data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -480,26 +494,18 @@
         
         <a  class="数据库 "
            href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="mysql,锁"
+           data-tag="锁,mysql"
            data-author="" >
             <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
             <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/01/数字签名/"
-           data-tag="可信,加密算法"
-           data-author="" >
-            <span class="post-title" title="数字签名">数字签名</span>
-            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
-        </a>
-        
         <a  class="java基础 "
-           href="/2019/09/01/池化之线程池/"
-           data-tag="java,多线程"
+           href="/2019/08/31/文件上传/"
+           data-tag="文件上传"
            data-author="" >
-            <span class="post-title" title="池化之线程池">池化之线程池</span>
-            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
         </a>
         
         <a  class="网络 "
@@ -511,11 +517,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/文件上传/"
-           data-tag="文件上传"
+           href="/2019/08/31/自旋锁/"
+           data-tag="锁"
            data-author="" >
-            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
-            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+            <span class="post-title" title="自旋锁">自旋锁</span>
+            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -527,11 +533,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/自旋锁/"
-           data-tag="锁"
+           href="/2019/09/01/池化之线程池/"
+           data-tag="java,多线程"
            data-author="" >
-            <span class="post-title" title="自旋锁">自旋锁</span>
-            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -540,22 +546,6 @@
            data-author="" >
             <span class="post-title" title="读写锁">读写锁</span>
             <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/04/重放攻击/"
-           data-tag="可信,网络安全"
-           data-author="" >
-            <span class="post-title" title="重放攻击">重放攻击</span>
-            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/锁粗化/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="锁粗化">锁粗化</span>
-            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -572,6 +562,22 @@
            data-author="" >
             <span class="post-title" title="轻量级锁">轻量级锁</span>
             <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/04/重放攻击/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/锁粗化/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -816,7 +822,7 @@ mysql中InnoDB表为什么要建议用自增列做主键: https://www.cnblogs.co
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#并发','#线程安全','#TCP/IP','#spring','#JDK1.8新特性','#maven','#mysql','#锁','#分布式','#可信','#密码学','#可信计算','#可靠','#容错','#内存模型','#加密算法','#java','#多线程','#IO','#阻塞与非阻塞','#文件上传','#线程','#网络安全',],
+            'data': ['#git','#spring','#并发','#线程安全','#TCP/IP','#JDK1.8新特性','#maven','#锁','#mysql','#分布式','#可信','#可信计算','#密码学','#可靠','#容错','#加密算法','#内存模型','#文件上传','#IO','#阻塞与非阻塞','#线程','#java','#多线程','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
