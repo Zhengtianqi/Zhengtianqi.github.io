@@ -2,22 +2,22 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>SpringCloud-Alibaba整合Nacos配置中心 | 君莫笑</title>
+  <title>Nacos配置中心使用 | 君莫笑</title>
   <meta name="keywords" content=" nacos-config , SpringCloud ">
-  <meta name="description" content="SpringCloud-Alibaba整合Nacos配置中心 | 君莫笑">
+  <meta name="description" content="Nacos配置中心使用 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="一、启动Nacos Server 1、启动方式可见 Nacos 官网 2、在配置列表里配置自己的配置，按照规范填写各项。 user.name=zhengtianqi user.password=123456  配置后的图：  二、客户端编写 1）常量类 public class Constants {     /**      * 配置中心url      */     public static">
 <meta name="keywords" content="nacos-config,SpringCloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringCloud-Alibaba整合Nacos配置中心">
-<meta property="og:url" content="https://zhengtianqi.github.io/2019/11/25/SpringCloud-Alibaba整合Nacos配置中心/index.html">
+<meta property="og:title" content="Nacos配置中心使用">
+<meta property="og:url" content="https://zhengtianqi.github.io/2019/11/25/Nacos配置中心使用/index.html">
 <meta property="og:site_name" content="君莫笑">
 <meta property="og:description" content="一、启动Nacos Server 1、启动方式可见 Nacos 官网 2、在配置列表里配置自己的配置，按照规范填写各项。 user.name=zhengtianqi user.password=123456  配置后的图：  二、客户端编写 1）常量类 public class Constants {     /**      * 配置中心url      */     public static">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhengtianqi.github.io/img/nacos1.png">
-<meta property="og:updated_time" content="2019-11-25T09:02:04.930Z">
+<meta property="og:updated_time" content="2019-11-25T09:53:02.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringCloud-Alibaba整合Nacos配置中心">
+<meta name="twitter:title" content="Nacos配置中心使用">
 <meta name="twitter:description" content="一、启动Nacos Server 1、启动方式可见 Nacos 官网 2、在配置列表里配置自己的配置，按照规范填写各项。 user.name=zhengtianqi user.password=123456  配置后的图：  二、客户端编写 1）常量类 public class Constants {     /**      * 配置中心url      */     public static">
 <meta name="twitter:image" content="https://zhengtianqi.github.io/img/nacos1.png">
 
@@ -193,7 +193,7 @@
     <div></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="33">
-<input type="hidden" id="yelog_site_word_count" value="28.2k">
+<input type="hidden" id="yelog_site_word_count" value="28.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -247,10 +247,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">JDK1.8新特性</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">nacos-config</a>
     </li>
     
@@ -259,11 +255,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">maven</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -275,6 +271,14 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">可信计算</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">可信</a>
     </li>
     
@@ -283,7 +287,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">可信计算</a>
+        <a href="javascript:" class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">多线程</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -299,19 +307,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">加密算法</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">内存模型</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">java</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">多线程</a>
+        <a href="javascript:" class="color5">加密算法</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -345,11 +345,11 @@
         </a>
         
         <a  class="网络 "
-           href="/2019/08/30/TCP握手、挥手协议/"
+           href="/2019/08/30/TCP-IP四层网络模型/"
            data-tag="TCP/IP"
            data-author="" >
-            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
-            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
+            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
         </a>
         
         <a  class="java基础 "
@@ -368,44 +368,20 @@
             <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/TCP-IP四层网络模型/"
-           data-tag="TCP/IP"
-           data-author="" >
-            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
-            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/11/14/java8新特性/"
-           data-tag="JDK1.8新特性"
-           data-author="" >
-            <span class="post-title" title="java8新特性">java8新特性</span>
-            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
-        </a>
-        
         <a  class="SpringCloud "
-           href="/2019/11/25/SpringCloud-Alibaba整合Nacos配置中心/"
+           href="/2019/11/25/Nacos配置中心使用/"
            data-tag="nacos-config,SpringCloud"
            data-author="" >
-            <span class="post-title" title="SpringCloud-Alibaba整合Nacos配置中心">SpringCloud-Alibaba整合Nacos配置中心</span>
+            <span class="post-title" title="Nacos配置中心使用">Nacos配置中心使用</span>
             <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
         </a>
         
-        <a  class="软件管理 "
-           href="/2019/08/28/maven梳理/"
-           data-tag="maven"
+        <a  class="网络 "
+           href="/2019/08/30/TCP握手、挥手协议/"
+           data-tag="TCP/IP"
            data-author="" >
-            <span class="post-title" title="maven梳理">maven梳理</span>
-            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/mysql表设计及优化/"
-           data-tag="mysql"
-           data-author="" >
-            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
-            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
         </a>
         
         <a  class="数据库 "
@@ -417,11 +393,43 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/互斥锁/"
+           href="/2019/11/14/java8新特性/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="互斥锁">互斥锁</span>
-            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/mysql表设计及优化/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
+        </a>
+        
+        <a  class="分布式 "
+           href="/2019/10/09/分布式全局唯一ID生成策略/"
+           data-tag="分布式"
+           data-author="" >
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
+        </a>
+        
+        <a  class="软件管理 "
+           href="/2019/08/28/maven梳理/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven梳理">maven梳理</span>
+            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
         </a>
         
         <a  class="java基础 "
@@ -433,27 +441,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
+           href="/2019/08/31/互斥锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
-        </a>
-        
-        <a  class="分布式 "
-           href="/2019/10/09/分布式全局唯一ID生成策略/"
-           data-tag="分布式"
-           data-author="" >
-            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
-            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/02/加密解密/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="加密解密">加密解密</span>
-            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
         </a>
         
         <a  class="可信 "
@@ -462,6 +454,14 @@
            data-author="" >
             <span class="post-title" title="可信与可信计算">可信与可信计算</span>
             <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -473,19 +473,27 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
+           href="/2019/09/02/加密解密/"
+           data-tag="可信,密码学"
            data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/09/01/池化之线程池/"
+           data-tag="java,多线程"
+           data-author="" >
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
         </a>
         
         <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
+           href="/2019/09/24/图解公钥与私钥/"
+           data-tag="可信,密码学"
            data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="数据库 "
@@ -497,11 +505,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/24/图解公钥与私钥/"
-           data-tag="可信,密码学"
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
            data-author="" >
-            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
-            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="java基础 "
@@ -512,12 +520,12 @@
             <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/01/数字签名/"
-           data-tag="可信,加密算法"
+        <a  class="java基础 "
+           href="/2019/08/31/读写锁/"
+           data-tag="锁"
            data-author="" >
-            <span class="post-title" title="数字签名">数字签名</span>
-            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+            <span class="post-title" title="读写锁">读写锁</span>
+            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -528,20 +536,12 @@
             <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/09/01/池化之线程池/"
-           data-tag="java,多线程"
+        <a  class="可信 "
+           href="/2019/09/01/数字签名/"
+           data-tag="可信,加密算法"
            data-author="" >
-            <span class="post-title" title="池化之线程池">池化之线程池</span>
-            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/自旋锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="自旋锁">自旋锁</span>
-            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -561,19 +561,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/读写锁/"
+           href="/2019/08/31/自旋锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="读写锁">读写锁</span>
-            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/锁粗化/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="锁粗化">锁粗化</span>
-            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+            <span class="post-title" title="自旋锁">自旋锁</span>
+            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -584,20 +576,28 @@
             <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/04/重放攻击/"
-           data-tag="可信,网络安全"
-           data-author="" >
-            <span class="post-title" title="重放攻击">重放攻击</span>
-            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/阻塞锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="阻塞锁">阻塞锁</span>
             <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/锁粗化/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/04/重放攻击/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
         </a>
         
     </nav>
@@ -612,9 +612,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-SpringCloud-Alibaba整合Nacos配置中心" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Nacos配置中心使用" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">SpringCloud-Alibaba整合Nacos配置中心</h1>
+        <h1 class="article-title">Nacos配置中心使用</h1>
     
     <div class="article-meta">
         
@@ -638,12 +638,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-25 17:02:04'>2019-11-25 16:38</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-25 17:53:02'>2019-11-25 16:38</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:684</span>
+        <span>字数:940</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -673,7 +673,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、启动Nacos Server</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、客户端编写</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、效果</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、启动Nacos Server</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、客户端编写</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、引入的依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">四、效果</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -692,7 +692,7 @@
         <h1>一、启动Nacos Server</h1>
 <p>1、启动方式可见 <a href="https://nacos.io/zh-cn/docs/quick-start.html" target="_blank" rel="noopener">Nacos 官网</a></p>
 <p>2、在配置列表里配置自己的配置，按照规范填写各项。</p>
-<pre><code class="language-properties">user.name=zhengtianqi
+<pre><code class="language-java">user.name=zhengtianqi
 user.password=123456
 </code></pre>
 <p>配置后的图：</p>
@@ -809,7 +809,7 @@ public class NacosUtils {
 
 </code></pre>
 <p>3）配置文件</p>
-<pre><code class="language-yaml">spring:
+<pre><code class="language-java">spring:
   application:
     name: nacos-config-example
     group: sa
@@ -845,7 +845,51 @@ public class NacosConfigExampleApplication {
 
 }
 </code></pre>
-<h1>三、效果</h1>
+<h1>三、引入的依赖</h1>
+<pre><code class="language-java">    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+
+        &lt;spring-cloud-alibaba.version&gt;2.1.1.RELEASE&lt;/spring-cloud-alibaba.version&gt;
+        &lt;spring-cloud-greenwich.version&gt;0.9.0.RELEASE&lt;/spring-cloud-greenwich.version&gt;
+    &lt;/properties&gt;
+        
+    &lt;dependencies&gt;
+		&lt;!--nacos--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.nacos&lt;/groupId&gt;
+            &lt;artifactId&gt;nacos-client&lt;/artifactId&gt;
+            &lt;version&gt;1.1.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+        
+&lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-alibaba-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud-greenwich.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+
+            &lt;dependency&gt;
+                &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-alibaba-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud-alibaba.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+    
+</code></pre>
+<h1>四、效果</h1>
 <pre><code class="language-java">2019-11-25 16:48:12.276  INFO 444 --- [-127.0.0.1_8848] locallog                                 : [../utils/NacosUtils$1.receiveConfigInfo:81][192.168.116.1][] - 修改后的配置ID是：[test-nacos-config.yml]，配置分组是：[DEFAULT_GROUP]获取的配置信息是user.name=zhengtianqi
 user.password=12345678
 </code></pre>
@@ -862,12 +906,12 @@ user.password=12345678
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>SpringCloud-Alibaba整合Nacos配置中心</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">684</span></p>
+    <p><span class="copy-title">文章标题:</span>Nacos配置中心使用</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">940</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
     <p><span class="copy-title">发布时间:</span>2019-11-25, 16:38:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-25, 17:02:04</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/25/SpringCloud-Alibaba整合Nacos配置中心/" title="SpringCloud-Alibaba整合Nacos配置中心">https://zhengtianqi.github.io/2019/11/25/SpringCloud-Alibaba整合Nacos配置中心/</a>
+    <p><span class="copy-title">最后更新:</span>2019-11-25, 17:53:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/25/Nacos配置中心使用/" title="Nacos配置中心使用">https://zhengtianqi.github.io/2019/11/25/Nacos配置中心使用/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -949,7 +993,7 @@ user.password=12345678
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#TCP/IP','#并发','#线程安全','#spring','#JDK1.8新特性','#nacos-config','#SpringCloud','#maven','#mysql','#锁','#分布式','#可信','#密码学','#可信计算','#可靠','#容错','#文件上传','#加密算法','#内存模型','#java','#多线程','#线程','#IO','#阻塞与非阻塞','#网络安全',],
+            'data': ['#git','#TCP/IP','#并发','#线程安全','#spring','#nacos-config','#SpringCloud','#mysql','#JDK1.8新特性','#锁','#分布式','#maven','#可信计算','#可信','#密码学','#java','#多线程','#可靠','#容错','#文件上传','#内存模型','#加密算法','#线程','#IO','#阻塞与非阻塞','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
