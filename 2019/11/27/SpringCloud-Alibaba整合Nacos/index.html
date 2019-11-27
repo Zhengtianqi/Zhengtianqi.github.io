@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>自旋锁 | 君莫笑</title>
-  <meta name="keywords" content=" 锁 ">
-  <meta name="description" content="自旋锁 | 君莫笑">
+  <title>SpringCloud-Alibaba整合Nacos | 君莫笑</title>
+  <meta name="keywords" content=" nacos-config , SpringCloud ">
+  <meta name="description" content="SpringCloud-Alibaba整合Nacos | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="在 Nacos Spring Cloud 中，dataId 的完整格式如下：${prefix}-${spring.profile.active}.${file-extension}    ${prefix} 为dataId的前缀，对应于Client端配置 spring.cloud.nacos.config.prefix 的值，如未配置，则默认对应Client端 spring.application">
 <meta name="keywords" content="nacos-config,SpringCloud">
@@ -621,9 +621,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-自旋锁" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-SpringCloud-Alibaba整合Nacos" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">自旋锁</h1>
+        <h1 class="article-title">SpringCloud-Alibaba整合Nacos</h1>
     
     <div class="article-meta">
         
@@ -631,26 +631,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="java基础">java基础</a>
+                <a href="javascript:" data-rel="SpringCloud">SpringCloud</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color2">锁</a>
+            <a href="javascript:" class="color3">nacos-config</a>
+            
+            <a href="javascript:" class="color2">SpringCloud</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-08-31 12:59:21'>2019-08-31 12:54</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-27 18:02:02'>2019-11-27 17:53</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:754</span>
+        <span>字数:340</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -680,7 +682,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">自旋锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">1、自旋锁概念（spinlock）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">2、自旋锁的优点 :</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">3、自旋锁应用 :</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">4、简单自旋锁的实现 ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">5、可重入的自旋锁和不可重入的自旋锁 ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">6、  另有三种常见的形式 :</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -696,68 +698,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>自旋锁</h1>
-<h2>1、自旋锁概念（spinlock）</h2>
-<p>是指当一个线程在获取锁的时候，如果锁已经被其它线程获取，那么该线程将循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。</p>
-<p>获取锁的线程一直处于活跃状态，但是并没有执行任何有效的任务，使用这种锁会造成busy-waiting。</p>
-<h2>2、自旋锁的优点 :</h2>
-<p>自旋锁不会使线程状态发生切换，一直处于用户态，即线程一直都是active的；不会使线程进入阻塞状态，减少了不必要的上下文切换，执行速度快非自旋锁在获取不到锁的时候会进入阻塞状态，从而进入内核态，当获取到锁的时候需要从内核态恢复，需要线程上下文切换。 （线程被阻塞后便进入内核（Linux）调度状态，这个会导致系统在用户态与内核态之间来回切换，严重影响锁的性能）</p>
-<h2>3、自旋锁应用 :</h2>
-<p>由于自旋锁只是将当前线程不停地执行循环体，不进行线程状态的改变，所以响应速度更快。但当线程数不停增加时，性能下降明显，因为每个线程都需要执行，占用CPU时间。</p>
-<p>如果线程竞争不激烈，并且保持锁的时间段。适合使用自旋锁。</p>
-<h2>4、简单自旋锁的实现 ：</h2>
-<pre><code class="language-java">public class SimpleSpinLock {
-     /**
-      * 持有锁的线程，null表示锁未被线程持有
-      */
-     private static AtomicReference&lt;Thread&gt; ref = new AtomicReference&lt;&gt;();
+        <p>在 Nacos Spring Cloud 中，dataId 的完整格式如下：${prefix}-${spring.profile.active}.${file-extension}</p>
+<ol>
+<li>
+<ol>
+<li>${prefix} 为dataId的前缀，对应于Client端配置 spring.cloud.nacos.config.prefix 的值，如未配置，则默认对应Client端 spring.application.name 配置项的值。</li>
+<li>${file-extension} 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。</li>
+<li>${spring.profile.active} 为为当前环境对应的 profile，如为空，则变为${prefix}-${spring.profile.active}.${file-extension}形式。</li>
+</ol>
+</li>
+</ol>
+<p>建议${prefix}采用类似 package.class的命名规则保证全局唯一性，class 部分建议是配置的业务含义。</p>
+<p>全部字符小写。只允许英文字符和 4 种特殊字符（&quot;.&quot;、&quot;:&quot;、&quot;-&quot;、&quot;_&quot;），不超过 256 字节。</p>
+<p>一、nacos配置</p>
+<p><img src="/img/nacos-springCloud1.png" alt="image-20191127175944755"></p>
+<p><img src="/img/nacos-springCloud2.png" alt="image-20191127180038072"></p>
+<p>二、配置文件</p>
+<p>创建配置文件  bootstrap.yml，并添加基础配置信息：</p>
+<pre><code class="language-java">spring:
+  application:
+    name: nacos-config-example
+  cloud:
+    nacos:
+      config:
+        server-addr: http://192.168.101.147:8848/
+        # config external configuration
+        ext-config:
+          # 1、Data Id (nacos-config-example.mysql-config.properties) 在默认的组 DEFAULT_GROUP,不支持配置的动态刷新
+          - data-id: mysql-config.properties
+          # 2、Data Id (nacos-config-example.es-config.properties) 不在默认的组，支持动态刷新
+          - data-id: es-config.properties
+            group: GLOBALE_GROUP
+            refresh: true
+        encode: utf-8
 
-public void Lock() {
-         Thread currentThread = Thread.currentThread();
-         // 当ref为null的时候compareAndSet返回true，反之为false
-         // 通过循环不断的自旋判断锁是否被其他线程持有
-         while (!ref.compareAndSet(null, currentThread)) {
-         }
-     }
-
-   public void unLock() {
-        Thread currentThread = Thread.currentThread();
-         if (ref.get() != currentThread) {
-         }
-         ref.set(null);
-     }
- }
-
-test：
-
-public class SimpleSpinLockTest {
-
-    private static int n = 0;
-
-    public static void main(String[] args) throws InterruptedException {
-         ThreadPoolExecutor pool = new ThreadPoolExecutor(100, 100, 1, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(), new DefaultNameThreadFactory(&quot;SimpleSpinLock&quot;));
-         CountDownLatch countDownLatch = new CountDownLatch(100);
-         SimpleSpinLock simpleSpinLock = new SimpleSpinLock();
-         for (int i = 0; i &lt; 100; i++) {
-             pool.submit(() -&gt; {
-                 simpleSpinLock.Lock();
-                 n++;
-                 simpleSpinLock.unLock();
-                 // 计数减一
-                 countDownLatch.countDown();
-             });
-         }
-         // 要求主线程等待所有任务全部准备好才一起并行执行
-         countDownLatch.await();
-         System.out.println(n);
-     }
- }
 </code></pre>
-<h2>5、可重入的自旋锁和不可重入的自旋锁 ：</h2>
-<p>仔细分析一下上述就可以看出，它是不支持重入的，即当一个线程第一次已经获取到了该锁，在锁释放之前又一次重新获取该锁，第二次就不能成功获取到。</p>
-<p>由于不满足CAS，所以第二次获取会进入while循环等待，而如果是可重入锁，第二次也是应该能够成功获取到的。为了实现可重入锁，我们需要引入一个计数器，用来记录获取锁的线程数----》其他章节可重入锁</p>
-<h2>6、  另有三种常见的形式 :</h2>
-<p>TicketLock ，CLHlock 和 MCSlock：https://www.cnblogs.com/stevenczp/p/7136416.html</p>
+<p>三、使用变量</p>
+<pre><code class="language-java">    @Value(&quot;jdbc-name&quot;)
+    private String jdbcName;
+    @Value(&quot;jdbc-password&quot;)
+    private String jdbcPassword;
+
+    @Value(&quot;es-name&quot;)
+    private String esName;
+    @Value(&quot;es-password&quot;)
+    private String esPassword;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -771,12 +757,12 @@ public class SimpleSpinLockTest {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>自旋锁</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">754</span></p>
+    <p><span class="copy-title">文章标题:</span>SpringCloud-Alibaba整合Nacos</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">340</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-08-31, 12:54:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-08-31, 12:59:21</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/31/自旋锁/" title="自旋锁">https://zhengtianqi.github.io/2019/08/31/自旋锁/</a>
+    <p><span class="copy-title">发布时间:</span>2019-11-27, 17:53:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-11-27, 18:02:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/27/SpringCloud-Alibaba整合Nacos/" title="SpringCloud-Alibaba整合Nacos">https://zhengtianqi.github.io/2019/11/27/SpringCloud-Alibaba整合Nacos/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
