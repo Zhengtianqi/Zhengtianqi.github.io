@@ -6,20 +6,20 @@
   <meta name="keywords" content=" HDFS , HADOOP ">
   <meta name="description" content="HDFS文件操作 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、读文件 ​	HDFS有一个文件系统实例，客户端通过调用这个实例的open()方法就可以打开系统中希望读取的文件。 ​	HDFS通过RPC调用NameNode获取文件块的位置信息，对于文件的每一个块，NameNode会返回该块副本DataNode的节点地址。 ​	另外，客户端还会根据网络拓扑来确定它与每一个DataNode的位置信息，从离它最近的那个DataNode获取数据块的副本，最理想的情况">
-<meta name="keywords" content="HDFS,HADOOP">
+<meta name="description" content="一、服务注册 1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;">
+<meta name="keywords" content="SpringCloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HDFS文件操作">
-<meta property="og:url" content="https://zhengtianqi.github.io/2019/12/16/HDFS文件操作/index.html">
+<meta property="og:title" content="SpringCloud-Alibaba整合Nacos服务注册发现">
+<meta property="og:url" content="https://zhengtianqi.github.io/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="一、读文件 ​	HDFS有一个文件系统实例，客户端通过调用这个实例的open()方法就可以打开系统中希望读取的文件。 ​	HDFS通过RPC调用NameNode获取文件块的位置信息，对于文件的每一个块，NameNode会返回该块副本DataNode的节点地址。 ​	另外，客户端还会根据网络拓扑来确定它与每一个DataNode的位置信息，从离它最近的那个DataNode获取数据块的副本，最理想的情况">
+<meta property="og:description" content="一、服务注册 1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/hdfs-read-file.png">
-<meta property="og:updated_time" content="2019-12-16T08:18:56.855Z">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/nacos-producer.png">
+<meta property="og:updated_time" content="2019-12-03T08:02:58.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDFS文件操作">
-<meta name="twitter:description" content="一、读文件 ​	HDFS有一个文件系统实例，客户端通过调用这个实例的open()方法就可以打开系统中希望读取的文件。 ​	HDFS通过RPC调用NameNode获取文件块的位置信息，对于文件的每一个块，NameNode会返回该块副本DataNode的节点地址。 ​	另外，客户端还会根据网络拓扑来确定它与每一个DataNode的位置信息，从离它最近的那个DataNode获取数据块的副本，最理想的情况">
-<meta name="twitter:image" content="https://zhengtianqi.github.io/img/hdfs-read-file.png">
+<meta name="twitter:title" content="SpringCloud-Alibaba整合Nacos服务注册发现">
+<meta name="twitter:description" content="一、服务注册 1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;">
+<meta name="twitter:image" content="https://zhengtianqi.github.io/img/nacos-producer.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -128,14 +128,6 @@
     
         
             
-            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="大数据">大数据<small>(2)</small></div>
                 
             </li>
@@ -160,6 +152,14 @@
     
         
             
+            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="网络">网络<small>(3)</small></div>
                 
             </li>
@@ -176,7 +176,7 @@
     
         
             
-            <li><div data-rel="分布式">分布式<small>(1)</small></div>
+            <li><div data-rel="可信">可信<small>(7)</small></div>
                 
             </li>
             
@@ -184,7 +184,7 @@
     
         
             
-            <li><div data-rel="可信">可信<small>(7)</small></div>
+            <li><div data-rel="分布式">分布式<small>(1)</small></div>
                 
             </li>
             
@@ -201,7 +201,7 @@
     <div></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="37">
-<input type="hidden" id="yelog_site_word_count" value="31.8k">
+<input type="hidden" id="yelog_site_word_count" value="32.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -235,10 +235,6 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">git</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">HDFS</a>
     </li>
     
@@ -255,6 +251,14 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">并发</a>
     </li>
     
@@ -263,19 +267,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">spring</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">TCP/IP</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">maven</a>
+        <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">JDK1.8新特性</a>
+        <a href="javascript:" class="color1">maven</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -287,19 +287,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">分布式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">可信</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">可信计算</a>
+        <a href="javascript:" class="color4">密码学</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">密码学</a>
+        <a href="javascript:" class="color4">分布式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">可信计算</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -319,11 +319,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">java</a>
+        <a href="javascript:" class="color3">IO</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">多线程</a>
+        <a href="javascript:" class="color2">阻塞与非阻塞</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -331,11 +331,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">IO</a>
+        <a href="javascript:" class="color5">java</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">阻塞与非阻塞</a>
+        <a href="javascript:" class="color4">多线程</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -351,14 +351,6 @@
 
     
     <nav id="title-list-nav">
-        
-        <a  class="软件管理 "
-           href="/2019/08/29/Git梳理/"
-           data-tag="git"
-           data-author="" >
-            <span class="post-title" title="Git梳理">Git梳理</span>
-            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
-        </a>
         
         <a  class="大数据 "
            href="/2019/12/16/HDFS概述/"
@@ -376,30 +368,6 @@
             <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2019/12/16/HDFS文件操作/"
-           data-tag="HDFS,HADOOP"
-           data-author="" >
-            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
-            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
-           data-tag="并发,线程安全"
-           data-author="" >
-            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
-            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
-        </a>
-        
-        <a  class="SpringCloud "
-           href="/2019/11/27/SpringCloud-Alibaba整合Nacos/"
-           data-tag="nacos-config,SpringCloud"
-           data-author="" >
-            <span class="post-title" title="SpringCloud-Alibaba整合Nacos配置中心">SpringCloud-Alibaba整合Nacos配置中心</span>
-            <span class="post-date" title="2019-11-27 17:53:00">2019/11/27</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/11/14/Spring-Bean生命周期/"
            data-tag="spring"
@@ -408,12 +376,28 @@
             <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
-        <a  class="SpringCloud "
-           href="/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/"
-           data-tag="SpringCloud"
+        <a  class="大数据 "
+           href="/2019/12/16/HDFS文件操作/"
+           data-tag="HDFS,HADOOP"
            data-author="" >
-            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
-            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
+            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
+            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
+        </a>
+        
+        <a  class="软件管理 "
+           href="/2019/08/29/Git梳理/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
+           data-tag="并发,线程安全"
+           data-author="" >
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
         </a>
         
         <a  class="网络 "
@@ -432,12 +416,12 @@
             <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
         </a>
         
-        <a  class="软件管理 "
-           href="/2019/08/28/maven梳理/"
-           data-tag="maven"
+        <a  class="SpringCloud "
+           href="/2019/11/27/SpringCloud-Alibaba整合Nacos/"
+           data-tag="nacos-config,SpringCloud"
            data-author="" >
-            <span class="post-title" title="maven梳理">maven梳理</span>
-            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+            <span class="post-title" title="SpringCloud-Alibaba整合Nacos配置中心">SpringCloud-Alibaba整合Nacos配置中心</span>
+            <span class="post-date" title="2019-11-27 17:53:00">2019/11/27</span>
         </a>
         
         <a  class="java基础 "
@@ -448,12 +432,20 @@
             <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
         </a>
         
-        <a  class="数据库 "
-           href="/2019/11/20/mysql排序/"
-           data-tag="mysql"
+        <a  class="软件管理 "
+           href="/2019/08/28/maven梳理/"
+           data-tag="maven"
            data-author="" >
-            <span class="post-title" title="mysql排序">mysql排序</span>
-            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+            <span class="post-title" title="maven梳理">maven梳理</span>
+            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
+            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
         </a>
         
         <a  class="数据库 "
@@ -472,12 +464,12 @@
             <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
+        <a  class="数据库 "
+           href="/2019/11/20/mysql排序/"
+           data-tag="mysql"
            data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
         </a>
         
         <a  class="java基础 "
@@ -486,6 +478,22 @@
            data-author="" >
             <span class="post-title" title="偏向锁">偏向锁</span>
             <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/02/加密解密/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
         </a>
         
         <a  class="分布式 "
@@ -521,27 +529,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/02/加密解密/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="加密解密">加密解密</span>
-            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
-        </a>
-        
-        <a  class="可信 "
            href="/2019/10/02/可靠性和容错技术/"
            data-tag="可靠,容错"
            data-author="" >
             <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
             <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/24/图解公钥与私钥/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
-            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="java基础 "
@@ -550,6 +542,14 @@
            data-author="" >
             <span class="post-title" title="对象存储与指针压缩">对象存储与指针压缩</span>
             <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/24/图解公钥与私钥/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="数据库 "
@@ -568,12 +568,12 @@
             <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/09/01/池化之线程池/"
-           data-tag="java,多线程"
+        <a  class="网络 "
+           href="/2019/08/30/理解IO阻塞与非阻塞/"
+           data-tag="IO,阻塞与非阻塞"
            data-author="" >
-            <span class="post-title" title="池化之线程池">池化之线程池</span>
-            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
+            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
+            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
         <a  class="java基础 "
@@ -584,20 +584,12 @@
             <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/理解IO阻塞与非阻塞/"
-           data-tag="IO,阻塞与非阻塞"
-           data-author="" >
-            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
-            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
-        </a>
-        
         <a  class="java基础 "
-           href="/2019/11/20/线程相关的知识/"
-           data-tag="线程"
+           href="/2019/09/01/池化之线程池/"
+           data-tag="java,多线程"
            data-author="" >
-            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
-            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -609,11 +601,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/读写锁/"
-           data-tag="锁"
+           href="/2019/11/20/线程相关的知识/"
+           data-tag="线程"
            data-author="" >
-            <span class="post-title" title="读写锁">读写锁</span>
-            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
+            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
         </a>
         
         <a  class="可信 "
@@ -625,14 +617,6 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/锁粗化/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="锁粗化">锁粗化</span>
-            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
            href="/2019/08/31/轻量级锁/"
            data-tag="锁"
            data-author="" >
@@ -641,11 +625,27 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/读写锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="读写锁">读写锁</span>
+            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/阻塞锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="阻塞锁">阻塞锁</span>
             <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/锁粗化/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -686,12 +686,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-12-16 16:18:56'>2019-12-16 15:47</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-16 17:04:21'>2019-12-16 15:47</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:480</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -721,7 +721,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、读文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、写文件</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、读文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、写文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、删除文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">四、修改文件</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -761,7 +761,29 @@
 <p>​	c、distance(d1/r1/n1,d1/r2/n3)=4;</p>
 <p>​	d、distance(d1/r1/n1,d2/r3/n4)=6;</p>
 <h1>二、写文件</h1>
-<p>​	HDFS有一个</p>
+<p>HDFS有一个分布式系统，客户端通过调用这个实例的create()方法就可以创建文件。</p>
+<p>DFS会发给NameNode一个RPC调用，在文件系统的命名空间创建一个新文件。</p>
+<p>在创建文件前NameNode会做一些检查，看看文件是否存在，客户端是否有创建权限等。</p>
+<p>若检查通过，NameNode会为创建文件写一条记录到本地磁盘的EditLog；</p>
+<p>若不通过会向客户端抛出IOException。</p>
+<p><img src="/img/hdfs-write-file.png" alt="image-20191216163905988"></p>
+<p>（1）首先，第一个DataNode是以数据包（4KB）的形式从客户端接收数据的，DataNode在把数据包写入到本地磁盘的同时会向第二个DataNode（作为副本节点）传送数据。</p>
+<p>（2）在第二个DataNode把接收到的数据包写入本地磁盘时会向第三个DataNode发送数据包。</p>
+<p>（3）第三个DataNode开始向本地磁盘写入数据包。此时，数据包以流水线的形式被写入和备份到所有DataNode节点。</p>
+<p>（4）传送管道中的每个DataNode节点在收到数据后都会向前面那个DataNode发送一个ACK，最终 第一个DataNode会向客户端发回一个ACK。</p>
+<p>（感觉这个ACK和TCP/IP协议中的差不多：ACK (Acknowledge character）即是确认字符，在数据通信中，接收站发给发送站的一种传输类<a href="https://baike.baidu.com/item/%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6/6913704" target="_blank" rel="noopener">控制字符</a>。表示发来的数据已确认接收无误。）</p>
+<p>（5）当客户端收到数据块的确认之后，数据块被认为已经持久化到所有节点，然后客户端会向NameNode发送一个确认。</p>
+<p>（这里是最后一次ACK吗？还有有一个seq？因为上边说每次发送的数据包是4KB比较小，每次都有ACK吧应该，还是最后检验程序完整性？感觉和文件上传很类似，期待研究源码！）</p>
+<p>（6）如果管道中的任何一个DataNode失败，管道会被关闭，数据将会继续写到剩余的DataNode中。同时NameNode会被告知待备份状态，NameNode会继续备份数据到新的可用的节点。</p>
+<p>解答上述疑问：数据块都会通过计算校验和来检测数据的完整性，校验和以隐藏文件的形式被单独存放在HDFS中，供读取时进行完整性校验。</p>
+<h1>三、删除文件</h1>
+<p>HADOOP	删除文件三部曲</p>
+<p>（1）NameNode只是重命名被删除的文件到 /trash 目录，因为重命名操作只是元信息的变动，所以整个过程非常快。在 /trash 中文件会被保留一定间隔的时间（默认6h）</p>
+<p>​	（在这个期间文件可以恢复）；</p>
+<p>（2）当指定的时间到达，NameNode将会把文件从命名空间中删除；</p>
+<p>（3）标记删除的文件块释放空间，HDFS文件系统显示空间增加。</p>
+<h1>四、修改文件</h1>
+<p>想啥呢?</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -776,10 +798,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>HDFS文件操作</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">480</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
     <p><span class="copy-title">发布时间:</span>2019-12-16, 15:47:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-12-16, 16:18:56</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-16, 17:04:21</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/16/HDFS文件操作/" title="HDFS文件操作">https://zhengtianqi.github.io/2019/12/16/HDFS文件操作/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -862,7 +884,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#git','#HDFS','#HADOOP','#nacos-config','#SpringCloud','#并发','#线程安全','#spring','#TCP/IP','#maven','#JDK1.8新特性','#mysql','#锁','#分布式','#可信','#可信计算','#密码学','#可靠','#容错','#内存模型','#加密算法','#java','#多线程','#文件上传','#IO','#阻塞与非阻塞','#线程','#网络安全',],
+            'data': ['#HDFS','#HADOOP','#nacos-config','#SpringCloud','#spring','#git','#并发','#线程安全','#TCP/IP','#JDK1.8新特性','#maven','#mysql','#锁','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#内存模型','#加密算法','#IO','#阻塞与非阻塞','#文件上传','#java','#多线程','#线程','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
