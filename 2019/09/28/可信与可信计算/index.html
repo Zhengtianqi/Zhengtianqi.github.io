@@ -6,23 +6,20 @@
   <meta name="keywords" content=" 可信计算 ">
   <meta name="description" content="可信与可信计算 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、基本模型 ​	MapReduce采取了分而治之的基本思想，将一个大的作业分解成若干小的任务，提交给集群的多台计算机处理，这样就大大提高了完成作业的效率。 ​	在Hadoop平台上，MapReduce框架负责处理并行编程中分布式存储、工作调度、负载均衡、容错及网络通信等复杂工作，把处理过程高度抽象为两个函数：Map 和 Reduce。 ​	Map负责把作业分解成多个任务，Reduce负责把分解后">
+<meta name="description" content="一、组件介绍 ​	Yarn的基本思想是将 JobTracker 的资源管理和作业的调度/监控两大主要职能拆分为两个独立的进程： ​		a. 一个全局的 Resource Manager ​		b. 每个应用对应的 Application Master（AM） ​	Resource Manager 和每个节点上的 Node Manager（NM）组成了全新的通用操作系统，以分布式的方式管理应用程序。">
 <meta name="keywords" content="HADOOP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MapReduce概述">
-<meta property="og:url" content="https://zhengtianqi.github.io/2019/12/16/MapReduce概述/index.html">
+<meta property="og:title" content="Yarn概述">
+<meta property="og:url" content="https://zhengtianqi.github.io/2019/12/18/Yarn概述/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="一、基本模型 ​	MapReduce采取了分而治之的基本思想，将一个大的作业分解成若干小的任务，提交给集群的多台计算机处理，这样就大大提高了完成作业的效率。 ​	在Hadoop平台上，MapReduce框架负责处理并行编程中分布式存储、工作调度、负载均衡、容错及网络通信等复杂工作，把处理过程高度抽象为两个函数：Map 和 Reduce。 ​	Map负责把作业分解成多个任务，Reduce负责把分解后">
+<meta property="og:description" content="一、组件介绍 ​	Yarn的基本思想是将 JobTracker 的资源管理和作业的调度/监控两大主要职能拆分为两个独立的进程： ​		a. 一个全局的 Resource Manager ​		b. 每个应用对应的 Application Master（AM） ​	Resource Manager 和每个节点上的 Node Manager（NM）组成了全新的通用操作系统，以分布式的方式管理应用程序。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/wordcount.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/wordcount-split.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/wordcount-map.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/wordcount-reduce.png">
-<meta property="og:updated_time" content="2019-12-16T10:07:22.822Z">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/Yarn.png">
+<meta property="og:updated_time" content="2019-12-18T02:22:59.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MapReduce概述">
-<meta name="twitter:description" content="一、基本模型 ​	MapReduce采取了分而治之的基本思想，将一个大的作业分解成若干小的任务，提交给集群的多台计算机处理，这样就大大提高了完成作业的效率。 ​	在Hadoop平台上，MapReduce框架负责处理并行编程中分布式存储、工作调度、负载均衡、容错及网络通信等复杂工作，把处理过程高度抽象为两个函数：Map 和 Reduce。 ​	Map负责把作业分解成多个任务，Reduce负责把分解后">
-<meta name="twitter:image" content="https://zhengtianqi.github.io/img/wordcount.png">
+<meta name="twitter:title" content="Yarn概述">
+<meta name="twitter:description" content="一、组件介绍 ​	Yarn的基本思想是将 JobTracker 的资源管理和作业的调度/监控两大主要职能拆分为两个独立的进程： ​		a. 一个全局的 Resource Manager ​		b. 每个应用对应的 Application Master（AM） ​	Resource Manager 和每个节点上的 Node Manager（NM）组成了全新的通用操作系统，以分布式的方式管理应用程序。">
+<meta name="twitter:image" content="https://zhengtianqi.github.io/img/Yarn.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -127,11 +124,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(38)</small></div></li>
+    <li><div class="all active">全部文章<small>(39)</small></div></li>
     
         
             
-            <li><div data-rel="大数据">大数据<small>(3)</small></div>
+            <li><div data-rel="大数据">大数据<small>(4)</small></div>
                 
             </li>
             
@@ -203,8 +200,8 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="38">
-<input type="hidden" id="yelog_site_word_count" value="33.5k">
+<input type="hidden" id="yelog_site_posts_number" value="39">
+<input type="hidden" id="yelog_site_word_count" value="34.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -238,15 +235,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">HDFS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">HADOOP</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">git</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">HDFS</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -286,11 +283,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">锁</a>
+        <a href="javascript:" class="color4">分布式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">分布式</a>
+        <a href="javascript:" class="color2">锁</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -306,14 +303,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">内存模型</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">加密算法</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">可靠</a>
     </li>
     
@@ -322,19 +311,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">文件上传</a>
+        <a href="javascript:" class="color5">内存模型</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">加密算法</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">线程</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">IO</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">阻塞与非阻塞</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -343,6 +328,18 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">多线程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">文件上传</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">IO</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">阻塞与非阻塞</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -356,11 +353,11 @@
     <nav id="title-list-nav">
         
         <a  class="大数据 "
-           href="/2019/12/16/MapReduce概述/"
-           data-tag="HADOOP"
+           href="/2019/12/16/HDFS文件操作/"
+           data-tag="HDFS,HADOOP"
            data-author="" >
-            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
-            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
+            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
+            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
         </a>
         
         <a  class="软件管理 "
@@ -371,28 +368,20 @@
             <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2019/12/16/HDFS文件操作/"
-           data-tag="HADOOP,HDFS"
-           data-author="" >
-            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
-            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
-        </a>
-        
-        <a  class="大数据 "
-           href="/2019/12/16/HDFS概述/"
-           data-tag="HADOOP,HDFS"
-           data-author="" >
-            <span class="post-title" title="HDFS概述">HDFS概述</span>
-            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
-        </a>
-        
         <a  class="SpringCloud "
            href="/2019/11/25/Nacos配置中心使用/"
            data-tag="nacos-config,SpringCloud"
            data-author="" >
             <span class="post-title" title="Nacos配置中心使用">Nacos配置中心使用</span>
             <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2019/12/16/MapReduce概述/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
+            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
         </a>
         
         <a  class="java基础 "
@@ -403,12 +392,12 @@
             <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/11/14/Spring-Bean生命周期/"
-           data-tag="spring"
+        <a  class="大数据 "
+           href="/2019/12/16/HDFS概述/"
+           data-tag="HDFS,HADOOP"
            data-author="" >
-            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
-            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
+            <span class="post-title" title="HDFS概述">HDFS概述</span>
+            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
         </a>
         
         <a  class="SpringCloud "
@@ -427,12 +416,12 @@
             <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/TCP-IP四层网络模型/"
-           data-tag="TCP/IP"
+        <a  class="java基础 "
+           href="/2019/11/14/Spring-Bean生命周期/"
+           data-tag="spring"
            data-author="" >
-            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
-            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
+            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
         <a  class="网络 "
@@ -441,6 +430,22 @@
            data-author="" >
             <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
             <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2019/08/30/TCP-IP四层网络模型/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
+            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2019/12/18/Yarn概述/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="Yarn概述">Yarn概述</span>
+            <span class="post-date" title="2019-12-18 09:12:00">2019/12/18</span>
         </a>
         
         <a  class="java基础 "
@@ -475,12 +480,12 @@
             <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/08/31/互斥锁/"
-           data-tag="锁"
+        <a  class="分布式 "
+           href="/2019/10/09/分布式全局唯一ID生成策略/"
+           data-tag="分布式"
            data-author="" >
-            <span class="post-title" title="互斥锁">互斥锁</span>
-            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
         <a  class="java基础 "
@@ -491,28 +496,36 @@
             <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
-        </a>
-        
-        <a  class="分布式 "
-           href="/2019/10/09/分布式全局唯一ID生成策略/"
-           data-tag="分布式"
-           data-author="" >
-            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
-            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
-        </a>
-        
         <a  class="可信 "
            href="/2019/09/02/加密解密/"
            data-tag="可信,密码学"
            data-author="" >
             <span class="post-title" title="加密解密">加密解密</span>
             <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/互斥锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
         </a>
         
         <a  class="可信 "
@@ -524,11 +537,11 @@
         </a>
         
         <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
            data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
         </a>
         
         <a  class="可信 "
@@ -537,6 +550,22 @@
            data-author="" >
             <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
             <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/可重入锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="可重入锁">可重入锁</span>
+            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/悲观锁、乐观锁/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -556,51 +585,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/可重入锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="可重入锁">可重入锁</span>
-            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="mysql,锁"
-           data-author="" >
-            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
-            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
-           data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/文件上传/"
-           data-tag="文件上传"
-           data-author="" >
-            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
-            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
            href="/2019/11/20/线程相关的知识/"
            data-tag="线程"
            data-author="" >
             <span class="post-title" title="线程相关的知识">线程相关的知识</span>
             <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
-        </a>
-        
-        <a  class="网络 "
-           href="/2019/08/30/理解IO阻塞与非阻塞/"
-           data-tag="IO,阻塞与非阻塞"
-           data-author="" >
-            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
-            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
         <a  class="java基础 "
@@ -612,19 +601,19 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/读写锁/"
-           data-tag="锁"
+           href="/2019/08/31/文件上传/"
+           data-tag="文件上传"
            data-author="" >
-            <span class="post-title" title="读写锁">读写锁</span>
-            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/04/重放攻击/"
-           data-tag="可信,网络安全"
+        <a  class="网络 "
+           href="/2019/08/30/理解IO阻塞与非阻塞/"
+           data-tag="IO,阻塞与非阻塞"
            data-author="" >
-            <span class="post-title" title="重放攻击">重放攻击</span>
-            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
+            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
         <a  class="java基础 "
@@ -636,11 +625,27 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/读写锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="读写锁">读写锁</span>
+            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/轻量级锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="轻量级锁">轻量级锁</span>
             <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/04/重放攻击/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
         </a>
         
         <a  class="java基础 "
@@ -881,7 +886,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#HADOOP','#git','#HDFS','#nacos-config','#SpringCloud','#并发','#线程安全','#spring','#TCP/IP','#JDK1.8新特性','#maven','#mysql','#锁','#分布式','#可信','#密码学','#可信计算','#内存模型','#加密算法','#可靠','#容错','#文件上传','#线程','#IO','#阻塞与非阻塞','#java','#多线程','#网络安全',],
+            'data': ['#HDFS','#HADOOP','#git','#nacos-config','#SpringCloud','#并发','#线程安全','#spring','#TCP/IP','#JDK1.8新特性','#maven','#mysql','#分布式','#锁','#可信','#密码学','#可信计算','#可靠','#容错','#内存模型','#加密算法','#线程','#java','#多线程','#文件上传','#IO','#阻塞与非阻塞','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
