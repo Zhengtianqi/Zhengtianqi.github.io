@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>加密解密 | 君莫笑</title>
-  <meta name="keywords" content=" 可信 , 密码学 ">
-  <meta name="description" content="加密解密 | 君莫笑">
+  <title>责任链模式 | 君莫笑</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="责任链模式 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="继之前的单例模式（https://blog.csdn.net/qq_23034755/article/details/90547215）深入学习，越看越容易不明白了[哭哭]： 一、单例优势与劣势 优点： ​		（1）可以节约内存，因为它限制了实例的个数，有利于Java垃圾回收。 ​		（2）数据库或者Socket连接要收到一定的限制，必须保持同一时间只能有一个连接的存在等这种单线程操作。 ​		（">
 <meta name="keywords" content="设计模式">
@@ -750,9 +750,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-加密解密" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-责任链模式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">加密解密</h1>
+        <h1 class="article-title">责任链模式</h1>
     
     <div class="article-meta">
         
@@ -760,28 +760,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="可信">可信</a>
+                <a href="javascript:" data-rel="设计模式">设计模式</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">可信</a>
-            
-            <a href="javascript:" class="color4">密码学</a>
+            <a href="javascript:" class="color5">设计模式</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-15 20:40:18'>2019-09-02 13:37</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-03 15:58:18'>2020-01-03 15:21</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:410</span>
+        <span>字数:961</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -811,7 +809,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（1）对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（2）非对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（3）混合加密机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">加密过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">解密过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（4）为什么需要混合加密机制？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">安全？速度快？</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、纯与不纯的责任链模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、什么情况下使用责任链</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -827,36 +825,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、组成</h1>
-<p>（1）明文：未加密的消息m；</p>
-<p>（2）密文：加密后的消息ct；</p>
-<p>（3）加解密算法：把明文变成密文，密文变成明文的转换函数；</p>
-<p>（4）加密密钥：明文 加密成 密文 需要的参数；</p>
-<p>（5）解密密钥：密文变成 明文 需要的参数</p>
-<h1>2、分类</h1>
-<h2>（1）对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 = 解密密钥</p>
-<p><img src="/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（2）非对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 != 解密密钥</p>
-<p><img src="/img/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（3）混合加密机制</h2>
-<p>混合加密算法：对称加密 + 非对称加密</p>
-<p><img src="/img/%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86%E7%9A%84%E6%96%B9%E5%BC%8F.png" alt></p>
-<h3>加密过程</h3>
-<p>（a）首先利用对称加密技术加密索要安全传输的消息</p>
-<p>（b）然后将对称密钥通过非对称加密的方式用公钥进行加密，附在（a）所述消息中</p>
-<h3>解密过程</h3>
-<p>（a）首先使用私钥解密密钥</p>
-<p>（b）然后再用此密钥解密消息</p>
-<h2>（4）为什么需要混合加密机制？</h2>
-<h3>安全？速度快？</h3>
-<p>​	先拿对称加密和非对称加密算法，做一个对比</p>
-<p>​	本文中的私钥、公钥是非对称加密的说法；密钥是对称加密的说法。</p>
-<p><img src="/img/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt="1571142451345"></p>
-<p>谈一下混合的好处：</p>
-<p>（a）利用对称加密的速度快：进行网络消息传输时响应及时；</p>
-<p>（b）非对称加密的安全优势：给你一个通过公钥加密的密钥，你先拿私钥解开加密的密钥，然后才能解开消息，保证密钥不被泄露。（注：有点绕；此处私钥、公钥是非对称加密的说法；密钥是对称加密的说法。）</p>
+        <p>最近一直听大佬说责任链模式，决定看看到底是什么。本文由翻阅《大话设计模式》得</p>
+<h1>一、引言</h1>
+<p>​		击鼓传花游戏，也称传彩球。中国民间游戏，流行于中国各地。数人、十数人或数十人围成一个圆圈席地而坐，另外一个人背对着人圈以槌击鼓。鼓响时，开始传花，花由一个人的手里传。</p>
+<p>​		有时候，花束就开始依次传递，鼓声一落，假如花束在某人手中，则该人就得饮酒（多是唱歌、跳舞、说笑话；或回答问题、猜谜、按纸条规定行事等）。</p>
+<p>​		击鼓传花便是责任链模式的应用。在责任链模式里，很多的对象由每一个对象对其下家的引用而联接起来形成一条链。</p>
+<p>​		请求在这个链上传递，直到链上的某一个对象决定处理此请求。发出这个请求的客户端并不知道链上的哪一个对象最终处理这个请求，这使得系统可以在不影响客户端的情况下动态地重新组织链和分配责任。</p>
+<p>​		在这个游戏中，参与游戏的人士具体处理者的对象，击鼓的人士客户端的对象。花代表请求。每个参加游戏的人有两个行为：（1）将花传下去（2）喝酒。击鼓的人不知道最终是哪个人执行了喝酒，但必然是做游戏的人们中的一个。</p>
+<h1>二、纯与不纯的责任链模式</h1>
+<p>​		一个纯的责任链模式要求一个具体的处理者对象只能在两个行为中选择一个：一是承担责任，二是把责任推给下家。不答应出现某一个具体处理者对象在承担了一部分责任后又把责任向下传的情况。</p>
+<p>​		但是在实际的系统里，纯的责任链很难找到；假如坚持责任链不纯便不是责任链模式，那么责任链模式便不会有太大的意义了。</p>
+<h1>三、什么情况下使用责任链</h1>
+<p>（1）系统已经有一个由处理者对象组成的链。这个链可能由复合模式给出。？？</p>
+<p>（2）当有多于一个的处理者对象会处理一个请求，而且在事先并不知道到底由哪一个处理者对象处理一个请求。这个处理者对象是动态确定的。</p>
+<p>（3）当系统想发出一个请求给多个处理者对象中的某一个，但是不明显指定是哪一个处理者对象会处理此请求。</p>
+<p>（4）当处理一个请求的处理者对象集合需要动态地指定时。？？</p>
+<p>​	光看概念不好理解</p>
+<p>四、责任链模式的长处</p>
+<p>灵活性：允许传给链结构的起点，但不知道最终在哪个节点上处理</p>
+<p>低耦合：发出请求与处理请求的对象之间耦合度降低，允许多个处理着处理最终处理这个命令。</p>
+<p>五、责任链的实践</p>
+<p>​		一个链可以是一条线，一个树，也可以是一个环。链的拓扑结构可以是单连通的或多连通的，责任链模式并不指定责任链的拓扑结构。但是责任链模式要求在同一个时间里，命令只可以被传给一个下家（或被处理掉）；而不可以传给多于一个下家。”</p>
+<p>笔者其他常见的设计模式：</p>
+<p>建造起模式：https://blog.csdn.net/qq_23034755/article/details/90487984</p>
+<p>单例模式：https://blog.csdn.net/qq_23034755/article/details/90547215</p>
+<p>观察者模式：https://blog.csdn.net/qq_23034755/article/details/90705205</p>
+<p>发布订阅模式：https://blog.csdn.net/qq_23034755/article/details/91340383</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -870,12 +864,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>加密解密</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">410</span></p>
+    <p><span class="copy-title">文章标题:</span>责任链模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">961</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-02, 13:37:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-15, 20:40:18</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/02/加密解密/" title="加密解密">https://zhengtianqi.github.io/2019/09/02/加密解密/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-03, 15:21:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-03, 15:58:18</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/03/责任链模式/" title="责任链模式">https://zhengtianqi.github.io/2020/01/03/责任链模式/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

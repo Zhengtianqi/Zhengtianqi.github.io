@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>加密解密 | 君莫笑</title>
-  <meta name="keywords" content=" 可信 , 密码学 ">
-  <meta name="description" content="加密解密 | 君莫笑">
+  <title>单例模式 | 君莫笑</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="单例模式 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="继之前的单例模式（https://blog.csdn.net/qq_23034755/article/details/90547215）深入学习，越看越容易不明白了[哭哭]： 一、单例优势与劣势 优点： ​		（1）可以节约内存，因为它限制了实例的个数，有利于Java垃圾回收。 ​		（2）数据库或者Socket连接要收到一定的限制，必须保持同一时间只能有一个连接的存在等这种单线程操作。 ​		（">
 <meta name="keywords" content="设计模式">
@@ -750,9 +750,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-加密解密" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-单例模式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">加密解密</h1>
+        <h1 class="article-title">单例模式</h1>
     
     <div class="article-meta">
         
@@ -760,28 +760,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="可信">可信</a>
+                <a href="javascript:" data-rel="设计模式">设计模式</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">可信</a>
-            
-            <a href="javascript:" class="color4">密码学</a>
+            <a href="javascript:" class="color5">设计模式</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-15 20:40:18'>2019-09-02 13:37</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-03 17:24:02'>2020-01-03 16:24</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:410</span>
+        <span>字数:561</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -811,7 +809,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（1）对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（2）非对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（3）混合加密机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">加密过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">解密过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（4）为什么需要混合加密机制？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">安全？速度快？</span></a></li></ol></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -827,36 +825,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、组成</h1>
-<p>（1）明文：未加密的消息m；</p>
-<p>（2）密文：加密后的消息ct；</p>
-<p>（3）加解密算法：把明文变成密文，密文变成明文的转换函数；</p>
-<p>（4）加密密钥：明文 加密成 密文 需要的参数；</p>
-<p>（5）解密密钥：密文变成 明文 需要的参数</p>
-<h1>2、分类</h1>
-<h2>（1）对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 = 解密密钥</p>
-<p><img src="/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（2）非对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 != 解密密钥</p>
-<p><img src="/img/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（3）混合加密机制</h2>
-<p>混合加密算法：对称加密 + 非对称加密</p>
-<p><img src="/img/%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86%E7%9A%84%E6%96%B9%E5%BC%8F.png" alt></p>
-<h3>加密过程</h3>
-<p>（a）首先利用对称加密技术加密索要安全传输的消息</p>
-<p>（b）然后将对称密钥通过非对称加密的方式用公钥进行加密，附在（a）所述消息中</p>
-<h3>解密过程</h3>
-<p>（a）首先使用私钥解密密钥</p>
-<p>（b）然后再用此密钥解密消息</p>
-<h2>（4）为什么需要混合加密机制？</h2>
-<h3>安全？速度快？</h3>
-<p>​	先拿对称加密和非对称加密算法，做一个对比</p>
-<p>​	本文中的私钥、公钥是非对称加密的说法；密钥是对称加密的说法。</p>
-<p><img src="/img/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt="1571142451345"></p>
-<p>谈一下混合的好处：</p>
-<p>（a）利用对称加密的速度快：进行网络消息传输时响应及时；</p>
-<p>（b）非对称加密的安全优势：给你一个通过公钥加密的密钥，你先拿私钥解开加密的密钥，然后才能解开消息，保证密钥不被泄露。（注：有点绕；此处私钥、公钥是非对称加密的说法；密钥是对称加密的说法。）</p>
+        <p>继之前的单例模式（https://blog.csdn.net/qq_23034755/article/details/90547215）深入学习，越看越容易不明白了[哭哭]：</p>
+<p>一、单例优势与劣势</p>
+<p>优点：</p>
+<p>​		（1）可以节约内存，因为它限制了实例的个数，有利于Java垃圾回收。</p>
+<p>​		（2）数据库或者Socket连接要收到一定的限制，必须保持同一时间只能有一个连接的存在等这种单线程操作。</p>
+<p>​		（3）提供了对唯一实例的受控访问。</p>
+<p>缺点：</p>
+<p>​		（1）没有抽象层，不能继承扩展很难。
+​		（2）违背了“单一职责原则”，一个类只重视内部关系，而忽略外部关系。</p>
+<p>​		（3）不适用于变化对象。</p>
+<p>​		（4）滥用单例会出现一些负面问题：</p>
+<p>a. 如为节省资源将数据库连接池对象设计为单例</p>
+<p>可能会导致共享连接池对象对程序过多而出现连接池溢出。</p>
+<p>b. 如果实例化的对象长时间不被利用</p>
+<p>系统会认为是垃圾而被回收，这样将导致对象状态丢失。</p>
+<p>二、单例模式与数据库连接（mysql为例，自己的理解）</p>
+<p>​		（1）mysql是有最大连接数的，连接数超过最大会出现错误</p>
+<p>​		（2）如果利用单例模式对connection对象封装，那么系统中只存在一个mysql连接实例，大家共用。所以没有办法并发，就存在了排队。</p>
+<p>​		（3）排队希望教给mysql引擎去解决。</p>
+<p>​		（4）后来为了获取更高的效率，利用数据库连接池（connection pool），连接池概念（https://zhengtianqi.github.io/2019/09/01/池化之线程池/）。</p>
+<p>​		（5）利用单例模式来管理connection pool，如：在初始化时创建100个connection对象（小于mysql最大连接数），然后需要的时候提供一个，用完之后返回到pool中。</p>
+<p>​		（6）这个pool存在哪里呢？若为全局变量，又违背了单例模式的用意（单例模式只有真正的单一实例的需求时才可以使用。一个设计得当的系统不应该有所谓的全局变量的，这些变量应该放到它们所描述的实体所对应的类中去）</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -870,12 +860,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>加密解密</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">410</span></p>
+    <p><span class="copy-title">文章标题:</span>单例模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">561</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-02, 13:37:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-15, 20:40:18</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/02/加密解密/" title="加密解密">https://zhengtianqi.github.io/2019/09/02/加密解密/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-03, 16:24:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-03, 17:24:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/03/单例模式/" title="单例模式">https://zhengtianqi.github.io/2020/01/03/单例模式/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
