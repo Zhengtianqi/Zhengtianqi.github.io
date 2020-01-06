@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>可重入锁 | 君莫笑</title>
-  <meta name="keywords" content=" 锁 ">
-  <meta name="description" content="可重入锁 | 君莫笑">
+  <title>JAVA数据类型易混概念 | 君莫笑</title>
+  <meta name="keywords" content=" java ">
+  <meta name="description" content="JAVA数据类型易混概念 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="1、整型 ​		在 Java 中 ， 整型的范围与运行 Java 代码的机器无关 。 ​	 ​		在通常情况下， int类型最常用。 但如果表示星球上的居住人数 ，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合 ，例如 ，底层的文件处理或者需要控制占用存储空间量的大数组 。 ​		长整型数值有一个后缀 L 或 1 ( 如 4000000000 L ) 。 ​">
 <meta name="keywords" content="java">
@@ -763,9 +763,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-可重入锁" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-JAVA数据类型" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">可重入锁</h1>
+        <h1 class="article-title">JAVA数据类型易混概念</h1>
     
     <div class="article-meta">
         
@@ -780,19 +780,19 @@
         
         <span class="tag">
             
-            <a href="javascript:" class="color2">锁</a>
+            <a href="javascript:" class="color5">java</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-15 18:07:40'>2019-08-31 13:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-06 16:08:50'>2020-01-06 14:30</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:787</span>
+        <span>字数:888</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -822,7 +822,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">1、可重入锁：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">2、Synchronized和ReentrantLock</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -838,78 +838,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2>1、可重入锁：</h2>
-<p>​	也叫做递归锁，指的是同一线程 外层函数获得锁之后 ，内层递归函数仍然有获取该锁的代码，但不受影响。
-​	&quot;独占&quot;，就是在同一时刻只能有一个线程获取到锁，而其它获取锁的线程只能处于同步队列中等待，只有获取锁的线程释放了锁，后继的线程才能够获取锁。</p>
-<p>​	“可重入“，就是支持重进入的锁，它表示该锁能够支持一个线程对资源的重复加锁。</p>
-<p>​	在JAVA环境下 ReentrantLock 和synchronized 都是可重入锁。</p>
-<h2>2、Synchronized和ReentrantLock</h2>
-<p><strong>1）性能区别：</strong></p>
-<p>​         在Synchronized优化以前，synchronized的性能是比ReenTrantLock差很多的，但是自从Synchronized引入了偏向锁，轻量级锁（自旋锁）后，两者的性能就差不多了，在两种方法都可用的情况下，官方甚至建议使用synchronized，其实    synchronized的优化我感觉就借鉴了ReenTrantLock中的CAS技术。都是试图在用户态就把加锁问题解决，避免进入内核态的线程阻塞。</p>
-<p>2）原理区别：</p>
-<p>​         Synchronized: 进过编译，会在同步块的前后分别形成monitorenter和monitorexit这个两个字节码指令。在执行monitorenter指令时，首先要尝试获取对象锁。如果这个对象没被锁定，或者当前线程已经拥有了那个对象锁，把锁的计算器加1，相应的，在执行monitorexit指令时会将锁计算器就减1，当计算器为0时，锁就被释放了。如果获取对象锁失败，那当前线程就要阻塞，直到对象锁被另一个线程释放为止。</p>
-<p>​         ReentrantLock: 是java.util.concurrent包下提供的一套互斥锁，相比Synchronized，ReentrantLock类提供了一些高级功能，主要有以下3项：</p>
-<ol>
-<li>等待可中断，持有锁的线程长期不释放的时候，正在等待的线程可以选择放弃等待，这相当于Synchronized来说可以避免出现死锁的情况。通过lock.lockInterruptibly()来实现这个机制。</li>
-<li>公平锁，多个线程等待同一个锁时，必须按照申请锁的时间顺序获得锁，Synchronized锁非公平锁，ReentrantLock默认的构造函数是创建的非公平锁，可以通过参数true设为公平锁，但公平锁表现的性能不是很好。</li>
-<li>锁绑定多个条件，一个ReentrantLock对象可以同时绑定对个对象。ReenTrantLock提供了一个Condition（条件）类，用来实现分组唤醒需要唤醒的线程们，而不是像synchronized要么随机唤醒一个线程要么唤醒全部线程。</li>
-</ol>
-<ol start="3">
-<li>demo</li>
-</ol>
-<pre><code class="language-java"> public class SynchronizedTest implements Runnable {
-     public synchronized void get() {
-         System.out.println(Thread.currentThread().getName());
-         set();
-     }
-     public synchronized void set() {
-         System.out.println(Thread.currentThread().getName());
-     }
-     @Override
-     public void run() {
-         get();
-     }
-     public static void main(String[] args) {
-         SynchronizedTest synchronizedTest = new SynchronizedTest();
-         new Thread(synchronizedTest).start();
-         new Thread(synchronizedTest).start();
-         new Thread(synchronizedTest).start();
-     }
- }
-
- 
-
-public class ReentrantLockTest implements Runnable {
-     ReentrantLock lock = new ReentrantLock();
-
-    public void get() {
-         lock.lock();
-         System.out.println(Thread.currentThread());
-         set();
-         lock.unlock();
-     }
-
-    public void set() {
-         lock.lock();
-         System.out.println(Thread.currentThread());
-         lock.unlock();
-     }
-
-    @Override
-     public void run() {
-         get();
-     }
-
+        <p>1、整型</p>
+<p>​		在 Java 中 ， 整型的范围与运行 Java 代码的机器无关 。</p>
+<p>​	<img src="/img/inttype.png" alt="image-20200106143552647"></p>
+<p>​		在通常情况下， int类型最常用。 但如果表示星球上的居住人数 ，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合 ，例如 ，底层的文件处理或者需要控制占用存储空间量的大数组 。</p>
+<p>​		长整型数值有一个后缀 L 或 1 ( 如 4000000000 L ) 。</p>
+<p>​		十六进制数值有一个前缀 0x 或 0X ( 如0xCAFE）。</p>
+<p>​		八进制有一个前缀 0 ,例如 ， 010 对应八进制中的 8。（很容易混淆，不建议使用）</p>
+<p>​		从 Java 7 开始 ， 加上前缀 0b 或 0B 就可以写二进制数 。 例如 ，0b1001就是 9 。</p>
+<p>​		从 Java 7 开始， 还可以为数字字面量加下划线 ， 如用1_000_000这些下划线只是为丫让人更易读 。Java编译器会去除这些下划线。 ( 或0b1111_0100_0010_0100_0000表示一百万）</p>
+<p>2、浮点型</p>
+<p><img src="/img/floattype.png" alt="image-20200106150945185"></p>
+<p>​		double 表示这种类型的数值精度是 float 类型的两倍 （ 有人称之为双精度数值 )</p>
+<p>很多情况下，不使用float。</p>
+<p>​		float 类型的数值有一个后缀 F 或 f ( 例如，3.14 F ) 。没有后缀 F的浮点数值 （ 如 3.14 ) 默认为 double 类型。当然 ， 也可以在浮点数值后面添加后缀 D 或 d（例如，3.14D）</p>
+<p>三个常量值：Double _ POSITIVE _ INFINITY 、 Double . NEGATIVEJNFINITY 和 Double . NaN</p>
+<pre><code class="language-java">public class ConstantTest {
     public static void main(String[] args) {
-         ReentrantLockTest lock = new ReentrantLockTest();
-         new Thread(lock).start();
-         new Thread(lock).start();
-         new Thread(lock).start();
-     }
- }
+        System.out.println(&quot;Double.POSITIVE_INFINITY = &quot; + 1.0 / 0.0);
+        System.out.println(&quot;Double.NEGATIVE_INFINITY = &quot; + -1.0 / 0.0);
+        System.out.println(&quot;Double.NaN = &quot; + 0.0d / 0.0);
+        System.out.println(Double.class);
+        // 如果得到一个完全可预测的结果比运行速度更重要的话， 那么就应该使用StrictMath类 遵循IEEE 754
+        System.out.println(StrictMath.max(1, 2));
+    }
+}
 
- 
 </code></pre>
+<p>​		Warning：浮点数值不适用于无法接受舍入误差的金融计算中。如果在数值计算中不允许有任何舍入误差 ， 就应该使用 BigDecimal类。</p>
+<p>3、char类型</p>
+<p>​		char 类型原本用于表示单个字符。不过 ，现在情况已经有所变化 。如今，有些 Unicode字符可以用一个 char 值描述， 另外一些 Unicode 字符则需要两个char 值。</p>
+<p><img src="/img/chartype.png" alt="image-20200106152036190"></p>
+<p>​		Unicode 打破了传统字符编码机制的限制，解决世界上文字编码不一致的问题。在设计 Java 时决定采用16 位的 Unicode 字符集， 这样会比使用 8 位字符集的程序设计语言有很大的改进。现在 ， 16 位的 char 类型已经不能满足描述所有 Unicode 字符的需要了，利用码点解决。</p>
+<p>​		最好不使用char类型，除非确定需要处理UTF-16代码单元。</p>
+<p>4、boolean 类型</p>
+<p>​		boolean（布尔）有两个值：true 或 false，与整型不能进行相互转换。</p>
+<p>5、数值类型之间的转换</p>
+<p>​		在图3-1中有 6 个实心箭头 ，表示无信息丢失的转换 ；</p>
+<p>​		有 3 个虚箭头 ， 表示可能有精度损失的转换。</p>
+<p><img src="/img/typetrans.png" alt="image-20200106160423586"></p>
+<p>​		如果两个操作数中有一个是 double类型 ， 另一个操作数就会转换为 double 类型。
+​		否则 ， 如果其中一个操作数是 float 类型 ， 另一个操作数将会转换为 float 类型 。
+​		否则 ，如果其中一个操作数是 long 类型， 另一个操作数将会转换为 long 类型 。
+​		否则 ， 两个操作数都将被转换为 int 类型 。</p>
+<p>​		强制转换也会造成精度丢失。</p>
+<p>​		例如 ：
+​			double x * 9.997 ;
+​			int nx = ( int ) x ;
+​			这样 ， 变量 nx 的值为 9</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -923,12 +899,12 @@ public class ReentrantLockTest implements Runnable {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>可重入锁</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">787</span></p>
+    <p><span class="copy-title">文章标题:</span>JAVA数据类型易混概念</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">888</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-08-31, 13:05:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-15, 18:07:40</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/31/可重入锁/" title="可重入锁">https://zhengtianqi.github.io/2019/08/31/可重入锁/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-06, 14:30:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-06, 16:08:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/06/JAVA数据类型/" title="JAVA数据类型易混概念">https://zhengtianqi.github.io/2020/01/06/JAVA数据类型/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
