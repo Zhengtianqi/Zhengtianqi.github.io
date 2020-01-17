@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>java8新特性 | 君莫笑</title>
-  <meta name="keywords" content=" JDK1.8新特性 ">
-  <meta name="description" content="java8新特性 | 君莫笑">
+  <title>Hive数据定义 | 君莫笑</title>
+  <meta name="keywords" content=" hive ">
+  <meta name="description" content="Hive数据定义 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="一、Hive 与 Mysql不同 ​		Hive不支持行级插入操作、更新操作和删除操作， ​		Hive不支持事务。 二、Hive中的数据库 Hive 中数据库的概念本质上仅仅是表的一个目录或者命名空间。 // 1、数据库目录为： hive.metastore.warehouse.dir  // 2、创建数据库 ： CREATE DATABASE financials;      // 3、已经存">
 <meta name="keywords" content="hive">
@@ -778,9 +778,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-java8新特性" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Hive数据定义" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java8新特性</h1>
+        <h1 class="article-title">Hive数据定义</h1>
     
     <div class="article-meta">
         
@@ -788,26 +788,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="java基础">java基础</a>
+                <a href="javascript:" data-rel="大数据">大数据</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">JDK1.8新特性</a>
+            <a href="javascript:" class="color5">hive</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-14 16:30:37'>2019-11-14 14:18</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-17 15:53:05'>2020-01-17 14:18</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:765</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -837,7 +837,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、Stream（流）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、方法引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、默认方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">四、 Date Time API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">五、 Optional 类</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、Hive 与 Mysql不同</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、Hive中的数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、分区表、管理表</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -853,285 +853,116 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话：</p>
-<h1>一、Stream（流）</h1>
-<p>Stream（流）是一个来自数据源的元素队列并支持聚合操作</p>
-<p>数据源是流的来源。 数据源可以是集合，数组，I/O channel等</p>
-<p>优点：</p>
-<ul>
-<li>内部迭代：通过访问者模式(Visitor)实现</li>
-<li>Pipelining：中间操作都会返回流对象本身</li>
-<li>聚合操作：类似SQL语句一样的操作， 比如 filter, map, reduce, find, match, sorted 等</li>
-</ul>
-<pre><code class="language-java">package com.bjut.java8test;
+        <h1>一、Hive 与 Mysql不同</h1>
+<p>​		Hive不支持行级插入操作、更新操作和删除操作，</p>
+<p>​		Hive不支持事务。</p>
+<h1>二、Hive中的数据库</h1>
+<p>Hive 中数据库的概念本质上仅仅是表的一个目录或者命名空间。</p>
+<pre><code class="language-java">// 1、数据库目录为：
+hive.metastore.warehouse.dir
 
-import org.junit.Test;
+// 2、创建数据库 ：
+CREATE DATABASE financials;    
 
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
+// 3、已经存在则： 
+CREATE DATABASE IF NOT EXISTS financials;
 
-public class Java8StreamTest {
-    final List&lt;String&gt; strings = Arrays.asList(&quot;abc&quot;, &quot;&quot;, &quot;bc&quot;, &quot;efg&quot;, &quot;abcd&quot;, &quot;&quot;, &quot;jkl&quot;);
-    final List&lt;Integer&gt; numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
-    final Random random = new Random();
+// 4、查看数据库：
+SHOW DATABASES;    SHOW DATABASES LIKE 'f.*';
 
-    @Test
-    public void filter() {
-        // filter 方法过滤出空字符串
-        List&lt;String&gt; filtered = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.toList());
-        System.out.println(filtered);
-    }
+// 5、修改默数据库位置：
+CREATE DATABASE financials LOCATION '/my/preferred/directory';
 
-    @Test
-    public void forEach() {
-        // Stream 提供了新的方法 'forEach' 来迭代流中的每个数据;limit 方法用于获取指定数量的流
-        random.ints().limit(10).forEach(System.out::println);
-    }
+// 6、切换工作数据库：
+USE financials;
 
-    @Test
-    public void map() {
-        // map 方法用于映射每个元素到对应的结果
-        // 获取对应的平方数, distinct为去重
-        List&lt;Integer&gt; squaresList = numbers.stream().map(i -&gt; i * i).distinct().collect(Collectors.toList());
-        System.out.println(squaresList);
-    }
+ (Hive v0.8.0，可以修改当前工作数据库为默认数据库，set hive.cli.print.current.db=true;)
 
-    @Test
-    public void sorted() {
-        // sorted 方法用于对流进行排序
-        random.ints().limit(10).sorted().forEach(System.out::println);
-    }
-
-    @Test
-    public void parallel() {
-        // 获取空字符串的数量
-        long count = strings.parallelStream().filter(string -&gt; string.isEmpty()).count();
-        System.out.println(count);
-    }
-
-    @Test
-    public void join() {
-        // 类似于
-        // jdk：String mergedString = String.join(&quot;,&quot;, strings);
-        // common.lang3：String mergedString = StringUtils.join(strings);
-
-        String mergedString = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.joining(&quot;,&quot;));
-        System.out.println(mergedString);
-    }
-
-    @Test
-    public void statistics(){
-        // 一些产生统计结果的收集器也非常有用。它们主要用于int、double、long等基本类型上
-        List&lt;Integer&gt; numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
-        IntSummaryStatistics stats = numbers.stream().mapToInt((x) -&gt; x).summaryStatistics();
-
-        System.out.println(&quot;列表中最大的数 : &quot; + stats.getMax());
-        System.out.println(&quot;列表中最小的数 : &quot; + stats.getMin());
-        System.out.println(&quot;所有数之和 : &quot; + stats.getSum());
-        System.out.println(&quot;平均数 : &quot; + stats.getAverage());
-    }
-
-}
-
-
+// 7、删除数据库：
+DROP DATABASE IF EXISTS financials;
 </code></pre>
-<h1>二、方法引用</h1>
-<p>方法引用</p>
-<p>方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。</p>
-<pre><code class="language-java">package com.bjut.java8test;
+<p>​</p>
+<pre><code class="language-java">// 8、级联删除数据库（含表）：
+DROP DATABASE IF EXISTS financials CASCADE;
 
-@FunctionalInterface
-public interface Supplier&lt;T&gt;{
-    T get();
-}
+// 9、可以使用  ALTER DATABASE 为数据库的 DBPROPERTIES 设置键-值对属性值，来描述数据库的属性信息，其他不可以更改：
+ALTER DATABASES financials SET DBPROPERTIES('edited-by' = 'Joe Dba')
+    
+// 10、删除表
+DROP TABLE IF EXISTS employees;
 
+// 11、表重命名
+ALTER TABLE log_messages RENAME TO logmsgs;
+
+// 12、 对某个字段重命名，并修改位置、类型或者注释
+ALTER TABLE log_messages
+CHANGE COLUMN hms hours_minutes_seconds INT
+COMMENT 'The hours, minutes, and seconds part of the timestamp'
+AFTER severity;
+// 13、增加列
+ALTER TABLE log_messages ADD COLUMNS(
+	app_name STRING COMMENT 'Application name',
+    session_id LONG COMMENT 'The current session id'
+);
+// 14、删除或者替换列
+ALTER TABLE log_messages REPLACE COLUMNS(
+	hours_mins_secs INT COMMENT 'hour, minute, seconds from timestamp',
+    severity STRING COMMENT 'The message severity'
+    message STRING COMMENT 'The rest of the message'
+);
+// 15、修改表属性
+ALTER TABLE log_messages SET TBLPROPERTIES(
+	'notes' = 'The process id is no longer captured; this column is always NULL'
+);
+// 16、修改存储属性
+ALTER TABLE log_messages PARTITION(year = 2012, month = 1, day =1) SET FILEFORMAT SEQUENCEFILE;
 </code></pre>
-<pre><code class="language-java">package com.bjut.java8test;
-
-public class Car {
-    // Supplier是jdk1.8的接口，这里和lamda一起使用了
-    public static Car create(final Supplier&lt;Car&gt; supplier) {
-        return supplier.get();
-    }
-
-    public static void collide(final Car car) {
-        System.out.println(&quot;Colloded&quot; + car.toString());
-    }
-
-    public void follow(final Car another) {
-        System.out.println(&quot;Following the&quot; + another.toString());
-    }
-
-    public void repair() {
-        System.out.println(&quot;Repaired&quot; + this.toString());
-    }
-}
+<h1>三、分区表、管理表</h1>
+<p>​	数据分区：通常使用分区来水平分散压力，将数据从物理上转移到和使用最频繁的用户更近的地方，以及实现其他目的。</p>
+<p>​	先按照 国家 ， 后按照 州 分区</p>
+<pre><code class="language-java">CREATE TABLE employees(
+	name	STRING,
+	salary	FLOAT,
+	subordinates	ARRAY&lt;STRING&gt;,
+	deductions	MAP&lt;STRING, FLOAT&gt;,
+	adress	STRUCT&lt;street:STRING, city:STRING, state:STRING, zip:INT&gt;
+)
+PARTITIONED BY (country STRING, state STRING)
 </code></pre>
-<pre><code class="language-java">package com.bjut.java8test;
-
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class Java8QuoteTest {
-    final Car car = Car.create(Car::new);
-    final List&lt;Car&gt; cars = Arrays.asList(car);
-    final Car police = Car.create(Car::new);
-
-    @Test
-    public void quoteType() {
-        // 静态方法引用：它的语法是Class::static_method，实例如下：
-        cars.forEach(Car::collide);
-        // 特定类的任意对象的方法引用：它的语法是Class::method实例如下：
-        cars.forEach(Car::repair);
-        // 特定对象的方法引用：它的语法是instance::method实例如下：
-        cars.forEach(police::follow);
-    }
-
-    @Test
-    public void quoteExample(){
-        List&lt;String&gt; names = new ArrayList&lt;&gt;(50);
-        names.add(&quot;hello&quot;);
-        names.add(&quot;world&quot;);
-        names.add(&quot;ni&quot;);
-        names.add(&quot;hao&quot;);
-        names.forEach(System.out::println);
-    }
-}
-
+<p>分区表改变了 Hive 对数据存储的组织方式。</p>
+<p>对比：</p>
+<p>​	（1）如果我们是在mydb数据库中创建的这个表，那么对于这个表只会有一个employees目录与之对应：</p>
+<p>​</p>
+<pre><code class="language-java">hdfs://master_server/user/hive/warehouse/mydb.db/employees
 </code></pre>
-<h1>三、默认方法</h1>
-<p>默认方法 − 默认方法就是一个在接口里面有了一个实现的方法。</p>
-<pre><code class="language-java">package com.bjut.java8test;
-
-public interface Java8DefaultInterface {
-    default void print(){
-        System.out.println(&quot;默认方法&quot;);
-    }
-}
-
+<p>​	（2）但是，Hive 现在将会创建好可以反映分区结构的子目录。如：</p>
+<pre><code class="language-java">...
+.../employees/country=CA/state=AB
+.../employees/country=CA/state=BC
+...
+.../employees/country=US/state=AL
+.../employees/country=US/state=AK
+...
 </code></pre>
-<pre><code class="language-java">package com.bjut.java8test;
-
-import org.junit.Test;
-
-/**
- * 测试接口默认方法
- */
-public class Java8DefaultInterfaceTest implements Java8DefaultInterface{
-
-    @Test
-    public void test(){
-        Java8DefaultInterface defaultInterface = new Java8DefaultInterfaceTest();
-        defaultInterface.print();
-    }
-}
-
+<p>当我们查询美国伊利诺斯州所有雇员：</p>
+<pre><code class="language-java">SELECT * FROM employees WHERE country  = 'US' AND state = 'IL';
 </code></pre>
-<h1>四、 Date Time API</h1>
-<p>加强对日期与时间的处理。</p>
-<pre><code class="language-java">package com.bjut.java8test;
+<p>更快，所以分区显著的提高查询性能。</p>
+<p>但是如果全查询数据非常大，会执行巨大的 MapReduce 任务。</p>
+<p>建议将Hive设置为 “strict(严格)” 模式，如果没有WHERE过滤的话，会禁止提交这个任务：</p>
+<pre><code class="language-java">set hive.mapred.mode=strict
+    
+// SHOW PARTITIONS命令查看表中存在的所有分区：
+SHOW PARTITION employees;
 
-import org.junit.Test;
-import java.time.*;
-
-public class Java8DateTest {
-    LocalDateTime currentTime = LocalDateTime.now();
-
-    @Test
-    public void testLocalDateTime() {
-        // 获取服务器当前的日期时间
-        System.out.println(&quot;时间&quot; + currentTime);
-
-        // 获取服务器当前日期
-        LocalDate date1 = currentTime.toLocalDate();
-        System.out.println(&quot;date1: &quot; + date1);
-
-        // 获取服务器某月某天
-        Month month = currentTime.getMonth();
-        int day = currentTime.getDayOfMonth();
-        int seconds = currentTime.getSecond();
-        System.out.println(&quot;月: &quot; + month + &quot;, 日: &quot; + day + &quot;, 秒: &quot; + seconds);
-    }
-
-    @Test
-    public void testStructDateTime() {
-        LocalDateTime date2 = currentTime.withDayOfMonth(12).withYear(2012);
-        System.out.println(&quot;date2&quot; + date2);
-
-        // 23 december 2014
-        LocalDate date3 = LocalDate.of(2014, Month.DECEMBER, 23);
-        System.out.println(&quot;date3&quot; + date3);
-
-        // 22 小时 15 分钟
-        LocalTime date4 = LocalTime.of(22, 15);
-        System.out.println(&quot;date4: &quot; + date4);
-
-        // 解析字符串
-        LocalTime date5 = LocalTime.parse(&quot;20:15:30&quot;);
-        System.out.println(&quot;date5: &quot; + date5);
-    }
-
-    @Test
-    public void testZonedDateTime() {
-        // 获取当前时间日期
-        ZonedDateTime date1 = ZonedDateTime.parse(&quot;2015-12-03T10:15:30+05:30[Asia/Shanghai]&quot;);
-        System.out.println(&quot;date1: &quot; + date1);
-
-        ZoneId id = ZoneId.of(&quot;Europe/Paris&quot;);
-        System.out.println(&quot;ZoneId: &quot; + id);
-
-        ZoneId currentZone = ZoneId.systemDefault();
-        System.out.println(&quot;当期时区: &quot; + currentZone);
-    }
-}
-
+// 查看指定分区
+SHOW PARTITIONS employees PARTITION(country='US')
+SHOW PARTITIONS employees PARTITION(country='US', state='AK')
 </code></pre>
-<h1>五、 Optional 类</h1>
-<p>Optional 类是一个可以为null的容器对象。优雅的解决null问题：我平时好像都是类似于 StringUtils.isBlank()</p>
-<p>JAVA9在它的基础上又增加了3个方法</p>
-<pre><code class="language-java">package com.bjut.java8test;
-
-import org.junit.Test;
-import java.util.Optional;
-
-public class java8OptionalTest {
-
-    @Test
-    public void testOptional() {
-        Integer value1 = null;
-        Integer value2 = new Integer(10);
-
-        // Optional.ofNullable -允许传递null参数
-        Optional&lt;Integer&gt; a = Optional.ofNullable(value1);
-        // Optional.of - 如果传递的参数是null ， 抛出异常NullPointerException
-        Optional&lt;Integer&gt; b = Optional.of(value2);
-
-        System.out.println(sum(a, b));
-    }
-
-
-    private Integer sum(Optional&lt;Integer&gt; a, Optional&lt;Integer&gt; b) {
-        // Optional.isPresent - 判断值是否存在
-        System.out.println(&quot;第一个参数值存在&quot; + a.isPresent());
-        System.out.println(&quot;第二个参数值存在&quot; + b.isPresent());
-
-        // Option.orElse - 如果值存在，返回它，否则返回默认值
-        Integer value1 = a.orElse(new Integer(0));
-
-        // Optional.get - 获取值，值需要存在
-        Integer value2 = b.get();
-        return value1 + value2;
-    }
-}
-
+<pre><code class="language-java">// 日志文件
+ALTER TABLE log_messages ADD PARTITION(year = 2012,month = 1,day = 2)
+LOCATION 'hdfs://master_server/data/log_message/2012/01/02';
 </code></pre>
-<p>参考文献：https://www.runoob.com/java/java8-new-features.html</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1145,12 +976,12 @@ public class java8OptionalTest {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>java8新特性</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">文章标题:</span>Hive数据定义</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">765</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-11-14, 14:18:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-14, 16:30:37</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/14/java8新特性/" title="java8新特性">https://zhengtianqi.github.io/2019/11/14/java8新特性/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-17, 14:18:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-17, 15:53:05</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/17/Hive数据定义/" title="Hive数据定义">https://zhengtianqi.github.io/2020/01/17/Hive数据定义/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
