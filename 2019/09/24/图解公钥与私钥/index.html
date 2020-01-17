@@ -6,23 +6,23 @@
   <meta name="keywords" content=" 可信 , 密码学 ">
   <meta name="description" content="图解公钥私钥 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1、整型 ​		在 Java 中 ， 整型的范围与运行 Java 代码的机器无关 。 ​	 ​		在通常情况下， int类型最常用。 但如果表示星球上的居住人数 ，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合 ，例如 ，底层的文件处理或者需要控制占用存储空间量的大数组 。 ​		长整型数值有一个后缀 L 或 1 ( 如 4000000000 L ) 。 ​">
-<meta name="keywords" content="java">
+<meta name="description" content="一、基本数据类型   上面图列表了Hive所支持的基本数据类型。 相同：这些数据类型是对 JAVA 中接口的实现，例如STRING是java中的String 不同： ​		1、在其他SQL方言中，通常会提供限制最大长度的 “字符数组” ，但是Hive不支持。 ​		因为 Hive 是为了优化磁盘的读和写的性能，列长度不重要（定长易于索引） ​		2、TIMESTAMP的值可以是整数（距离Unix新">
+<meta name="keywords" content="hive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA数据类型易混概念">
-<meta property="og:url" content="https://zhengtianqi.github.io/2020/01/06/JAVA数据类型/index.html">
+<meta property="og:title" content="Hive数据类型和文件格式">
+<meta property="og:url" content="https://zhengtianqi.github.io/2020/01/17/Hive数据类型和文件格式/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="1、整型 ​		在 Java 中 ， 整型的范围与运行 Java 代码的机器无关 。 ​	 ​		在通常情况下， int类型最常用。 但如果表示星球上的居住人数 ，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合 ，例如 ，底层的文件处理或者需要控制占用存储空间量的大数组 。 ​		长整型数值有一个后缀 L 或 1 ( 如 4000000000 L ) 。 ​">
+<meta property="og:description" content="一、基本数据类型   上面图列表了Hive所支持的基本数据类型。 相同：这些数据类型是对 JAVA 中接口的实现，例如STRING是java中的String 不同： ​		1、在其他SQL方言中，通常会提供限制最大长度的 “字符数组” ，但是Hive不支持。 ​		因为 Hive 是为了优化磁盘的读和写的性能，列长度不重要（定长易于索引） ​		2、TIMESTAMP的值可以是整数（距离Unix新">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/inttype.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/floattype.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/chartype.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/typetrans.png">
-<meta property="og:updated_time" content="2020-01-06T09:14:46.702Z">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/hive%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/hive%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/hive%E9%9B%86%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20200117113506023.png">
+<meta property="og:updated_time" content="2020-01-17T06:12:51.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA数据类型易混概念">
-<meta name="twitter:description" content="1、整型 ​		在 Java 中 ， 整型的范围与运行 Java 代码的机器无关 。 ​	 ​		在通常情况下， int类型最常用。 但如果表示星球上的居住人数 ，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合 ，例如 ，底层的文件处理或者需要控制占用存储空间量的大数组 。 ​		长整型数值有一个后缀 L 或 1 ( 如 4000000000 L ) 。 ​">
-<meta name="twitter:image" content="https://zhengtianqi.github.io/img/inttype.png">
+<meta name="twitter:title" content="Hive数据类型和文件格式">
+<meta name="twitter:description" content="一、基本数据类型   上面图列表了Hive所支持的基本数据类型。 相同：这些数据类型是对 JAVA 中接口的实现，例如STRING是java中的String 不同： ​		1、在其他SQL方言中，通常会提供限制最大长度的 “字符数组” ，但是Hive不支持。 ​		因为 Hive 是为了优化磁盘的读和写的性能，列长度不重要（定长易于索引） ​		2、TIMESTAMP的值可以是整数（距离Unix新">
+<meta name="twitter:image" content="https://zhengtianqi.github.io/img/hive%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -127,11 +127,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(47)</small></div></li>
+    <li><div class="all active">全部文章<small>(48)</small></div></li>
     
         
             
-            <li><div data-rel="大数据">大数据<small>(7)</small></div>
+            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
                 
             </li>
             
@@ -139,7 +139,7 @@
     
         
             
-            <li><div data-rel="软件管理">软件管理<small>(2)</small></div>
+            <li><div data-rel="大数据">大数据<small>(8)</small></div>
                 
             </li>
             
@@ -179,7 +179,7 @@
     
         
             
-            <li><div data-rel="分布式">分布式<small>(1)</small></div>
+            <li><div data-rel="可信">可信<small>(7)</small></div>
                 
             </li>
             
@@ -187,7 +187,7 @@
     
         
             
-            <li><div data-rel="可信">可信<small>(7)</small></div>
+            <li><div data-rel="分布式">分布式<small>(1)</small></div>
                 
             </li>
             
@@ -211,8 +211,8 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="47">
-<input type="hidden" id="yelog_site_word_count" value="40k">
+<input type="hidden" id="yelog_site_posts_number" value="48">
+<input type="hidden" id="yelog_site_word_count" value="40.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -246,6 +246,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">HDFS</a>
     </li>
     
@@ -254,11 +258,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">git</a>
+        <a href="javascript:" class="color5">java</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">java</a>
+        <a href="javascript:" class="color5">hive</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -270,15 +274,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Spark</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">线程安全</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Spark</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -290,7 +294,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">maven</a>
+        <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -298,15 +302,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">JDK1.8新特性</a>
+        <a href="javascript:" class="color1">maven</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">锁</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">分布式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -315,6 +315,10 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">密码学</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">分布式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -342,6 +346,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">文件上传</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">加密算法</a>
     </li>
     
@@ -358,10 +366,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">文件上传</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">线程</a>
     </li>
     
@@ -375,12 +379,12 @@
     
     <nav id="title-list-nav">
         
-        <a  class="大数据 "
-           href="/2019/12/16/HDFS概述/"
-           data-tag="HDFS,HADOOP"
+        <a  class="软件管理 "
+           href="/2019/08/29/Git梳理/"
+           data-tag="git"
            data-author="" >
-            <span class="post-title" title="HDFS概述">HDFS概述</span>
-            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
         </a>
         
         <a  class="大数据 "
@@ -391,12 +395,12 @@
             <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
         </a>
         
-        <a  class="软件管理 "
-           href="/2019/08/29/Git梳理/"
-           data-tag="git"
+        <a  class="大数据 "
+           href="/2019/12/16/HDFS概述/"
+           data-tag="HDFS,HADOOP"
            data-author="" >
-            <span class="post-title" title="Git梳理">Git梳理</span>
-            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
+            <span class="post-title" title="HDFS概述">HDFS概述</span>
+            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
         </a>
         
         <a  class="java基础 "
@@ -405,6 +409,14 @@
            data-author="" >
             <span class="post-title" title="JAVA数据类型易混概念">JAVA数据类型易混概念</span>
             <span class="post-date" title="2020-01-06 14:30:00">2020/01/06</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2020/01/17/Hive数据类型和文件格式/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据类型和文件格式">Hive数据类型和文件格式</span>
+            <span class="post-date" title="2020-01-17 13:41:00">2020/01/17</span>
         </a>
         
         <a  class="大数据 "
@@ -423,14 +435,6 @@
             <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2019/12/18/Spark相关概述/"
-           data-tag="Spark"
-           data-author="" >
-            <span class="post-title" title="Spark相关概述">Spark相关概述</span>
-            <span class="post-date" title="2019-12-18 13:41:00">2019/12/18</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
            data-tag="并发,线程安全"
@@ -439,12 +443,20 @@
             <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/11/14/Spring-Bean生命周期/"
-           data-tag="spring"
+        <a  class="大数据 "
+           href="/2019/12/18/Spark相关概述/"
+           data-tag="Spark"
            data-author="" >
-            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
-            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
+            <span class="post-title" title="Spark相关概述">Spark相关概述</span>
+            <span class="post-date" title="2019-12-18 13:41:00">2019/12/18</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
+            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
         </a>
         
         <a  class="SpringCloud "
@@ -455,12 +467,12 @@
             <span class="post-date" title="2019-11-27 17:53:00">2019/11/27</span>
         </a>
         
-        <a  class="SpringCloud "
-           href="/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/"
-           data-tag="SpringCloud"
+        <a  class="java基础 "
+           href="/2019/11/14/Spring-Bean生命周期/"
+           data-tag="spring"
            data-author="" >
-            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
-            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
+            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
+            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
         <a  class="网络 "
@@ -487,6 +499,22 @@
             <span class="post-date" title="2019-12-18 09:12:00">2019/12/18</span>
         </a>
         
+        <a  class="java基础 "
+           href="/2019/11/14/java8新特性/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/11/20/mysql排序/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+        </a>
+        
         <a  class="大数据 "
            href="/2019/12/18/WordCount简析/"
            data-tag="HADOOP"
@@ -504,19 +532,11 @@
         </a>
         
         <a  class="数据库 "
-           href="/2019/11/20/mysql排序/"
+           href="/2019/08/31/mysql表设计及优化/"
            data-tag="mysql"
            data-author="" >
-            <span class="post-title" title="mysql排序">mysql排序</span>
-            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/11/14/java8新特性/"
-           data-tag="JDK1.8新特性"
-           data-author="" >
-            <span class="post-title" title="java8新特性">java8新特性</span>
-            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
@@ -527,28 +547,12 @@
             <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
         </a>
         
-        <a  class="数据库 "
-           href="/2019/08/31/mysql表设计及优化/"
-           data-tag="mysql"
+        <a  class="可信 "
+           href="/2019/09/02/加密解密/"
+           data-tag="可信,密码学"
            data-author="" >
-            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
-            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/公平锁、非公平锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
-            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/偏向锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="偏向锁">偏向锁</span>
-            <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
         </a>
         
         <a  class="分布式 "
@@ -559,20 +563,20 @@
             <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
+        <a  class="java基础 "
+           href="/2019/08/31/偏向锁/"
+           data-tag="锁"
            data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+            <span class="post-title" title="偏向锁">偏向锁</span>
+            <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/09/02/加密解密/"
-           data-tag="可信,密码学"
+        <a  class="java基础 "
+           href="/2019/08/31/公平锁、非公平锁/"
+           data-tag="锁"
            data-author="" >
-            <span class="post-title" title="加密解密">加密解密</span>
-            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
         </a>
         
         <a  class="设计模式 "
@@ -581,22 +585,6 @@
            data-author="" >
             <span class="post-title" title="单例模式">单例模式</span>
             <span class="post-date" title="2020-01-03 16:24:00">2020/01/03</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/可重入锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="可重入锁">可重入锁</span>
-            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/24/图解公钥与私钥/"
-           data-tag="可信,密码学"
-           data-author="" >
-            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
-            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
         <a  class="可信 "
@@ -616,11 +604,51 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/可重入锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="可重入锁">可重入锁</span>
+            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/24/图解公钥与私钥/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/11/20/对象存储与指针压缩/"
            data-tag="内存模型"
            data-author="" >
             <span class="post-title" title="对象存储与指针压缩">对象存储与指针压缩</span>
             <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2019/08/31/悲观锁、乐观锁/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/01/02/排序之比较器/"
+           data-tag="java,数据结构"
+           data-author="" >
+            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
         </a>
         
         <a  class="java基础 "
@@ -632,11 +660,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2020/01/02/排序之比较器/"
-           data-tag="java,数据结构"
+           href="/2019/08/31/文件上传/"
+           data-tag="文件上传"
            data-author="" >
-            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
-            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
         </a>
         
         <a  class="可信 "
@@ -647,12 +675,12 @@
             <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
-        <a  class="数据库 "
-           href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="mysql,锁"
+        <a  class="大数据 "
+           href="/2019/12/23/特征提取-简单流程/"
+           data-tag="HADOOP"
            data-author="" >
-            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
-            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+            <span class="post-title" title="用户行为特征提取">用户行为特征提取</span>
+            <span class="post-date" title="2019-12-23 11:10:00">2019/12/23</span>
         </a>
         
         <a  class="java基础 "
@@ -671,14 +699,6 @@
             <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2019/12/23/特征提取-简单流程/"
-           data-tag="HADOOP"
-           data-author="" >
-            <span class="post-title" title="用户行为特征提取">用户行为特征提取</span>
-            <span class="post-date" title="2019-12-23 11:10:00">2019/12/23</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/自旋锁/"
            data-tag="锁"
@@ -688,19 +708,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/轻量级锁/"
-           data-tag="锁"
+           href="/2019/11/20/线程相关的知识/"
+           data-tag="线程"
            data-author="" >
-            <span class="post-title" title="轻量级锁">轻量级锁</span>
-            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/文件上传/"
-           data-tag="文件上传"
-           data-author="" >
-            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
-            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
+            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
         </a>
         
         <a  class="设计模式 "
@@ -720,19 +732,19 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/11/20/线程相关的知识/"
-           data-tag="线程"
+           href="/2019/08/31/轻量级锁/"
+           data-tag="锁"
            data-author="" >
-            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
-            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/锁粗化/"
+           href="/2019/08/31/阻塞锁/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="锁粗化">锁粗化</span>
-            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
         </a>
         
         <a  class="可信 "
@@ -744,11 +756,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/阻塞锁/"
+           href="/2019/08/31/锁粗化/"
            data-tag="锁"
            data-author="" >
-            <span class="post-title" title="阻塞锁">阻塞锁</span>
-            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
         </a>
         
     </nav>
@@ -978,7 +990,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#HDFS','#HADOOP','#git','#java','#nacos-config','#SpringCloud','#Spark','#并发','#线程安全','#spring','#TCP/IP','#maven','#mysql','#JDK1.8新特性','#锁','#分布式','#可信','#密码学','#设计模式','#可信计算','#可靠','#容错','#内存模型','#数据结构','#加密算法','#多线程','#IO','#阻塞与非阻塞','#文件上传','#线程','#网络安全',],
+            'data': ['#git','#HDFS','#HADOOP','#java','#hive','#nacos-config','#SpringCloud','#并发','#线程安全','#Spark','#spring','#TCP/IP','#JDK1.8新特性','#mysql','#maven','#锁','#可信','#密码学','#分布式','#设计模式','#可信计算','#可靠','#容错','#内存模型','#数据结构','#文件上传','#加密算法','#多线程','#IO','#阻塞与非阻塞','#线程','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
