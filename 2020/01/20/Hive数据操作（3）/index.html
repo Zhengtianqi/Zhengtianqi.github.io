@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Spark相关概述 | 君莫笑</title>
-  <meta name="keywords" content=" Spark ">
-  <meta name="description" content="Spark相关概述 | 君莫笑">
+  <title>&lt; &gt; Hive数据操作（3） | 君莫笑</title>
+  <meta name="keywords" content=" hive ">
+  <meta name="description" content="&lt; &gt; Hive数据操作（3） | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="keywords" content="hive">
 <meta property="og:type" content="article">
@@ -791,9 +791,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Spark相关概述" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Hive数据操作（3）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Spark相关概述</h1>
+        <h1 class="article-title">&lt; &gt; Hive数据操作（3）</h1>
     
     <div class="article-meta">
         
@@ -808,19 +808,19 @@
         
         <span class="tag">
             
-            <a href="javascript:" class="color1">Spark</a>
+            <a href="javascript:" class="color5">hive</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-12-18 17:12:52'>2019-12-18 13:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-20 14:27:15'>2020-01-20 14:27</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:389</span>
+        <span>字数:0</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -850,7 +850,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、Spark的核心组件是：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、关键概念</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -866,39 +866,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>一、Spark的核心组件是：</h1>
-<p>​				集群资源管理服务（Cluster Manager）</p>
-<p>​				运行作业任务的节点（WorkerNode），</p>
-<p>​				每个应用的任务控制节点 Driver 和 每个机器节点上有具有任务的执行进程（Executor）</p>
-<p><img src="/img/Spark.png" alt="image-20191218134210879"></p>
-<p>说明：</p>
-<p><img src="/img/spark-all.png" alt="image-20191218140600902"></p>
-<h1>二、关键概念</h1>
-<p>（1）RDD</p>
-<p>​		Spark 的核心概念是弹性分布式数据集。RDD 是一个只读且不可变的分布式对象集合，创建、转化即调用 RDD 操作者一系列过程贯穿于 Spark 大数据处理的始终。</p>
-<p>（2）DAG</p>
-<p>​		Spark使用有向无环图进行任务调度。</p>
-<p>（3）Spark SQL</p>
-<p>​		用于结构化数据的计算。</p>
-<p>（4）DataFrame</p>
-<p>​		分布式的、按照名名列的形式组织的数据集合。</p>
-<p>（5）SQLContext</p>
-<p>​		Spark SQL 提供 SQLContext 封装 Spark 中的所有关系型功能，可以用前面提到的SparkContext创建SQLContext。</p>
-<p>（6）JDBC数据源</p>
-<p>三、Spark 和 HDFS 的配合关系</p>
-<p>​		<img src="/img/spark+hdfs.png" alt="image-20191218141731121"></p>
-<ul>
-<li>（1）读取文件的详细步骤：</li>
-<li>SparkScheduler 与 HDFS 交互获取 File A 的文件信息。</li>
-<li>HDFS返回该文件具体的 Block 信息</li>
-<li>SparkScheduler 根据具体的 Block 数据量，决定一个并行度，创建多个 Task 去读取这些文件Block</li>
-<li>Executor 端执行 Task 并读取具体的 Block，作为 RDD（弹性分部数据集）的一部分</li>
-<li>（2）HDFS文件写入的详细步骤：</li>
-<li>SparkScheduler 创建要写入文件的目录</li>
-<li>根据 RDD 分区分块情况，计算写出数据的 Task 数，并下发这些任务到 Executor</li>
-<li>Executor 执行这些 Task，将具体 RDD 的数据写入到第一步创建的目录下</li>
-</ul>
-
+        
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
     </div>
@@ -911,12 +879,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Spark相关概述</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">389</span></p>
+    <p><span class="copy-title">文章标题:</span>&lt; &gt; Hive数据操作（3）</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">0</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-12-18, 13:41:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-12-18, 17:12:52</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/18/Spark相关概述/" title="Spark相关概述">https://zhengtianqi.github.io/2019/12/18/Spark相关概述/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-20, 14:27:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-20, 14:27:15</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/20/Hive数据操作（3）/" title="&lt; &gt; Hive数据操作（3）">https://zhengtianqi.github.io/2020/01/20/Hive数据操作（3）/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
