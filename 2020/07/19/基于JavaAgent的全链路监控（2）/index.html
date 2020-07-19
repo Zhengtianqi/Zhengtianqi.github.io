@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Hive调优 | 君莫笑</title>
-  <meta name="keywords" content=" hive ">
-  <meta name="description" content="Hive调优 | 君莫笑">
+  <title>基于JavaAgent的全链路监控（2） | 君莫笑</title>
+  <meta name="keywords" content=" javaagent ">
+  <meta name="description" content="基于JavaAgent的全链路监控（2） | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="利用javaagent进行方法耗时的监控 1、介绍 ​		方法耗时利用前人轮子字节码操作工具ByteBuddy：Byte Buddy是一个代码生成和操作库，用于在Java应用程序运行时创建和修改Java类，而无需编译器的帮助。 除了Java类库附带的代码生成实用程序外，Byte Buddy还允许创建任意类，并且不限于实现用于创建运行时代理的接口。 此外，Byte Buddy提供了一个方便的API，">
 <meta name="keywords" content="javaagent">
@@ -901,9 +901,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Hive调优" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-基于JavaAgent的全链路监控（2）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hive调优</h1>
+        <h1 class="article-title">基于JavaAgent的全链路监控（2）</h1>
     
     <div class="article-meta">
         
@@ -911,26 +911,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="大数据">大数据</a>
+                <a href="javascript:" data-rel="java基础">java基础</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">hive</a>
+            <a href="javascript:" class="color5">javaagent</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-21 17:46:53'>2020-01-21 16:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-19 17:06:04'>2020-07-19 16:54</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:178</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -960,7 +960,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、使用EXPLAIN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、限制调整LIMIT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">三、JOIN优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">四、本地模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">五、并行执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">六、严格模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">七、调整mapper和reducer个数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">八、JVM重用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">九、索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">十、动态分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">十一、推测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">十二、单个MapReducer中多个GROUP BY</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">十三、虚拟列</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">利用javaagent进行方法耗时的监控</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">1、介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">2、pom.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">3、MethodCostTime.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">4、MyAgent.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">5、MANIFEST.MF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">6、测试</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -976,33 +976,221 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>一、使用EXPLAIN</h1>
-<p>​		查看逻辑，更多用 EXPLAIN EXTENDED</p>
-<h1>二、限制调整LIMIT</h1>
-<h1>三、JOIN优化</h1>
-<p>​		表足够小用map-side JOIN</p>
-<h1>四、本地模式</h1>
-<p>​	对于小数据集，单机或单线程执行时间比较短</p>
-<pre><code class="language-java">hive&gt; set oldjobtracker=${hiveconf.mapred.job.tracker};
-hive&gt; set mapred.job.tracker=local;
-hive&gt; set mapred.tmp.dir=/home/edward/tmp
-hive&gt; SELECT * from people WHERE firstname=bob;
-hive&gt; set mapred.job.tracker=${oldjobtracker};
+        <h1>利用javaagent进行方法耗时的监控</h1>
+<h2>1、介绍</h2>
+<p>​		方法耗时利用前人轮子字节码操作工具ByteBuddy：Byte Buddy是一个代码生成和操作库，用于在Java应用程序运行时创建和修改Java类，而无需编译器的帮助。 除了Java类库附带的代码生成实用程序外，Byte Buddy还允许创建任意类，并且不限于实现用于创建运行时代理的接口。 此外，Byte Buddy提供了一个方便的API，可以使用Java代理或在构建过程中手动更改类。</p>
+<h2>2、pom.xml</h2>
+<p>引入ByteBuddy并打入到Agent包中</p>
+<pre><code class="language-java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;cn.edu.bjut&lt;/groupId&gt;
+    &lt;artifactId&gt;checkpoint-agent&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+
+        &lt;!-- Build args --&gt;
+        &lt;argline&gt;-Xms512m -Xmx512m&lt;/argline&gt;
+        &lt;updateReleaseInfo&gt;true&lt;/updateReleaseInfo&gt;
+        &lt;maven.test.skip&gt;true&lt;/maven.test.skip&gt;
+        &lt;!-- 自定义MANIFEST.MF --&gt;
+        &lt;maven.configuration.manifestFile&gt;src/main/resources/META-INF/MANIFEST.MF&lt;/maven.configuration.manifestFile&gt;
+
+        &lt;javassist.version&gt;3.12.1.GA&lt;/javassist.version&gt;
+        &lt;guava.version&gt;15.0&lt;/guava.version&gt;
+        &lt;byte-buddy.version&gt;1.8.20&lt;/byte-buddy.version&gt;
+        &lt;maven-shade-plugin.version&gt;2.4.3&lt;/maven-shade-plugin.version&gt;
+
+        &lt;maven-compiler-plugin.version&gt;3.8.1&lt;/maven-compiler-plugin.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javassist&lt;/groupId&gt;
+            &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+            &lt;version&gt;${javassist.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+            &lt;artifactId&gt;guava&lt;/artifactId&gt;
+            &lt;version&gt;${guava.version}&lt;/version&gt;
+            &lt;scope&gt;compile&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;net.bytebuddy&lt;/groupId&gt;
+            &lt;artifactId&gt;byte-buddy&lt;/artifactId&gt;
+            &lt;version&gt;${byte-buddy.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;net.bytebuddy&lt;/groupId&gt;
+            &lt;artifactId&gt;byte-buddy-agent&lt;/artifactId&gt;
+            &lt;version&gt;${byte-buddy.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;!-- 将javassist包打包到Agent中 --&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${maven-shade-plugin.version}&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;shade&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;transformers&gt;
+                                &lt;transformer
+                                        implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
+                                    &lt;manifestEntries&gt;
+                                        &lt;!--指明包含 premain 方法的类名，否则打包出来的文件会找不到 MANIFEST.MF --&gt;
+                                        &lt;Premain-Class&gt;cn.edu.bjut.agent.MyAgent&lt;/Premain-Class&gt;
+                                    &lt;/manifestEntries&gt;
+                                &lt;/transformer&gt;
+                            &lt;/transformers&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${maven-compiler-plugin.version}&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;8&lt;/source&gt;
+                    &lt;target&gt;8&lt;/target&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
 </code></pre>
-<h1>五、并行执行</h1>
-<p>hive.exec.parallell=true</p>
-<h1>六、严格模式</h1>
-<p>hive.mapred.mode=strict</p>
-<p>（1）必须有WHERE</p>
-<p>（2）对于ORDER BY 的语句必须有LIMIT</p>
-<p>（3）限制笛卡尔基的查询</p>
-<h1>七、调整mapper和reducer个数</h1>
-<h1>八、JVM重用</h1>
-<h1>九、索引</h1>
-<h1>十、动态分区</h1>
-<h1>十一、推测执行</h1>
-<h1>十二、单个MapReducer中多个GROUP BY</h1>
-<h1>十三、虚拟列</h1>
+<h2>3、MethodCostTime.java</h2>
+<pre><code class="language-java">package cn.edu.bjut.monitor;
+
+import net.bytebuddy.implementation.bind.annotation.Origin;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+
+/**
+ * @author zhengtianqi
+ */
+public class MethodCostTime {
+
+    @RuntimeType
+    public static Object intercept(@Origin Method method, @SuperCall Callable&lt;?&gt; callable) throws Exception {
+        long start = System.currentTimeMillis();
+        try {
+            // 原有函数执行
+            return callable.call();
+        } finally {
+            System.out.println(method + &quot; 方法耗时：&quot; + (System.currentTimeMillis() - start) + &quot;ms&quot;);
+        }
+    }
+}
+
+</code></pre>
+<h2>4、MyAgent.java</h2>
+<pre><code class="language-java">package cn.edu.bjut.agent;
+
+import cn.edu.bjut.monitor.JvmStack;
+import cn.edu.bjut.monitor.MethodCostTime;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import net.bytebuddy.agent.builder.AgentBuilder;
+import net.bytebuddy.description.type.TypeDescription;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.MethodDelegation;
+import net.bytebuddy.matcher.ElementMatchers;
+import net.bytebuddy.utility.JavaModule;
+
+import java.lang.instrument.Instrumentation;
+import java.util.concurrent.*;
+
+/**
+ * @author zhengtianqi
+ */
+public class MyAgent {
+
+    /**
+     * JVM 首先尝试在代理类上调用以下方法
+     */
+    public static void premain(String agentArgs, Instrumentation inst) {
+        System.out.println(&quot;this is my agent：&quot; + agentArgs);
+
+        AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule) -&gt; {
+            return builder
+                    // 拦截任意方法
+                    .method(ElementMatchers.any())
+                    // 委托
+                    .intercept(MethodDelegation.to(MethodCostTime.class));
+        };
+
+        AgentBuilder.Listener listener = new AgentBuilder.Listener() {
+            @Override
+            public void onDiscovery(String s, ClassLoader classLoader, JavaModule javaModule, boolean b) {
+
+            }
+
+            @Override
+            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, boolean b, DynamicType dynamicType) {
+
+            }
+
+            @Override
+            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, boolean b) {
+
+            }
+
+            @Override
+            public void onError(String s, ClassLoader classLoader, JavaModule javaModule, boolean b, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onComplete(String s, ClassLoader classLoader, JavaModule javaModule, boolean b) {
+
+            }
+
+        };
+
+        new AgentBuilder
+                .Default()
+                // 指定需要拦截的类
+                .type(ElementMatchers.nameStartsWith(&quot;cn.edu.bjut&quot;))
+                .transform(transformer)
+                .with(listener)
+                .installOn(inst);
+
+    /**
+     * 如果代理类没有实现上面的方法，那么 JVM 将尝试调用该方法
+     */
+    public static void premain(String agentArgs) {
+    }
+}
+
+</code></pre>
+<h2>5、MANIFEST.MF</h2>
+<pre><code class="language-java">Manifest-Version: 1.0
+Premain-Class: cn.edu.bjut.agent.MyAgent
+Can-Redefine-Classes: true
+</code></pre>
+<h2>6、测试</h2>
+<pre><code class="language-java">VM options: -javaagent:D:\git\credible\checkpoint-agent\target\checkpoint-agent-1.0-SNAPSHOT.jar=testargs
+</code></pre>
+<p><img src="/img/agent-costtime2.png" alt="image-20200719170509172"></p>
+<p>结果：</p>
+<p><img src="/img/agent-costtime.png" alt="image-20200719170325930"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1016,12 +1204,12 @@ hive&gt; set mapred.job.tracker=${oldjobtracker};
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Hive调优</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">178</span></p>
+    <p><span class="copy-title">文章标题:</span>基于JavaAgent的全链路监控（2）</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-21, 16:48:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-21, 17:46:53</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/21/Hive调优/" title="Hive调优">https://zhengtianqi.github.io/2020/01/21/Hive调优/</a>
+    <p><span class="copy-title">发布时间:</span>2020-07-19, 16:54:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-19, 17:06:04</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/19/基于JavaAgent的全链路监控（2）/" title="基于JavaAgent的全链路监控（2）">https://zhengtianqi.github.io/2020/07/19/基于JavaAgent的全链路监控（2）/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
