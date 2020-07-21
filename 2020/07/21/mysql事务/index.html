@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>mysql排序 | 君莫笑</title>
+  <title>mysql事务 | 君莫笑</title>
   <meta name="keywords" content=" mysql ">
-  <meta name="description" content="mysql排序 | 君莫笑">
+  <meta name="description" content="mysql事务 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
@@ -943,9 +943,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-mysql排序" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-mysql事务" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">mysql排序</h1>
+        <h1 class="article-title">mysql事务</h1>
     
     <div class="article-meta">
         
@@ -967,12 +967,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-26 15:31:53'>2019-11-20 20:35</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-21 09:42:51'>2020-07-21 09:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:341</span>
+        <span>字数:0</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1002,7 +1002,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、正常的数字排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、排序中文时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">3、现在改成gbk_chinese_ci</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">4、英中排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">5、中文混搭</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -1018,53 +1018,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、正常的数字排序</h1>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F1.png" alt="image-20191120204232822"></p>
-<h1>2、排序中文时</h1>
-<p>，就是出现问题</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F2.png" alt="image-20191120204352223"></p>
-<p>​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。</p>
-<h1>3、现在改成gbk_chinese_ci</h1>
-<p>，ci是不区分大小写</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F3.png" alt="image-20191120204623652"></p>
-<p>这样的话，结果：</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F4.png" alt="image-20191120204719806"></p>
-<h1>4、英中排序</h1>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F5.png" alt="image-20191120205015864"></p>
-<p>​	这个也是gbk的排序效果，但是我们想做到中英混搭的效果，我认为可以自已在mysql编译前放进自己的排序规则，</p>
-<h1>5、中文混搭</h1>
-<p>先看一下效果：</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F6.png" alt="image-20191120205433980"></p>
-<p>我们sql用引入了一个函数GET_FIRST_PINYIN_CHAR</p>
-<pre><code class="language-java">SELECT
-	a.id,
-	a.username 
-FROM
-	test AS a 
-ORDER BY
-	GET_FIRST_PINYIN_CHAR(a.username)
-</code></pre>
-<p>这个函数需要在创建表之后定义，如下：</p>
-<pre><code class="language-java">DROP FUNCTION IF EXISTS `GET_FIRST_PINYIN_CHAR`;
-CREATE FUNCTION `GET_FIRST_PINYIN_CHAR`(PARAM VARCHAR(255)) RETURNS VARCHAR(2) CHARSET utf8
-BEGIN
-    DECLARE V_RETURN VARCHAR(255);
-    DECLARE V_FIRST_CHAR VARCHAR(2);
-    SET V_FIRST_CHAR = UPPER(LEFT(PARAM,1));
-  SET V_RETURN = V_FIRST_CHAR;
-    IF LENGTH( V_FIRST_CHAR)&lt;&gt;CHARACTER_LENGTH(V_FIRST_CHAR) THEN
-    SET V_RETURN = ELT(INTERVAL(CONV(HEX(LEFT(CONVERT(PARAM USING gbk),1)),16,10),
-        0xB0A1,0xB0C5,0xB2C1,0xB4EE,0xB6EA,0xB7A2,0xB8C1,0xB9FE,0xBBF7,
-        0xBFA6,0xC0AC,0xC2E8,0xC4C3,0xC5B6,0xC5BE,0xC6DA,0xC8BB,
-        0xC8F6,0xCBFA,0xCDDA,0xCEF4,0xD1B9,0xD4D1),
-    'A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z');
-    END IF;
-    RETURN V_RETURN;
-END
-</code></pre>
-<p>这个函数创建成功后，会显示ok。有些时候不成功，可能是没有打开创建函数的权限。</p>
-<p>需要在mysql配置文件中打开 log_bin_trust_function_creators</p>
-
+        
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
     </div>
@@ -1077,12 +1031,12 @@ END
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>mysql排序</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">341</span></p>
+    <p><span class="copy-title">文章标题:</span>mysql事务</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">0</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-11-20, 20:35:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-26, 15:31:53</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/20/mysql排序/" title="mysql排序">https://zhengtianqi.github.io/2019/11/20/mysql排序/</a>
+    <p><span class="copy-title">发布时间:</span>2020-07-21, 09:42:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-21, 09:42:51</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/21/mysql事务/" title="mysql事务">https://zhengtianqi.github.io/2020/07/21/mysql事务/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

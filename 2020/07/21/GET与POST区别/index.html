@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>mysql排序 | 君莫笑</title>
-  <meta name="keywords" content=" mysql ">
-  <meta name="description" content="mysql排序 | 君莫笑">
+  <title>GET与POST区别 | 君莫笑</title>
+  <meta name="keywords" content=" GET/POST ">
+  <meta name="description" content="GET与POST区别 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
@@ -943,9 +943,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-mysql排序" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-GET与POST区别" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">mysql排序</h1>
+        <h1 class="article-title">GET与POST区别</h1>
     
     <div class="article-meta">
         
@@ -953,26 +953,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="数据库">数据库</a>
+                <a href="javascript:" data-rel="网络">网络</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color1">mysql</a>
+            <a href="javascript:" class="color4">GET/POST</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-26 15:31:53'>2019-11-20 20:35</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-21 09:30:43'>2020-07-21 08:29</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:341</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1002,7 +1002,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、正常的数字排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、排序中文时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">3、现在改成gbk_chinese_ci</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">4、英中排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">5、中文混搭</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">GET请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">GET响应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">POST请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">POST响应</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、W3C表格对比</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（1）表格对比：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（2）交互对比</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">3、面试问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（1）GET方法的参数写法是固定的吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（2）GET 方法的长度限制是怎么回事？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（3）POST 方法比 GET 方法安全？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（4）POST 方法会产生两个 TCP 数据包？</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1018,52 +1018,112 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、正常的数字排序</h1>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F1.png" alt="image-20191120204232822"></p>
-<h1>2、排序中文时</h1>
-<p>，就是出现问题</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F2.png" alt="image-20191120204352223"></p>
-<p>​	这是因为我们在选取排序规则时，选择的不是gbk。所以想要正确的排序，需要我们了解我们选取字段的排序规则。</p>
-<h1>3、现在改成gbk_chinese_ci</h1>
-<p>，ci是不区分大小写</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F3.png" alt="image-20191120204623652"></p>
-<p>这样的话，结果：</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F4.png" alt="image-20191120204719806"></p>
-<h1>4、英中排序</h1>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F5.png" alt="image-20191120205015864"></p>
-<p>​	这个也是gbk的排序效果，但是我们想做到中英混搭的效果，我认为可以自已在mysql编译前放进自己的排序规则，</p>
-<h1>5、中文混搭</h1>
-<p>先看一下效果：</p>
-<p><img src="/img/mysql%E6%8E%92%E5%BA%8F6.png" alt="image-20191120205433980"></p>
-<p>我们sql用引入了一个函数GET_FIRST_PINYIN_CHAR</p>
-<pre><code class="language-java">SELECT
-	a.id,
-	a.username 
-FROM
-	test AS a 
-ORDER BY
-	GET_FIRST_PINYIN_CHAR(a.username)
+        <h1>1、介绍</h1>
+<p>​		最常用的利用GET和POST请求后端数据。GET和POST是HTTP与服务器交互的方式，交互方式还有DELETE、PUT、HEAD、OPTIONS、CONNECT等。</p>
+<p>​	先看看GET和POST的样貌：</p>
+<h2>GET请求</h2>
+<pre><code class="language-java">GET /empty_project/inde.jsp HTTP/1.1
+  Host: localhost:8088
+  Connection: keep-alive
+  Upgrade-Insecure-Requests: 1
+  User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)       Chrome/55.0.2883.87 Safari/537.36
+  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+  Accept-Encoding: gzip, deflate, sdch, br
+  Accept-Language: zh-CN,zh;q=0.8
+  Cookie: pgv_pvi=4403687424
 </code></pre>
-<p>这个函数需要在创建表之后定义，如下：</p>
-<pre><code class="language-java">DROP FUNCTION IF EXISTS `GET_FIRST_PINYIN_CHAR`;
-CREATE FUNCTION `GET_FIRST_PINYIN_CHAR`(PARAM VARCHAR(255)) RETURNS VARCHAR(2) CHARSET utf8
-BEGIN
-    DECLARE V_RETURN VARCHAR(255);
-    DECLARE V_FIRST_CHAR VARCHAR(2);
-    SET V_FIRST_CHAR = UPPER(LEFT(PARAM,1));
-  SET V_RETURN = V_FIRST_CHAR;
-    IF LENGTH( V_FIRST_CHAR)&lt;&gt;CHARACTER_LENGTH(V_FIRST_CHAR) THEN
-    SET V_RETURN = ELT(INTERVAL(CONV(HEX(LEFT(CONVERT(PARAM USING gbk),1)),16,10),
-        0xB0A1,0xB0C5,0xB2C1,0xB4EE,0xB6EA,0xB7A2,0xB8C1,0xB9FE,0xBBF7,
-        0xBFA6,0xC0AC,0xC2E8,0xC4C3,0xC5B6,0xC5BE,0xC6DA,0xC8BB,
-        0xC8F6,0xCBFA,0xCDDA,0xCEF4,0xD1B9,0xD4D1),
-    'A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z');
-    END IF;
-    RETURN V_RETURN;
-END
+<p>Accept 浏览器支持的类型
+Accept-Language 浏览器支持的语言
+Accept-Encoding 浏览器支持的压缩格式
+Host 请求的主机
+Connection keep-alive 这个是链接一小段时间</p>
+<h2>GET响应</h2>
+<pre><code class="language-java">HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=F463F5132A34573215C941893534BF26; Path=/empty_project; HttpOnly
+Content-Type: text/html;charset=utf-8
+Content-Length: 196
+Date: Mon, 02 Jan 2017 08:52:48 GMT
 </code></pre>
-<p>这个函数创建成功后，会显示ok。有些时候不成功，可能是没有打开创建函数的权限。</p>
-<p>需要在mysql配置文件中打开 log_bin_trust_function_creators</p>
+<p>响应行 (协议/版本 状态码 状态码解析)</p>
+<p>响应头 （key/value格式）</p>
+<p>空行</p>
+<p>响应正文</p>
+<h2>POST请求</h2>
+<pre><code class="language-java">POST /index.jsp HTTP/1.1
+Host: localhost:8088
+Connection: keep-alive
+Content-Length: 35
+Cache-Control: max-age=0
+Origin: http://localhost:8088
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://localhost:8088/login.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: pgv_pvi=4403687424
+
+username=username&amp;password=password
+</code></pre>
+<p>Content-Type 使用application/x-www-form-urlencoded</p>
+<p>转化为字节 -- 加上128 -- 转化为16进制 -- 添加%</p>
+<h2>POST响应</h2>
+<pre><code class="language-java">POST /index.jsp HTTP/1.1
+Host: localhost:8088
+Connection: keep-alive
+Content-Length: 252
+Cache-Control: max-age=0
+Origin: http://localhost:8088
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarySN8ehdkx6tF3Ngiq
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://localhost:8088/login.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: pgv_pvi=4403687424; JSESSIONID=061657A0C03921CB478ACB889502C93A
+
+------WebKitFormBoundarySN8ehdkx6tF3Ngiq
+Content-Disposition: form-data; name=&quot;username&quot;
+
+sdfdsf
+------WebKitFormBoundarySN8ehdkx6tF3Ngiq
+Content-Disposition: form-data; name=&quot;password&quot;
+
+sdfdsfsdfdsf
+------WebKitFormBoundarySN8ehdkx6tF3Ngiq--
+</code></pre>
+<h1>2、W3C表格对比</h1>
+<p><img src="/img/GETPOST.png" alt="image-20200721091103941"></p>
+<h2>（1）表格对比：</h2>
+<p>​		GET 用于获取信息，是无副作用的，是幂等的，且可缓存
+​		POST 用于修改服务器上的数据，有副作用，非幂等，不可缓存</p>
+<p>​		幂等性：是指无论调用多少次都不会有不同结果的一种特性，一般是指HTTP GET的查询方法。</p>
+<h2>（2）交互对比</h2>
+<p>​		GET产生一个TCP数据包，POST产生两个TCP数据包：</p>
+<p>​		对于GET方式的请求，游览器会把http header和data一并发送出去，服务器响应200（返回数据）</p>
+<p>​		对于POST请求。游览器先发送header，服务器响应100 continue，游览器再发送data，服务器响应200 ok（返回数据）3、</p>
+<h1>3、面试问题</h1>
+<h2>（1）GET方法的参数写法是固定的吗？</h2>
+<p>​		一般约定中我们都是把参数写在?后边，用&amp;分割</p>
+<p>​		但是我们知道，解析报文的过程是通过获取 TCP 数据，用正则等工具从数据中获取 Header 和 Body，从而提取参数。</p>
+<p>​		比如header请求头中添加token，来验证用户是否登录等权限问题。</p>
+<p>​		也就是说，我们可以自己约定参数的写法，只要服务端能够解释出来就行，万变不离其宗。</p>
+<h2>（2）GET 方法的长度限制是怎么回事？</h2>
+<p>​		网络上都会提到浏览器地址栏输入的参数是有限的。</p>
+<p>​		首先说明一点，HTTP 协议没有 Body 和 URL 的长度限制，对 URL 限制的大多是浏览器和服务器的原因。</p>
+<p>​		浏览器原因就不说了，服务器是因为处理长 URL 要消耗比较多的资源，为了性能和安全（防止恶意构造长 URL 来攻击）考虑，会给 URL 长度加限制。</p>
+<h2>（3）POST 方法比 GET 方法安全？</h2>
+<p>​		有人说POST 比 GET 安全，因为数据在地址栏上不可见。</p>
+<p>​		然而，从传输的角度来说，他们都是不安全的，因为 HTTP 在网络上是明文传输的，只要在网络节点上捉包，就能完整地获取数据报文。（个人发现某60和某讯电脑管家，会将GET和POST请求数据包完整的上传到他们的服务器，解析后你提交的信息就会被破解。类似于中间人攻击也会导致泄露，不安全）</p>
+<p>​		要想安全传输，就只有利用非对称加密，也就是 HTTPS。</p>
+<p>参考：http://www.javanx.cn/20190227/get-post/</p>
+<h2>（4）POST 方法会产生两个 TCP 数据包？</h2>
+<p>​		上述文章中提到，post 会将 header 和 body 分开发送，先发送 header，服务端返回 100 状态码再发送 body。</p>
+<p>​		HTTP 协议中没有明确说明 POST 会产生两个 TCP 数据包，而且实际测试(Chrome)发现，header 和 body 不会分开发送。</p>
+<p>​		所以，header 和 body 分开发送是部分浏览器或框架的请求方法，不属于 post 必然行为。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1077,12 +1137,12 @@ END
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>mysql排序</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">341</span></p>
+    <p><span class="copy-title">文章标题:</span>GET与POST区别</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-11-20, 20:35:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-11-26, 15:31:53</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/20/mysql排序/" title="mysql排序">https://zhengtianqi.github.io/2019/11/20/mysql排序/</a>
+    <p><span class="copy-title">发布时间:</span>2020-07-21, 08:29:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-21, 09:30:43</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/21/GET与POST区别/" title="GET与POST区别">https://zhengtianqi.github.io/2020/07/21/GET与POST区别/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
