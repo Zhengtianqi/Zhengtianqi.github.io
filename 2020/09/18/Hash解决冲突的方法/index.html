@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>加密解密 | 君莫笑</title>
-  <meta name="keywords" content=" 可信 , 密码学 ">
-  <meta name="description" content="加密解密 | 君莫笑">
+  <title>Hash解决冲突的方法 | 君莫笑</title>
+  <meta name="keywords" content=" 哈希表 ">
+  <meta name="description" content="Hash解决冲突的方法 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="1、什么是hash表 ​		散列表（hash table，也叫哈希表），是根据关键码值（key value）而直接进行访问的数据结构。 ​		也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫 散列函数，存放记录的数组叫做散列表。 ​		给定表M，存在函数f（key），对于任意给定的关键字值 key，代入函数后若能得到包含改关键字的记录在表中的地址，则称表M为">
 <meta name="keywords" content="哈希表">
@@ -1078,9 +1078,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-加密解密" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Hash解决冲突的方法" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">加密解密</h1>
+        <h1 class="article-title">Hash解决冲突的方法</h1>
     
     <div class="article-meta">
         
@@ -1088,28 +1088,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="可信">可信</a>
+                <a href="javascript:" data-rel="面试">面试</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">可信</a>
-            
-            <a href="javascript:" class="color4">密码学</a>
+            <a href="javascript:" class="color4">哈希表</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-15 20:40:18'>2019-09-02 13:37</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-18 13:43:08'>2020-09-18 13:02</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:410</span>
+        <span>字数:619</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1139,7 +1137,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（1）对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（2）非对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（3）混合加密机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">加密过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">解密过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">（4）为什么需要混合加密机制？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">安全？速度快？</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、什么是hash表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、hash冲突</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">3、处理hash冲突的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">1、开放定址法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">2、再哈希法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">3、链地址法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">4、建立公共溢出区</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1155,36 +1153,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、组成</h1>
-<p>（1）明文：未加密的消息m；</p>
-<p>（2）密文：加密后的消息ct；</p>
-<p>（3）加解密算法：把明文变成密文，密文变成明文的转换函数；</p>
-<p>（4）加密密钥：明文 加密成 密文 需要的参数；</p>
-<p>（5）解密密钥：密文变成 明文 需要的参数</p>
-<h1>2、分类</h1>
-<h2>（1）对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 = 解密密钥</p>
-<p><img src="/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（2）非对称加密算法</h2>
-<p>对称加密算法 ： 加密密钥 != 解密密钥</p>
-<p><img src="/img/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt></p>
-<h2>（3）混合加密机制</h2>
-<p>混合加密算法：对称加密 + 非对称加密</p>
-<p><img src="/img/%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86%E7%9A%84%E6%96%B9%E5%BC%8F.png" alt></p>
-<h3>加密过程</h3>
-<p>（a）首先利用对称加密技术加密索要安全传输的消息</p>
-<p>（b）然后将对称密钥通过非对称加密的方式用公钥进行加密，附在（a）所述消息中</p>
-<h3>解密过程</h3>
-<p>（a）首先使用私钥解密密钥</p>
-<p>（b）然后再用此密钥解密消息</p>
-<h2>（4）为什么需要混合加密机制？</h2>
-<h3>安全？速度快？</h3>
-<p>​	先拿对称加密和非对称加密算法，做一个对比</p>
-<p>​	本文中的私钥、公钥是非对称加密的说法；密钥是对称加密的说法。</p>
-<p><img src="/img/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95.png" alt="1571142451345"></p>
-<p>谈一下混合的好处：</p>
-<p>（a）利用对称加密的速度快：进行网络消息传输时响应及时；</p>
-<p>（b）非对称加密的安全优势：给你一个通过公钥加密的密钥，你先拿私钥解开加密的密钥，然后才能解开消息，保证密钥不被泄露。（注：有点绕；此处私钥、公钥是非对称加密的说法；密钥是对称加密的说法。）</p>
+        <h1>1、什么是hash表</h1>
+<p>​		散列表（hash table，也叫哈希表），是根据关键码值（key value）而直接进行访问的数据结构。</p>
+<p>​		也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫 散列函数，存放记录的数组叫做散列表。</p>
+<p>​		给定表M，存在函数f（key），对于任意给定的关键字值 key，代入函数后若能得到包含改关键字的记录在表中的地址，则称表M为哈希（hash）表，函数 f（key）为哈希（hash）函数。</p>
+<h1>2、hash冲突</h1>
+<p>​		对应不同的关键字可能获得相同的 hash 地址，即 key1 ≠ key2，但是f（key1） = f（key2）。这种现象就是冲突，而且这种冲突只能尽可能的减少，不能完全避免。</p>
+<p>​		因为哈希函数是从关键字集合和地址集合的映像，通畅关键字集合比较大，而地址集合的元素仅为哈希表中的地址值。</p>
+<h1>3、处理hash冲突的方法</h1>
+<h2>1、开放定址法</h2>
+<p>​		所谓的开放定址法就是一旦发生了冲突，就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存入。</p>
+<p>​		fi(key) = ( f(key) + di) MOD m  (di = 1,2,3,......,m-1)</p>
+<h2>2、再哈希法</h2>
+<p>​		再哈希法又叫双哈希法，有多个不同的Hash函数，当发生冲突时，使用第二个，第三个，...... ,等哈希函数</p>
+<p>​		计算地址，直到无冲突。</p>
+<p>​	（不易发生聚集，但是增加计算时间）</p>
+<h2>3、链地址法</h2>
+<p>​		每个哈希表节点都有一个next指针，多个哈希表节点可以用next指针构成一个单向链表，被分配到同一个索引上的多个节点可以用 next 指针构成一个单向链表，被分配到同一个索引上的多个节点可以用这个单向链表连接起来。</p>
+<p>​		键值对k2，v2与键值对k1，v1通过计算后的索引值都为2，这时及时产生冲突，但是可以通到next 指将 k2，k1所在的节点连接起来，这样就解决了哈希的冲突问题。</p>
+<h2>4、建立公共溢出区</h2>
+<p>​		将 哈希表 分为 基本表 和 溢出表两部分</p>
+<p>​		凡是和基本表发生冲突的元素，依赖包填入溢出表。</p>
+<p>​</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1198,12 +1188,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>加密解密</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">410</span></p>
+    <p><span class="copy-title">文章标题:</span>Hash解决冲突的方法</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">619</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-02, 13:37:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-15, 20:40:18</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/02/加密解密/" title="加密解密">https://zhengtianqi.github.io/2019/09/02/加密解密/</a>
+    <p><span class="copy-title">发布时间:</span>2020-09-18, 13:02:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-18, 13:43:08</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/18/Hash解决冲突的方法/" title="Hash解决冲突的方法">https://zhengtianqi.github.io/2020/09/18/Hash解决冲突的方法/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
