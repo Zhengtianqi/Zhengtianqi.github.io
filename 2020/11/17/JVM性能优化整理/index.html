@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>DNS | 君莫笑</title>
-  <meta name="keywords" content=" DNS ">
-  <meta name="description" content="DNS | 君莫笑">
+  <title>JVM性能优化整理 | 君莫笑</title>
+  <meta name="keywords" content>
+  <meta name="description" content="JVM性能优化整理 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="1、类加载过程 ​		Java语言是一种具有动态性的解释型语言，类(Class)只有被加载到JVM后才能运行。当运行指定程序时，JVM会将编译生成的.class文件按照需求和一定的规则加载到内存中，并组织成为一个完整的Java应用程序。 ​		这个加载过程是由类加载器完成，具体来说，就是由ClassLoader和它的子类来实现的。类加载器本身也是一个类，其实质是把类文件从硬盘读取到内存中。 ​">
 <meta property="og:type" content="article">
@@ -1125,9 +1125,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-DNS" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-JVM性能优化整理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">DNS</h1>
+        <h1 class="article-title">JVM性能优化整理</h1>
     
     <div class="article-meta">
         
@@ -1135,26 +1135,20 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="网络">网络</a>
+                <a href="javascript:" data-rel="面试">面试</a>
             
         </span>
         
         
-        <span class="tag">
-            
-            <a href="javascript:" class="color4">DNS</a>
-            
-        </span>
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-11-17 16:10:46'>2020-11-17 15:14</time>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-21 21:26:04'>2020-07-21 15:57</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>字数:1.6k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1184,7 +1178,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">1、介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">2、DNS解析原理</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -1200,38 +1194,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>1、介绍</h1>
-<p>​		在互联网中是用IP来标识一台服务器的。IP地址虽然能够代表一台设备，但是由于记忆起来比较困难，所以将其替换成一个能够理解和识别的名字，这个名字我们称作为域名。</p>
-<p>​		在域名后面会定义一个IP地址用来指向网站服务器。DNS负责域名到IP地址的对应。</p>
-<p>​		DNS 是域名系统(Domain Name System，缩写：DNS)是互联网的一项服务。它将域名和IP地址相互映射的一个分布式数据库，在数据库中保存域名与IP的对照关系，从而使人更方便地访问互联网。</p>
-<p>​		DNS解析是分布式存储的，从结构上来说最顶层是，根域名服务器(ROOT DNS Server)，存储260个顶级域名服务器的IP地址。对于Ipv4来说全球有13个根域名服务器，它储存了每个域(如.com .net .cn)的解析和域名服务器的地址信息。简单的说，根域名服务器就是存放顶级域名服务器地址的。</p>
-<p>​		在根域名服务器下一级就是，顶级域名服务器。例如.com的域名服务器，存储的是一些一级域名的权威DNS服务器地址(如toutiao.com的DNS)。</p>
-<p>​		顶级域名又称一级域名，顶级域名可以分为三类，即gTLD、ccTLD和New gTLD：</p>
-<p>​		gTLD：国际顶级域名(generic top-level domains，gTLD)，例如：.com/.net/.org等都属于gTLD;</p>
-<p>​		ccTLD：国家和地区顶级域名(country code top-level domains，简称ccTLD)，例如：中国是.cn域名，日本是.jp域名;</p>
-<p>​		New gTLD：新顶级域名(New gTLD)，例如：.xyz/.top/.red/.help等新顶级域名。</p>
-<p><img src="/img/DNS1.png" alt="image-20200721195559652"></p>
-<h1>2、DNS解析原理</h1>
-<p><img src="/img/DNS2.png" alt="image-20200721195702373"></p>
-<p>通过9步来诠释DNS解析过程：</p>
-<p>（1）用户请求通过浏览器输入要访问网站的地址，例如：www.toutiao.com。浏览器会在自己的缓存中查找URL对应IP地址。如果之前访问过，保存了这个URL对应IP地址的缓存，那么就直接访问IP地址。如果没有缓存，进入到第2步。</p>
-<p>（2）通过计算机本地的Host文件配置，可以设置URL和IP地址的映射关系。比如windows下是通过C:\windwos\system32\driver\etc\hosts文件来设置的，linux中则是/etc/named.confg文件。这里查找本地的Host文件，看是有IP地址的缓存。如果在文件中依旧没有找到映射关系，进入第3步</p>
-<p>（3）请求Local DNS Server，通过本地运营商获取URL和IP的映射关系。如果在校园网，DNS服务器就在学校，如果是小区网络，DNS服务器是运营商提供的。总之这个服务器在物理位置上离发起请求的计算机比较近。Local DNS Server缓存了大量的DNS解析结果。由于它的性能较好，物理上的距离又比较近，它通常会在很短的时间内返回指定域名的解析结果。80%的DNS解析需求在这一步就满足了。如果在这一步还是没有完成DNS解析，进入第4步</p>
-<p>（4）通过Root DNS Server进行解析，ROOT DNS Server会根据请求的URL 返回给Local DNS Server顶级域名服务器的地址。例如：查询的是”.com”的域名，就查询 gTL对应的域名服务器的地址</p>
-<p>（5）返回顶级域名服务器的地址以后，访问对应的顶级域名服务器(gTLD、ccTLD、New gTLD)，并且返回Name Server服务器地址。这个Name Server就是网站注册的域名服务器，上面包含了网站URL和IP的对应信息。例如你在某个域名服务提供商申请的域名，这个域名就由他们的服务器来解析。这个Name Server是由域名提供商维护的</p>
-<p>（6）Name Server会把指定域名的A记录或者CNAME返回给Local DNS Server，并且设置一个TTL</p>
-<ul>
-<li>A (Address) 记录是用来指定主机名(或域名)对应的IP地址记录。用户可以将该域名下的网站服务器指向到自己的web server上。同时也可以设置您域名的二级域名。</li>
-<li>CNAME：别名记录。这种记录允许您将多个名字映射到另外一个域名。通常用于同时提供WWW和MAIL服务的计算机。例如，有一台计算机名为“host.mydomain.com”(A记录)。它同时提供WWW和MAIL服务，为了便于用户访问服务。服务商从方便维护的角度，一般也建议用户使用CNAME记录绑定域名的。如果主机使用了双线IP，显然使用CNAME也要方便一些。</li>
-<li>TTL(Time To Live)：也就是设置这个DNS解析在Local DNS Server上面的过期时间。超过了这个过期时间，URL和IP的映射就会被删除，需要获取还要请求Name Server</li>
-</ul>
-<p>（7）如果此时获取的是A记录，那么就可以直接访问网站的IP了。但是通常来说大型的网站都会返回CNAME，然后将其传给GTM Server</p>
-<p>​		GTM(Global Traffic Manager的简写)即全局流量管理，基于网宿智能DNS、分布式监控体系，实现实时故障切换及全球负载均衡，保障应用服务的持续高可用性。传给GTM的目的就是希望通过GTM的负载均衡机制，帮助用户找到最适合自己的服务器IP。</p>
-<p>​		也就是离自己最近，性能最好，服务器状态最健康的。而且大多数的网站会做CDN缓存，此时就更需要使用GTM帮你找到网络节点中适合你的CDN缓存服务器。</p>
-<p>（8）找到CDN缓存服务器以后，可以直接从服务器上面获取一些静态资源，例如：HTML、CSS、JS和图片。但是一些动态资源，例如商品信息，订单信息，需要通过第9步</p>
-<p>（9）对于没有缓存的动态资源需要从应用服务器获取，在应用服务器与互联网之间通常有一层负载均衡器负责反向代理。有它路由到应用服务器上</p>
-<p>借鉴于：https://network.51cto.com/art/202003/613009.htm</p>
-<p>作者：崔皓来源：<a href="https://www.toutiao.com/i6807234747488535054/" target="_blank" rel="noopener">51CTO技术栈</a>|2020-03-23 15:08</p>
+        <p>1、类加载过程</p>
+<p>​		Java语言是一种具有动态性的解释型语言，类(Class)只有被加载到JVM后才能运行。当运行指定程序时，JVM会将编译生成的.class文件按照需求和一定的规则加载到内存中，并组织成为一个完整的Java应用程序。</p>
+<p>​		这个加载过程是由类加载器完成，具体来说，就是由ClassLoader和它的子类来实现的。类加载器本身也是一个类，其实质是把类文件从硬盘读取到内存中。</p>
+<p>​		类的加载方式分为隐式加载和显示加载。隐式加载指的是程序在使用new等方式创建对象时，会隐式地调用类的加载器把对应的类加载到JVM中。显示加载指的是通过直接调用class.forName()方法来把所需的类加载到JVM中。</p>
+<p>7个阶段：加载-验证-准备-解析-初始化-使用-卸载</p>
+<p>（1）加载</p>
+<p>加载是类加载的第一个过程，在这个阶段，将完成一下三件事情:</p>
+<p>​		通过一个类的全限定名获取该类的二进制流。</p>
+<p>​		将该二进制流中的静态存储结构转化为方法去运行时数据结构。</p>
+<p>​		在内存中生成该类的Class 对象，作为该类的数据访问入口。</p>
+<p>（2）验证</p>
+<p>验证的目的是为了确保Class 文件的字节流中的信息不回危害到虚拟机.在该阶段主要完成以下四钟验证:
+		文件格式验证∶验证字节流是否符合Class文件的规范，如主次版本号是否在当前虚拟机范围内，常量池中的常量是否有不被支持的类型.</p>
+<p>​		元数据验证∶对字节码描述的信息进行语义分析，如这个类是否有父类，是否集成了不被继承的类等。
+​		字节码验证∶是整个验证过程中最复杂的一个阶段，通过验证数据流和控制流的分析，确定程序语义是否正确，主要针对方法体的验证。如∶方法中的类型转换是否正确，跳转指令是否正确等。</p>
+<p>​		符号引用验证∶这个动作在后面的解析过程中发生，主要是为了确保解析动作能正确执行。</p>
+<p>（3）解析</p>
+<p>​		该阶段主要完成符号引用到直接引用的转换动作。解析动作并不一定在初始化动作完成之前，也有可能在初始化之后。</p>
+<p>（4）初始化</p>
+<p>​		初始化时类加载的最后一步，前面的类加载过程，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制。到了初始化阶段，才真正开始执行类中的定义的java程序代码。</p>
+<p>（6）使用</p>
+<p>（7）卸载</p>
+<p>2、GC对象的判定方法</p>
+<p>（1）引用计数法</p>
+<p>​		引用对象时，计数器+1；引用失效时，计数器-1。无法解决循环引用问题。</p>
+<p>（2）可达性算法（引用链法）</p>
+<p>该算法的思想是: 从一个被称为GC Roots的对象开始向下搜索，如果一个对象到GC Roots没有任何引用链相连时，则说明此对象不可用。（有向图进行管理）</p>
+<p>在Java中可以作为GC Roots 的对象有以下几种:</p>
+<p>虚拟机栈中引用的对象、方法区类静态属性引用的对象、方法区常量池引用的对象、本地方法栈JNI引用的对象</p>
+<p>3、java内存泄露</p>
+<p>​		所谓内存泄露就是指一个不再被程序使用的对象或变量一直被占据在内存中。Java中有垃圾回收机制，它可以保证一对象不再被引用的时候，即对象变成了孤儿的时候，对象将自动被垃圾回收器从内存中清除掉。</p>
+<p>​		由于Java使用有向图的方式进行垃圾回收管理,可以消除引用循环的问题，例如有两个对象，相互引用，只要它们和根进程不可达的，那么GC也是可以回收它们的。</p>
+<p>​		Java 中的内存泄露的情况:长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄露，尽管短生命周期对象已经不再需要，但是因为长生命周期对象持有它的引用而导致不能被回收，这就是Java中内存泄露的发生场景。</p>
+<p>​		通俗地说，就是程序员可能创建了一个对象，以后一直不再使用这个对象，这个对象却一直被引用，即这个对象无用但是却无法被垃圾回收器回收的，这就是java中可能出现内存泄露的情况，例如，缓存系统，我们加载了一个对象放在缓存中(例如放在一个全局map对象中)，然后一直不再使用它，这个对象一直被缓存引用，但却不再被使用。。</p>
+<p>​		检查Java中的内存泄露，一定要让程序将各种分支情况都完整执行到程序结束，然后看某个对象是否被使用过，如果没有，则才能判定这个对象属于内存泄露。</p>
+<p>​	如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存?不会，在下一个垃圾回收周期中，这个对象将是可被回收的。</p>
+<p>4、深拷贝和浅拷贝</p>
+<p>​		浅拷贝就是对对象中的数据成员进行简单赋值，如果存在动态成员或者指针就会报错。
+​		深拷贝就是对对象中存在的动态成员或指针重新开辟内存空间。</p>
+<p>5、类加载器</p>
+<p>实现通过类的权限定名获取该类的二进制字节流的代码块叫做类加载器。主要有一下四种类加载器:
+		（1）启动类加载器(BootstrapClassLoader)用来加载Java核心类库，无法被Java程序直接引用。
+		（2）扩展类加载器(extensions class loader):它用来加载Java 的扩展库。Java虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载Java类。</p>
+<p>​		（3）系统类加载器(system class loader):它根据Java应用的类路径
+(CLASSPATH)来加载Java类。一般来说,Java应用的类都是由它来完成加载的。可以通过ClassLoader.getSystemClassLoader()来获取它。
+​		（4）用户自定义类加载器，通过继承 java.lang.ClassLoader类的方式实现。</p>
+<p>6、类加载器双亲委派模型</p>
+<p>​		当一个类收到了类加载请求时，不会自己先去加载这个类，而是将其委派给父类，由父类去加载，如果此时父类不能加载，反馈给子类，由子类去完成类的加载。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1245,12 +1255,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>DNS</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
+    <p><span class="copy-title">文章标题:</span>JVM性能优化整理</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-07-21, 15:57:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-07-21, 21:26:04</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/21/DNS/" title="DNS">https://zhengtianqi.github.io/2020/07/21/DNS/</a>
+    <p><span class="copy-title">发布时间:</span>2020-11-17, 15:14:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-11-17, 16:10:46</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/11/17/JVM性能优化整理/" title="JVM性能优化整理">https://zhengtianqi.github.io/2020/11/17/JVM性能优化整理/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
