@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>排序之比较器Comparable&lt;T&gt; | 君莫笑</title>
-  <meta name="keywords" content=" java , 数据结构 ">
-  <meta name="description" content="排序之比较器Comparable&lt;T&gt; | 君莫笑">
+  <title>并发编程总结 | 君莫笑</title>
+  <meta name="keywords" content=" java ">
+  <meta name="description" content="并发编程总结 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="1、类加载过程 ​		Java语言是一种具有动态性的解释型语言，类(Class)只有被加载到JVM后才能运行。当运行指定程序时，JVM会将编译生成的.class文件按照需求和一定的规则加载到内存中，并组织成为一个完整的Java应用程序。 ​		这个加载过程是由类加载器完成，具体来说，就是由ClassLoader和它的子类来实现的。类加载器本身也是一个类，其实质是把类文件从硬盘读取到内存中。 ​">
 <meta property="og:type" content="article">
@@ -1133,9 +1133,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-排序之比较器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-并发编程总结" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">排序之比较器Comparable&lt;T&gt;</h1>
+        <h1 class="article-title">并发编程总结</h1>
     
     <div class="article-meta">
         
@@ -1143,7 +1143,7 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="java基础">java基础</a>
+                <a href="javascript:" data-rel="面试">面试</a>
             
         </span>
         
@@ -1152,19 +1152,17 @@
             
             <a href="javascript:" class="color5">java</a>
             
-            <a href="javascript:" class="color5">数据结构</a>
-            
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-02 11:45:16'>2020-01-02 10:27</time>
+        创建时间:<time class="date" title='更新时间: 2020-11-17 17:55:28'>2020-11-17 16:57</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:508</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1194,7 +1192,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">一、Comparable比较器的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">二、Comparable比较器的原理</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -1210,128 +1208,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1>一、Comparable<t>比较器的使用</t></h1>
-<p>​		JAVA中可以通过实现 Comparable<t>接口的方式让对象进行排序。使用方法：</t></p>
-<p>​			1、实体继承Comparable<t></t></p>
-<p>​			2、实现compareTo方法，根据需求进行比较</p>
-<pre><code class="language-java">package com.bjut.fight.utils.comparable;
-
-public class Student implements Comparable&lt;Student&gt; {
-    private String name;
-    private int age;
-
-    public Student(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    @Override
-    public int compareTo(Student o) {
-        // 1表示大于，-1表示小于，0表示等于
-        return this.age &gt;= o.age ? 1 : -1;
-    }
-
-    public void print() {
-        System.out.println(this.name + &quot;,&quot; + this.age);
-    }
-}
-
-</code></pre>
-<pre><code class="language-java">public class Test {
-    public static void main(String[] args) {
-		Student stu1 = new Student(&quot;zhangsan&quot;, 10);
-        Student stu2 = new Student(&quot;zhangsan&quot;, 21);
-        Student stu3 = new Student(&quot;zhangsan&quot;, 19);
-        Student stu4 = new Student(&quot;zhangsan&quot;, 26);
-
-        Student[] students = {stu1, stu2, stu3, stu4};
-
-        Arrays.sort(students);
-        for (Student stu : students) {
-            stu.print();
-        }
-    }
-}
-</code></pre>
-<h1>二、Comparable<t>比较器的原理</t></h1>
-<p>​		为什么实现compareTo两个元素比较，不需要扫描全部，下一个元素插入的时候就把顺序排好了，它使用的是二叉树中序排序，下边是（网上最多介绍的）简单的处理方法：</p>
-<p>​		（1）设置根节点</p>
-<p>​		（2）新增节点，与根节点比较大小，</p>
-<p>​					小则放到左子树（若左子树已经存在，则用此左子树进行递归调用）</p>
-<p>​					大则放到右子树（若右子树已经存在，则用此右子树进行递归调用）</p>
-<pre><code class="language-java">package com.bjut.fight.utils.comparable;
-
-/**
- * @author 郑天祺 on 2020/1/2 9:26
- */
-public class MyComparable {
-
-    public static class BinaryTree&lt;T&gt; {
-        class Node {
-            private Comparable&lt;T&gt; data;
-            private Node left;
-            private Node right;
-
-            Node(Comparable&lt;T&gt; data) {
-                this.data = data;
-            }
-
-            void addNode(Node newNode) {
-                if (newNode.data.compareTo((T) this.data) &lt; 0) {
-                    if (this.left == null) {
-                        this.left = newNode;
-                    } else {
-                        this.left.addNode(newNode);
-                    }
-                }
-                if (newNode.data.compareTo((T) this.data) &gt;= 0) {
-                    if (this.right == null) {
-                        this.right = newNode;
-                    } else {
-                        this.right.addNode(newNode);
-                    }
-                }
-            }
-
-            void print() {
-                if (this.left != null) {
-                    left.print();
-                }
-                System.out.println(this.data + &quot;\t&quot;);
-
-                if (this.right != null) {
-                    this.right.print();
-                }
-            }
-        }
-
-        private Node root;
-
-        public void add(Comparable&lt;T&gt; data) {
-            Node newNode = new Node(data);
-            if (root == null) {
-                root = newNode;
-            } else {
-                root.addNode(newNode);
-            }
-        }
-
-        public void print() {
-            this.root.print();
-        }
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class Test {
-    public static void main(String[] args) {
-        MyComparable.BinaryTree&lt;Integer&gt; bt = new MyComparable.BinaryTree&lt;&gt;();
-        bt.add(1);
-        bt.add(2);
-        bt.add(0);
-        bt.print();
- 	}
-}
-</code></pre>
+        <p>1、Synchronized</p>
+<p>​		Synchronized是由JVM实现的一种实现互斥同步的一种方式，如果你查看被Synchronized修饰过的程序块编译后的字节码，会发现，被Synchronized修饰过的程序块，在编译前后被编译器生成了monitor enter和monitor exit两个字节码指令。</p>
+<p>​		这两个指令是什么意思呢?在虚拟机执行到monitor enter指令时，首先要尝试获取对象的锁︰如果这个对象没有锁定，或者当前线程已经拥有了这个对象的锁，把锁的计数器+1;当执行monitorexit指令时将锁计数器-1﹔当计数器为O时，锁就被释放了。如果获取对象失败了，那当前线程就要阻塞等待，直到对象锁被另外一个线程释放为止。</p>
+<p>​		Java中Synchronize通过在对象头设置标记，达到了获取锁和释放锁的目的。</p>
+<p>​		Synchronize是非公平锁。</p>
+<p>2、Synchronized锁对象</p>
+<p>​		“锁”的本质其实是monitorenter和monitorexit字节码指令的一个Reference类型的参数，即要锁定和解锁的对象。我们知道，使用Synchronized可以修饰不同的对象，因此，对应的对象锁可以这么确定。
+（1）如果 Synchronized 明确指定了锁对象，比如 Synchronized(变量名)、Synchronized(this)等，说明加解锁对象为该对象。
+（2）如果没有明确指定:
+若Synchronized修饰的方法为非静态方法，表示此方法对应的对象为锁对象;
+若Synchronized修饰的方法为静态方法，则表示此方法对应的类对象为锁对象。
+注意，当一个对象被锁住时，对象里面所有用Synchronized修饰的方法都将产生堵塞，而对象里非 Synchronized修饰的方法可正常被调用，不受锁影响。</p>
+<p>3、Synchronized可重入锁</p>
+<p>​		可重入性是锁的一个基本要求，是为了解决自己锁死自己的情况。比如下面的伪代码，一个类中的同步方法调用另一个同步方法，假如Synchronized 不支持重入，进入method2方法时当前线程获得锁，method2方法里面执行method1时当前线程又要去尝试获取锁，这时如果不支持重入，它就要等释放，把自己阻塞，导致自己锁死自己。
+​		对Synchronized来说，可重入性是显而易见的，刚才提到，在执行monitor enter指令时，如果这个对象没有锁定，或者当前线程已经拥有了这个对象的锁(而不是已拥有了锁则不能继续获取)，就把锁的计数器+1，其实本质上就通过这种方式实现了可重入性。</p>
+<p>4、JVM对java的原生锁的优化</p>
+<p>​		在Java 6之前，Monitor的实现完全依赖底层操作系统的互斥锁来实现,也就是我们刚才在问题二中所阐述的获取/释放锁的逻辑。由于Java层面的线程与操作系统的原生线程有映射关系，如果要将一个线程进行阻塞或唤起都需要操作系统的协助，这就需要从用户态切换到内核态来执行，这种切换代价十分昂贵，很耗处理器时间，现代JDK中做了大量的优化。</p>
+<p>​		一种优化是使用自旋锁，即在把线程进行阻塞操作之前先让线程自旋等待一段时间，可能在等待期间其他线程已经解锁，这时就无需再让线程执行阻塞操作，避免了用户态到内核态的切换。现代JDK中还提供了三种不同的Monitor实现，也就是三种不同的锁: 偏向锁、轻量级锁、重量级锁</p>
+<p>​		这三种锁使得JDK得以优化Synchronized的运行，当JVM检测到不同的竞争状况时，会自动切换到适合的锁实现，这就是锁的升级、降级。</p>
+<p>​		当没有竞争出现时，默认会使用偏向锁。JVM会利用CAS操作，在对象头上的Mark Word部分设置线程ID，以表示这个对象偏向于当前线程，所以并不涉及真正的互斥锁，因为在很多应用场景中，大部分对象生命周期中最多会被一个线程锁定，使用偏斜锁可以降低无竞争开销。</p>
+<p>​		如果有另一线程试图锁定某个被偏斜过的对象，JVM就撤销偏斜锁，切换到轻量级锁实现。</p>
+<p>​		轻量级锁依赖CAS操作 Mark Word来试图获取锁，如果重试成功，就使用普通的轻量级锁;否则,进—步升级为重量级锁。</p>
+<p>5、Synchronize 和 ReentrantLock实现原理的不同</p>
+<p>Synchronized通过在对象头中设置标记实现了这一目的，是一种JVM原生的锁实现方式，而 ReentrantLock 以及所有的基于Lock接口的实现类，都是通过用一个volitile 修饰的int型变量，并保证每个线程都能拥有对该int的可见性和原子修改，其本质是基于所谓的AQS框架。</p>
+<p>6、AQS框架</p>
+<p>​		AQS(AbstractQueuedSynchronizer类)是一个用来构建锁和同步器的框架,各种Lock包中的锁(常用的有ReentrantLock、ReadWriteLock)，以及其他如Semaphore、CountDownLatch，甚至是早期的FutureTask 等，都是基于AQS来构建。</p>
+<p>（1）AQS内部定义了一个volatile int state变量，表示同步状态：当线程调用lock方法时，如果state=0，说明没有任何线程占有共享资源的锁，可以获得锁并将state=1;如果state=1，则说明有线程目前正在使用共享变量，其他线程必须加入同步队列进行等待。</p>
+<p>（2）</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
@@ -1345,12 +1249,12 @@ public class MyComparable {
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>排序之比较器Comparable&lt;T&gt;</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">508</span></p>
+    <p><span class="copy-title">文章标题:</span>并发编程总结</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="郑天祺">郑天祺</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-02, 10:27:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-02, 11:45:16</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/02/排序之比较器/" title="排序之比较器Comparable&lt;T&gt;">https://zhengtianqi.github.io/2020/01/02/排序之比较器/</a>
+    <p><span class="copy-title">发布时间:</span>2020-11-17, 16:57:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-11-17, 17:55:28</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/11/17/并发编程总结/" title="并发编程总结">https://zhengtianqi.github.io/2020/11/17/并发编程总结/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
