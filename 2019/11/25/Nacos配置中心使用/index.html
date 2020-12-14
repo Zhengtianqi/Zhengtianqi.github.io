@@ -6,24 +6,21 @@
   <meta name="keywords" content=" nacos-config , SpringCloud ">
   <meta name="description" content="Nacos配置中心使用 | 君莫笑">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1、建立三个文档    上传 到hdfs  2、代码 package cn.edu.bjut;    import org.apache.hadoop.io.LongWritable;   import org.apache.hadoop.io.Text;   import org.apache.hadoop.mapreduce.lib.input.*;   import org.apache.h">
-<meta name="keywords" content="hadoop">
+<meta name="description" content="1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;com.alibaba.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;">
+<meta name="keywords" content="SpringCloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MapReduce平均数计算">
-<meta property="og:url" content="https://zhengtianqi.github.io/2020/12/06/MapReduce平均数计算/index.html">
+<meta property="og:title" content="SpringCloud使用Feign+Ribbon">
+<meta property="og:url" content="https://zhengtianqi.github.io/2020/12/14/SpringCloud使用Feign-Ribbon/index.html">
 <meta property="og:site_name" content="君莫笑">
-<meta property="og:description" content="1、建立三个文档    上传 到hdfs  2、代码 package cn.edu.bjut;    import org.apache.hadoop.io.LongWritable;   import org.apache.hadoop.io.Text;   import org.apache.hadoop.mapreduce.lib.input.*;   import org.apache.h">
+<meta property="og:description" content="1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;com.alibaba.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201206121627187.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201206121650739.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201206121711716.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201206121829515.png">
-<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201206122126739.png">
-<meta property="og:updated_time" content="2020-12-06T04:21:44.982Z">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201214125020584.png">
+<meta property="og:image" content="https://zhengtianqi.github.io/img/image-20201214125032862.png">
+<meta property="og:updated_time" content="2020-12-14T04:50:49.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MapReduce平均数计算">
-<meta name="twitter:description" content="1、建立三个文档    上传 到hdfs  2、代码 package cn.edu.bjut;    import org.apache.hadoop.io.LongWritable;   import org.apache.hadoop.io.Text;   import org.apache.hadoop.mapreduce.lib.input.*;   import org.apache.h">
-<meta name="twitter:image" content="https://zhengtianqi.github.io/img/image-20201206121627187.png">
+<meta name="twitter:title" content="SpringCloud使用Feign+Ribbon">
+<meta name="twitter:description" content="1、引入依赖 &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;com.alibaba.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;">
+<meta name="twitter:image" content="https://zhengtianqi.github.io/img/image-20201214125020584.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -128,7 +125,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(85)</small></div></li>
+    <li><div class="all active">全部文章<small>(99)</small></div></li>
     
         
             
@@ -188,7 +185,7 @@
     
         
             
-            <li><div data-rel="SpringCloud">SpringCloud<small>(2)</small></div>
+            <li><div data-rel="SpringCloud">SpringCloud<small>(15)</small></div>
                 
             </li>
             
@@ -204,7 +201,7 @@
     
         
             
-            <li><div data-rel="设计模式">设计模式<small>(2)</small></div>
+            <li><div data-rel="分布式">分布式<small>(1)</small></div>
                 
             </li>
             
@@ -220,7 +217,7 @@
     
         
             
-            <li><div data-rel="分布式">分布式<small>(1)</small></div>
+            <li><div data-rel="设计模式">设计模式<small>(2)</small></div>
                 
             </li>
             
@@ -236,8 +233,8 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="85">
-<input type="hidden" id="yelog_site_word_count" value="71.6k">
+<input type="hidden" id="yelog_site_posts_number" value="99">
+<input type="hidden" id="yelog_site_word_count" value="77.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -275,11 +272,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">GET/POST</a>
+        <a href="javascript:" class="color2">java基础</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">java基础</a>
+        <a href="javascript:" class="color4">EsClient</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -291,11 +288,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">EsClient</a>
+        <a href="javascript:" class="color2">hadoop</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">hadoop</a>
+        <a href="javascript:" class="color4">GET/POST</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -315,11 +312,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">https</a>
+        <a href="javascript:" class="color1">httpclient</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">httpclient</a>
+        <a href="javascript:" class="color1">https</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -335,14 +332,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">线程安全</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">nacos-config</a>
     </li>
     
@@ -355,11 +344,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">TCP/IP</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">tomcat</a>
+        <a href="javascript:" class="color5">线程安全</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">TCP/IP</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -367,7 +360,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">maven</a>
+        <a href="javascript:" class="color5">JDK1.8新特性</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -383,11 +376,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color2">tomcat</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">JDK1.8新特性</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -395,7 +388,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">分布式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -407,7 +404,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">分布式</a>
+        <a href="javascript:" class="color4">多线程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -423,10 +424,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">多线程</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">javaagent</a>
     </li>
     
@@ -439,10 +436,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">文件上传</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">排序</a>
     </li>
     
@@ -451,15 +444,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">线程</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">IO</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">阻塞与非阻塞</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">文件上传</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">线程</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -484,14 +481,6 @@
             <span class="post-date" title="2020-07-21 15:57:00">2020/07/21</span>
         </a>
         
-        <a  class="网络 "
-           href="/2020/07/21/GET与POST区别/"
-           data-tag="GET/POST"
-           data-author="" >
-            <span class="post-title" title="GET与POST区别">GET与POST区别</span>
-            <span class="post-date" title="2020-07-21 08:29:00">2020/07/21</span>
-        </a>
-        
         <a  class="面试 "
            href="/2020/07/24/AtomicInteger/"
            data-tag="java基础"
@@ -501,11 +490,11 @@
         </a>
         
         <a  class="elasticsearch "
-           href="/2020/07/15/ElasticSearch近实时性介绍/"
-           data-tag="es"
+           href="/2020/07/15/ElasticSearch客户端/"
+           data-tag="EsClient,es"
            data-author="" >
-            <span class="post-title" title="ElasticSearch近实时性介绍">ElasticSearch近实时性介绍</span>
-            <span class="post-date" title="2020-07-15 10:51:00">2020/07/15</span>
+            <span class="post-title" title="ElasticSearch客户端">ElasticSearch客户端</span>
+            <span class="post-date" title="2020-07-15 11:10:00">2020/07/15</span>
         </a>
         
         <a  class="软件管理 "
@@ -516,20 +505,20 @@
             <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
         </a>
         
-        <a  class="elasticsearch "
-           href="/2020/07/15/ElasticSearch客户端/"
-           data-tag="es,EsClient"
-           data-author="" >
-            <span class="post-title" title="ElasticSearch客户端">ElasticSearch客户端</span>
-            <span class="post-date" title="2020-07-15 11:10:00">2020/07/15</span>
-        </a>
-        
         <a  class="大数据 "
            href="/2020/12/06/HDFS-shell操作（1）/"
            data-tag="hadoop"
            data-author="" >
             <span class="post-title" title="HDFS shell操作（1）">HDFS shell操作（1）</span>
             <span class="post-date" title="2020-12-06 11:50:00">2020/12/06</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2020/07/21/GET与POST区别/"
+           data-tag="GET/POST"
+           data-author="" >
+            <span class="post-title" title="GET与POST区别">GET与POST区别</span>
+            <span class="post-date" title="2020-07-21 08:29:00">2020/07/21</span>
         </a>
         
         <a  class="大数据 "
@@ -557,14 +546,6 @@
         </a>
         
         <a  class="大数据 "
-           href="/2020/01/20/HiveQL视图/"
-           data-tag="hive"
-           data-author="" >
-            <span class="post-title" title="HiveQL视图">HiveQL视图</span>
-            <span class="post-date" title="2020-01-20 16:27:00">2020/01/20</span>
-        </a>
-        
-        <a  class="大数据 "
            href="/2019/12/16/HDFS概述/"
            data-tag="HDFS,HADOOP"
            data-author="" >
@@ -573,11 +554,11 @@
         </a>
         
         <a  class="大数据 "
-           href="/2020/01/19/Hive数据操作（2）/"
+           href="/2020/01/20/HiveQL视图/"
            data-tag="hive"
            data-author="" >
-            <span class="post-title" title="Hive数据操作（2）">Hive数据操作（2）</span>
-            <span class="post-date" title="2020-01-19 15:50:00">2020/01/19</span>
+            <span class="post-title" title="HiveQL视图">HiveQL视图</span>
+            <span class="post-date" title="2020-01-20 16:27:00">2020/01/20</span>
         </a>
         
         <a  class="大数据 "
@@ -589,14 +570,6 @@
         </a>
         
         <a  class="大数据 "
-           href="/2020/01/20/Hive数据操作（3）/"
-           data-tag="hive"
-           data-author="" >
-            <span class="post-title" title="Hive数据操作（3）">Hive数据操作（3）</span>
-            <span class="post-date" title="2020-01-20 14:27:00">2020/01/20</span>
-        </a>
-        
-        <a  class="大数据 "
            href="/2020/01/17/Hive数据操作/"
            data-tag="hive"
            data-author="" >
@@ -605,11 +578,35 @@
         </a>
         
         <a  class="大数据 "
+           href="/2020/01/20/Hive数据操作（3）/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（3）">Hive数据操作（3）</span>
+            <span class="post-date" title="2020-01-20 14:27:00">2020/01/20</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2020/01/19/Hive数据操作（2）/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（2）">Hive数据操作（2）</span>
+            <span class="post-date" title="2020-01-19 15:50:00">2020/01/19</span>
+        </a>
+        
+        <a  class="大数据 "
            href="/2020/01/17/Hive数据类型和文件格式/"
            data-tag="hive"
            data-author="" >
             <span class="post-title" title="Hive数据类型和文件格式">Hive数据类型和文件格式</span>
             <span class="post-date" title="2020-01-17 13:41:00">2020/01/17</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2020/01/21/Hive索引/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive索引">Hive索引</span>
+            <span class="post-date" title="2020-01-21 10:59:00">2020/01/21</span>
         </a>
         
         <a  class="大数据 "
@@ -629,19 +626,19 @@
         </a>
         
         <a  class="网络 "
-           href="/2020/09/11/Http和Https的区别/"
-           data-tag="https"
-           data-author="" >
-            <span class="post-title" title="Http和Https的区别">Http和Https的区别</span>
-            <span class="post-date" title="2020-09-11 11:11:00">2020/09/11</span>
-        </a>
-        
-        <a  class="网络 "
            href="/2020/07/15/HttpClient/"
            data-tag="httpclient"
            data-author="" >
             <span class="post-title" title="HttpClient">HttpClient</span>
             <span class="post-date" title="2020-07-15 17:12:00">2020/07/15</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2020/09/11/Http和Https的区别/"
+           data-tag="https"
+           data-author="" >
+            <span class="post-title" title="Http和Https的区别">Http和Https的区别</span>
+            <span class="post-date" title="2020-09-11 11:11:00">2020/09/11</span>
         </a>
         
         <a  class="spring "
@@ -653,19 +650,19 @@
         </a>
         
         <a  class="面试 "
-           href="/2020/09/27/JVM内存结构/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM内存结构">JVM内存结构</span>
-            <span class="post-date" title="2020-09-27 11:55:00">2020/09/27</span>
-        </a>
-        
-        <a  class="面试 "
            href="/2020/09/18/JVM垃圾回收算法/"
            data-tag="JVM"
            data-author="" >
             <span class="post-title" title="JVM垃圾回收算法">JVM垃圾回收算法</span>
             <span class="post-date" title="2020-09-18 09:18:00">2020/09/18</span>
+        </a>
+        
+        <a  class="面试 "
+           href="/2020/09/27/JVM内存结构/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM内存结构">JVM内存结构</span>
+            <span class="post-date" title="2020-09-27 11:55:00">2020/09/27</span>
         </a>
         
         <a  class="java基础 "
@@ -676,14 +673,6 @@
             <span class="post-date" title="2020-01-06 14:30:00">2020/01/06</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2020/01/21/Hive索引/"
-           data-tag="hive"
-           data-author="" >
-            <span class="post-title" title="Hive索引">Hive索引</span>
-            <span class="post-date" title="2020-01-21 10:59:00">2020/01/21</span>
-        </a>
-        
         <a  class="面试 "
            href="/2020/11/17/JVM性能优化整理/"
            data-tag=""
@@ -692,36 +681,28 @@
             <span class="post-date" title="2020-11-17 15:14:00">2020/11/17</span>
         </a>
         
-        <a  class="大数据 "
-           href="/2020/12/06/MapReduce平均数计算/"
-           data-tag="hadoop"
-           data-author="" >
-            <span class="post-title" title="MapReduce平均数计算">MapReduce平均数计算</span>
-            <span class="post-date" title="2020-12-06 12:14:00">2020/12/06</span>
-        </a>
-        
-        <a  class="大数据 "
-           href="/2019/12/16/MapReduce概述/"
-           data-tag="HADOOP"
-           data-author="" >
-            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
-            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
-           data-tag="并发,线程安全"
-           data-author="" >
-            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
-            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
-        </a>
-        
         <a  class="面试 "
            href="/2020/09/27/JVM类加载过程/"
            data-tag="JVM"
            data-author="" >
             <span class="post-title" title="JVM类加载过程">JVM类加载过程</span>
             <span class="post-date" title="2020-09-27 11:08:00">2020/09/27</span>
+        </a>
+        
+        <a  class="elasticsearch "
+           href="/2020/07/15/ElasticSearch近实时性介绍/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="ElasticSearch近实时性介绍">ElasticSearch近实时性介绍</span>
+            <span class="post-date" title="2020-07-15 10:51:00">2020/07/15</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2020/12/06/MapReduce平均数计算/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="MapReduce平均数计算">MapReduce平均数计算</span>
+            <span class="post-date" title="2020-12-06 12:14:00">2020/12/06</span>
         </a>
         
         <a  class="SpringCloud "
@@ -733,19 +714,19 @@
         </a>
         
         <a  class="大数据 "
+           href="/2019/12/16/MapReduce概述/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
+            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
+        </a>
+        
+        <a  class="大数据 "
            href="/2019/12/18/Spark相关概述/"
            data-tag="Spark"
            data-author="" >
             <span class="post-title" title="Spark相关概述">Spark相关概述</span>
             <span class="post-date" title="2019-12-18 13:41:00">2019/12/18</span>
-        </a>
-        
-        <a  class="网络 "
-           href="/2019/08/30/TCP-IP四层网络模型/"
-           data-tag="TCP/IP"
-           data-author="" >
-            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
-            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
         </a>
         
         <a  class="java基础 "
@@ -756,14 +737,6 @@
             <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
         </a>
         
-        <a  class="网络 "
-           href="/2019/08/30/TCP握手、挥手协议/"
-           data-tag="TCP/IP"
-           data-author="" >
-            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
-            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
-        </a>
-        
         <a  class="SpringCloud "
            href="/2019/12/03/SpringCloud-Alibaba整合Nacos服务注册发现/"
            data-tag="SpringCloud"
@@ -772,12 +745,140 @@
             <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
         </a>
         
-        <a  class="面试 "
-           href="/2020/11/17/Tomcat性能优化整理/"
-           data-tag="tomcat"
+        <a  class="java基础 "
+           href="/2019/10/12/SimpleDateFormat引发的线程安全问题/"
+           data-tag="并发,线程安全"
            data-author="" >
-            <span class="post-title" title="Tomcat性能优化整理">Tomcat性能优化整理</span>
-            <span class="post-date" title="2020-11-17 12:34:00">2020/11/17</span>
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud-Ribbon参数配置/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Ribbon参数配置">SpringCloud Ribbon参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud-client配置/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud client配置">SpringCloud client配置</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud使用Feign-Ribbon/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon">SpringCloud使用Feign+Ribbon</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud使用RestTemplate/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用RestTemplate">SpringCloud使用RestTemplate</span>
+            <span class="post-date" title="2020-12-14 12:37:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud使用Feign-Ribbon-Hystrix/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon+Hystrix">SpringCloud使用Feign+Ribbon+Hystrix</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud-Hystrix参数配置/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Hystrix参数配置">SpringCloud Hystrix参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud健康检查/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud健康检查">SpringCloud健康检查</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud使用Feign/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign">SpringCloud使用Feign</span>
+            <span class="post-date" title="2020-12-14 12:38:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud异常配置/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud异常配置">SpringCloud异常配置</span>
+            <span class="post-date" title="2020-12-14 11:34:00">2020/12/14</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/12/14/SpringCloud服务消费/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务消费">SpringCloud服务消费</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud服务构建/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务构建">SpringCloud服务构建</span>
+            <span class="post-date" title="2020-12-14 11:30:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud服务注册/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务注册">SpringCloud服务注册</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud管理配置页面/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud管理配置页面">SpringCloud管理配置页面</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2019/08/30/TCP-IP四层网络模型/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
+            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="SpringCloud "
+           href="/2020/12/14/SpringCloud运维接口/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud运维接口">SpringCloud运维接口</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="网络 "
+           href="/2019/08/30/TCP握手、挥手协议/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
         </a>
         
         <a  class="网络 "
@@ -804,20 +905,20 @@
             <span class="post-date" title="2019-12-18 11:57:00">2019/12/18</span>
         </a>
         
+        <a  class="java基础 "
+           href="/2019/11/14/java8新特性/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+        </a>
+        
         <a  class="大数据 "
            href="/2019/12/18/Yarn概述/"
            data-tag="HADOOP"
            data-author="" >
             <span class="post-title" title="Yarn概述">Yarn概述</span>
             <span class="post-date" title="2019-12-18 09:12:00">2019/12/18</span>
-        </a>
-        
-        <a  class="软件管理 "
-           href="/2019/08/28/maven梳理/"
-           data-tag="maven"
-           data-author="" >
-            <span class="post-title" title="maven梳理">maven梳理</span>
-            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
         </a>
         
         <a  class="java基础 "
@@ -828,12 +929,12 @@
             <span class="post-date" title="2020-07-21 15:43:00">2020/07/21</span>
         </a>
         
-        <a  class="数据库 "
-           href="/2019/11/20/mysql排序/"
-           data-tag="mysql"
+        <a  class="面试 "
+           href="/2020/11/17/Tomcat性能优化整理/"
+           data-tag="tomcat"
            data-author="" >
-            <span class="post-title" title="mysql排序">mysql排序</span>
-            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+            <span class="post-title" title="Tomcat性能优化整理">Tomcat性能优化整理</span>
+            <span class="post-date" title="2020-11-17 12:34:00">2020/11/17</span>
         </a>
         
         <a  class="数据库 "
@@ -845,19 +946,35 @@
         </a>
         
         <a  class="数据库 "
+           href="/2019/11/20/mysql排序/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/08/31/互斥锁/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class="软件管理 "
+           href="/2019/08/28/maven梳理/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven梳理">maven梳理</span>
+            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+        </a>
+        
+        <a  class="数据库 "
            href="/2019/08/31/mysql表设计及优化/"
            data-tag="mysql"
            data-author="" >
             <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
             <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/11/14/java8新特性/"
-           data-tag="JDK1.8新特性"
-           data-author="" >
-            <span class="post-title" title="java8新特性">java8新特性</span>
-            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
         </a>
         
         <a  class="java基础 "
@@ -876,20 +993,12 @@
             <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
         </a>
         
-        <a  class="设计模式 "
-           href="/2020/01/03/单例模式/"
-           data-tag="设计模式"
+        <a  class="分布式 "
+           href="/2019/10/09/分布式全局唯一ID生成策略/"
+           data-tag="分布式"
            data-author="" >
-            <span class="post-title" title="单例模式">单例模式</span>
-            <span class="post-date" title="2020-01-03 16:24:00">2020/01/03</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2019/08/31/互斥锁/"
-           data-tag="锁"
-           data-author="" >
-            <span class="post-title" title="互斥锁">互斥锁</span>
-            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
         </a>
         
         <a  class="可信 "
@@ -900,12 +1009,20 @@
             <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
         </a>
         
-        <a  class="分布式 "
-           href="/2019/10/09/分布式全局唯一ID生成策略/"
-           data-tag="分布式"
+        <a  class="java基础 "
+           href="/2020/08/11/原子性，有序性，可见性/"
+           data-tag="多线程"
            data-author="" >
-            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
-            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
+            <span class="post-title" title="原子性，有序性，可见性">原子性，有序性，可见性</span>
+            <span class="post-date" title="2020-08-11 11:04:00">2020/08/11</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/01/03/单例模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2020-01-03 16:24:00">2020/01/03</span>
         </a>
         
         <a  class="可信 "
@@ -916,36 +1033,12 @@
             <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
         </a>
         
-        <a  class="可信 "
-           href="/2019/10/02/可靠性和容错技术/"
-           data-tag="可靠,容错"
-           data-author="" >
-            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
-            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/01/可信基本概念/"
-           data-tag="可信"
-           data-author="" >
-            <span class="post-title" title="可信基本概念">可信基本概念</span>
-            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
-        </a>
-        
         <a  class="java基础 "
            href="/2019/08/31/可重入锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="可重入锁">可重入锁</span>
             <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2020/08/11/原子性，有序性，可见性/"
-           data-tag="多线程"
-           data-author="" >
-            <span class="post-title" title="原子性，有序性，可见性">原子性，有序性，可见性</span>
-            <span class="post-date" title="2020-08-11 11:04:00">2020/08/11</span>
         </a>
         
         <a  class="可信 "
@@ -956,12 +1049,36 @@
             <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
         </a>
         
+        <a  class="可信 "
+           href="/2019/10/02/可靠性和容错技术/"
+           data-tag="可靠,容错"
+           data-author="" >
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+        </a>
+        
         <a  class="java基础 "
            href="/2020/07/17/基于JavaAgent的全链路监控（1）/"
            data-tag="javaagent"
            data-author="" >
             <span class="post-title" title="基于JavaAgent的全链路监控（1）">基于JavaAgent的全链路监控（1）</span>
             <span class="post-date" title="2020-07-17 13:11:00">2020/07/17</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/07/19/基于JavaAgent的全链路监控（2）/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（2）">基于JavaAgent的全链路监控（2）</span>
+            <span class="post-date" title="2020-07-19 16:54:00">2020/07/19</span>
+        </a>
+        
+        <a  class="可信 "
+           href="/2019/09/01/可信基本概念/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -980,22 +1097,6 @@
             <span class="post-date" title="2020-07-19 22:55:00">2020/07/19</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2020/07/19/基于JavaAgent的全链路监控（2）/"
-           data-tag="javaagent"
-           data-author="" >
-            <span class="post-title" title="基于JavaAgent的全链路监控（2）">基于JavaAgent的全链路监控（2）</span>
-            <span class="post-date" title="2020-07-19 16:54:00">2020/07/19</span>
-        </a>
-        
-        <a  class="数据库 "
-           href="/2019/08/31/悲观锁、乐观锁/"
-           data-tag="mysql,锁"
-           data-author="" >
-            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
-            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
-        </a>
-        
         <a  class="面试 "
            href="/2020/11/17/并发编程总结/"
            data-tag="java"
@@ -1012,12 +1113,12 @@
             <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2020/01/02/排序之比较器/"
-           data-tag="java,数据结构"
+        <a  class="数据库 "
+           href="/2019/08/31/悲观锁、乐观锁/"
+           data-tag="mysql,锁"
            data-author="" >
-            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
-            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
         </a>
         
         <a  class="spring "
@@ -1037,11 +1138,11 @@
         </a>
         
         <a  class="java基础 "
-           href="/2019/08/31/文件上传/"
-           data-tag="文件上传"
+           href="/2020/01/02/排序之比较器/"
+           data-tag="java,数据结构"
            data-author="" >
-            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
-            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
         </a>
         
         <a  class="面试 "
@@ -1052,22 +1153,6 @@
             <span class="post-date" title="2020-10-23 15:49:00">2020/10/23</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/09/01/池化之线程池/"
-           data-tag="java,多线程"
-           data-author="" >
-            <span class="post-title" title="池化之线程池">池化之线程池</span>
-            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
-        </a>
-        
-        <a  class="可信 "
-           href="/2019/09/01/数字签名/"
-           data-tag="可信,加密算法"
-           data-author="" >
-            <span class="post-title" title="数字签名">数字签名</span>
-            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
-        </a>
-        
         <a  class="大数据 "
            href="/2019/12/23/特征提取-简单流程/"
            data-tag="HADOOP"
@@ -1076,12 +1161,12 @@
             <span class="post-date" title="2019-12-23 11:10:00">2019/12/23</span>
         </a>
         
-        <a  class="java基础 "
-           href="/2019/11/20/线程相关的知识/"
-           data-tag="线程"
+        <a  class="可信 "
+           href="/2019/09/01/数字签名/"
+           data-tag="可信,加密算法"
            data-author="" >
-            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
-            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
         </a>
         
         <a  class="网络 "
@@ -1093,11 +1178,51 @@
         </a>
         
         <a  class="java基础 "
+           href="/2019/08/31/文件上传/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
            href="/2019/08/31/自旋锁/"
            data-tag="锁"
            data-author="" >
             <span class="post-title" title="自旋锁">自旋锁</span>
             <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/09/01/池化之线程池/"
+           data-tag="java,多线程"
+           data-author="" >
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2019/11/20/线程相关的知识/"
+           data-tag="线程"
+           data-author="" >
+            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
+            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2020/01/03/责任链模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="责任链模式">责任链模式</span>
+            <span class="post-date" title="2020-01-03 15:21:00">2020/01/03</span>
+        </a>
+        
+        <a  class="java基础 "
+           href="/2020/09/01/运算符/"
+           data-tag="运算符"
+           data-author="" >
+            <span class="post-title" title="运算符">运算符</span>
+            <span class="post-date" title="2020-09-01 09:24:00">2020/09/01</span>
         </a>
         
         <a  class="java基础 "
@@ -1114,22 +1239,6 @@
            data-author="" >
             <span class="post-title" title="轻量级锁">轻量级锁</span>
             <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
-        </a>
-        
-        <a  class="java基础 "
-           href="/2020/09/01/运算符/"
-           data-tag="运算符"
-           data-author="" >
-            <span class="post-title" title="运算符">运算符</span>
-            <span class="post-date" title="2020-09-01 09:24:00">2020/09/01</span>
-        </a>
-        
-        <a  class="设计模式 "
-           href="/2020/01/03/责任链模式/"
-           data-tag="设计模式"
-           data-author="" >
-            <span class="post-title" title="责任链模式">责任链模式</span>
-            <span class="post-date" title="2020-01-03 15:21:00">2020/01/03</span>
         </a>
         
         <a  class="可信 "
@@ -1556,7 +1665,7 @@ user.password=12345678
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#DNS','#GET/POST','#java基础','#es','#git','#EsClient','#hadoop','#HDFS','#HADOOP','#哈希表','#hive','#https','#httpclient','#spring','#JVM','#java','#并发','#线程安全','#nacos-config','#SpringCloud','#Spark','#TCP/IP','#tomcat','#UDP','#maven','#String','#StringBuilder','#StringBuffer','#mysql','#JDK1.8新特性','#锁','#设计模式','#可信','#密码学','#分布式','#可信计算','#可靠','#容错','#多线程','#javaagent','#内存模型','#数据结构','#文件上传','#排序','#加密算法','#线程','#IO','#阻塞与非阻塞','#运算符','#网络安全',],
+            'data': ['#DNS','#java基础','#EsClient','#es','#git','#hadoop','#GET/POST','#HDFS','#HADOOP','#哈希表','#hive','#httpclient','#https','#spring','#JVM','#java','#nacos-config','#SpringCloud','#Spark','#并发','#线程安全','#TCP/IP','#UDP','#JDK1.8新特性','#String','#StringBuilder','#StringBuffer','#tomcat','#mysql','#锁','#maven','#分布式','#可信','#密码学','#多线程','#设计模式','#可信计算','#可靠','#容错','#javaagent','#内存模型','#数据结构','#排序','#加密算法','#IO','#阻塞与非阻塞','#文件上传','#线程','#运算符','#网络安全',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
