@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>重构 | 个人博客</title>
+  <meta name="keywords" content=" 重构 ">
+  <meta name="description" content="重构 | 个人博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="一、引言 SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？ Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。 二、@ControllerAdvice注解使用方法 &#x2F;&#x2F; 第一种 @RestControllerAd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC全局异常处理器">
+<meta property="og:url" content="https://zhengtianqi.github.io/2023/04/17/SpringMVC%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="一、引言 SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？ Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。 二、@ControllerAdvice注解使用方法 &#x2F;&#x2F; 第一种 @RestControllerAd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T05:47:00.000Z">
+<meta property="article:modified_time" content="2023-06-10T03:30:28.615Z">
+<meta property="article:author" content="ztq">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>ztq</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/Zhengtianqi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://zhengtianqi.gitee.io/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:270490096@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=270490096&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(145)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="操作系统">
+                        
+                        操作系统
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="大数据">
+                        
+                        大数据
+                        <small>(21)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="分布式">
+                        
+                        分布式
+                        <small>(7)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="可信">
+                        
+                        可信
+                        <small>(7)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="面试">
+                        
+                        面试
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="软件管理">
+                        
+                        软件管理
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="设计模式">
+                        
+                        设计模式
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="数据库">
+                        
+                        数据库
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="网络">
+                        
+                        网络
+                        <small>(9)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="CICD">
+                        
+                        CICD
+                        <small>(12)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="java基础">
+                        
+                        java基础
+                        <small>(31)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="python基础">
+                        
+                        python基础
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="spring">
+                        
+                        spring
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="145">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://blog.csdn.net/qq_23034755">博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>达梦</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>打包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>多线程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式存储</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分库分表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>哈希表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>加密算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可靠</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可信计算</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>密码学</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>内存模型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容错</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>设计模式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据结构</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>网络安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>伪共享</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线程安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>向量数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运算符</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>重构</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>子网掩码</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>阻塞与非阻塞</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BigDecimal</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CAP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Disruptor</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DNS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>elk</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>es</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GET/POST</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hadoop</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HADOOP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hive</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>httpclient</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>https</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>IO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ip</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>javaagent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JDK1.8新特性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>k8s</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>kafka</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>maven</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Milvus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mybatis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nacos-config</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spark</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>String</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>StringBuffer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>StringBuilder</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>TCP/IP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tomcat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>UDP</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 spring "
+           href="/2023/04/17/SpringMVC%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="SpringMVC全局异常处理器">SpringMVC全局异常处理器</span>
+            <span class="post-date" title="2023-04-17 13:47:00">2023/04/17</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/04/17/mybatis-plus%E6%8F%92%E4%BB%B6%E7%BB%9F%E4%B8%80%E5%A4%84%E7%90%86createTime%EF%BC%8CcreateBy%EF%BC%8CupdateBy/"
+           data-tag="mybatis"
+           data-author="" >
+            <span class="post-title" title="mybatis-plus插件统一处理createTime，createBy，updateBy">mybatis-plus插件统一处理createTime，createBy，updateBy</span>
+            <span class="post-date" title="2023-04-17 09:28:00">2023/04/17</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2023/03/17/springboot%E6%89%93jar%E5%8C%85%E5%88%86%E7%A6%BB%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6/"
+           data-tag="打包,运维"
+           data-author="" >
+            <span class="post-title" title="springboot打jar包分离资源文件">springboot打jar包分离资源文件</span>
+            <span class="post-date" title="2023-03-17 09:21:00">2023/03/17</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/12/07/BigDecimal/"
+           data-tag="BigDecimal"
+           data-author="" >
+            <span class="post-title" title="BigDecimal">BigDecimal</span>
+            <span class="post-date" title="2022-12-07 15:19:00">2022/12/07</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E5%9B%9B/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(四)">软件安装及高可用部署(四)</span>
+            <span class="post-date" title="2022-11-16 10:37:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E4%B8%89/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(三)">软件安装及高可用部署(三)</span>
+            <span class="post-date" title="2022-11-16 10:36:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E4%BA%8C/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(二)">软件安装及高可用部署(二)</span>
+            <span class="post-date" title="2022-11-16 09:41:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/11/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(一)">软件安装及高可用部署(一)</span>
+            <span class="post-date" title="2022-11-11 11:25:00">2022/11/11</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/11/08/Milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8B%E4%BB%A5%E5%9B%BE%E6%90%9C%E5%9B%BE/"
+           data-tag="向量数据库,Milvus"
+           data-author="" >
+            <span class="post-title" title="Milvus向量数据库之以图搜图">Milvus向量数据库之以图搜图</span>
+            <span class="post-date" title="2022-11-08 14:28:00">2022/11/08</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/11/08/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/"
+           data-tag="达梦"
+           data-author="" >
+            <span class="post-title" title="达梦数据库">达梦数据库</span>
+            <span class="post-date" title="2022-11-08 10:51:00">2022/11/08</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2022/10/28/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97springboot-kafka/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka架构设计">kafka架构设计</span>
+            <span class="post-date" title="2022-10-28 17:18:00">2022/10/28</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/09/14/nginx%E9%85%8D%E7%BD%AE/"
+           data-tag="nginx"
+           data-author="" >
+            <span class="post-title" title="nginx配置">nginx配置</span>
+            <span class="post-date" title="2022-09-14 11:48:00">2022/09/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/09/14/java%E6%93%8D%E4%BD%9Ctxt%E6%96%87%E4%BB%B6%E6%80%BB%E7%BB%93/"
+           data-tag="java,文件"
+           data-author="" >
+            <span class="post-title" title="java操作txt文件总结">java操作txt文件总结</span>
+            <span class="post-date" title="2022-09-14 09:53:00">2022/09/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/09/07/Netty/"
+           data-tag="Netty"
+           data-author="" >
+            <span class="post-title" title="Netty介绍及简单示例">Netty介绍及简单示例</span>
+            <span class="post-date" title="2022-09-07 14:12:00">2022/09/07</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/09/05/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%A6%82%E5%BF%B5%E7%AF%87/"
+           data-tag="分库分表"
+           data-author="" >
+            <span class="post-title" title="分库分表概念篇">分库分表概念篇</span>
+            <span class="post-date" title="2022-09-05 17:36:00">2022/09/05</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/09/01/Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker网络模型">Docker网络模型</span>
+            <span class="post-date" title="2022-09-01 13:26:00">2022/09/01</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2022/08/31/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-springcloud-nacos-seata/"
+           data-tag="mysql,分布式事务"
+           data-author="" >
+            <span class="post-title" title="分布式事务-springcloud-nacos-seata">分布式事务-springcloud-nacos-seata</span>
+            <span class="post-date" title="2022-08-31 11:35:00">2022/08/31</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2022/05/05/ip%E5%9C%B0%E5%9D%80%E4%B8%8E%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E6%8D%A2%E7%AE%97%E5%85%AC%E5%BC%8F/"
+           data-tag="ip,子网掩码"
+           data-author="" >
+            <span class="post-title" title="ip地址与子网掩码换算公式">ip地址与子网掩码换算公式</span>
+            <span class="post-date" title="2022-05-05 11:12:00">2022/05/05</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/04/11/mysql%E7%AE%80%E5%8D%95%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql简单主从搭建过程">mysql简单主从搭建过程</span>
+            <span class="post-date" title="2022-04-11 23:32:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/04/11/docker%E9%95%9C%E5%83%8F%E9%83%A8%E7%BD%B2%E5%88%B0k8s%E9%9B%86%E7%BE%A4/"
+           data-tag="docker,k8s"
+           data-author="" >
+            <span class="post-title" title="docker镜像部署到k8s集群">docker镜像部署到k8s集群</span>
+            <span class="post-date" title="2022-04-11 21:20:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/04/08/JDK%E5%B9%B6%E5%8F%91%E5%8C%85%E5%B8%B8%E7%94%A8%E7%B1%BB/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JDK并发包常用类">JDK并发包常用类</span>
+            <span class="post-date" title="2022-04-08 22:05:00">2022/04/08</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/04/04/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"
+           data-tag="k8s"
+           data-author="" >
+            <span class="post-title" title="k8s集群搭建">k8s集群搭建</span>
+            <span class="post-date" title="2022-04-04 21:42:00">2022/04/04</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/03/22/MinIO%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/"
+           data-tag="分布式存储"
+           data-author="" >
+            <span class="post-title" title="MinIO单机安装以及使用">MinIO单机安装以及使用</span>
+            <span class="post-date" title="2022-03-22 21:55:00">2022/03/22</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/25/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%EF%BC%89-%E5%AD%97%E5%85%B8/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（三）-字典">Redis数据结构与对象（三）-字典</span>
+            <span class="post-date" title="2022-01-25 15:58:00">2022/01/25</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/23/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89-%E9%93%BE%E8%A1%A8/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（二）-链表">Redis数据结构与对象（二）-链表</span>
+            <span class="post-date" title="2022-01-23 16:18:00">2022/01/23</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/22/Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（一）-简单动态字符串">Redis数据结构与对象（一）-简单动态字符串</span>
+            <span class="post-date" title="2022-01-22 12:34:00">2022/01/22</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/10/16/mysql%E7%AA%81%E7%84%B6%E5%8F%98%E6%85%A2%E6%8E%92%E6%9F%A5/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql突然变慢排查">mysql突然变慢排查</span>
+            <span class="post-date" title="2021-10-16 11:02:00">2021/10/16</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2021/08/07/CountDownLatch/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="CountDownLatch">CountDownLatch</span>
+            <span class="post-date" title="2021-08-07 13:25:00">2021/08/07</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/02/%E5%88%9D%E8%AF%86redis%EF%BC%885%EF%BC%89-%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（5）-内存调优">初识redis（5）-内存调优</span>
+            <span class="post-date" title="2021-08-02 00:14:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/02/%E5%88%9D%E8%AF%86redis%EF%BC%884%EF%BC%89-%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（4）-主从架构">初识redis（4）-主从架构</span>
+            <span class="post-date" title="2021-08-02 00:13:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/01/%E5%88%9D%E8%AF%86redis%EF%BC%883%EF%BC%89-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（3）-持久化">初识redis（3）-持久化</span>
+            <span class="post-date" title="2021-08-01 22:43:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/01/%E5%88%9D%E8%AF%86redis%EF%BC%882%EF%BC%89/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（2）-基本特性">初识redis（2）-基本特性</span>
+            <span class="post-date" title="2021-08-01 22:08:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/07/31/%E5%88%9D%E8%AF%86redis%EF%BC%881%EF%BC%89/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（1）-数据结构">初识redis（1）-数据结构</span>
+            <span class="post-date" title="2021-07-31 12:49:00">2021/07/31</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2021/07/18/docker20-10-7%E6%9C%AC%E6%9C%BA%E5%BC%80%E5%90%AF2375%E9%85%8D%E7%BD%AE/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker本机打镜像">docker本机打镜像</span>
+            <span class="post-date" title="2021-07-18 19:18:00">2021/07/18</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/30/%E9%A5%BC%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="饼图">饼图</span>
+            <span class="post-date" title="2021-04-30 15:20:00">2021/04/30</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/18/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="分布式锁"
+           data-author="" >
+            <span class="post-title" title="分布式锁">分布式锁</span>
+            <span class="post-date" title="2021-04-18 13:00:00">2021/04/18</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2021/04/18/%E9%87%8D%E6%9E%84/"
+           data-tag="重构"
+           data-author="" >
+            <span class="post-title" title="重构">重构</span>
+            <span class="post-date" title="2021-04-18 00:07:00">2021/04/18</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/Histogram%EF%BC%88%E7%9B%B4%E6%96%B9%E5%9B%BE%EF%BC%89-KDE%EF%BC%88%E5%AF%86%E5%BA%A6%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Histogram（直方图）&amp;KDE（密度图)">Histogram（直方图）&amp;KDE（密度图)</span>
+            <span class="post-date" title="2021-04-17 18:54:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/python%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9F%BA%E7%A1%80/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python可视化基础">python可视化基础</span>
+            <span class="post-date" title="2021-04-17 18:45:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/%E7%9B%B4%E6%96%B9%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="直方图">直方图</span>
+            <span class="post-date" title="2021-04-17 18:27:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/%E6%95%A3%E7%82%B9%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="散点图">散点图</span>
+            <span class="post-date" title="2021-04-17 18:18:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2021/04/13/k8s%E6%9E%84%E5%BB%BAELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/"
+           data-tag="k8s,elk"
+           data-author="" >
+            <span class="post-title" title="k8s构建ELK日志平台">k8s构建ELK日志平台</span>
+            <span class="post-date" title="2021-04-13 14:40:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/13/Disruptor%E4%B8%AD%E5%8F%91%E5%B8%83%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3%E7%B1%BB/"
+           data-tag="Disruptor"
+           data-author="" >
+            <span class="post-title" title="Disruptor中发布事件相关类">Disruptor中发布事件相关类</span>
+            <span class="post-date" title="2021-04-13 14:27:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/13/Disruptor/"
+           data-tag="Disruptor"
+           data-author="" >
+            <span class="post-title" title="Disruptor">Disruptor</span>
+            <span class="post-date" title="2021-04-13 14:17:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2020/12/14/%E5%88%86%E5%B8%83%E5%BC%8FCAP%E6%A6%82%E5%BF%B5/"
+           data-tag="CAP"
+           data-author="" >
+            <span class="post-title" title="分布式CAP概念">分布式CAP概念</span>
+            <span class="post-date" title="2020-12-14 13:47:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 操作系统 "
+           href="/2020/12/14/%E4%BC%AA%E5%85%B1%E4%BA%AB/"
+           data-tag="伪共享"
+           data-author="" >
+            <span class="post-title" title="伪共享">伪共享</span>
+            <span class="post-date" title="2020-12-14 13:34:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2020/12/14/Docker%E5%85%A5%E9%97%A8/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker入门">Docker入门</span>
+            <span class="post-date" title="2020-12-14 13:13:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/12/14/java%E4%B8%AD%E7%9A%84Queue%E9%98%9F%E5%88%97/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="java中的Queue队列">java中的Queue队列</span>
+            <span class="post-date" title="2020-12-14 13:04:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/Kafka%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="Kafka的简单使用">Kafka的简单使用</span>
+            <span class="post-date" title="2020-12-14 12:59:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign-Ribbon-Hystrix/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon+Hystrix">SpringCloud使用Feign+Ribbon+Hystrix</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign-Ribbon/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon">SpringCloud使用Feign+Ribbon</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign">SpringCloud使用Feign</span>
+            <span class="post-date" title="2020-12-14 12:38:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8RestTemplate/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用RestTemplate">SpringCloud使用RestTemplate</span>
+            <span class="post-date" title="2020-12-14 12:37:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E5%BC%82%E5%B8%B8%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud异常配置">SpringCloud异常配置</span>
+            <span class="post-date" title="2020-12-14 11:34:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-Hystrix%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Hystrix参数配置">SpringCloud Hystrix参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-Ribbon%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Ribbon参数配置">SpringCloud Ribbon参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-client%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud client配置">SpringCloud client配置</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务注册">SpringCloud服务注册</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务消费">SpringCloud服务消费</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud健康检查">SpringCloud健康检查</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E7%AE%A1%E7%90%86%E9%85%8D%E7%BD%AE%E9%A1%B5%E9%9D%A2/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud管理配置页面">SpringCloud管理配置页面</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E8%BF%90%E7%BB%B4%E6%8E%A5%E5%8F%A3/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud运维接口">SpringCloud运维接口</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务构建">SpringCloud服务构建</span>
+            <span class="post-date" title="2020-12-14 11:30:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/MapReduce%E5%B9%B3%E5%9D%87%E6%95%B0%E8%AE%A1%E7%AE%97/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="MapReduce平均数计算">MapReduce平均数计算</span>
+            <span class="post-date" title="2020-12-06 12:14:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/HDFS-shell%E6%93%8D%E4%BD%9C%EF%BC%882%EF%BC%89/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="HBASE shell操作（2）">HBASE shell操作（2）</span>
+            <span class="post-date" title="2020-12-06 12:02:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/HDFS-shell%E6%93%8D%E4%BD%9C%EF%BC%881%EF%BC%89/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="HDFS shell操作（1）">HDFS shell操作（1）</span>
+            <span class="post-date" title="2020-12-06 11:50:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="并发编程总结">并发编程总结</span>
+            <span class="post-date" title="2020-11-17 16:57:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/JVM%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%95%B4%E7%90%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JVM性能优化整理">JVM性能优化整理</span>
+            <span class="post-date" title="2020-11-17 15:14:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/Tomcat%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%95%B4%E7%90%86/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat性能优化整理">Tomcat性能优化整理</span>
+            <span class="post-date" title="2020-11-17 12:34:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/27/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM内存结构">JVM内存结构</span>
+            <span class="post-date" title="2020-09-27 11:55:00">2020/09/27</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/27/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM类加载过程">JVM类加载过程</span>
+            <span class="post-date" title="2020-09-27 11:08:00">2020/09/27</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/18/Hash%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%B9%E6%B3%95/"
+           data-tag="哈希表"
+           data-author="" >
+            <span class="post-title" title="Hash解决冲突的方法">Hash解决冲突的方法</span>
+            <span class="post-date" title="2020-09-18 13:02:00">2020/09/18</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/18/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM垃圾回收算法">JVM垃圾回收算法</span>
+            <span class="post-date" title="2020-09-18 09:18:00">2020/09/18</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/09/13/IOC%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8F%8D%E5%B0%84%E6%AD%A5%E9%AA%A4/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="IOC中的基本反射步骤">IOC中的基本反射步骤</span>
+            <span class="post-date" title="2020-09-13 09:22:00">2020/09/13</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/09/11/Http%E5%92%8CHttps%E7%9A%84%E5%8C%BA%E5%88%AB/"
+           data-tag="https"
+           data-author="" >
+            <span class="post-title" title="Http和Https的区别">Http和Https的区别</span>
+            <span class="post-date" title="2020-09-11 11:11:00">2020/09/11</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/09/11/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95Autowired/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="手写一个简单Autowired">手写一个简单Autowired</span>
+            <span class="post-date" title="2020-09-11 10:49:00">2020/09/11</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/09/01/%E8%BF%90%E7%AE%97%E7%AC%A6/"
+           data-tag="运算符"
+           data-author="" >
+            <span class="post-title" title="运算符">运算符</span>
+            <span class="post-date" title="2020-09-01 09:24:00">2020/09/01</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/07/24/AtomicInteger/"
+           data-tag="java基础"
+           data-author="" >
+            <span class="post-title" title="AtomicInteger">AtomicInteger</span>
+            <span class="post-date" title="2020-07-24 15:52:00">2020/07/24</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/DNS/"
+           data-tag="DNS"
+           data-author="" >
+            <span class="post-title" title="DNS">DNS</span>
+            <span class="post-date" title="2020-07-21 15:57:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/21/l-String%E3%80%81-StringBuilder%E3%80%81StringBuffer%E5%8C%BA%E5%88%AB/"
+           data-tag="String,StringBuilder,StringBuffer"
+           data-author="" >
+            <span class="post-title" title="String、 StringBuilder、StringBuffer区别">String、 StringBuilder、StringBuffer区别</span>
+            <span class="post-date" title="2020-07-21 15:43:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2020/07/21/mysql%E4%BA%8B%E5%8A%A1/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql事务">mysql事务</span>
+            <span class="post-date" title="2020-07-21 09:42:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/GET%E4%B8%8EPOST%E5%8C%BA%E5%88%AB/"
+           data-tag="GET/POST"
+           data-author="" >
+            <span class="post-title" title="GET与POST区别">GET与POST区别</span>
+            <span class="post-date" title="2020-07-21 08:29:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/TCP%E4%B8%8EUDP%E7%9A%84%E5%8C%BA%E5%88%AB/"
+           data-tag="TCP/IP,UDP"
+           data-author="" >
+            <span class="post-title" title="TCP与UDP的区别">TCP与UDP的区别</span>
+            <span class="post-date" title="2020-07-21 08:00:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/19/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%883%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（3）">基于JavaAgent的全链路监控（3）</span>
+            <span class="post-date" title="2020-07-19 17:25:00">2020/07/19</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/19/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%882%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（2）">基于JavaAgent的全链路监控（2）</span>
+            <span class="post-date" title="2020-07-19 16:54:00">2020/07/19</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/17/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%881%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（1）">基于JavaAgent的全链路监控（1）</span>
+            <span class="post-date" title="2020-07-17 13:11:00">2020/07/17</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/15/HttpClient/"
+           data-tag="httpclient"
+           data-author="" >
+            <span class="post-title" title="HttpClient">HttpClient</span>
+            <span class="post-date" title="2020-07-15 17:12:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/07/15/ElasticSearch%E5%AE%A2%E6%88%B7%E7%AB%AF/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="ElasticSearch客户端">ElasticSearch客户端</span>
+            <span class="post-date" title="2020-07-15 11:10:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/07/15/ElasticSearch%E8%BF%91%E5%AE%9E%E6%97%B6%E6%80%A7%E4%BB%8B%E7%BB%8D/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="ElasticSearch近实时性介绍">ElasticSearch近实时性介绍</span>
+            <span class="post-date" title="2020-07-15 10:51:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/03/28/ThreadLocal/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="ThreadLocal">ThreadLocal</span>
+            <span class="post-date" title="2020-03-28 09:59:00">2020/03/28</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E8%B0%83%E4%BC%98/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive调优">Hive调优</span>
+            <span class="post-date" title="2020-01-21 16:48:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive模式设计">Hive模式设计</span>
+            <span class="post-date" title="2020-01-21 14:09:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E7%B4%A2%E5%BC%95/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive索引">Hive索引</span>
+            <span class="post-date" title="2020-01-21 10:59:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/20/HiveQL%E8%A7%86%E5%9B%BE/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="HiveQL视图">HiveQL视图</span>
+            <span class="post-date" title="2020-01-20 16:27:00">2020/01/20</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/20/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%EF%BC%883%EF%BC%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（3）">Hive数据操作（3）</span>
+            <span class="post-date" title="2020-01-20 14:27:00">2020/01/20</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/19/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%EF%BC%882%EF%BC%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（2）">Hive数据操作（2）</span>
+            <span class="post-date" title="2020-01-19 15:50:00">2020/01/19</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（1）">Hive数据操作（1）</span>
+            <span class="post-date" title="2020-01-17 16:11:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据定义">Hive数据定义</span>
+            <span class="post-date" title="2020-01-17 14:18:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据类型和文件格式">Hive数据类型和文件格式</span>
+            <span class="post-date" title="2020-01-17 13:41:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/06/JAVA%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JAVA数据类型易混概念">JAVA数据类型易混概念</span>
+            <span class="post-date" title="2020-01-06 14:30:00">2020/01/06</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2020/01/03/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2020-01-03 16:24:00">2020/01/03</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2020/01/03/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="责任链模式">责任链模式</span>
+            <span class="post-date" title="2020-01-03 15:21:00">2020/01/03</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/02/%E6%8E%92%E5%BA%8F%E4%B9%8B%E6%AF%94%E8%BE%83%E5%99%A8Comparator-T/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="排序之比较器Comparator&lt;T&gt;">排序之比较器Comparator&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 11:34:00">2020/01/02</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/02/%E6%8E%92%E5%BA%8F%E4%B9%8B%E6%AF%94%E8%BE%83%E5%99%A8/"
+           data-tag="java,数据结构"
+           data-author="" >
+            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/23/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96-%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="用户行为特征提取">用户行为特征提取</span>
+            <span class="post-date" title="2019-12-23 11:10:00">2019/12/23</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/Spark%E7%9B%B8%E5%85%B3%E6%A6%82%E8%BF%B0/"
+           data-tag="Spark"
+           data-author="" >
+            <span class="post-title" title="Spark相关概述">Spark相关概述</span>
+            <span class="post-date" title="2019-12-18 13:41:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/WordCount%E7%AE%80%E6%9E%90/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="WordCount简析">WordCount简析</span>
+            <span class="post-date" title="2019-12-18 11:57:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/Yarn%E6%A6%82%E8%BF%B0/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="Yarn概述">Yarn概述</span>
+            <span class="post-date" title="2019-12-18 09:12:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/MapReduce%E6%A6%82%E8%BF%B0/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
+            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/HDFS%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"
+           data-tag="HDFS,HADOOP"
+           data-author="" >
+            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
+            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/HDFS%E6%A6%82%E8%BF%B0/"
+           data-tag="HDFS,HADOOP"
+           data-author="" >
+            <span class="post-title" title="HDFS概述">HDFS概述</span>
+            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2019/12/03/SpringCloud-Alibaba%E6%95%B4%E5%90%88Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
+            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2019/11/25/Nacos%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/"
+           data-tag="SpringCloud,nacos-config"
+           data-author="" >
+            <span class="post-title" title="Nacos配置中心使用">Nacos配置中心使用</span>
+            <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/11/20/mysql%E6%8E%92%E5%BA%8F/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/20/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E4%B8%8E%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A9/"
+           data-tag="内存模型"
+           data-author="" >
+            <span class="post-title" title="对象存储与指针压缩">对象存储与指针压缩</span>
+            <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/20/%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86/"
+           data-tag="线程"
+           data-author="" >
+            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
+            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/14/Spring-Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
+            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/14/java8%E6%96%B0%E7%89%B9%E6%80%A7/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/10/12/SimpleDateFormat%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/"
+           data-tag="并发,线程安全"
+           data-author="" >
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2019/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5/"
+           data-tag="分布式"
+           data-author="" >
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/10/02/%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%92%8C%E5%AE%B9%E9%94%99%E6%8A%80%E6%9C%AF/"
+           data-tag="可靠,容错"
+           data-author="" >
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/28/%E5%8F%AF%E4%BF%A1%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/"
+           data-tag="可信计算"
+           data-author="" >
+            <span class="post-title" title="可信与可信计算">可信与可信计算</span>
+            <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/24/%E5%9B%BE%E8%A7%A3%E5%85%AC%E9%92%A5%E4%B8%8E%E7%A7%81%E9%92%A5/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/04/%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/02/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/01/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/"
+           data-tag="可信,加密算法"
+           data-author="" >
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/01/%E5%8F%AF%E4%BF%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/09/01/%E6%B1%A0%E5%8C%96%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/"
+           data-tag="多线程,java"
+           data-author="" >
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/08/31/mysql%E8%A1%A8%E8%AE%BE%E8%AE%A1%E5%8F%8A%E4%BC%98%E5%8C%96/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E9%94%81%E7%B2%97%E5%8C%96/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%81%8F%E5%90%91%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="偏向锁">偏向锁</span>
+            <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%85%AC%E5%B9%B3%E9%94%81%E3%80%81%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/08/31/%E6%82%B2%E8%A7%82%E9%94%81%E3%80%81%E4%B9%90%E8%A7%82%E9%94%81/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E4%BA%92%E6%96%A5%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%AF%BB%E5%86%99%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="读写锁">读写锁</span>
+            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="可重入锁">可重入锁</span>
+            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E9%98%BB%E5%A1%9E%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%87%AA%E6%97%8B%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="自旋锁">自旋锁</span>
+            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/%E7%90%86%E8%A7%A3IO%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E/"
+           data-tag="IO,阻塞与非阻塞"
+           data-author="" >
+            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
+            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/TCP%E6%8F%A1%E6%89%8B%E3%80%81%E6%8C%A5%E6%89%8B%E5%8D%8F%E8%AE%AE/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/TCP-IP%E5%9B%9B%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
+            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 软件管理 "
+           href="/2019/08/29/Git%E6%A2%B3%E7%90%86/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
+        </a>
+        
+        <a  class="全部文章 软件管理 "
+           href="/2019/08/28/maven%E6%A2%B3%E7%90%86/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven梳理">maven梳理</span>
+            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-重构" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">重构</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="设计模式">设计模式</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">重构</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-06-10 11:30:29'>2021-04-18 00:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">1、什么是重构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">2、软件质量因素的定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">3、重构的意义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">4、重构实例演示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%8F%AF%E9%9D%A0%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="toc-text">Step1、重构第一步-可靠的测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E5%88%86%E8%A7%A3%E9%87%8D%E7%BB%84statement-%E6%89%BE%E5%87%BA%E4%BB%A3%E7%A0%81%E7%9A%84%E9%80%BB%E8%BE%91%E6%B3%A5%E5%9B%A2%E5%B9%B6%E8%BF%90%E7%94%A8Extract-Method"><span class="toc-text">Step2、重构第二步-分解重组statement 找出代码的逻辑泥团并运用Extract Method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E4%B8%89%E6%AD%A5-%E6%9B%B4%E6%94%B9amountFor%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">Step3、重构第三步-更改amountFor中的变量名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step4%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E6%90%AC%E7%A7%BB%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E4%BB%A3%E7%A0%81"><span class="toc-text">Step4、重构第四步-搬移金额计算代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step5%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%94%E6%AD%A5-%E8%BF%90%E7%94%A8Extract-Method-%E5%8F%82%E8%80%83%E6%8A%BD%E5%8F%96%E8%AE%A1%E7%AE%97%E9%87%91%E9%A2%9D%EF%BC%8C%E6%9D%A5%E6%8A%BD%E5%8F%96%E7%A7%AF%E5%88%86"><span class="toc-text">Step5、重构第五步-运用Extract Method 参考抽取计算金额，来抽取积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step6%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E5%85%AD%E6%AD%A5-%E5%8E%BB%E6%8E%89%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F"><span class="toc-text">Step6、重构第六步-去掉临时变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step7%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E4%B8%83%E6%AD%A5-%E8%BF%90%E7%94%A8%E5%A4%9A%E6%80%81%E5%8F%96%E4%BB%A3%E4%B8%8E%E4%BB%B7%E6%A0%BC%E7%9B%B8%E5%85%B3%E7%9A%84%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-text">Step7、重构第七步-运用多态取代与价格相关的条件逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step8%E3%80%81%E9%87%8D%E6%9E%84%E7%AC%AC%E5%85%AB%E6%AD%A5-%E8%BF%90%E7%94%A8%E5%A4%9A%E6%80%81%E5%8F%96%E4%BB%A3%E4%B8%8E%E4%BB%B7%E6%A0%BC%E7%9B%B8%E5%85%B3%E7%9A%84%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-text">Step8、重构第八步-运用多态取代与价格相关的条件逻辑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">5、总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6、重构的时机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E3%80%81%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%87%8D%E6%9E%84"><span class="toc-text">（1）、什么时候重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E3%80%81%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%8D%E9%87%8D%E6%9E%84"><span class="toc-text">（2）、什么时候不重构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">7、重构的手段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E3%80%81%E6%94%B9%E5%96%84%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81"><span class="toc-text">（1）、改善重复代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E3%80%81%E6%94%B9%E5%96%84%E8%BF%87%E9%95%BF%E7%9A%84%E5%87%BD%E6%95%B0%E3%80%81%E8%BF%87%E5%A4%A7%E7%9A%84%E7%B1%BB%E3%80%81-%E8%BF%87%E9%95%BF%E7%9A%84%E5%8F%82%E6%95%B0%E5%88%97"><span class="toc-text">（2）、改善过长的函数、过大的类、 过长的参数列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E3%80%81%E5%8F%91%E6%95%A3%E5%BC%8F%E5%8F%98%E5%8C%96"><span class="toc-text">（3）、发散式变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E3%80%81%E9%9C%BE%E5%BC%B9%E5%BC%8F%E4%BF%AE%E6%94%B9"><span class="toc-text">（4）、霾弹式修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E3%80%81-%E4%BE%9D%E6%81%8B%E6%83%85%E8%8A%82"><span class="toc-text">（5）、 依恋情节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E3%80%81%E6%95%B0%E6%8D%AE%E6%B3%A5%E5%9B%A2"><span class="toc-text">（6）、数据泥团</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%887%EF%BC%89%E3%80%81%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%81%8F%E6%89%A7"><span class="toc-text">（7）、基本类型偏执</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%888%EF%BC%89%E3%80%81Switch%E6%83%8A%E6%82%9A%E7%8E%B0%E8%BA%AB"><span class="toc-text">（8）、Switch惊悚现身</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%889%EF%BC%89%E3%80%81%E5%B9%B3%E8%A1%8C%E7%BB%A7%E6%89%BF%E4%BD%93%E7%B3%BB"><span class="toc-text">（9）、平行继承体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8810%EF%BC%89%E3%80%81%E5%86%97%E8%B5%98%E7%B1%BB"><span class="toc-text">（10）、冗赘类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8811%EF%BC%89%E3%80%81%E5%A4%B8%E5%A4%B8%E5%85%B6%E8%B0%88%E6%9C%AA%E6%9D%A5%E6%80%A7"><span class="toc-text">（11）、夸夸其谈未来性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8812%EF%BC%89%E3%80%81%E4%BB%A4%E4%BA%BA%E8%BF%B7%E6%83%91%E7%9A%84%E6%9A%82%E6%97%B6%E5%AD%97%E6%AE%B5"><span class="toc-text">（12）、令人迷惑的暂时字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8813%EF%BC%89%E3%80%81-%E8%BF%87%E5%BA%A6%E8%80%A6%E5%90%88%E7%9A%84%E6%B6%88%E6%81%AF%E9%93%BE"><span class="toc-text">（13）、 过度耦合的消息链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8814%EF%BC%89%E3%80%81%E4%B8%AD%E9%97%B4%E4%BA%BA"><span class="toc-text">（14）、中间人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%8815%EF%BC%89%E3%80%81%E7%8B%8E%E6%98%B5%E5%85%B3%E7%B3%BB"><span class="toc-text">（15）、狎昵关系</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>1、什么是重构</h1>
+<p>​		在百度百科里给出的定义是:在不改变软件系统外部行为的前提下，改善它的内部结构。通过调整程序代码改善软件的质量、性能，使其程序的设计模式和架构更趋合理，提高软件的扩展性和维护性。</p>
+<p>​		也许有人会问，为什么不在项目开始时多花些时间把设计做好，而要以后花时间来重构呢？</p>
+<p>​		首先要知道一个完美得可以预见未来任何变化的设计，或一个灵活得可以容纳任何扩展的设计是不存在的。系统设计人员对即将着手的项目往往只能从大方向予以把控，而无法知道每个细枝末节。</p>
+<p>​		其次永远不变的就是变化，提出需求的用户往往要在软件成型后，才开始&quot;品头论足&quot;，系统设计人员毕竟不是先知先觉的神仙，功能的变化导致设计的调整再所难免。</p>
+<p>​		所以&quot;测试为先，持续重构&quot;作为良好开发习惯被越来越多的人所采纳，测试和重构像黄河的护堤，成为保证软件质量的法宝</p>
+<h1>2、软件质量因素的定义</h1>
+<p>正确性（Correctness）：系统满足规格说明和用户目标的程度，即在预定环境下能正确地完成预期功能的程度</p>
+<p>健壮性（Robustness）：在硬件发生故障、输入的数据无效或操作错误等意外环境下，系统能做出适当响应的程度</p>
+<p>效率（Efficiency）：为了完成预定的功能，系统需要的计算资源的多少</p>
+<p>完整性（Efficiency）或安全性（Security）：对未经授权的人使用软件或数据的企图，系统能够控制（禁止）的程度</p>
+<p>可用性（Usability）：系统在完成预定应该完成的功能时令人满意的程度</p>
+<p>风险（Risk）：按预定的成本和进度把系统开发出来，并且为用户所满意的概率</p>
+<p>可理解性（Comprehensibility）：理解和使用该系统的容易程度</p>
+<p>可维修性（Maintainability）：诊断和改正在运行现场发现的错误所需要的工作量的大小</p>
+<p>灵活性（Maintainability）或适应性（Adaptability）：修改或改进正在运行的系统需要的工作量的多少</p>
+<p>可再用性（Reusability）：在其他应用中该程序可以被再次使用的程度（或范围）</p>
+<p>可移植性（Portability）：把程序从一种硬件配置和（或）软件系统环境转移到另一种配置和环境时，需要的工作量多少。有一种定量度量的方法是：用原来程序设计和调试的成本除移植时需用的费用</p>
+<p>互运行性（Interoperability）：把该系统和另一个系统结合起来需要的工作量的多少</p>
+<p>重构的目的就是为了保证软件满足以上特性。</p>
+<h1>3、重构的意义</h1>
+<p>​		在不改变系统功能的情况下，改变系统的实现方式。为什么要这么做？投入精力不用来满足客户关心的需求，而是仅仅改变了软件的实现方式，这是否是在浪费客户的投资呢？</p>
+<p>​		重构的重要性要从软件的生命周期说起。软件不同与普通的产品，他是一种智力产品，没有具体的物理形态。一个软件不可能发生物理损耗，界面上的按钮永远不会因为按动次数太多而发生接触不良。那么为什么一个软件制造出来以后，却不能永远使用下去呢？</p>
+<p>​		对软件的生命造成威胁的因素只有一个：需求的变更。一个软件总是为解决某种特定的需求而产生，时代在发展，客户的业务也在发生变化。有的需求相对稳定一些，有的需求变化的比较剧烈，还有的需求已经消失了，或者转化成了别的需求。在这种情况下，软件必须相应的改变，考虑到成本和时间等因素，当然不是所有的需求变化都要在软件系统中实现。但是总的说来，软件要适应需求的变化，以保持自己的生命力。</p>
+<p>​		软件产品最初制造出来，是经过精心的设计，具有良好架构的。但是随着时间的发展、需求的变化，必须不断的修改原有的功能、追加新的功能，还免不了有一些缺陷需要修改。为了实现变更，不可避免的要违反最初的设计构架。经过一段时间以后，软件的架构就千疮百孔了。bug越来越多，越来越难维护，新的需求越来越难实现，软件的构架对新的需求渐渐的失去支持能力，而是成为一种制约。最后新需求的开发成本会超过开发一个新的软件的成本，这就是这个软件系统的生命走到尽头的时候。重构就能够最大限度的避免这样一种现象。系统发展到一定阶段后，使用重构的方式，不改变系统的外部功能，只对内部的结构进行重新的整理。通过重构，不断的调整系统的结构，使系统对于需求的变更始终具有较强的适应能力。</p>
+<h1>4、重构实例演示</h1>
+<p>​		案例很简单，这是给一家出租店用的程序。计算每一位顾客的消费金额并打印详单。操作者告诉程序：顾客租了哪些影片？租期多长？程序会根据租赁时间和影片类型计算费用。影片分为三类：普通片、儿童片、新片。除了计算费用还有为顾客计算积分，积分会根据租片类型是否为新片而不同。</p>
+<p>为了实现这个功能。我们编写出了以下代码（三个类：Movie、Rental、Consumer）：</p>
+<p><img src="/img/1618675966507.png" alt="1618675966507"></p>
+<p><img src="/img/1618675987731.png" alt="1618675987731"></p>
+<p><img src="/img/1618676025236.png" alt="1618676025236"></p>
+<p>存在的问题：</p>
+<p>（1）对于consumer里面的statement方法。<br>
+这个方法做的事情太多，如果用户希望对系统做一点修改，首先他们希望以html格式 输出详单，这样可在网页上直接显示。这个变化的影响是：根本不可能在打印html报表的函数中复用目前statement的任何行为。唯一可以做的就是编写一个全新的htmlStatement 大量重复statement的行为。如果计费标准发生变化必须同时修改statement和htmlstatement， 不断的修改和不断的复制粘贴，在程序要保存很长时间时，造成潜在的威胁.</p>
+<p>（2）如果用户希望改变影片分类规则，但还未决定怎么改，他们设想几种方案。 这些方案都会影响消费和积分的计算方式。为了应付分类规则和计费规则的变化，程序不得不对statement做出修改，但是如果我们把statement内的代码，复制到htmlstatement函数中，就必须确保将来的任何修改在两个地方保持一致，随着各种规则变得愈来愈复杂，适当的修改点越来越难找，不犯错的机会也越来越少。</p>
+<p>（3）你的态度也行倾向于尽量少修改程序，不管怎么说。它运行的很好。你心里牢牢记着那句古老的工程谚语：如果它没坏。就不要动它 也行这个程序还没坏，但是它造成了伤害，它让你的生活比较难过，因为你发现很难完成客户所需的修改。你发现自己需要为程序添加一个特性。而代码结构使你无法方便的达到目的，那就先重构那个程序。 重构，真的是可以锻炼自己思维和代码的编写能力</p>
+<h2 id="Step1、重构第一步-可靠的测试">Step1、重构第一步-可靠的测试</h2>
+<p>01 进行重构时，我们需要依赖测试，让它告诉我们是否引入bug。好的测试是重构的根本</p>
+<p>02 重构的前提是要有一个可靠的测试，这个测试必须有自我检验能力</p>
+<h2 id="Step2、重构第二步-分解重组statement-找出代码的逻辑泥团并运用Extract-Method">Step2、重构第二步-分解重组statement 找出代码的逻辑泥团并运用Extract Method</h2>
+<p>这个函数太长了，代码块越小，代码的功能越好管理。代码的处理和移动也越轻松<br>
+代码重构目标：希望将长长的函数切开，把较小的块移动到更合适的类中，最终能够降低代码重复和扩展<br>
+将 switch这段逻辑泥团抽离为函数。<br>
+在分析函数内的局部变量和参数，其中statement() while循环中有两个： thisAmount、each, thisAmount会被修改，each不会被修改。<br>
+任何不会被修改的变量都可以被当成参数传入新的函数<br>
+注意每次调整都要编译测试<br>
+重构技术就是以 微小 的步伐修改程序，如果你犯下错误，很容易发现它</p>
+<p><img src="/img/1618676190337.png" alt="1618676190337"></p>
+<h2 id="Step3、重构第三步-更改amountFor中的变量名">Step3、重构第三步-更改amountFor中的变量名</h2>
+<p>好的代码应该清楚表达出自己的功能，变量名称是代码清晰的关键。<br>
+任何一个傻瓜都能写出计算机可以理解的代码。唯有写出人类容易理解的代码，才是优秀的程序员。<br>
+代码应该表现自己的目的<br>
+随着对程序的理解逐渐加深，我也就不断的把这些理解嵌入到代码中，这么一来才不会遗忘我曾经理解的东西</p>
+<p><img src="/img/1618676232016.png" alt="1618676232016"></p>
+<h2 id="Step4、重构第四步-搬移金额计算代码">Step4、重构第四步-搬移金额计算代码</h2>
+<p>观察amountFor时，发现这个函数没有使用来自Consumer类的信息，使用了来自Rental类的信息。<br>
+所以应该改这段代码搬移到Rental类。并且做相应的调整：更改方法名、参数等 更改调用处<br>
+运用Replace Temp with Query把thisAmount除去</p>
+<p><img src="/img/1618676280257.png" alt="1618676280257"></p>
+<p>第一步：先将计算金额代码搬移到Rental类中</p>
+<p>Rental类中添加方法 getCharge</p>
+<p>第二步：针对搬移后的代码，调整Consumer类</p>
+<h2 id="Step5、重构第五步-运用Extract-Method-参考抽取计算金额，来抽取积分">Step5、重构第五步-运用Extract Method 参考抽取计算金额，来抽取积分</h2>
+<p><img src="/img/1618676358941.png" alt="1618676358941"></p>
+<p>第一步：将积分计算方法搬移到Rental类中</p>
+<p>第二步：2、更改consumer类中获取积分</p>
+<h2 id="Step6、重构第六步-去掉临时变量">Step6、重构第六步-去掉临时变量</h2>
+<p>临时变量只在自己所属的函数中有效，所以它们会助长冗长而复杂的函数。<br>
+运用Replace Temp with Query,并利用查询函数(query method)来取代totalAmount和frequentRentalPoints这两个临时变量。<br>
+由于类中的任何函数都可以调用上述查询函数，所以它能够促成较干净的设计，而减少冗长复杂的函数。</p>
+<p><img src="/img/1618676411155.png" alt="1618676411155"></p>
+<p>第一步：totalAmount和frequenRenterPoint两个临时变量</p>
+<p>第二步：使用查询函数来替代</p>
+<h2 id="Step7、重构第七步-运用多态取代与价格相关的条件逻辑">Step7、重构第七步-运用多态取代与价格相关的条件逻辑</h2>
+<p>对于switch语句，最好不要在另一个对象的属性基础上运用switch语句。如果不得不使用。也应该在对象自己的数据上使用而不是在别人的数据上使用。 这暗示getCharge应该移动到Movie中<br>
+租期的长度来自Rental对象，计算费用的时候需要两项数据：租期长度和影片类型<br>
+为什么选择租期长度呢。因为本系统可能发生变化是加入新影片类型。这种变化带有不稳定性倾向<br>
+如果影片类型发生变化，我希望尽量控制它造成的影响。所以在Movie对象中计算费用</p>
+<p><img src="/img/1618676461026.png" alt="1618676461026"></p>
+<h2 id="Step8、重构第八步-运用多态取代与价格相关的条件逻辑">Step8、重构第八步-运用多态取代与价格相关的条件逻辑</h2>
+<p>用多态替换Switch，如果创建三个子类继承Movie，调用方就必须创建具体的子类对象（违反依赖倒置原则）。<br>
+一个对象具有状态，并且不同状态下有不同的行为，引入State模式：<br>
+创建接口Price作为Movie的属性，接口方法getCharge(int daysRented)，再创建三个实现类，把Switch分支的逻辑移至具体的实现类<br>
+依赖倒置原则，调用方应该依赖抽象类或接口，不要依赖具体实现类</p>
+<p>创建price接口 将getPriceCode、getCharge getFrequentRenterPoint抽象出来</p>
+<p><img src="/img/1618676506490.png" alt="1618676506490"></p>
+<p><img src="/img/1618676526483.png" alt="1618676526483"></p>
+<p>创建子类继承Price 实现具体的实现</p>
+<h1>5、总结</h1>
+<p>1、每个方法只做一件事，每个方法抽象层级不能多于两层，根据这个原则抽取方法。</p>
+<p>2、根据类的职责和对象之间的依赖关系，把方法移至对应的类。</p>
+<p>3、应该调用对象的接口方法，不要直接操作对象的属性。</p>
+<p>4、尽量减少方法中的临时变量，简化逻辑，增加可读性。</p>
+<h1>6、重构的时机</h1>
+<h2 id="（1）、什么时候重构">（1）、什么时候重构</h2>
+<p>三次法则：事不过三，三则重构<br>
+添加功能时重构（New Feature）<br>
+代码的设计无法帮助我轻松的添加我所需要的特性，如果用某种方式来设计，添加特性会简单的多。一旦完成重构，新特性的添加会更快速，更流畅<br>
+修补错误时重构（Bug Fix）<br>
+调试过程中，运用重构，多半是为了让代码更具有可读性<br>
+复审代码时重构（Code Review)重构可以帮助我们复审代码</p>
+<h2 id="（2）、什么时候不重构">（2）、什么时候不重构</h2>
+<p>既有代码太混乱，且不能正常工作，需要重写而不是重构。<br>
+项目接近最后期限时，应该避免重构。</p>
+<h1>7、重构的手段</h1>
+<h2 id="（1）、改善重复代码">（1）、改善重复代码</h2>
+<p>​		重复的代码是坏味道中出现频率最高的情形非其莫属。如果在一个的以上地方看到相同的代码，那么就可以肯定：想办法将它们合而为一，代码会变得更好。最单纯的重复代码就是“同一个类的两个函数含有相同的表达式”，这时候可以采用抽取方法提炼出重复的代码，然后让这两个地点都调用被提炼出的那一段代码。</p>
+<p>​		另一种常见情况就是“两个互为兄弟的子类内含相同的表达式”，这时候只需对两个类抽取方法，然后将提炼出的代码推入到超类中。如果代码之间只是类似而并非完全相同，那么就需要通过抽取方法将相似部分和差异部分分开，构成单独一个函数。如果有些函数以不同的算法做相同的事，可以使用比较清晰的一个替换掉其余的。</p>
+<h2 id="（2）、改善过长的函数、过大的类、-过长的参数列">（2）、改善过长的函数、过大的类、 过长的参数列</h2>
+<p>​		程序员都喜欢简短的函数。拥有短函数的对象会活的比较好、比较长。不熟悉面向对象技术的人，常常觉得对象程序中只有无穷无尽的委托，根本没有进行任何计算。和此类程序共同生活数年后，你才会知道这些小小函数的价值。</p>
+<p>​		应该积极地分解函数，将长长的函数变为多个短小的函数。一般会遵循这样的原则：每当感觉需要用注释来说明点什么的时候，就把需要说明的东西写进一个独立函数中，并以其用途命名。不要嫌麻烦。可以对一组甚至短短一行代码做这件事，哪怕替换后的函数调用动作比函数自身还长，只要函数名称能够解释其用途，也应毫不犹豫地那么做。关键不在于函数的长度，而在于函数“做什么”和“如何做”之间的语义距离。<br>
+​		如果想利用单个的类做太多的事情，其内往往会出现太多实例变量。一旦如此，重复的代码就接踵而来。可以将几个变量一起提炼至新类内。提炼时应该选择类内彼此相关的变量，将它们放在一起。通常如果类内的数个变量有着相同的前缀或字尾，这就意味有机会把它们提炼到某个组件内。和“太多实例变量”一样，类内如果有太多代码，也是代码重复、混乱并最终走向死亡的源头。最简单的方案是把多余的东西消弭于类内部。如果有五个“百行函数”，它们之中很多代码都相同，那么或许你可以把它们变成五个“十行函数”和十个提炼出的“双行函数”。</p>
+<p>​		刚开始学编程的时候，或许都是“把函数所需的所有东西都以参数传递进去”。这样也是可以理解的，因为除此之外就只能选择全局数据，而全局数据是邪恶的东西。对象技术告诉我们，如果你手上没有所需的东西，总可以叫一个对象给你。有了对象，你就不必要把函数所需的所有东西都以参数传递给它，只需传给它足够的、让函数能从中获得自己的东西就行。太长的的参数列难以理解，太多参数会造成前后不一致、不易使用，而且一旦需要更多数据，就不得不修改它。如果将对象传递给函数，大多数修改都将没有必要，因为很可能只需增加一两条请求，就能得到更多的数据。</p>
+<h2 id="（3）、发散式变化">（3）、发散式变化</h2>
+<p>​		我们希望软件能够容易被修改——毕竟软件再怎么说本来就该是“软”的。一旦需要修改，我们希望能够跳到系统某一点，只在该处做修改。如果不能做到这点，你就会嗅出两种紧密相关的刺鼻味道中的一种。如果某个类经常因为不同的原因在不同的方向上发生变化，发散式变化就出现了。其主要指“一个类受多种变化的影响”。当你看着一个类说：“呃，如果新加入一个数据库，就必须修改这三个函数；如果新出现一种工具，就必须修改这四个函数。”那么此时也许将这个对象分成两个会更好，这样对每个对象就可以只因一种变化而需要修改因为不同的原因，在不同的方向上，修改同一个类。应该分解成更小的类，每个类只因一种原因而修改。多层结构系统，开发人员往往容易把全部逻辑都放在Service层，导致Service类非常庞大且不断被修改。</p>
+<h2 id="（4）、霾弹式修改">（4）、霾弹式修改</h2>
+<p>​		如果每遇到变化，都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是霾弹式修改。其主要指“一种变化引发多个类相应修改”。如果需要修改的代码散布四周，不但很难找到它们，也很容易忘记某个重要的修改。这种情况可以把所有需要的代码放进同一个类。如果眼下没有合适的类可以安置这些代码，就创造一个。通常可以运用内联类把一系列相关行为放进同一个类。</p>
+<h2 id="（5）、-依恋情节">（5）、 依恋情节</h2>
+<p>​		众所周知，对象技术的全部要点在于：其是一种“将数据和对数据的操作行为包装在一起”的技术。有一种经典的气味：函数对于某个类的兴趣高过对自己所处类的兴趣。在很多情况下，都能够看到：某个函数为了计算某个值，从另一个对象那儿调用几乎半打的取值函数。疗法也显而易见：把这个函数移至另一个地点，移到它该去的地方。‘有时候一个函数往往会用到几个类的功能，那么它究竟该被置于何处呢？处理原则通常为：判断哪个类拥有最多被此函数使用的数据，然后就把这个函数和那些数据摆在一起。</p>
+<h2 id="（6）、数据泥团">（6）、数据泥团</h2>
+<p>​		如果用比较形象的事物来形容数据项，我想“小孩子”是一个不错的选择，数据项就像小孩子，喜欢成群结队地呆在一块儿。常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。这些总是绑在一起出现的数据真应该拥有属于它们自己的对象。这种情况可以先找出这些数据以字段形式出现的地方，将它们提炼到一个独立对象中，然后将注意力转移到函数签名上，运用参数对象为它减肥。这样做的直接好处是可以将很多参数列缩短，简化函数调用。一个比较好的评判方法是：删掉众多数据中的一项。这么做其它数据有没有因而失去意义？如果它们不再有意义，这就是一个明确的信号：应该为它们产生一个新对象。</p>
+<h2 id="（7）、基本类型偏执">（7）、基本类型偏执</h2>
+<p>​		大多数编程环境都有两种数据：结构类型允许你将数据组织成有意义的形式；基本类型则是构成结构类型的积木块。但是请记住：结构总是会带来一定的额外开销。它们可能代表着数据库中的表，如果只为做一两件事而创建结构类型也可能显得很麻烦。 对象的一个极大价值在于：它们模糊甚至打破横亘于基本数据和体积较大的类之间的界限。如果你有一组应该总是被放在一起的字段，可以将其抽取为一个独立的类。如果你在参数列中看到基本型数据，可以引入参数对象进行处理。如果你发现自己正从数组中挑选数据，可以运用以对象取代数组进行处理。 由一个起始值和一个结束值组成的range类：如果你有大量的基本数据类型字段，就有可能将其中部分存在逻辑联系的字段组织起来，形成一个类。更进一步的是，将与这些数据有关联的方法也一并移入类中 如果你发现自己正从数组中挑选数据，可运用 以对象取代数组。</p>
+<h2 id="（8）、Switch惊悚现身">（8）、Switch惊悚现身</h2>
+<p>​		面向对象程序的一个较明显特征是：少用switch语句。从本质上说，switch语句的问题在于重复。你常会发现同样的switch语句散布于不同的地方。如果要为它添加一个新的case语句，就必须找到所用switch语句并修改它们。面向对象中的多态概念可为此带来优雅的解决办法。大多数时候，一看到switch语句，那就应该考虑以多态来替换它。switch语句常常根据类型码进行选择，你要的是“与该类型码相关的函数或类”，所以应该将switch语句提炼到一个独立函数中，再将它搬移到需要多态性的那个类里。</p>
+<h2 id="（9）、平行继承体系">（9）、平行继承体系</h2>
+<p>​		平行继承体系其实是霾弹式修改的特殊情况。在这种情况下，每当为某个类增加一个子类，必须也为另一个类增加一个子类。如果发现某个继承体系的类名称前缀和另一个继承体系的类名称前缀完全相同，这种坏味道就会被嗅出。<br>
+​		消除这种重复性的一般策略是：让一个<br>
+​		继承体系的实例引用另一个继承体系的实例。</p>
+<p><img src="/img/1618677203153.png" alt="1618677203153"></p>
+<h2 id="（10）、冗赘类">（10）、冗赘类</h2>
+<p>​		你所创建的每一个类，都得有人去理解它、维护它，这些工作都是需要花钱的。如果一个类的所得并不值其身价，他就应该消失。项目中经常会出现这样的情况：某个类原本对得起自己的价值，但重构使它身形缩水，不再做那么多工作；或开发者事先规划了某些变化，并添加一个类来应付这些变化，但变化实际没有发生。不管是哪种原因，都应该让这个类庄严赴义吧。如果某些子类并没有做足够的工作，我们可以尝试“折叠继承体系”，将超类和子类合为一体，那样就会减少维护时间。对于那些几乎没用的组件，就应该将这个类的所有特性搬移到另一个类中，然后移除原类。</p>
+<h2 id="（11）、夸夸其谈未来性">（11）、夸夸其谈未来性</h2>
+<p>​		我们经常会说：“我想总有一天需要做这事”，并因而企图以各样的钩子和特殊情况来处理一些非必要的事情。一旦这样，坏味道就浮现出来了。夸夸其谈未来的结果往往会造成系统更加难以理解和维护。如果所有的装置都被用到了，那就值得那么做；如果用不到，就不值得。用不上的装置只会阻挡你的路，给你添乱，那就搬开它吧。如果某个抽象类其实没有太大作用，可以将超类和子类合为一体。将不必要的委托转移到另一个类中，并消除原先的类。如果函数的某些参数未被用上，那么就将参数移走。如果函数名称带有多余的抽象意味，就应该对它重命名，让它现实一些。</p>
+<h2 id="（12）、令人迷惑的暂时字段">（12）、令人迷惑的暂时字段</h2>
+<p>​		有时候你会发现：类中的某个实例变量仅为某种特定情况而设。这样的代码让人难以理解，因为你通常认为对象在所有时候都需要它的所有变量。当变量在未被使用的情况下去猜测其当初设置的目的，会让你发疯的。可以使用提炼新类为这个可怜的孤儿创造一个家，然后把所有和这个变量相关的代码都放进这个新家。也许还可以使用“将Null值替换为Null对象”在“变量不合法”的情况下创建一个Null对象，从而避免写出条件式代码。</p>
+<h2 id="（13）、-过度耦合的消息链">（13）、 过度耦合的消息链</h2>
+<p>​		如果你看到用户向一个对象请求另一个对象，然后再向后者请求另一个对象，然后再请求另一个对象…这就是消息链。这种方式意味着客户代码将与某些功能函数中的导航结构紧密耦合。一旦对象间的关系发生任何变化，客户端就不得不做出相应修改。 这时候我们可以隐藏“委托关系”，并在服务类上建立客户所需要的所有函数。你可以在消息链的不同位置进行这种重构手法。理论上是可以重构消息链上的任何一个对象，但是这样做往往会把一系列对象都变成“中间人”。通常更好的选择是：先观察消息链最终得到的对象是用来干什么的，再看看能否通过抽取方法把使用该对象的代码提炼到一个独立函数中，然后再将这个函数推入消息链。</p>
+<pre><code class="language-java">String result=Class.getFile().getFileChannel().getFileSource().getFileName() 
+
+String result=Class.getFile().getFileName(); 
+</code></pre>
+<p>​		常常是因为数据结构的层次很深，需要层层调用getter获取内层数据。 个人认为Message Chains如果频繁出现，考虑这个字段是否应该移到较外层的类，或者把调用链封装在较外层类的方法。</p>
+<h2 id="（14）、中间人">（14）、中间人</h2>
+<p>​		我们都知道对象的基本特征之一就是封装——对外部世界隐藏其内部细节。封装往往伴随着委托。比如你对Boss说是否有时间参加一个会议，他把这个消息“委托”给他的记事本，然后才能回答你。但是，你没有必要知道Boss到底使用传统记事本或电子记事本亦或秘书来记录自己的约会。人们可能会过度使用委托。你也许会看到某个类接口中有一半的函数都委托给其它类，这样就是过度委托。这时候就应该移除中间人，直接和真正的负责人打交道。如果这样“不干实事”的函数只有少数几个，可以将它们放进调用端。如果中间人还有其它行为，可以把它变成实责对象的子类，这样你既可以扩展原对象的行为，又不必负担那么多的委托动作。</p>
+<h2 id="（15）、狎昵关系">（15）、狎昵关系</h2>
+<p>​		有时候你会看到两个类过于亲密，花费太多时间去探究彼此的private成分。如果这发生在两个“人”之间，我们无比做卫道士；但对于类，我们就希望它们严守清规。也许就像古代的恋人一样，过分狎昵的类必须拆散。可以通过“移动方法”和“移动字段”帮它们划清界限，从而减少狎昵行径。如果两个类实在是情投意合，可以把两者共同点提炼到一个安全地点，让它们坦荡地使用这个新类。或者通过隐藏“委托关系”让另一个类来为它们传递相思情。将双向关联改为单向关联提炼类，将两个类的共同点提炼到新类中，让它们共同使用新类</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+    <div id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODM2MC8zNDgyMw==">
+        <script type="text/javascript">
+			(function(d, s) {
+				var j, e = d.getElementsByTagName(s)[0];
+
+				if (typeof LivereTower === 'function') { return; }
+
+				j = d.createElement(s);
+				window.livereOptions = {
+					eagerLoading: true,
+					scrollEventTargetSelector: '#post'
+                }
+				j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+				j.async = true;
+				e.parentNode.insertBefore(j, e);
+			})(document, 'script');
+        </script>
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2019-2022 blog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

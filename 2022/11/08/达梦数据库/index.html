@@ -1,0 +1,3126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>达梦数据库 | 个人博客</title>
+  <meta name="keywords" content=" 达梦 ">
+  <meta name="description" content="达梦数据库 | 个人博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="一、引言 SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？ Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。 二、@ControllerAdvice注解使用方法 &#x2F;&#x2F; 第一种 @RestControllerAd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC全局异常处理器">
+<meta property="og:url" content="https://zhengtianqi.github.io/2023/04/17/SpringMVC%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="一、引言 SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？ Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。 二、@ControllerAdvice注解使用方法 &#x2F;&#x2F; 第一种 @RestControllerAd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T05:47:00.000Z">
+<meta property="article:modified_time" content="2023-06-10T03:30:28.615Z">
+<meta property="article:author" content="ztq">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>ztq</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/Zhengtianqi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://zhengtianqi.gitee.io/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:270490096@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=270490096&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(145)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="操作系统">
+                        
+                        操作系统
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="大数据">
+                        
+                        大数据
+                        <small>(21)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="分布式">
+                        
+                        分布式
+                        <small>(7)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="可信">
+                        
+                        可信
+                        <small>(7)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="面试">
+                        
+                        面试
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="软件管理">
+                        
+                        软件管理
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="设计模式">
+                        
+                        设计模式
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="数据库">
+                        
+                        数据库
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="网络">
+                        
+                        网络
+                        <small>(9)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="CICD">
+                        
+                        CICD
+                        <small>(12)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="java基础">
+                        
+                        java基础
+                        <small>(31)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="python基础">
+                        
+                        python基础
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="spring">
+                        
+                        spring
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="145">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://blog.csdn.net/qq_23034755">博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>达梦</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>打包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>多线程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式存储</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式事务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分库分表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>哈希表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>加密算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可靠</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>可信计算</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>密码学</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>内存模型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容错</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>设计模式</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据结构</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>网络安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>伪共享</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线程</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线程安全</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>向量数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运算符</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>重构</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>子网掩码</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>阻塞与非阻塞</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BigDecimal</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CAP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Disruptor</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DNS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>elk</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>es</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GET/POST</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hadoop</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HADOOP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hive</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>httpclient</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>https</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>IO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ip</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>javaagent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JDK1.8新特性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>k8s</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>kafka</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>maven</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Milvus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mybatis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nacos-config</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spark</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>String</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>StringBuffer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>StringBuilder</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>TCP/IP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tomcat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>UDP</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 spring "
+           href="/2023/04/17/SpringMVC%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="SpringMVC全局异常处理器">SpringMVC全局异常处理器</span>
+            <span class="post-date" title="2023-04-17 13:47:00">2023/04/17</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/04/17/mybatis-plus%E6%8F%92%E4%BB%B6%E7%BB%9F%E4%B8%80%E5%A4%84%E7%90%86createTime%EF%BC%8CcreateBy%EF%BC%8CupdateBy/"
+           data-tag="mybatis"
+           data-author="" >
+            <span class="post-title" title="mybatis-plus插件统一处理createTime，createBy，updateBy">mybatis-plus插件统一处理createTime，createBy，updateBy</span>
+            <span class="post-date" title="2023-04-17 09:28:00">2023/04/17</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2023/03/17/springboot%E6%89%93jar%E5%8C%85%E5%88%86%E7%A6%BB%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6/"
+           data-tag="打包,运维"
+           data-author="" >
+            <span class="post-title" title="springboot打jar包分离资源文件">springboot打jar包分离资源文件</span>
+            <span class="post-date" title="2023-03-17 09:21:00">2023/03/17</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/12/07/BigDecimal/"
+           data-tag="BigDecimal"
+           data-author="" >
+            <span class="post-title" title="BigDecimal">BigDecimal</span>
+            <span class="post-date" title="2022-12-07 15:19:00">2022/12/07</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E5%9B%9B/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(四)">软件安装及高可用部署(四)</span>
+            <span class="post-date" title="2022-11-16 10:37:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E4%B8%89/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(三)">软件安装及高可用部署(三)</span>
+            <span class="post-date" title="2022-11-16 10:36:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/16/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2-%E4%BA%8C/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(二)">软件安装及高可用部署(二)</span>
+            <span class="post-date" title="2022-11-16 09:41:00">2022/11/16</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/11/11/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E9%AB%98%E5%8F%AF%E7%94%A8%E9%83%A8%E7%BD%B2/"
+           data-tag="运维"
+           data-author="" >
+            <span class="post-title" title="软件安装及高可用部署(一)">软件安装及高可用部署(一)</span>
+            <span class="post-date" title="2022-11-11 11:25:00">2022/11/11</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/11/08/Milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8B%E4%BB%A5%E5%9B%BE%E6%90%9C%E5%9B%BE/"
+           data-tag="向量数据库,Milvus"
+           data-author="" >
+            <span class="post-title" title="Milvus向量数据库之以图搜图">Milvus向量数据库之以图搜图</span>
+            <span class="post-date" title="2022-11-08 14:28:00">2022/11/08</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/11/08/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93/"
+           data-tag="达梦"
+           data-author="" >
+            <span class="post-title" title="达梦数据库">达梦数据库</span>
+            <span class="post-date" title="2022-11-08 10:51:00">2022/11/08</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2022/10/28/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97springboot-kafka/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka架构设计">kafka架构设计</span>
+            <span class="post-date" title="2022-10-28 17:18:00">2022/10/28</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/09/14/nginx%E9%85%8D%E7%BD%AE/"
+           data-tag="nginx"
+           data-author="" >
+            <span class="post-title" title="nginx配置">nginx配置</span>
+            <span class="post-date" title="2022-09-14 11:48:00">2022/09/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/09/14/java%E6%93%8D%E4%BD%9Ctxt%E6%96%87%E4%BB%B6%E6%80%BB%E7%BB%93/"
+           data-tag="java,文件"
+           data-author="" >
+            <span class="post-title" title="java操作txt文件总结">java操作txt文件总结</span>
+            <span class="post-date" title="2022-09-14 09:53:00">2022/09/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/09/07/Netty/"
+           data-tag="Netty"
+           data-author="" >
+            <span class="post-title" title="Netty介绍及简单示例">Netty介绍及简单示例</span>
+            <span class="post-date" title="2022-09-07 14:12:00">2022/09/07</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/09/05/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%A6%82%E5%BF%B5%E7%AF%87/"
+           data-tag="分库分表"
+           data-author="" >
+            <span class="post-title" title="分库分表概念篇">分库分表概念篇</span>
+            <span class="post-date" title="2022-09-05 17:36:00">2022/09/05</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/09/01/Docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker网络模型">Docker网络模型</span>
+            <span class="post-date" title="2022-09-01 13:26:00">2022/09/01</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2022/08/31/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-springcloud-nacos-seata/"
+           data-tag="mysql,分布式事务"
+           data-author="" >
+            <span class="post-title" title="分布式事务-springcloud-nacos-seata">分布式事务-springcloud-nacos-seata</span>
+            <span class="post-date" title="2022-08-31 11:35:00">2022/08/31</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2022/05/05/ip%E5%9C%B0%E5%9D%80%E4%B8%8E%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E6%8D%A2%E7%AE%97%E5%85%AC%E5%BC%8F/"
+           data-tag="ip,子网掩码"
+           data-author="" >
+            <span class="post-title" title="ip地址与子网掩码换算公式">ip地址与子网掩码换算公式</span>
+            <span class="post-date" title="2022-05-05 11:12:00">2022/05/05</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/04/11/mysql%E7%AE%80%E5%8D%95%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql简单主从搭建过程">mysql简单主从搭建过程</span>
+            <span class="post-date" title="2022-04-11 23:32:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/04/11/docker%E9%95%9C%E5%83%8F%E9%83%A8%E7%BD%B2%E5%88%B0k8s%E9%9B%86%E7%BE%A4/"
+           data-tag="docker,k8s"
+           data-author="" >
+            <span class="post-title" title="docker镜像部署到k8s集群">docker镜像部署到k8s集群</span>
+            <span class="post-date" title="2022-04-11 21:20:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2022/04/08/JDK%E5%B9%B6%E5%8F%91%E5%8C%85%E5%B8%B8%E7%94%A8%E7%B1%BB/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JDK并发包常用类">JDK并发包常用类</span>
+            <span class="post-date" title="2022-04-08 22:05:00">2022/04/08</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2022/04/04/k8s%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"
+           data-tag="k8s"
+           data-author="" >
+            <span class="post-title" title="k8s集群搭建">k8s集群搭建</span>
+            <span class="post-date" title="2022-04-04 21:42:00">2022/04/04</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/03/22/MinIO%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/"
+           data-tag="分布式存储"
+           data-author="" >
+            <span class="post-title" title="MinIO单机安装以及使用">MinIO单机安装以及使用</span>
+            <span class="post-date" title="2022-03-22 21:55:00">2022/03/22</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/25/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%89%EF%BC%89-%E5%AD%97%E5%85%B8/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（三）-字典">Redis数据结构与对象（三）-字典</span>
+            <span class="post-date" title="2022-01-25 15:58:00">2022/01/25</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/23/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89-%E9%93%BE%E8%A1%A8/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（二）-链表">Redis数据结构与对象（二）-链表</span>
+            <span class="post-date" title="2022-01-23 16:18:00">2022/01/23</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/22/Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="Redis数据结构与对象（一）-简单动态字符串">Redis数据结构与对象（一）-简单动态字符串</span>
+            <span class="post-date" title="2022-01-22 12:34:00">2022/01/22</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/10/16/mysql%E7%AA%81%E7%84%B6%E5%8F%98%E6%85%A2%E6%8E%92%E6%9F%A5/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql突然变慢排查">mysql突然变慢排查</span>
+            <span class="post-date" title="2021-10-16 11:02:00">2021/10/16</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2021/08/07/CountDownLatch/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="CountDownLatch">CountDownLatch</span>
+            <span class="post-date" title="2021-08-07 13:25:00">2021/08/07</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/02/%E5%88%9D%E8%AF%86redis%EF%BC%885%EF%BC%89-%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（5）-内存调优">初识redis（5）-内存调优</span>
+            <span class="post-date" title="2021-08-02 00:14:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/02/%E5%88%9D%E8%AF%86redis%EF%BC%884%EF%BC%89-%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（4）-主从架构">初识redis（4）-主从架构</span>
+            <span class="post-date" title="2021-08-02 00:13:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/01/%E5%88%9D%E8%AF%86redis%EF%BC%883%EF%BC%89-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（3）-持久化">初识redis（3）-持久化</span>
+            <span class="post-date" title="2021-08-01 22:43:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/01/%E5%88%9D%E8%AF%86redis%EF%BC%882%EF%BC%89/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（2）-基本特性">初识redis（2）-基本特性</span>
+            <span class="post-date" title="2021-08-01 22:08:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/07/31/%E5%88%9D%E8%AF%86redis%EF%BC%881%EF%BC%89/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="初识redis（1）-数据结构">初识redis（1）-数据结构</span>
+            <span class="post-date" title="2021-07-31 12:49:00">2021/07/31</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2021/07/18/docker20-10-7%E6%9C%AC%E6%9C%BA%E5%BC%80%E5%90%AF2375%E9%85%8D%E7%BD%AE/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker本机打镜像">docker本机打镜像</span>
+            <span class="post-date" title="2021-07-18 19:18:00">2021/07/18</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/30/%E9%A5%BC%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="饼图">饼图</span>
+            <span class="post-date" title="2021-04-30 15:20:00">2021/04/30</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/18/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="分布式锁"
+           data-author="" >
+            <span class="post-title" title="分布式锁">分布式锁</span>
+            <span class="post-date" title="2021-04-18 13:00:00">2021/04/18</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2021/04/18/%E9%87%8D%E6%9E%84/"
+           data-tag="重构"
+           data-author="" >
+            <span class="post-title" title="重构">重构</span>
+            <span class="post-date" title="2021-04-18 00:07:00">2021/04/18</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/Histogram%EF%BC%88%E7%9B%B4%E6%96%B9%E5%9B%BE%EF%BC%89-KDE%EF%BC%88%E5%AF%86%E5%BA%A6%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Histogram（直方图）&amp;KDE（密度图)">Histogram（直方图）&amp;KDE（密度图)</span>
+            <span class="post-date" title="2021-04-17 18:54:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/python%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9F%BA%E7%A1%80/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python可视化基础">python可视化基础</span>
+            <span class="post-date" title="2021-04-17 18:45:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/%E7%9B%B4%E6%96%B9%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="直方图">直方图</span>
+            <span class="post-date" title="2021-04-17 18:27:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 python基础 "
+           href="/2021/04/17/%E6%95%A3%E7%82%B9%E5%9B%BE/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="散点图">散点图</span>
+            <span class="post-date" title="2021-04-17 18:18:00">2021/04/17</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2021/04/13/k8s%E6%9E%84%E5%BB%BAELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/"
+           data-tag="k8s,elk"
+           data-author="" >
+            <span class="post-title" title="k8s构建ELK日志平台">k8s构建ELK日志平台</span>
+            <span class="post-date" title="2021-04-13 14:40:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/13/Disruptor%E4%B8%AD%E5%8F%91%E5%B8%83%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3%E7%B1%BB/"
+           data-tag="Disruptor"
+           data-author="" >
+            <span class="post-title" title="Disruptor中发布事件相关类">Disruptor中发布事件相关类</span>
+            <span class="post-date" title="2021-04-13 14:27:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2021/04/13/Disruptor/"
+           data-tag="Disruptor"
+           data-author="" >
+            <span class="post-title" title="Disruptor">Disruptor</span>
+            <span class="post-date" title="2021-04-13 14:17:00">2021/04/13</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2020/12/14/%E5%88%86%E5%B8%83%E5%BC%8FCAP%E6%A6%82%E5%BF%B5/"
+           data-tag="CAP"
+           data-author="" >
+            <span class="post-title" title="分布式CAP概念">分布式CAP概念</span>
+            <span class="post-date" title="2020-12-14 13:47:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 操作系统 "
+           href="/2020/12/14/%E4%BC%AA%E5%85%B1%E4%BA%AB/"
+           data-tag="伪共享"
+           data-author="" >
+            <span class="post-title" title="伪共享">伪共享</span>
+            <span class="post-date" title="2020-12-14 13:34:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 CICD "
+           href="/2020/12/14/Docker%E5%85%A5%E9%97%A8/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker入门">Docker入门</span>
+            <span class="post-date" title="2020-12-14 13:13:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/12/14/java%E4%B8%AD%E7%9A%84Queue%E9%98%9F%E5%88%97/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="java中的Queue队列">java中的Queue队列</span>
+            <span class="post-date" title="2020-12-14 13:04:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/Kafka%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="Kafka的简单使用">Kafka的简单使用</span>
+            <span class="post-date" title="2020-12-14 12:59:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign-Ribbon-Hystrix/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon+Hystrix">SpringCloud使用Feign+Ribbon+Hystrix</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign-Ribbon/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign+Ribbon">SpringCloud使用Feign+Ribbon</span>
+            <span class="post-date" title="2020-12-14 12:39:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8Feign/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用Feign">SpringCloud使用Feign</span>
+            <span class="post-date" title="2020-12-14 12:38:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E4%BD%BF%E7%94%A8RestTemplate/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud使用RestTemplate">SpringCloud使用RestTemplate</span>
+            <span class="post-date" title="2020-12-14 12:37:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E5%BC%82%E5%B8%B8%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud异常配置">SpringCloud异常配置</span>
+            <span class="post-date" title="2020-12-14 11:34:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-Hystrix%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Hystrix参数配置">SpringCloud Hystrix参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-Ribbon%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud Ribbon参数配置">SpringCloud Ribbon参数配置</span>
+            <span class="post-date" title="2020-12-14 11:33:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud-client%E9%85%8D%E7%BD%AE/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud client配置">SpringCloud client配置</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务注册">SpringCloud服务注册</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务消费">SpringCloud服务消费</span>
+            <span class="post-date" title="2020-12-14 11:32:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud健康检查">SpringCloud健康检查</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E7%AE%A1%E7%90%86%E9%85%8D%E7%BD%AE%E9%A1%B5%E9%9D%A2/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud管理配置页面">SpringCloud管理配置页面</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E8%BF%90%E7%BB%B4%E6%8E%A5%E5%8F%A3/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud运维接口">SpringCloud运维接口</span>
+            <span class="post-date" title="2020-12-14 11:31:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/12/14/SpringCloud%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud服务构建">SpringCloud服务构建</span>
+            <span class="post-date" title="2020-12-14 11:30:00">2020/12/14</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/MapReduce%E5%B9%B3%E5%9D%87%E6%95%B0%E8%AE%A1%E7%AE%97/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="MapReduce平均数计算">MapReduce平均数计算</span>
+            <span class="post-date" title="2020-12-06 12:14:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/HDFS-shell%E6%93%8D%E4%BD%9C%EF%BC%882%EF%BC%89/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="HBASE shell操作（2）">HBASE shell操作（2）</span>
+            <span class="post-date" title="2020-12-06 12:02:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/12/06/HDFS-shell%E6%93%8D%E4%BD%9C%EF%BC%881%EF%BC%89/"
+           data-tag="hadoop"
+           data-author="" >
+            <span class="post-title" title="HDFS shell操作（1）">HDFS shell操作（1）</span>
+            <span class="post-date" title="2020-12-06 11:50:00">2020/12/06</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="并发编程总结">并发编程总结</span>
+            <span class="post-date" title="2020-11-17 16:57:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/JVM%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%95%B4%E7%90%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JVM性能优化整理">JVM性能优化整理</span>
+            <span class="post-date" title="2020-11-17 15:14:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/11/17/Tomcat%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%95%B4%E7%90%86/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat性能优化整理">Tomcat性能优化整理</span>
+            <span class="post-date" title="2020-11-17 12:34:00">2020/11/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/27/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM内存结构">JVM内存结构</span>
+            <span class="post-date" title="2020-09-27 11:55:00">2020/09/27</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/27/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM类加载过程">JVM类加载过程</span>
+            <span class="post-date" title="2020-09-27 11:08:00">2020/09/27</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/18/Hash%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E7%9A%84%E6%96%B9%E6%B3%95/"
+           data-tag="哈希表"
+           data-author="" >
+            <span class="post-title" title="Hash解决冲突的方法">Hash解决冲突的方法</span>
+            <span class="post-date" title="2020-09-18 13:02:00">2020/09/18</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/09/18/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM垃圾回收算法">JVM垃圾回收算法</span>
+            <span class="post-date" title="2020-09-18 09:18:00">2020/09/18</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/09/13/IOC%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8F%8D%E5%B0%84%E6%AD%A5%E9%AA%A4/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="IOC中的基本反射步骤">IOC中的基本反射步骤</span>
+            <span class="post-date" title="2020-09-13 09:22:00">2020/09/13</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/09/11/Http%E5%92%8CHttps%E7%9A%84%E5%8C%BA%E5%88%AB/"
+           data-tag="https"
+           data-author="" >
+            <span class="post-title" title="Http和Https的区别">Http和Https的区别</span>
+            <span class="post-date" title="2020-09-11 11:11:00">2020/09/11</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2020/09/11/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95Autowired/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="手写一个简单Autowired">手写一个简单Autowired</span>
+            <span class="post-date" title="2020-09-11 10:49:00">2020/09/11</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/09/01/%E8%BF%90%E7%AE%97%E7%AC%A6/"
+           data-tag="运算符"
+           data-author="" >
+            <span class="post-title" title="运算符">运算符</span>
+            <span class="post-date" title="2020-09-01 09:24:00">2020/09/01</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2020/07/24/AtomicInteger/"
+           data-tag="java基础"
+           data-author="" >
+            <span class="post-title" title="AtomicInteger">AtomicInteger</span>
+            <span class="post-date" title="2020-07-24 15:52:00">2020/07/24</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/DNS/"
+           data-tag="DNS"
+           data-author="" >
+            <span class="post-title" title="DNS">DNS</span>
+            <span class="post-date" title="2020-07-21 15:57:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/21/l-String%E3%80%81-StringBuilder%E3%80%81StringBuffer%E5%8C%BA%E5%88%AB/"
+           data-tag="String,StringBuilder,StringBuffer"
+           data-author="" >
+            <span class="post-title" title="String、 StringBuilder、StringBuffer区别">String、 StringBuilder、StringBuffer区别</span>
+            <span class="post-date" title="2020-07-21 15:43:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2020/07/21/mysql%E4%BA%8B%E5%8A%A1/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql事务">mysql事务</span>
+            <span class="post-date" title="2020-07-21 09:42:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/GET%E4%B8%8EPOST%E5%8C%BA%E5%88%AB/"
+           data-tag="GET/POST"
+           data-author="" >
+            <span class="post-title" title="GET与POST区别">GET与POST区别</span>
+            <span class="post-date" title="2020-07-21 08:29:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/21/TCP%E4%B8%8EUDP%E7%9A%84%E5%8C%BA%E5%88%AB/"
+           data-tag="TCP/IP,UDP"
+           data-author="" >
+            <span class="post-title" title="TCP与UDP的区别">TCP与UDP的区别</span>
+            <span class="post-date" title="2020-07-21 08:00:00">2020/07/21</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/19/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%883%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（3）">基于JavaAgent的全链路监控（3）</span>
+            <span class="post-date" title="2020-07-19 17:25:00">2020/07/19</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/19/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%882%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（2）">基于JavaAgent的全链路监控（2）</span>
+            <span class="post-date" title="2020-07-19 16:54:00">2020/07/19</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/07/17/%E5%9F%BA%E4%BA%8EJavaAgent%E7%9A%84%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%EF%BC%881%EF%BC%89/"
+           data-tag="javaagent"
+           data-author="" >
+            <span class="post-title" title="基于JavaAgent的全链路监控（1）">基于JavaAgent的全链路监控（1）</span>
+            <span class="post-date" title="2020-07-17 13:11:00">2020/07/17</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2020/07/15/HttpClient/"
+           data-tag="httpclient"
+           data-author="" >
+            <span class="post-title" title="HttpClient">HttpClient</span>
+            <span class="post-date" title="2020-07-15 17:12:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/07/15/ElasticSearch%E5%AE%A2%E6%88%B7%E7%AB%AF/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="ElasticSearch客户端">ElasticSearch客户端</span>
+            <span class="post-date" title="2020-07-15 11:10:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/07/15/ElasticSearch%E8%BF%91%E5%AE%9E%E6%97%B6%E6%80%A7%E4%BB%8B%E7%BB%8D/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="ElasticSearch近实时性介绍">ElasticSearch近实时性介绍</span>
+            <span class="post-date" title="2020-07-15 10:51:00">2020/07/15</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/03/28/ThreadLocal/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="ThreadLocal">ThreadLocal</span>
+            <span class="post-date" title="2020-03-28 09:59:00">2020/03/28</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E8%B0%83%E4%BC%98/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive调优">Hive调优</span>
+            <span class="post-date" title="2020-01-21 16:48:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive模式设计">Hive模式设计</span>
+            <span class="post-date" title="2020-01-21 14:09:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/21/Hive%E7%B4%A2%E5%BC%95/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive索引">Hive索引</span>
+            <span class="post-date" title="2020-01-21 10:59:00">2020/01/21</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/20/HiveQL%E8%A7%86%E5%9B%BE/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="HiveQL视图">HiveQL视图</span>
+            <span class="post-date" title="2020-01-20 16:27:00">2020/01/20</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/20/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%EF%BC%883%EF%BC%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（3）">Hive数据操作（3）</span>
+            <span class="post-date" title="2020-01-20 14:27:00">2020/01/20</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/19/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%EF%BC%882%EF%BC%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（2）">Hive数据操作（2）</span>
+            <span class="post-date" title="2020-01-19 15:50:00">2020/01/19</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据操作（1）">Hive数据操作（1）</span>
+            <span class="post-date" title="2020-01-17 16:11:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据定义">Hive数据定义</span>
+            <span class="post-date" title="2020-01-17 14:18:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2020/01/17/Hive%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/"
+           data-tag="hive"
+           data-author="" >
+            <span class="post-title" title="Hive数据类型和文件格式">Hive数据类型和文件格式</span>
+            <span class="post-date" title="2020-01-17 13:41:00">2020/01/17</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/06/JAVA%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JAVA数据类型易混概念">JAVA数据类型易混概念</span>
+            <span class="post-date" title="2020-01-06 14:30:00">2020/01/06</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2020/01/03/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2020-01-03 16:24:00">2020/01/03</span>
+        </a>
+        
+        <a  class="全部文章 设计模式 "
+           href="/2020/01/03/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="责任链模式">责任链模式</span>
+            <span class="post-date" title="2020-01-03 15:21:00">2020/01/03</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/02/%E6%8E%92%E5%BA%8F%E4%B9%8B%E6%AF%94%E8%BE%83%E5%99%A8Comparator-T/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="排序之比较器Comparator&lt;T&gt;">排序之比较器Comparator&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 11:34:00">2020/01/02</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2020/01/02/%E6%8E%92%E5%BA%8F%E4%B9%8B%E6%AF%94%E8%BE%83%E5%99%A8/"
+           data-tag="java,数据结构"
+           data-author="" >
+            <span class="post-title" title="排序之比较器Comparable&lt;T&gt;">排序之比较器Comparable&lt;T&gt;</span>
+            <span class="post-date" title="2020-01-02 10:27:00">2020/01/02</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/23/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96-%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="用户行为特征提取">用户行为特征提取</span>
+            <span class="post-date" title="2019-12-23 11:10:00">2019/12/23</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/Spark%E7%9B%B8%E5%85%B3%E6%A6%82%E8%BF%B0/"
+           data-tag="Spark"
+           data-author="" >
+            <span class="post-title" title="Spark相关概述">Spark相关概述</span>
+            <span class="post-date" title="2019-12-18 13:41:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/WordCount%E7%AE%80%E6%9E%90/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="WordCount简析">WordCount简析</span>
+            <span class="post-date" title="2019-12-18 11:57:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/18/Yarn%E6%A6%82%E8%BF%B0/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="Yarn概述">Yarn概述</span>
+            <span class="post-date" title="2019-12-18 09:12:00">2019/12/18</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/MapReduce%E6%A6%82%E8%BF%B0/"
+           data-tag="HADOOP"
+           data-author="" >
+            <span class="post-title" title="MapReduce概述">MapReduce概述</span>
+            <span class="post-date" title="2019-12-16 17:13:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/HDFS%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"
+           data-tag="HDFS,HADOOP"
+           data-author="" >
+            <span class="post-title" title="HDFS文件操作">HDFS文件操作</span>
+            <span class="post-date" title="2019-12-16 15:47:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 大数据 "
+           href="/2019/12/16/HDFS%E6%A6%82%E8%BF%B0/"
+           data-tag="HDFS,HADOOP"
+           data-author="" >
+            <span class="post-title" title="HDFS概述">HDFS概述</span>
+            <span class="post-date" title="2019-12-16 10:10:00">2019/12/16</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2019/12/03/SpringCloud-Alibaba%E6%95%B4%E5%90%88Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0/"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="SpringCloud-Alibaba整合Nacos服务注册发现">SpringCloud-Alibaba整合Nacos服务注册发现</span>
+            <span class="post-date" title="2019-12-03 15:18:00">2019/12/03</span>
+        </a>
+        
+        <a  class="全部文章 spring "
+           href="/2019/11/25/Nacos%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/"
+           data-tag="SpringCloud,nacos-config"
+           data-author="" >
+            <span class="post-title" title="Nacos配置中心使用">Nacos配置中心使用</span>
+            <span class="post-date" title="2019-11-25 16:38:00">2019/11/25</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/11/20/mysql%E6%8E%92%E5%BA%8F/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql排序">mysql排序</span>
+            <span class="post-date" title="2019-11-20 20:35:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/20/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E4%B8%8E%E6%8C%87%E9%92%88%E5%8E%8B%E7%BC%A9/"
+           data-tag="内存模型"
+           data-author="" >
+            <span class="post-title" title="对象存储与指针压缩">对象存储与指针压缩</span>
+            <span class="post-date" title="2019-11-20 19:50:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/20/%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86/"
+           data-tag="线程"
+           data-author="" >
+            <span class="post-title" title="线程相关的知识">线程相关的知识</span>
+            <span class="post-date" title="2019-11-20 19:46:00">2019/11/20</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/14/Spring-Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring Bean作用域与生命周期">Spring Bean作用域与生命周期</span>
+            <span class="post-date" title="2019-11-14 16:52:00">2019/11/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/11/14/java8%E6%96%B0%E7%89%B9%E6%80%A7/"
+           data-tag="JDK1.8新特性"
+           data-author="" >
+            <span class="post-title" title="java8新特性">java8新特性</span>
+            <span class="post-date" title="2019-11-14 14:18:00">2019/11/14</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/10/12/SimpleDateFormat%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/"
+           data-tag="并发,线程安全"
+           data-author="" >
+            <span class="post-title" title="SimpleDateFormat引发的线程安全问题">SimpleDateFormat引发的线程安全问题</span>
+            <span class="post-date" title="2019-10-12 18:42:00">2019/10/12</span>
+        </a>
+        
+        <a  class="全部文章 分布式 "
+           href="/2019/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5/"
+           data-tag="分布式"
+           data-author="" >
+            <span class="post-title" title="分布式全局唯一ID生成策略">分布式全局唯一ID生成策略</span>
+            <span class="post-date" title="2019-10-09 12:00:00">2019/10/09</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/10/02/%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%92%8C%E5%AE%B9%E9%94%99%E6%8A%80%E6%9C%AF/"
+           data-tag="可靠,容错"
+           data-author="" >
+            <span class="post-title" title="可靠性和容错技术">可靠性和容错技术</span>
+            <span class="post-date" title="2019-10-02 13:39:00">2019/10/02</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/28/%E5%8F%AF%E4%BF%A1%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/"
+           data-tag="可信计算"
+           data-author="" >
+            <span class="post-title" title="可信与可信计算">可信与可信计算</span>
+            <span class="post-date" title="2019-09-28 16:55:00">2019/09/28</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/24/%E5%9B%BE%E8%A7%A3%E5%85%AC%E9%92%A5%E4%B8%8E%E7%A7%81%E9%92%A5/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="图解公钥私钥">图解公钥私钥</span>
+            <span class="post-date" title="2019-09-24 21:32:00">2019/09/24</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/04/%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB/"
+           data-tag="可信,网络安全"
+           data-author="" >
+            <span class="post-title" title="重放攻击">重放攻击</span>
+            <span class="post-date" title="2019-09-04 19:54:00">2019/09/04</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/02/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/"
+           data-tag="可信,密码学"
+           data-author="" >
+            <span class="post-title" title="加密解密">加密解密</span>
+            <span class="post-date" title="2019-09-02 13:37:00">2019/09/02</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/01/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/"
+           data-tag="可信,加密算法"
+           data-author="" >
+            <span class="post-title" title="数字签名">数字签名</span>
+            <span class="post-date" title="2019-09-01 20:23:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 可信 "
+           href="/2019/09/01/%E5%8F%AF%E4%BF%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"
+           data-tag="可信"
+           data-author="" >
+            <span class="post-title" title="可信基本概念">可信基本概念</span>
+            <span class="post-date" title="2019-09-01 14:46:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/09/01/%E6%B1%A0%E5%8C%96%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/"
+           data-tag="多线程,java"
+           data-author="" >
+            <span class="post-title" title="池化之线程池">池化之线程池</span>
+            <span class="post-date" title="2019-09-01 10:14:00">2019/09/01</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传之Content-Type">文件上传之Content-Type</span>
+            <span class="post-date" title="2019-08-31 16:15:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/08/31/mysql%E8%A1%A8%E8%AE%BE%E8%AE%A1%E5%8F%8A%E4%BC%98%E5%8C%96/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql表设计及优化">mysql表设计及优化</span>
+            <span class="post-date" title="2019-08-31 15:28:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="轻量级锁">轻量级锁</span>
+            <span class="post-date" title="2019-08-31 15:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E9%94%81%E7%B2%97%E5%8C%96/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="锁粗化">锁粗化</span>
+            <span class="post-date" title="2019-08-31 13:32:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%81%8F%E5%90%91%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="偏向锁">偏向锁</span>
+            <span class="post-date" title="2019-08-31 13:22:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%85%AC%E5%B9%B3%E9%94%81%E3%80%81%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="公平锁、非公平锁">公平锁、非公平锁</span>
+            <span class="post-date" title="2019-08-31 13:21:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2019/08/31/%E6%82%B2%E8%A7%82%E9%94%81%E3%80%81%E4%B9%90%E8%A7%82%E9%94%81/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="悲观锁、乐观锁">悲观锁、乐观锁</span>
+            <span class="post-date" title="2019-08-31 13:16:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E4%BA%92%E6%96%A5%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="互斥锁">互斥锁</span>
+            <span class="post-date" title="2019-08-31 13:13:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%AF%BB%E5%86%99%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="读写锁">读写锁</span>
+            <span class="post-date" title="2019-08-31 13:08:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="可重入锁">可重入锁</span>
+            <span class="post-date" title="2019-08-31 13:05:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E9%98%BB%E5%A1%9E%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="阻塞锁">阻塞锁</span>
+            <span class="post-date" title="2019-08-31 13:00:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 java基础 "
+           href="/2019/08/31/%E8%87%AA%E6%97%8B%E9%94%81/"
+           data-tag="锁"
+           data-author="" >
+            <span class="post-title" title="自旋锁">自旋锁</span>
+            <span class="post-date" title="2019-08-31 12:54:00">2019/08/31</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/%E7%90%86%E8%A7%A3IO%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E/"
+           data-tag="IO,阻塞与非阻塞"
+           data-author="" >
+            <span class="post-title" title="理解IO阻塞与非阻塞">理解IO阻塞与非阻塞</span>
+            <span class="post-date" title="2019-08-30 17:34:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/TCP%E6%8F%A1%E6%89%8B%E3%80%81%E6%8C%A5%E6%89%8B%E5%8D%8F%E8%AE%AE/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP握手、挥手协议">TCP握手、挥手协议</span>
+            <span class="post-date" title="2019-08-30 15:58:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 网络 "
+           href="/2019/08/30/TCP-IP%E5%9B%9B%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"
+           data-tag="TCP/IP"
+           data-author="" >
+            <span class="post-title" title="TCP IP四层网络模型">TCP IP四层网络模型</span>
+            <span class="post-date" title="2019-08-30 15:12:00">2019/08/30</span>
+        </a>
+        
+        <a  class="全部文章 软件管理 "
+           href="/2019/08/29/Git%E6%A2%B3%E7%90%86/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git梳理">Git梳理</span>
+            <span class="post-date" title="2019-08-29 10:28:00">2019/08/29</span>
+        </a>
+        
+        <a  class="全部文章 软件管理 "
+           href="/2019/08/28/maven%E6%A2%B3%E7%90%86/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="maven梳理">maven梳理</span>
+            <span class="post-date" title="2019-08-28 17:01:00">2019/08/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-达梦数据库" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">达梦数据库</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="数据库">数据库</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">达梦</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-06-10 11:30:29'>2022-11-08 10:51</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">一、安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E8%A7%84%E5%88%92%E5%AE%89%E8%A3%85%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%EF%BC%9A"><span class="toc-text">1、规划安装用户和用户组：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E8%A7%84%E5%88%92%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="toc-text">2、规划安装目录：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%8C%82%E8%BD%BD-iso-%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-text">3、挂载 iso 镜像文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">4、安装方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%8D%B8%E8%BD%BD-DM-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">5、卸载 DM 数据库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">二、创建数据库及数据库实例管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F1%E3%80%81DM-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE%E5%8A%A9%E6%89%8B%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E6%96%B9%E5%BC%8F%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">方式1、DM 数据库配置助手图形化界面方式创建数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F2%E3%80%81dminit-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E4%BE%8B"><span class="toc-text">方式2、dminit 命令行创建数据库实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%86%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%8D%E5%8A%A1%EF%BC%9A"><span class="toc-text">两种方式注册数据库服务：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">三、连接及操作数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">1、连接数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80-DM-%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">方式一 DM 管理工具图形化界面连接数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C-disql-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%96%B9%E5%BC%8F%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">方式二 disql 命令行方式连接数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8A%A9%E6%89%8B%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5%E4%B8%B2"><span class="toc-text">网络配置助手配置连接串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DM-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">DM 数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">三、DM 数据库启动方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-%E5%90%AF%E5%8A%A8%EF%BC%9A"><span class="toc-text">Root 启动：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dmdba-%E7%94%A8%E6%88%B7%E5%90%AF%E5%8A%A8"><span class="toc-text">dmdba 用户启动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">四、DM 的客户端工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%88manager%EF%BC%89"><span class="toc-text">DM 管理工具（manager）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%B7%A5%E5%85%B7%EF%BC%88console%EF%BC%89"><span class="toc-text">DM 控制台工具（console）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E5%B7%A5%E5%85%B7%EF%BC%88dts%EF%BC%89"><span class="toc-text">DM 数据迁移工具（dts）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E6%80%A7%E8%83%BD%E7%9B%91%E8%A7%86%E5%B7%A5%E5%85%B7%EF%BC%88monitor%EF%BC%89%EF%BC%9A"><span class="toc-text">DM 性能监视工具（monitor）：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">五、DM体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DM8-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E7%94%B1%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E5%AE%9E%E4%BE%8B%E6%9E%84%E6%88%90"><span class="toc-text">DM8 数据库是由数据库和实例构成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="toc-text">数据库：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-text">实例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-text">DM 存储结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%82%E6%95%B0%E7%9A%84%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-text">DM 数据库参数的类型：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0%EF%BC%9A"><span class="toc-text">运行时的内存池：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DM-%E7%BA%BF%E7%A8%8B"><span class="toc-text">DM 线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E7%BA%BF%E7%A8%8B"><span class="toc-text">监听线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BA%BF%E7%A8%8B"><span class="toc-text">工作线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO-%E7%BA%BF%E7%A8%8B"><span class="toc-text">IO 线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%88%B7%E6%96%B0%E7%BA%BF%E7%A8%8B"><span class="toc-text">日志刷新线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%BD%92%E6%A1%A3%E7%BA%BF%E7%A8%8B"><span class="toc-text">日志归档线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E9%87%8D%E5%81%9A%E7%BA%BF%E7%A8%8B"><span class="toc-text">日志重做线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E7%BA%BF%E7%A8%8B"><span class="toc-text">调度线程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">六、一个 sql 的执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">七、表空间管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">管理表空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9TMP%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">修改TMP表空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">创建表空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-text">表空间重命名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">八、归档管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E6%A1%A3%E7%AE%A1%E7%90%86"><span class="toc-text">归档管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-%E5%BC%80%E5%90%AF%E5%BD%92%E6%A1%A3"><span class="toc-text">SQL 开启归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-dm-ini-%E5%92%8C-dmarch-ini-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%BC%80%E5%90%AF%E5%BD%92%E6%A1%A3"><span class="toc-text">修改 dm.ini 和 dmarch.ini 配置文件开启归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E6%A1%A3%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-text">归档日志文件的切换和删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E6%A1%A3%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-text">归档文件的删除</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">九、用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%B1%BB%E5%9E%8B"><span class="toc-text">用户类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%8F%A3%E4%BB%A4%E7%AD%96%E7%95%A5"><span class="toc-text">系统口令策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E5%8F%A3%E4%BB%A4%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-text">修改系统口令策略：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="toc-text">SQL 管理用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E9%94%99%E8%AF%AF%E5%A4%9A%E6%AC%A1%EF%BC%88%E9%BB%98%E8%AE%A4-3-%E6%AC%A1%EF%BC%89%EF%BC%8C%E5%B0%86%E4%BC%9A%E8%A2%AB%E9%94%81%E5%AE%9A%E3%80%82"><span class="toc-text">用户输入错误多次（默认 3 次），将会被锁定。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E9%94%81%E5%AE%9A%E5%92%8C%E8%A7%A3%E9%94%81%EF%BC%9A"><span class="toc-text">用户锁定和解锁：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E7%9A%84%E9%BB%98%E8%AE%A4%E8%A1%A8%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="toc-text">修改用户的默认表空间：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-text">修改用户密码:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="toc-text">删除用户：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6"><span class="toc-text">用户资源限制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">十、权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%8B%E4%BA%88%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9D%83%E9%99%90%EF%BC%88%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%EF%BC%89%EF%BC%9A"><span class="toc-text">赋予数据库权限（系统权限）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%8B%E4%BA%88%E5%AF%B9%E8%B1%A1%E6%9D%83%E9%99%90"><span class="toc-text">赋予对象权限:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E6%8B%A5%E6%9C%89%E7%9A%84%E6%9D%83%E9%99%90%EF%BC%9A"><span class="toc-text">查看当前用户拥有的权限：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%9A%84%E5%9B%9E%E6%94%B6%EF%BC%9A"><span class="toc-text">权限的回收：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">十一、角色管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%92%E8%89%B2%E7%B1%BB%E5%9E%8B"><span class="toc-text">角色类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">十二、数据库的备份还原</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E8%BF%98%E5%8E%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">备份还原基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E3%80%81%E8%BF%98%E5%8E%9F%E4%B8%8E%E6%81%A2%E5%A4%8D%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">备份、还原与恢复的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-AP-%E6%9C%8D%E5%8A%A1%E6%98%AF%E5%90%A6%E5%90%AF%E5%8A%A8%EF%BC%9A"><span class="toc-text">查看 AP 服务是否启动：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%B1%E6%9C%BA%E5%A4%87%E4%BB%BD%E4%B8%8E%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">脱机备份与还原数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E8%BF%98%E5%8E%9F%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="toc-text">表空间的还原和恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E6%9C%BA%E5%A4%87%E4%BB%BD%E4%B8%8E%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">联机备份与还原数据库</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>国产oracle系数据库学习笔记</p>
+<h1>一、安装</h1>
+<h2 id="1、规划安装用户和用户组：">1、规划安装用户和用户组：</h2>
+<p>不推荐使用 root 安装，规划单独的用户安装。</p>
+<pre><code class="language-java">[root@KylinDCA03 opt]# groupadd dinstall
+[root@KylinDCA03 opt]# useradd -g dinstall -m -d /home/dmdba -s /bin/bash dmdba
+[root@KylinDCA03 opt]# passwd dmdba
+</code></pre>
+<p>更改用户 dmdba 的密码 。<br>
+新的 密码：<br>
+重新输入新的 密码：<br>
+passwd：所有的身份验证令牌已经成功更新。</p>
+<h2 id="2、规划安装目录：">2、规划安装目录：</h2>
+<p>创建安装目录/dm8，并修改安装目录的所属组给 dmdba 用户和该用户所属组</p>
+<pre><code class="language-java">[root@KylinDCA03 opt]# mkdir /dm8
+[root@KylinDCA03 opt]# ls -ld /dm8
+drwxr-xr-x 2 root root 6 12 月 20 18:50 /dm8
+[root@KylinDCA03 opt]# chown dmdba:dinstall /dm8
+[root@KylinDCA03 opt]# ls -ld /dm8
+drwxr-xr-x 2 dmdba dinstall 6 12 月 20 18:50 /dm8
+</code></pre>
+<h2 id="3、挂载-iso-镜像文件：">3、挂载 iso 镜像文件：</h2>
+<pre><code class="language-java">[root@KylinDCA03 opt]# mkdir /mnt/dm
+[root@KylinDCA03 opt]# mount /opt/dm8_20210818_x86_rh6_64_ent_8.4.2.18_pack14.iso 
+/mnt/dm
+mount: /mnt/dm: WARNING: source write-protected, mounted read-only.
+[root@KylinDCA03 opt]# su - dmdba
+[dmdba@KylinDCA03 ~]$ cd /mnt/dm
+[dmdba@KylinDCA03 dm]$ ll
+总用量 739440
+-r-xr-xr-x 1 root root 2784248 8 月 23 14:36 'DM8 Install.pdf'
+-r-xr-xr-x 1 root root 754402133 8 月 23 14:40 DMInstall.bin
+</code></pre>
+<h2 id="4、安装方式：">4、安装方式：</h2>
+<p>（1）第一次启动虚拟机，执行下 xhost +</p>
+<pre><code class="language-java">[root@KylinDCA03 桌面]# xhost +
+access control disabled, clients can connect from any host
+</code></pre>
+<p>（2）查看 root 用户的 DISPLAY 变量值</p>
+<pre><code class="language-java">[root@KylinDCA03 桌面]# echo $DISPLAY
+:0.0
+</code></pre>
+<p>（3）切换 dmdba 用户</p>
+<pre><code class="language-java">[root@KylinDCA03 桌面]# su - dmdba
+上一次登录： 一 12 月 20 18:54:09 CST 2021 pts/1 上
+（4）设置 dmdba 用户的 DISPLAY 变量值为步骤（1）中的值（仅对当前会话生效）
+[dmdba@KylinDCA03 ~]$ export DISPLAY=:0.0
+[dmdba@KylinDCA03 ~]$ cd /mnt/dm
+[dmdba@KylinDCA03 dm]$ ll
+总用量 739440
+-r-xr-xr-x 1 root root 2784248 8 月 23 14:36 'DM8 Install.pdf'
+-r-xr-xr-x 1 root root 754402133 8 月 23 14:40 DMInstall.bin
+## 2、图形化界面方式安装 DM 数据库
+[dmdba@KylinDCA03 dm]$ ./DMInstall.bin
+</code></pre>
+<p>安装时报 tmp 不足的解决方法<br>
+如果安装时报错 tmp 不足，可以设置 DM_INSTALL_TMPDIR 变量，指定到别的路径下(存<br>
+储空间大于 2G)。<br>
+设置参考如下：</p>
+<pre><code class="language-java">[root@localhost opt]# mkdir tmp
+[root@localhost opt]# chown dmdba:dinstall /opt/tmp
+或
+[root@localhost opt]# chmod 777 /opt/tmp
+</code></pre>
+<pre><code class="language-java">[root@localhost opt]# su - dmdba
+上一次登录： 四 6 月 30 09:06:43 CST 2022 pts/1 上
+[dmdba@localhost ~]$ export DM_INSTALL_TMPDIR=/opt/tmp
+[dmdba@localhost ~]$ cd /mnt/dm
+[dmdba@localhost dm]$ ll
+总用量 927088
+-r-xr-xr-x 1 root root 2802237 3 月 4 13:39 'DM8 Install.pdf'
+-r-xr-xr-x 1 root root 946534466 3 月 4 13:44 DMInstall.bin
+[dmdba@localhost dm]$ ./DMInstall.bin
+</code></pre>
+<p>（5）设置文件打开数</p>
+<pre><code class="language-java">vim /etc/security/limits.conf
+</code></pre>
+<p>（6）界面提示使用 root 用户执行如下脚本</p>
+<pre><code class="language-java">[root@KylinDCA03 桌面]# /dm8/script/root/root_installer.sh
+移动 /dm8/bin/dm_svc.conf 到/etc 目录
+修改服务器权限
+创建 DmAPService 服务
+Created symlink /etc/systemd/system/multi-user.target.wants/DmAPService.service →
+/usr/lib/systemd/system/DmAPService.service.
+创建服务(DmAPService)完成
+启动 DmAPService 服务
+</code></pre>
+<h2 id="5、卸载-DM-数据库">5、卸载 DM 数据库</h2>
+<p>图形化卸载 DM 数据库<br>
+DM 安装目录下执行./uninstall.sh 卸载 DM 数据库：</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 dm8]$ ./uninstall.sh
+</code></pre>
+<p>界面提示使用 root 用户执行如下脚本</p>
+<pre><code class="language-java">[root@KylinDCA03 桌面]# /dm8/root_uninstaller.sh
+删除 DmAPService 服务
+Removed /etc/systemd/system/multi-user.target.wants/DmAPService.service.
+删除/etc/dm_svc.conf 文件
+命令行方式卸载 DM 数据库
+DM 安装目录下执行./uninstall.sh -i 卸载 DM 数据库：
+[dmdba@KylinDCA03 dm8]$ ./uninstall.sh -i
+</code></pre>
+<h1>二、创建数据库及数据库实例管理</h1>
+<h2 id="方式1、DM-数据库配置助手图形化界面方式创建数据库">方式1、DM 数据库配置助手图形化界面方式创建数据库</h2>
+<p>（1）运行 <a target="_blank" rel="noopener" href="http://dbca.sh">dbca.sh</a> 创建数据库</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 ~]$ cd /dm8/tool
+[dmdba@KylinDCA03 tool]$ ./dbca.sh
+</code></pre>
+<p>簇大小、页大小、字符集、大小写敏感、VARCHAR 类型以字符为单位等一旦指定，数据库创建完成将无法更改。页是达梦数据库的最小存储单元，达梦中 varchar 类型长度默认不能大于页大小的一半。<br>
+VARCHAR 类型以字符为单位（默认以字节为单位）<br>
+以字节为单位：<br>
+Varchar(10), gb18030 字符集，一个中文占用两个字节，Varchar(10)只能保存五个中文。<br>
+Varchar(10), utf-8 字符集，一个中文占用三个字节，Varchar(10)只能保存三个中文。<br>
+以字符为单位：<br>
+Varchar(10),不管什么字符集，Varchar(10)都能保存十个中文。</p>
+<p>（2）界面提示使用 root 用户执行脚本：</p>
+<pre><code class="language-java">[root@KylinDCA03 network-scripts]# mv /dm8/bin/DmServiceDMSERVER.service /usr/lib/systemd/system/DmServiceDMSERVER.service
+[root@KylinDCA03 network-scripts]# systemctl enable DmServiceDMSERVER.service
+Created symlink /etc/systemd/system/multi-user.target.wants/DmServiceDMSERVER.service →
+/usr/lib/systemd/system/DmServiceDMSERVER.service.
+[root@KylinDCA03 network-scripts]# systemctl start DmServiceDMSERVER.service
+</code></pre>
+<h2 id="方式2、dminit-命令行创建数据库实例">方式2、dminit 命令行创建数据库实例</h2>
+<p>dminit 创建 DM 数据库<br>
+dminit 是 DM 初始化数据库的命令行工具，位于 DM 安装目录 bin 下。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 bin]$ ./dminit help
+关键字                          说明（默认值）
+--------------------------------------------
+INI_FILE                      初始化文件dm.ini存放的路径
+PATH                          初始化数据库存放的路径
+CTL_PATH                      控制文件路径
+LOG_PATH                      日志文件路径
+EXTENT_PATH                   数据文件使用的簇大小（16），可选值：16，32，64，单位：页
+PAGE_SIZE                     数据页大小（8），可选值：4，8，16，32，单位：K
+CASE_SENSITIVE                大小敏感（Y），可选值：Y/N，1/0
+CHARSET/UNICODE_FLAG          字符集（0），可选值：0[GB18030]，1[UTF-8]，2[EUC-KR]
+SEC_PRIV_MODE                 权限管理模式（0），可选值：0[TRADITION]，1[BMJ]，2[EVAL]
+LENGTH_IN_CHAR                VARCHAR类型长度是否以字符为单位（N），可选值：Y/N，1/0
+SYSDBA_PWD                    设置SYSDBA密码（SYSDBA）
+SYSAUDITOR_PWD                设置SYSAUDITOR密码（SYSAUDITOR）
+DB_NAME                       数据库名（DBNAME）
+INSTANCE_NAME                 实例名（DMSERVER）    
+PORT_NUM                      监听端口号（5236）
+BUFFER                        系统缓存大小（100），单位M
+TIME_ZONE                     设置时区（+08:00）
+
+[dmdba@KylinDCA03 bin]$ ./dminit path=/dm8/data db_name=DMTEST instance_NAME=DMTESTSVR sysdba_pwd=Dameng123 port_num=5238 PAGE_SIZE=16
+initdb V8
+db version: 0x7000c
+file dm.key not found, use default license!
+License will expire on 2022-08-20
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+log file path: /dm8/data/DMTEST/DMTEST01.log
+log file path: /dm8/data/DMTEST/DMTEST02.log
+write to dir [/dm8/data/DMTEST].
+create dm database success. 2021-12-20 19:59:56
+</code></pre>
+<p>dminit 方式创建数据库不会自动注册数据库服务（DM 数据库配置助手方式默认自动注册数<br>
+据库服务），所以不能以服务方式启动数据库，如果要以服务方式启动，则需要注册数据库<br>
+服务。</p>
+<h2 id="两种方式注册数据库服务：">两种方式注册数据库服务：</h2>
+<p>（3.1）DM 数据库配置助手注册数据库服务<br>
+执行 <a target="_blank" rel="noopener" href="http://dbca.sh">dbca.sh</a> 打开 DM 数据库配置助手，选择“注册数据库服务”<br>
+界面提示使用 root 用户执行脚本：</p>
+<pre><code class="language-java">[root@KylinDCA03 ~]# systemctl enable DmServiceDMTESTSVR.service
+Created symlink /etc/systemd/system/multi-user.target.wants/DmServiceDMTESTSVR.service →
+/usr/lib/systemd/system/DmServiceDMTESTSVR.service.
+[root@KylinDCA03 ~]# systemctl start DmServiceDMTESTSVR.service
+</code></pre>
+<pre><code class="language-java">[dmdba@KylinDCA03 bin]$ ./disql sysdba/Dameng123:5238
+服务器[LOCALHOST:5238]:处于普通打开状态
+登录使用时间 : 12.397(ms)
+disql V8
+SQL&gt; select name from V$database;
+行号 NAME 
+---------- ------
+1 DMTEST
+已用时间: 8.418(毫秒). 执行号:50600.
+SQL&gt; select instance_name from v$instance;
+行号 INSTANCE_NAME
+---------- -------------
+1 DMTESTSVR
+已用时间: 0.563(毫秒). 执行号:50601.
+SQL&gt;
+
+</code></pre>
+<p>（3.2）root 执行注册服务脚本</p>
+<pre><code class="language-java">[root@KylinDCA04 ~]# cd $DM_HOME/script/root
+[root@KylinDCA03 root]# ./dm_service_installer.sh -t dmserver -p DMTESTSVR -dm_ini /dm8/data/DMTEST/dm.ini
+Created symlink /etc/systemd/system/multi-user.target.wants/DmServiceDMTESTSVR.service →
+/usr/lib/systemd/system/DmServiceDMTESTSVR.service.
+创建服务(DmServiceDMTESTSVR)完成
+</code></pre>
+<h1>三、连接及操作数据库</h1>
+<h2 id="1、连接数据库">1、连接数据库</h2>
+<pre><code class="language-java">如果使用客户端工具连接远端数据库服务器，需要开放数据库服务器防火墙对应端口（开放
+端口后需 reload）：
+[root@localhost ~]# firewall-cmd --add-port=5236/tcp --permanent --zone=public
+[root@localhost ~]# firewall-cmd --reload
+[root@localhost ~]# firewall-cmd --list-ports
+</code></pre>
+<p>也可以关闭数据库服务器的防火墙</p>
+<pre><code class="language-java">[root@localhost dm]# systemctl status firewalld
+[root@localhost dm]# systemctl stop firewalld
+</code></pre>
+<h3 id="方式一-DM-管理工具图形化界面连接数据库">方式一 DM 管理工具图形化界面连接数据库</h3>
+<pre><code class="language-java">[dmdba@KylinDCA03 ~]$ cd $DM_HOME/tool
+[dmdba@KylinDCA03 tool]$ ./manager
+</code></pre>
+<h3 id="方式二-disql-命令行方式连接数据库">方式二 disql 命令行方式连接数据库</h3>
+<pre><code class="language-java">[dmdba@KylinDCA03 ~]$ cd /dm8/bin
+[dmdba@KylinDCA03 bin]$ ./disql sysdba/Dameng123:5236
+服务器[LOCALHOST:5236]:处于普通打开状态
+登录使用时间 : 1.829(ms)
+disql V8
+SQL&gt; select name from V$database;
+行号 NAME
+---------- ----
+1 DM
+已用时间: 2.913(毫秒). 执行号:51600.
+SQL&gt; select instance_name from v$instance;
+26 / 118
+行号 INSTANCE_NAME
+---------- -------------
+1 DMSERVER
+已用时间: 0.434(毫秒). 执行号:51601.
+SQL&gt; exit
+[dmdba@KylinDCA03 bin]$ ./disql sysdba/Dameng123:5238
+服务器[LOCALHOST:5238]:处于普通打开状态
+登录使用时间 : 12.397(ms)
+disql V8
+SQL&gt; select name from V$database;
+行号 NAME 
+---------- ------
+1 DMTEST
+已用时间: 8.418(毫秒). 执行号:50600.
+SQL&gt; select instance_name from v$instance;
+行号 INSTANCE_NAME
+---------- -------------
+1 DMTESTSVR
+已用时间: 0.563(毫秒). 执行号:50601.
+SQL&gt;
+</code></pre>
+<h3 id="网络配置助手配置连接串">网络配置助手配置连接串</h3>
+<p>网络配置助手</p>
+<pre><code class="language-java">[dmdba@KylinDCA04 tool]$ ./nca.sh
+</code></pre>
+<p>网络配置助手实际写的是 dm_svc.conf 文件，也可以直接手工编辑该文件。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 tool]$ cat /etc/dm_svc.conf
+TIME_ZONE=(480)
+LANGUAGE=(cn)
+DM=(127.0.0.1:5236)
+DMTEST=(127.0.0.1:5238)
+</code></pre>
+<h3 id="DM-数据库">DM 数据库</h3>
+<p>DM 数据库启动顺序：读取配置参数文件 dm.ini,找到控制文件 dm.ctl，启动后台进程和线程，启动数据库实例，启动到mount 状态，根据控制文件中的数据文件路径和练级日志文件路径，找到并打开数据文件和联机日志，启动到 OPEN 状态。<br>
+Oracle 启动顺序：nomount-&gt;mount-&gt;open<br>
+Shutdown：关闭状态<br>
+Mount：配置状态，此时可以修改数据库归档配置、主备等模式，不能进行数据文件的读写。此时数据库不能对外正常提供务。<br>
+Open：打开状态，此时数据库提供正常的服务。可以读写数据文件。正常访问表，读取数据。<br>
+Suspend：只读状态，只能读，不能写（DML 操作一旦 commit，数据库即会被挂起）。<br>
+MOUNT 和 OPEN 可以相互转换（与 Oracle 不同）。SUSPEND 和 OPEN 也可以相互转换。<br>
+但 MOUNT 和 SUSPEND 之间不能相互转换。</p>
+<pre><code class="language-java">SQL&gt; select status$ from v$instance;
+行号 STATUS$
+---------- -------
+1 OPEN
+已用时间: 4.453(毫秒). 执行号:52100.
+SQL&gt; alter database mount;
+操作已执行
+已用时间: 371.497(毫秒). 执行号:0.
+SQL&gt; select status$ from v$instance;
+行号 STATUS$
+---------- -------
+1 MOUNT
+已用时间: 0.599(毫秒). 执行号:52101.
+SQL&gt; alter database open;
+29 / 118
+操作已执行
+已用时间: 333.412(毫秒). 执行号:0.
+SQL&gt; select status$ from v$instance;
+行号 STATUS$
+---------- -------
+1 OPEN
+已用时间: 0.463(毫秒). 执行号:52102.
+SQL&gt; alter database suspend;
+操作已执行
+已用时间: 102.752(毫秒). 执行号:0.
+SQL&gt; select status$ from v$instance;
+行号 STATUS$
+---------- -------
+1 SUSPEND
+已用时间: 0.514(毫秒). 执行号:52103.
+SQL&gt; exit
+</code></pre>
+<p>MOUNT 状态下，可以配置归档，设置主备模式，修改联机日志文件路径等，MOUNT 状态下不能读写数据（但可以读动态性能视图中的数据，因为动态视图数据来源于控制文件或内存中的，比如 v$datafile、v$database 等），MOUNT 状态数据库不能对外提供服务（不能读写数据，业务中断）</p>
+<pre><code class="language-java">[dmdba@localhost ~]$ disql sysdba/SYSDBA@OA
+服务器[127.0.0.1:5236]:处于普通打开状态
+登录使用时间 : 1.744(ms)
+disql V8
+SQL&gt; alter database mount;
+操作已执行
+已用时间: 9.672(毫秒). 执行号:0.
+SQL&gt; select * from t_test;
+select * from t_test;
+第 1 行附近出现错误[-510]:系统处于 MOUNT 状态.
+已用时间: 0.587(毫秒). 执行号:0.
+SQL&gt; insert into t_test(id) values(4);
+insert into t_test(id) values(4);
+[-510]:系统处于 MOUNT 状态.
+已用时间: 0.403(毫秒). 执行号:0.
+SQL&gt; select name, status$ from v$instance;
+行号 NAME STATUS$
+---------- ---------- -------
+1 DMOASERVER MOUNT
+已用时间: 3.317(毫秒). 执行号:2700.
+SQL&gt; select name, status$ from v$database;
+行号 NAME STATUS$
+---------- ---- -----------
+1 DMOA 3
+已用时间: 1.347(毫秒). 执行号:2701.
+SQL&gt; select path from v$datafile;
+行号 PATH
+---------- -------------------------
+1 /dm8/data/DMOA/SYSTEM.DBF
+2 /dm8/data/DMOA/ROLL.DBF
+3 /dm8/data/DMOA/TEMP.DBF
+4 /dm8/data/DMOA/MAIN.DBF
+5 /dm8/data/DMOA/DMHR.DBF
+</code></pre>
+<h1>三、DM 数据库启动方式：</h1>
+<h2 id="Root-启动：">Root 启动：</h2>
+<p>（1） systemctl 服务方式管理（CentOS6 使用 service 命令）</p>
+<pre><code class="language-java">systemctl start|status|stop|enable|disable DmServiceDMSERVER
+</code></pre>
+<p>（2） DM 服务查看器管理（以 root 方式打开才有启动的权限）</p>
+<pre><code class="language-java">[root@KylinDCA04 tool]# ./dmservice.sh
+</code></pre>
+<h2 id="dmdba-用户启动">dmdba 用户启动</h2>
+<p>两种启动方式，都可以将数据库启动到 mount 状态）：<br>
+（1） 前台启动方式（dmserver）<br>
+如果没有注册数据库服务，只能使用此方式启动。其他的启动方式都需要注册数据库服务。<br>
+前台启动方式，界面输入 exit 或者按 CTRL+C 即会关闭数据库；</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 bin]$ ./dmserver /dm8/data/DMTEST/dm.ini
+file dm.key not found, use default license!
+version info: develop
+DM Database Server x64 V8 4-2-18-21.08.20-146029-10013-ENT startup...
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+Database mode = 0, oguid = 0
+License will expire on 2022-08-20
+file lsn: 28292
+ndct db load finished
+ndct fill fast pool finished
+iid page's trxid[6012]
+NEXT TRX ID = 6013
+pseg_collect_mgr_items, total collect 0 active_trxs, 0 cmt_trxs, 0 pre_cmt_trxs, 0 active_pages, 0 
+cmt_pages, 0 pre_cmt_pages, 0 mgr pages, 0 mgr recs!
+total 0 active crash trx, pseg_crash_trx_rollback sys_only(0) begin ...
+pseg_crash_trx_rollback end, total 0 active crash trx, include 0 empty_trxs, 0 empty_pages which 
+only need to delete mgr recs.
+pseg_crash_trx_rollback end
+pseg recv finished
+nsvr_startup end.
+aud sys init success.
+aud rt sys init success.
+systables desc init success.
+ndct_db_load_info success.
+nsvr_process_before_open begin.
+nsvr_process_before_open success.
+total 0 active crash trx, pseg_crash_trx_rollback sys_only(0) begin ...
+pseg_crash_trx_rollback end, total 0 active crash trx, include 0 empty_trxs, 0 empty_pages which 
+only need to delete mgr recs.
+pseg_crash_trx_rollback end
+SYSTEM IS READY.
+</code></pre>
+<p>（2）后台启动方式（DmServiceDMSERVER）</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 ~]$ cd /dm8/bin
+[dmdba@KylinDCA03 bin]$ ll Dm*
+-rwxr-xr-x 1 dmdba dinstall 13827 12 月 20 19:33 DmAPService
+-rwxr-xr-x 1 dmdba dinstall 14850 12 月 20 19:33 DmAuditMonitorService
+-rwxr-xr-x 1 dmdba dinstall 13655 12 月 20 19:33 DmInstanceMonitorService
+-rwxr-xr-x 1 dmdba dinstall 14110 12 月 20 19:33 DmJobMonitorService
+-rwxr-xr-x 1 dmdba dinstall 16117 12 月 20 19:53 DmServiceDMSERVER
+-rwxr-xr-x 1 dmdba dinstall 16122 12 月 20 21:56 DmServiceDMTESTSVR
+[dmdba@KylinDCA03 bin]$ ./DmServiceDMTESTSVR start
+Starting DmServiceDMTESTSVR: [ OK ]
+[dmdba@KylinDCA03 bin]$ ./DmServiceDMTESTSVR stop
+Stopping DmServiceDMTESTSVR: [ OK ]
+[dmdba@KylinDCA03 bin]$ ./DmServiceDMTESTSVR start mount
+Starting DmServiceDMTESTSVR: [ OK ]
+[dmdba@KylinDCA03 bin]$ ./DmServiceDMTESTSVR status
+DmServiceDMTESTSVR (pid 35387) is running.
+[dmdba@KylinDCA03 bin]$
+</code></pre>
+<h1>四、DM 的客户端工具</h1>
+<h2 id="DM-管理工具（manager）">DM 管理工具（manager）</h2>
+<p>图形化管理数据库，联机工具，包含用户管理、角色权限管理、表空间、模式、模式下对象（表、索引、约束、函数、过程、视图等)、数据库物理联机备份、作业管理等功能</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 tool]$ ./manager
+</code></pre>
+<h2 id="DM-控制台工具（console）">DM 控制台工具（console）</h2>
+<p>DM 控制台工具是一个脱机工具，提供脱机备份还原、修改数据库参数（修改后重启数据库才能生效）等功能。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 tool]$ ./console
+</code></pre>
+<h2 id="DM-数据迁移工具（dts）">DM 数据迁移工具（dts）</h2>
+<p>DM 数据迁移工具支持其他数据库迁移到达梦，或者达梦迁移到文件等功能。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 tool]$ ./dts
+</code></pre>
+<h2 id="DM-性能监视工具（monitor）：">DM 性能监视工具（monitor）：</h2>
+<p>可以用来监视数据库的线程、事务会话、表空间占用等信息。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 tool]$ ./monitor
+</code></pre>
+<h1>五、DM体系结构</h1>
+<h2 id="DM8-数据库是由数据库和实例构成">DM8 数据库是由数据库和实例构成</h2>
+<h3 id="数据库：">数据库：</h3>
+<p>DM 数据库指的是磁盘上存放在 DM 数据库中的数据的集合</p>
+<h3 id="实例：">实例：</h3>
+<p>实例一般是由一组正在运行的 DM 后台进程/线程以及一个大型的共享内存组成<br>
+<img src="/img/dm1.png" alt="img"></p>
+<h2 id="DM-存储结构">DM 存储结构</h2>
+<p><img src="/img/dm2.png" alt="img"><br>
+表空间是 DM 数据库的最大存储单元，所有数据都存储在表空间中。<br>
+表空间采用段（segment）、簇（extent）和页（page，对应 block）的方式管理。<br>
+一个表空间可以包含一个或多个数据文件。一个数据文件仅能归属于一个表空间。<br>
+DM 物理文件包含：配置文件、控制文件、数据文件、联机日志（此四个文件必不可少，缺少一个将无法正常启动）。<br>
+配置文件包括（服务配置 dm.ini，守护配置，复制配置，审计配置）<br>
+控制文件，数据文件，重做日志文件，备份文件，归档日志文件，跟踪日志文件等<br>
+<img src="/img/dm3.png" alt="img"></p>
+<h2 id="DM-数据库参数的类型：">DM 数据库参数的类型：</h2>
+<p>READ ONLY：手动参数，不能通过 SQL 命令或函数修改；只能通过修改 dm.ini 文本文件修改此参数（需要重启数据库才能生效）。<br>
+SYS：动态（系统级）参数。数据库运行中可以直接修改，可以即可以修改内存中的值，也可以修改参数文件中的值。可以通过 SQL 命令或系统函数修改。<br>
+SESSION:动态（会话级）参数，数据库运行中可以直接修改，可以即可以修改内存中的值，也可以修改参数文件中的值，还可以只修改当前会话的值。可以通过 SQL 命令或函数修改，且可以只针对当前会话生效。<br>
+IN FILE：静态参数，不能修改内存中的值，只能修改参数文件中的值，可以通过 SQL 命令或函数修改，但需要重启数据库才能生效。<br>
+静态参数在数据库运行期间不能修改内存中的值，动态参数在数据库运行期间可以修改内存中的值（修改后立即生效）。</p>
+<h2 id="运行时的内存池：">运行时的内存池：</h2>
+<p>特点：使用时申请，用完即释放。包含：虚拟内存池 vm pool、会话池 session pool、<br>
+排序区、HASH 区等。<br>
+排序区和 HASH 区<br>
+排序区：SORT_BUF_SIZE<br>
+少量的数据排序，优先在内存中排序，此时占用排序区；<br>
+大量的数据排序，内存中放不下，占用临时表空间排序。<br>
+如果业务经常有排序，可以适当调大排序区，提高效率。<br>
+HASH 区：HJ_BUF_SIZE<br>
+HASH 连接、HASH 分区占用哈希区。如果业务 hash 连接较多，可以调大哈希区。</p>
+<h2 id="DM-线程">DM 线程</h2>
+<p>DM 是单进程多线程对称服务器架构。Oracle 是多进程架构。</p>
+<h3 id="监听线程">监听线程</h3>
+<p>用于在服务器端口上进行循环监听，有来自客户的连接请求，监听线程被唤醒并生成一个会话线程，将申请的任务加入工作线程的任务队列，等待工作线程进行处理。 会话线程 dm_sql_thd 每个会话 session 对应一个会话线程，会话多时该线程会多，会话对应的线程 id 可以在 v$sessions 中查询。</p>
+<h3 id="工作线程">工作线程</h3>
+<p>DM 的核心线程；默认 16 个工作线程。</p>
+<h3 id="IO-线程">IO 线程</h3>
+<p>用于读写数据<br>
+需要处理的数据块不在缓冲区中，此时需要将相关数据块读入缓冲区 -物理读<br>
+缓冲区满或系统关闭时，此时需要将部分脏数据块写入磁盘 -写脏块<br>
+检查点到来时，需要将所有脏数据块写入磁盘</p>
+<h3 id="日志刷新线程">日志刷新线程</h3>
+<p>日志的刷盘。主要用于事务提交或检查点时将日志缓冲区中的 REDO 日志写入到日志文<br>
+件中。</p>
+<h3 id="日志归档线程">日志归档线程</h3>
+<p>完成 redo 日志的归档。</p>
+<h3 id="日志重做线程">日志重做线程</h3>
+<p>主要用于系统故障恢复，日志重做线程根据 REDO 日志进行并行的故障恢复</p>
+<h3 id="调度线程">调度线程</h3>
+<p>用于定时调度任务。<br>
+检查系统级的时间触发器；<br>
+清理 SQL 缓存、计划缓存中失效的项，或者超出缓存限制后淘汰不常用的缓存项；<br>
+动态缓冲区检查。根据需要动态扩展或动态收缩系统缓冲池；<br>
+自动执行检查点;<br>
+会话超时检测;<br>
+必要时执行数据更新页刷盘；<br>
+唤醒等待的工作线程;</p>
+<h1>六、一个 sql 的执行</h1>
+<p>当客户端发起请求，首先到达监听线程，监听线程创建一个会话线程，将任务加入工作线程队列。<br>
+Sql 语法语义权限解析（字典缓冲区，语法语义校验，权限校验）：<br>
+首先在 sql 缓冲区中查找是否有对应的 sql 语句，如果找到，再查找对应的执行计划，找到执行计划，根据执行计划执行 sql，这个过程称为软解析；如果 sql 缓冲区中没有找到对应 sql 语句，会将该sql 语句加入 sql 缓冲区，并生成对应执行计划，执行计划放入 sql 缓冲区，根据执行计划执行 sql 语句，返回结果集，这个过程称为硬解析）。<br>
+从系统性能提升来说，要减少硬解析。查询（读数据，数据缓冲区，如果数据缓冲区中存在数据页，则直接从数据缓冲区中读取数据，称为逻辑读；如果数据缓冲区中不存在该数据页，会话线程调用 IO 线程，IO 线程从磁盘上的数据文件中读取数据页并放入到数据缓冲区，称为物理读。<br>
+从系统性能考虑，应减少物理读，提高逻辑读）,如果查询涉及 HASH 连接等，会占用 HASH 区，如果涉及到排序，少量的数据排序（内存中能排下的）则占用排序区，HASH 区和排序区以会话池或虚拟池的方式申请。<br>
+修改（将数据读入数据缓冲区，此过程同上，在数据缓冲区中修改，修改会产生 redo 和 undo，redo 放在日志缓冲区中，undo 写入回滚段； 修改完成后，执行 commit，日志刷新线程将日志缓冲区中的数据写入联机日志文件；当数据库执行检查点时，IO 线程会将脏页写入磁盘数据文件。</p>
+<h1>七、表空间管理</h1>
+<h2 id="管理表空间">管理表空间</h2>
+<p>表空间是 DM 数据库的最大逻辑存储单元，表中的数据在逻辑上都是存放在表空间中，在物理上存放在表空间对应的物理数据文件。表空间由数据文件组成，表空间采用段、簇、页的方式进行管理。<br>
+DM 默认预定义 SYSTEM、ROLL、MAIN、TEMP、HMAIN 五个表空间。<br>
+SYSTEM：系统表空间，存放数据字典等信息（表、字段、视图等对象的定义、用户角色权限信息等，部分隐含参数写入SYSTEM 表空间），SYSTEM 表空间自动扩展不允许关闭。<br>
+ROLL：回滚表空间，存放回滚页，数据库中的 DML 操作对应都会生成 redo 和 undo，undo 信息放入 ROLL 表空间对应的数据文件中，redo 信息写入联机日志文件，用于保证数据的一致性。<br>
+ROLL 回滚段数据包含 Active、unexpired、expired 三种状态。<br>
+遇到查询记录过旧的错误（等同于 oracle 的快照过旧的错误）。解决方法：<br>
+1、 增大 undo_retention（回滚段的保留时长）, 及时、分段提交。扩大 ROLL 表空间。<br>
+2、查询时间过长导致，可以考虑优化查询。<br>
+MAIN：用户默认表空间，当创建用户时，如果为指定用户的默认表空间，则 MAIN 为用户的默认表空间。相当于 Oracle 的 USERS 表空间。<br>
+TEMP：临时表空间，存放临时表数据、临时结果集等，当大量的数据排序或创建索引等占用临时表空间。DM 中临时表空间由参数 TEMP_SIZE 指定。</p>
+<h2 id="修改TMP表空间">修改TMP表空间</h2>
+<p>数据库启动时会按照如下参数重建 TEMP 表空间。</p>
+<pre><code class="language-java">select name, value, type from v$parameter t where name like 'TEMP%';
+# TEMP_SIZE：临时表空间初始大小
+# TEMP_PATH: 临时表空间路径
+# TEMP_SPACE_LIMIT：临时表空间的空间限制，0 表示不限制。
+</code></pre>
+<p>修改临时表空间的初始大小：</p>
+<pre><code class="language-java"># alter system set 'TEMP_SIZE'=100 spfile;
+</code></pre>
+<p>收缩 TEMP 表空间的方法：<br>
+1、 重启数据库，TEMP 表空间数据文件会重建。<br>
+2、 在线收缩临时表空间使用 SP_TRUNC_TS_FILE 函数。</p>
+<h2 id="创建表空间">创建表空间</h2>
+<p>使用 create tablespace 语句创建表空间：</p>
+<pre><code class="language-java">create tablespace tbs DATAFILE 'TBS01.DBF' size 32;
+</code></pre>
+<p>DM 数据文件大小，最大值不能低于页大小的 4096 倍（如果页大小是 8K，最小值将不<br>
+低于 32M），最大值为页大小的 2 的 31 次方-1（如果页大小是 8K，最大值为 16T-1）。</p>
+<h2 id="表空间重命名">表空间重命名</h2>
+<p>DM 预定义表空间不支持重命名，自定义表空间支持重命名。</p>
+<pre><code class="language-java">alter tablespace tbs RENAME TO dmtbs;
+</code></pre>
+<h1>八、归档管理</h1>
+<h2 id="归档管理">归档管理</h2>
+<p>默认情况下，达梦数据库运行在非归档模式下。<br>
+归档是对 REDO 日志的归档。归档的目的是使数据库故障时可以恢复到故障的前一刻（完<br>
+全恢复），或者恢复到指定的时间点或指定 LSN（Log Sequence Number）（不完全恢复）。<br>
+假如现网每天凌晨 0 点备份；<br>
+第二天下午 14：00 数据磁盘损坏，数据库故障。<br>
+故障时联机日志中只有 13：30-14：00；此时如果没有开启数据库归档，则数据库无法恢复<br>
+到故障前一刻 14：00（缺失凌晨 0 点-13：30 的 redo 信息）。<br>
+开归档就可以将凌晨 0 点-14：00 的 redo 信息保存在归档日志文件中，数据库恢复时就可以<br>
+利用归档将数据库恢复到最新的状态。<br>
+联机备份，数据库需要开启归档状态。<br>
+利用归档可以做完全恢复和不完全恢复。</p>
+<h2 id="SQL-开启归档">SQL 开启归档</h2>
+<pre><code class="language-java">归档开启：
+alter database mount;
+alter database ARCHIVELOG;
+alter database ADD ARCHIVELOG 'type=local, dest=/dm8/arch, file_size=64, 
+space_limit=10240';
+alter database open;
+查看归档配置：
+select arch_mode from v$database;
+select * from v$dm_arch_ini;
+修改归档的配置（修改归档空间上限）：
+alter database modify archivelog 'type=local, dest=/dm8/arch, SPACE_LIMIT=20480';
+SQL 关闭归档
+SQL&gt; alter database mount;
+操作已执行
+已用时间: 438.355(毫秒). 执行号:0.
+SQL&gt; alter database noarchivelog;
+操作已执行
+已用时间: 41.445(毫秒). 执行号:0.
+SQL&gt; alter database delete archivelog 'type=local,dest=/dm8/arch';
+操作已执行
+已用时间: 0.519(毫秒). 执行号:0.
+SQL&gt; alter database open;
+操作已执行
+已用时间: 322.559(毫秒). 执行号:0.
+SQL&gt; select arch_mode from v$database;
+行号 ARCH_MODE
+---------- ---------
+1 N
+已用时间: 0.654(毫秒). 执行号:714.
+SQL&gt; select * from v$dm_arch_ini;
+未选定行
+</code></pre>
+<h2 id="修改-dm-ini-和-dmarch-ini-配置文件开启归档">修改 dm.ini 和 dmarch.ini 配置文件开启归档</h2>
+<pre><code class="language-java">[dmdba@KylinDCA03 DM]$ cat dmarch.ini
+#DaMeng Database Archive Configuration file
+#this is comments
+ ARCH_WAIT_APPLY = 0
+[ARCHIVE_LOCAL1]
+ ARCH_TYPE = LOCAL
+ ARCH_DEST = /dm8/arch
+ ARCH_FILE_SIZE = 64
+ ARCH_SPACE_LIMIT = 10240
+ ARCH_FLUSH_BUF_SIZE = 0
+[dmdba@KylinDCA03 DM]$ cat dm.ini|grep ARCH_INI
+ ARCH_INI = 1 #dmarch.ini
+</code></pre>
+<h2 id="归档日志文件的切换和删除">归档日志文件的切换和删除</h2>
+<p>数据库自动完成归档的切换，DM 支持手工切换归档；</p>
+<pre><code class="language-java">alter SYSTEM ARCHIVE LOG CURRENT;
+alter SYSTEM SWITCH LOGFILE;
+alter DATABASE ARCHIVELOG CURRENT;
+</code></pre>
+<h2 id="归档文件的删除">归档文件的删除</h2>
+<pre><code class="language-java">select * from v$ifun t where name like 'SF_ARCHIVELOG_%';
+SF_ARCHIVELOG_DELETE_BEFORE_LSN
+SF_ARCHIVELOG_DELETE_BEFORE_TIME
+# 删除10天前的归档日志。
+Select SF_ARCHIVELOG_DELETE_BEFORE_TIME(sysdate-10);
+</code></pre>
+<p>针对业务繁忙期间，出现磁盘 IO 不定时繁忙的情况，因为配置了归档的空间上限（归档达<br>
+到此上限），生成新的归档日志前删除旧的归档日志文件造成了 IO 的不定时繁忙。<br>
+解决方案：配置 JOB 作业，在业务空间期定时清理 N 天之前的归档文件。</p>
+<h1>九、用户管理</h1>
+<h2 id="用户类型">用户类型</h2>
+<p>DM 默认的预定义用户：<br>
+SYS：系统内置用户，不允许登录。<br>
+SYSDBA：系统管理员，拥有几乎所有权限（除审计和强制访问控制）<br>
+SYSAUDITOR：系统审计管理员，具有审计相关权限。<br>
+SYSSSO：系统安全管理员，具有强制访问控制等权限；<br>
+SYSDBO：安全版本才有的用户，安全操作员。</p>
+<h2 id="系统口令策略">系统口令策略</h2>
+<p>PWD_POLICY（隐含参数，不在 dm.ini 中）参数指定系统的口令策略，默认为 2；<br>
+系统支持的口令策略有：<br>
+0 无策略<br>
+1 禁止与用户名相同<br>
+2 口令长度需大于等于 INI 参数 PWD_MIN_LEN 设置的值<br>
+4 至少包含一个大写字母（A-Z）<br>
+8 至少包含一个数字（0-9）<br>
+16 至少包含一个标点符号（英文输入法状态下，除“和空格外的所有符号）<br>
+口令策略可单独应用，也可组合应用。组合应用时，如需要应用策略 2 和 4，则设置口<br>
+令策略为 2+4=6 即可。<br>
+PWD_POLICY 是隐含参数，PWD_POLICY，只能通过函数或 SQL 语句修改。</p>
+<pre><code class="language-java">select * from v$parameter t where t.name = 'PWD_POLICY';
+create user hr IDENTIFIED by dameng123;
+</code></pre>
+<h2 id="修改系统口令策略：">修改系统口令策略：</h2>
+<pre><code class="language-java">alter SYSTEM set 'PWD_POLICY' = 15 BOTH;
+</code></pre>
+<h2 id="SQL-管理用户">SQL 管理用户</h2>
+<pre><code class="language-java">create user hrtest IDENTIFIED by dameng123
+</code></pre>
+<h2 id="用户输入错误多次（默认-3-次），将会被锁定。">用户输入错误多次（默认 3 次），将会被锁定。</h2>
+<pre><code class="language-java">select * from dba_users;
+select b.USERNAME,a.* from sysusers a, dba_users b where a.id = b.USER_ID;
+</code></pre>
+<h2 id="创建用户">创建用户</h2>
+<pre><code class="language-java">create user hrtest IDENTIFIED by Dameng123 DEFAULT TABLESPACE TBSTEST;
+</code></pre>
+<h2 id="用户锁定和解锁：">用户锁定和解锁：</h2>
+<pre><code class="language-java">alter user hr ACCOUNT UNLOCK;
+alter user hr ACCOUNT LOCK;
+</code></pre>
+<h2 id="修改用户的默认表空间：">修改用户的默认表空间：</h2>
+<pre><code class="language-java">alter user hr DEFAULT TABLESPACE dmtbs;
+</code></pre>
+<h2 id="修改用户密码">修改用户密码:</h2>
+<pre><code class="language-java">alter user hrtest IDENTIFIED by &quot;Dameng@123&quot;;
+</code></pre>
+<h2 id="删除用户：">删除用户：</h2>
+<pre><code class="language-java">drop user if EXISTS hr;
+drop user if EXISTS hr CASCADE; --生产环境慎用
+</code></pre>
+<h2 id="用户资源限制">用户资源限制</h2>
+<p>用户资源限制设置（可以直接使用 limit 子句，也可以使用 profile 来管理用户的资源限制）：</p>
+<pre><code class="language-java">alter user hr LIMIT FAILED_LOGIN_ATTEMPS 5, PASSWORD_LOCK_TIME 3;
+</code></pre>
+<p>DM 支持使用 profile 管理用户资源限制（新版本支持，2021 年 10 月以后的版本）</p>
+<pre><code class="language-java">select * from DBA_PROFILES;
+create profile profile1 limit FAILED_LOGIN_ATTEMPS 5, PASSWORD_LOCK_TIME 3, 
+PASSWORD_LIFE_TIME 180;
+alter user hrtest PROFILE profile1;
+</code></pre>
+<p>查询用户使用的profile资源限制文件</p>
+<pre><code class="language-java">select a.pid profileid, b.name profile_name, a.uid userid, c.name user_name
+from SYSUSERPROFILES a, SYSOBJECTS b, SYSOBJECTS c
+where a.PID = b.id 
+and a.UID = c.ID;
+</code></pre>
+<p>密码带有特殊字符的登录处理<br>
+达梦中密码带有特殊字符需要双引号括起来，在 linux 系统下可以使用单引号‘转义。</p>
+<pre><code class="language-java">[dmdba@KylinDCA03 ~]$ disql hrtest/'&quot;Dameng@123&quot;'
+服务器[LOCALHOST:5236]:处于普通打开状态
+登录使用时间 : 1.589(ms)
+disql V8
+SQL&gt; conn hrtest/&quot;Dameng@123&quot;
+</code></pre>
+<p>也可以使用右斜杠\转义</p>
+<pre><code class="language-java">[dmdba@localhost ~]$ disql dmoa/\&quot;Dameng@123\&quot;
+服务器[LOCALHOST:5236]:处于普通打开状态
+登录使用时间 : 3.162(ms)
+disql V8
+SQL&gt; alter user dmoa identified by &quot;Dameng123@#'&quot;;
+操作已执行
+已用时间: 6.184(毫秒). 执行号:1000.
+SQL&gt; exit
+[dmdba@localhost ~]$ disql dmoa/\&quot;Dameng123@#\'\&quot;
+服务器[LOCALHOST:5236]:处于普通打开状态
+登录使用时间 : 1.863(ms)
+disql V8
+SQL&gt;
+</code></pre>
+<h1>十、权限管理</h1>
+<h2 id="赋予数据库权限（系统权限）：">赋予数据库权限（系统权限）：</h2>
+<pre><code class="language-java">SQL&gt; grant create table to hrtest;
+操作已执行
+已用时间: 3.431(毫秒). 执行号:1700.
+</code></pre>
+<h2 id="赋予对象权限">赋予对象权限:</h2>
+<pre><code class="language-java">SQL&gt; grant select on dmhr.employee to hrtest;
+操作已执行
+已用时间: 0.535(毫秒). 执行号:1703.
+</code></pre>
+<h2 id="查看当前用户拥有的权限：">查看当前用户拥有的权限：</h2>
+<pre><code class="language-java">select * from session_privs;
+</code></pre>
+<h2 id="权限的回收：">权限的回收：</h2>
+<pre><code class="language-java">SQL&gt; revoke select on dmhr.employee from hrtest;
+## 操作已执行
+已用时间: 1.792(毫秒). 执行号:1704.
+SQL&gt; revoke create table from hrtest;
+## 操作已执行
+已用时间: 1.704(毫秒). 执行号:1705
+## 赋予查询对象权限，精确到列
+SQL&gt; grant select (employee_id, employee_name) on dmhr.employee to hrtest;
+## 操作已执行
+已用时间: 2.175(毫秒). 执行号:1706.
+</code></pre>
+<p>相关数据字典：</p>
+<pre><code class="language-java">select * from dba_sys_privs t where t.GRANTEE= 'HRTEST';
+select * from dba_role_privs t where t.GRANTEE= 'HRTEST';
+select * from dba_tab_privs t where t.GRANTEE= 'HRTEST';
+DM 默 认 不 能 授 予 用 户 在 其 他 模 式 下 数 据 定 义 （ DDL ） 的 权 限 ， 由 参 数
+ENABLE_DDL_ANY_PRIV 指定，默认为 0。
+grant select any table to hrtest;
+select * from v$parameter t where name like '%ENABLE_DDL_ANY_PRIV%';
+alter SYSTEM set 'ENABLE_DDL_ANY_PRIV' = 1 both; --开启后可正常赋予权限
+grant create any table to hrtest;
+grant create any index to hrtest;
+</code></pre>
+<h1>十一、角色管理</h1>
+<h2 id="角色类型">角色类型</h2>
+<p>角色是权限的集合，角色使权限管理更加方便。<br>
+DBA：具有几乎所有权限（除审计和强制访问控制之外），默认赋给 SYSDBA 用户。<br>
+PUBLIC：具有对当前模式下对象的 DML 数据操作权限。<br>
+RESOURCE：具有在当前模式下对象定义权限（创建表、索引、视图等）；<br>
+SOI：具有查询 sys 开头系统表的权限；<br>
+VTI：具有查询 v$开头的动态视图权限（动态视图记录在 v$dynamic_tables，如果没有此权限，DM 管理工具上会报没有查询 v$视图权限）<br>
+DB_AUDIT_开头的角色是审计相关角色，具有审计相关权限，默认赋给 SYSAUDITOR。<br>
+DB_POLICY_开头的角色是安全相关角色，具有强制访问控制等权限，默认赋给 SYSSSO。</p>
+<pre><code class="language-java">select * from dba_roles;
+create role r1;
+grant create table to r1;
+grant select on dmhr.department to r1;
+grant r1 to hrtest;
+sp_set_role('R1',0) --角色禁用和启用，禁用后角色权限将不在生效。
+</code></pre>
+<p>赋予对象权限增加 with grant option 说明权限可以转授，回收时要增加 cascade 关键字级联<br>
+回收权限，否则报错：</p>
+<pre><code class="language-java">revoke select on dmhr.employee from r2 CASCADE;
+</code></pre>
+<h1>十二、数据库的备份还原</h1>
+<h2 id="备份还原基本概念">备份还原基本概念</h2>
+<p>备份包含物理备份和逻辑备份。<br>
+物理备份是拷贝有效的数据页。逻辑备份是导出数据库中逻辑数据。<br>
+物理备份分为完全备份、增量备份；联机备份（热备）和脱机备份（冷备）。<br>
+完全备份是指一个备份包含指定数据库或表空间的所有数据；<br>
+增量备份是指在一次全备份或上一次增量备份后，以后每次的备份只需备份与前一次相比增加或者被修改的文件；<br>
+增量备份包含差异增量备份和累积增量备份，默认是差异增量备份。<br>
+差异增量备份的基础备份集可以是全量备份，也可以是增量备份；<br>
+累计增量备份的基备份集只能是全量备份。<br>
+热备：指数据库启动状态下的备份<br>
+冷备：指数据库关闭状态下的备份。<br>
+备份级别：全库备份、表空间级备份、表级备份、归档备份。<br>
+物理还原是备份的逆过程；<br>
+恢复是使用归档将数据库恢复到最新状态或指定时间点；或使用备份集中的 redo 信息将数据库恢复至一致性状态。</p>
+<h2 id="备份、还原与恢复的关系">备份、还原与恢复的关系</h2>
+<p>备份还原两个重要参数：</p>
+<pre><code class="language-java">select * from v$parameter t where name in ('BAK_PATH', 'BAK_USE_AP');
+</code></pre>
+<p>BAK_PATH：DM 默认的备份路径，生成环境不要和源库数据文件放在同一磁盘上。避免磁<br>
+盘损坏，数据文件和备份文件同时损坏的情况。<br>
+BAK_USE_AP：备份还原策略，默认使用 DMAP 辅助进程。</p>
+<h2 id="查看-AP-服务是否启动：">查看 AP 服务是否启动：</h2>
+<pre><code class="language-java">[dmdba@KylinDCA04 bak]$ ps -ef|grep dmap
+dmdba 86474 1 0 4 月 14 ? 00:00:01 /dm8/bin/dmap
+</code></pre>
+<p>如果 AP 服务没有启动，则备份报错：<br>
+[执行语句1]:</p>
+<pre><code class="language-java">backup database;
+执行失败(语句1)
+-7170: bakres 连接 DMAP 失败
+</code></pre>
+<h2 id="脱机备份与还原数据库">脱机备份与还原数据库</h2>
+<p>脱机备份（数据库关闭状态下的备份）<br>
+一、使用 dmrman 工具可以脱机备份<br>
+库备份（冷备）</p>
+<pre><code class="language-java">RMAN&gt; backup database '/dm8/data/DM/dm.ini';
+backup database '/dm8/data/DM/dm.ini';
+file dm.key not found, use default license!
+Database mode = 0, oguid = 0
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+EP[0]'s cur_lsn[46292], file_lsn[46292]
+Processing backupset /dm8/data/DM/bak/DB_DM_FULL_20211222_152753_249786
+[Percent:100.00%][Speed:0.00M/s][Cost:00:00:00][Remaining:00:00:00]
+backup successfully!
+time used: 00:00:01.255
+</code></pre>
+<h2 id="表空间的还原和恢复">表空间的还原和恢复</h2>
+<p>测试删除普通表空间数据文件，演示普通表空间的还原于恢复。<br>
+DM8 表空间的还原与恢复需要在脱机状态下操作.<br>
+制造测试数据，然后删除表空间数据文件：</p>
+<pre><code class="language-java">[dmdba@KylinDCA04 ~]$ DmServiceDMSERVER start
+Starting DmServiceDMSERVER: [ OK ]
+[dmdba@KylinDCA04 ~]$ disql sysdba/SYSDBA
+服务器[LOCALHOST:5236]:处于普通打开状态
+登录使用时间 : 28.250(ms)
+disql V8
+SQL&gt; select count(*) from t_dept;
+行号 COUNT(*)
+---------- --------------------
+1 46
+已用时间: 1.278(毫秒). 执行号:501.
+SQL&gt; insert into t_dept select * from dmhr.department;
+99 / 118
+影响行数 47
+已用时间: 1.972(毫秒). 执行号:502.
+SQL&gt; commit;
+操作已执行
+已用时间: 1.313(毫秒). 执行号:503.
+SQL&gt; select count(*) from t_dept;
+行号 COUNT(*)
+---------- --------------------
+1 93
+已用时间: 0.318(毫秒). 执行号:504.
+SQL&gt; insert into t_dept select * from dmhr.department;
+影响行数 47
+已用时间: 1.972(毫秒). 执行号:502.
+SQL&gt; commit;
+操作已执行
+已用时间: 1.313(毫秒). 执行号:503.
+SQL&gt; select count(*) from t_dept;
+行号 COUNT(*)
+---------- --------------------
+1 140
+SQL&gt; select table_name, tablespace_name,owner from dba_tables t where t.table_name='T_DEPT';
+行号 TABLE_NAME TABLESPACE_NAME OWNER
+---------- ---------- --------------- ------
+1 T_DEPT MAIN SYSDBA
+已用时间: 103.392(毫秒). 执行号:600.
+SQL&gt; host rm MAIN.DBF
+表空间 MAIN 的还原与恢复演示：
+[dmdba@KylinDCA04 full]$ dmrman
+dmrman V8
+RMAN&gt; restore database '/dm8/data/DAMENG/dm.ini' tablespace main from backupset 
+'/dm8/backup/full/CONSOLEFULLBAK';
+restore database '/dm8/data/DAMENG/dm.ini' tablespace main from backupset 
+'/dm8/backup/full/CONSOLEFULLBAK';
+file dm.key not found, use default license!
+100 / 118
+Database mode = 0, oguid = 0
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+EP[0]'s cur_lsn[1507247], file_lsn[1507247]
+[Percent:100.00%][Speed:0.00M/s][Cost:00:00:02][Remaining:00:00:00]
+restore successfully.
+time used: 00:00:02.595
+表空间的恢复系统会自动利用归档恢复到最新状态。
+RMAN&gt; recover database '/dm8/data/DAMENG/dm.ini' tablespace main;
+recover database '/dm8/data/DAMENG/dm.ini' tablespace main;
+Database mode = 0, oguid = 0
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+EP[0]'s cur_lsn[1507247], file_lsn[1507247]
+[Percent:100.00%][Speed:0.00PKG/s][Cost:00:00:00][Remaining:00:00:00]
+recover successfully.
+time used: 464.414(ms)
+</code></pre>
+<p>全库的还原与恢复<br>
+测试场景：删除 system 数据文件<br>
+使用全量备份集或增量备份集进行还原和恢复步骤相同。<br>
+假如 a（全量）-&gt;b1(增量)-&gt; b2(增量)<br>
+-&gt; c1(增量)<br>
+如果全量备份丢失，基于其增量的备份也将无法正常使用</p>
+<p>（1）数据库的还原</p>
+<pre><code class="language-java">RMAN&gt; restore database '/dm8/data/DM/dm.ini' from backupset 
+'/dm8/backup/full/ONLINEBAK_02';
+restore database '/dm8/data/DM/dm.ini' from backupset '/dm8/backup/full/ONLINEBAK_02';
+[Percent:0.00%][Speed:0.00M/s][Cost:00:00:01][Remaining:00:00:00]Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+[Percent:100.00%][Speed:0.00M/s][Cost:00:00:02][Remaining:00:00:00]
+restore successfully.
+time used: 00:00:02.330
+</code></pre>
+<p>（2）数据库的恢复</p>
+<pre><code class="language-java">RMAN&gt; recover database '/dm8/data/DM/dm.ini' with archivedir '/dm8/arch';
+recover database '/dm8/data/DM/dm.ini' with archivedir '/dm8/arch';
+Database mode = 0, oguid = 0
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+EP[0]'s cur_lsn[46002], file_lsn[46002]
+EP:0 total 4 pkgs applied, percent: 11%
+EP:0 total 8 pkgs applied, percent: 22%
+EP:0 total 12 pkgs applied, percent: 34%
+EP:0 total 16 pkgs applied, percent: 45%
+EP:0 total 20 pkgs applied, percent: 57%
+EP:0 total 24 pkgs applied, percent: 68%
+EP:0 total 28 pkgs applied, percent: 80%
+102 / 118
+EP:0 total 32 pkgs applied, percent: 91%
+EP:0 total 35 pkgs applied, percent: 100%
+recover successfully!
+time used: 294.062(ms)
+</code></pre>
+<p>（3）更新数据库魔数</p>
+<pre><code class="language-java">RMAN&gt; recover database '/dm8/data/DM/dm.ini' update db_magic;
+recover database '/dm8/data/DM/dm.ini' update db_magic;
+Database mode = 0, oguid = 0
+Normal of FAST
+Normal of DEFAULT
+Normal of RECYCLE
+Normal of KEEP
+Normal of ROLL
+EP[0]'s cur_lsn[46292], file_lsn[46292]
+recover successfully!
+time used: 00:00:01.009
+不完全恢复的使用场景：
+表误删除（DROP），可以指定归档恢复到删除的前一刻。
+recover database '/dm8/data/DMTEST/dm.ini' with archivedir '/dm8/arch' until lsn XX;
+recover database '/dm8/data/DMTEST/dm.ini' with archivedir '/dm8/arch' until time XX;
+show 查看备份集
+RMAN&gt; show backupset '/dm8/data/DAMENG/bak_full';
+remove 删除备份集
+RMAN&gt; remove backupset '/dm8/data/DAMENG/bak_increment';
+check 检查备份集
+RMAN&gt; check backupset '/dm8/data/DAMENG/bak_full';
+</code></pre>
+<h2 id="联机备份与还原数据库">联机备份与还原数据库</h2>
+<p>联机备份：数据库是启动状态，联机备份要求数据库打开归档。<br>
+备份时 AP 服务需要为启动状态。<br>
+SQL 备份数据库<br>
+备份数据库</p>
+<pre><code class="language-java">backup database; --全量备份
+backup database increment; --增量备份
+backup database full to ONLINEBAK_01 backupset
+'/dm8/backup/full/ONLINEBAK_01';
+backup database increment BASE ON BACKUPSET 
+'/dm8/backup/full/ONLINEBAK_01' to ONLINEBAKINCR_01 
+backupset '/dm8/backup/incr/ONLINEBAK_01' ;
+backup database increment with BACKUPDIR '/dm8/backup/full/' to
+ONLINEBAKINCR_02 backupset '/dm8/backup/incr/ONLINEBAK_02' ;
+备份集管理
+--查看备份集
+select * from v$backupset;
+--备份集相关函数
+select * from v$ifun t where t.name like 'SF_BAKSET%';
+SF_BAKSET_BACKUP_DIR_ADD('DISK','/dm8/backup/full/');
+SF_BAKSET_BACKUP_DIR_ADD('DISK','/dm8/backup/incr/');
+--校验备份集
+select SF_BAKSET_CHECK('DISK','/dm8/backup/incr/ONLINEBAK_02');
+--查看各个增量备份集的基础备份集：
+select t.BACKUP_NAME, t.BACKUP_PATH, LEVEL, t.type,
+ SYS_CONNECT_BY_PATH(t.BACKUP_NAME, '/') BACKUP_BASECONNECT,
+ CONNECT_BY_ISLEAF ISLEAF
+ from (select a.BACKUP_NAME, a.BACKUP_PATH, a.BASE_NAME, a.TYPE
+ from V$BACKUPSET a) t 
+connect by t.BASE_NAME = PRIOR t.BACKUP_NAME 
+start with t.type = 0;
+表空间备份
+backup tablespace dmtbs;
+backup tablespace dmtbs INCREMENT with BACKUPDIR '/dm8/backup/full/' to
+DMTBSINCR_01 backupset '/dm8/backup/incr/DMTBSINCR_01' ;
+表和归档的备份
+backup table dmhr.employee; --表的备份
+backup archivelog all; --归档备份
+库级、表空间的还原和恢复不支持联机恢复，只支持脱机还原恢复。
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 270490096@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+    <div id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODM2MC8zNDgyMw==">
+        <script type="text/javascript">
+			(function(d, s) {
+				var j, e = d.getElementsByTagName(s)[0];
+
+				if (typeof LivereTower === 'function') { return; }
+
+				j = d.createElement(s);
+				window.livereOptions = {
+					eagerLoading: true,
+					scrollEventTargetSelector: '#post'
+                }
+				j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+				j.async = true;
+				e.parentNode.insertBefore(j, e);
+			})(document, 'script');
+        </script>
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2019-2022 blog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
