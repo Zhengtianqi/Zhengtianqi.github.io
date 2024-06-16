@@ -1,0 +1,81 @@
+<template><div><p>链表提供了高效的节点重排能力，以及顺序性的节点访问方式，并且可以通过增删节点来灵活地调整链表的长度。</p>
+<p>作为一种常用数据结构，链表内置在很多高级的编程语言里面，因为 Redis 使用的 C 语言并没有内置这种数据结构，所以 Redis 构建了自己的链表实现。</p>
+<p>链表在 Redis 中的应用非常广泛，比如列表键的底层实现之一就是链表：当一个列表键包含了数量比较多的元素，又或者列表中包含的元素都是比较长的字符串时，Redis 就会使用链表作为列表键的底层实现。</p>
+<p>举个例子，以下展示的 <code v-pre>integers</code> 列表键包含了从 <code v-pre>1</code> 到 <code v-pre>1024</code> 共一千零二十四个整数：</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>redis<span class="token operator">></span> <span class="token class-name">LLEN</span> integers
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1024</span>
+ 
+redis<span class="token operator">></span> <span class="token constant">LRANGE</span> integers <span class="token number">0</span> <span class="token number">10</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"2"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"3"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"4"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"5"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"6"</span>
+<span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">"7"</span>
+<span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">"8"</span>
+<span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">"9"</span>
+<span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">"10"</span>
+<span class="token number">11</span><span class="token punctuation">)</span> <span class="token string">"11"</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code v-pre>integers</code> 列表键的底层实现就是一个链表，链表中的每个节点都保存了一个整数值。</p>
+<p>除了链表键之外，发布与订阅、慢查询、监视器等功能也用到了链表，Redis 服务器本身还使用链表来保存多个客户端的状态信息，以及使用链表来构建客户端输出缓冲区（output buffer），本书后续的章节将陆续对这些链表应用进行介绍。</p>
+<p>本文接下来的内容将对 Redis 的链表实现进行介绍，并列出相应的链表和链表节点 API 。</p>
+<h2 id="链表和链表节点的实现" tabindex="-1"><a class="header-anchor" href="#链表和链表节点的实现" aria-hidden="true">#</a> 链表和链表节点的实现</h2>
+<p>每个链表节点使用一个 <code v-pre>adlist.h/listNode</code> 结构来表示：</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>typedef struct listNode <span class="token punctuation">{</span>
+    <span class="token comment">// 前置节点</span>
+    struct listNode <span class="token operator">*</span>prev<span class="token punctuation">;</span>
+    <span class="token comment">// 后置节点</span>
+    struct listNode <span class="token operator">*</span>next<span class="token punctuation">;</span>
+    <span class="token comment">// 节点的值</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span>value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> listNode<span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>多个 <code v-pre>listNode</code> 可以通过 <code v-pre>prev</code> 和 <code v-pre>next</code> 指针组成双端链表，如图 3-1 所示。</p>
+<figure><img src="/assets/images/df56c6c619c3e1efb6f6140d56f67bcd.png" alt="img" tabindex="0" loading="lazy"><figcaption>img</figcaption></figure>
+<p>虽然仅仅使用多个 <code v-pre>listNode</code> 结构就可以组成链表，但使用 <code v-pre>adlist.h/list</code> 来持有链表的话，操作起来会更方便：</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>typedef struct list <span class="token punctuation">{</span>
+    <span class="token comment">// 表头节点</span>
+    listNode <span class="token operator">*</span>head<span class="token punctuation">;</span>
+    <span class="token comment">// 表尾节点</span>
+    listNode <span class="token operator">*</span>tail<span class="token punctuation">;</span>
+    <span class="token comment">// 链表所包含的节点数量</span>
+    unsigned <span class="token keyword">long</span> len<span class="token punctuation">;</span>
+    <span class="token comment">// 节点值复制函数</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>dup<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 节点值释放函数</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>free<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 节点值对比函数</span>
+    <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>match<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> list<span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code v-pre>list</code> 结构为链表提供了表头指针 <code v-pre>head</code> 、表尾指针 <code v-pre>tail</code> ，以及链表长度计数器 <code v-pre>len</code> ，而 <code v-pre>dup</code> 、 <code v-pre>free</code> 和 <code v-pre>match</code> 成员则是用于实现多态链表所需的类型特定函数：</p>
+<ul>
+<li><code v-pre>dup</code> 函数用于复制链表节点所保存的值；</li>
+<li><code v-pre>free</code> 函数用于释放链表节点所保存的值；</li>
+<li><code v-pre>match</code> 函数则用于对比链表节点所保存的值和另一个输入值是否相等。</li>
+</ul>
+<p>图 3-2 是由一个 <code v-pre>list</code> 结构和三个 <code v-pre>listNode</code> 结构组成的链表：</p>
+<figure><img src="/assets/images/591a3d39db7558c3fd1db79821abec5e.png" alt="img" tabindex="0" loading="lazy"><figcaption>img</figcaption></figure>
+<p>Redis 的链表实现的特性可以总结如下：</p>
+<ul>
+<li>双端：链表节点带有 <code v-pre>prev</code> 和 <code v-pre>next</code> 指针，获取某个节点的前置节点和后置节点的复杂度都是 O(1) 。</li>
+<li>无环：表头节点的 <code v-pre>prev</code> 指针和表尾节点的 <code v-pre>next</code> 指针都指向 <code v-pre>NULL</code> ，对链表的访问以 <code v-pre>NULL</code> 为终点。</li>
+<li>带表头指针和表尾指针：通过 <code v-pre>list</code> 结构的 <code v-pre>head</code> 指针和 <code v-pre>tail</code> 指针，程序获取链表的表头节点和表尾节点的复杂度为 O(1) 。</li>
+<li>带链表长度计数器：程序使用 <code v-pre>list</code> 结构的 <code v-pre>len</code> 属性来对 <code v-pre>list</code> 持有的链表节点进行计数，程序获取链表中节点数量的复杂度为 O(1) 。</li>
+<li>多态：链表节点使用 <code v-pre>void*</code> 指针来保存节点值，并且可以通过 <code v-pre>list</code> 结构的 <code v-pre>dup</code> 、 <code v-pre>free</code> 、 <code v-pre>match</code> 三个属性为节点值设置类型特定函数，所以链表可以用于保存各种不同类型的值。</li>
+</ul>
+<h2 id="链表和链表节点的-api" tabindex="-1"><a class="header-anchor" href="#链表和链表节点的-api" aria-hidden="true">#</a> 链表和链表节点的 API</h2>
+<p>表 3-1 列出了所有用于操作链表和链表节点的 API 。</p>
+<hr>
+<p>表 3-1 链表和链表节点 API</p>
+<figure><img src="/assets/images/image-20220123235957505.png" alt="image-20220123235957505" tabindex="0" loading="lazy"><figcaption>image-20220123235957505</figcaption></figure>
+<h2 id="回顾" tabindex="-1"><a class="header-anchor" href="#回顾" aria-hidden="true">#</a> 回顾</h2>
+<ul>
+<li>链表被广泛用于实现 Redis 的各种功能，比如列表键，发布与订阅，慢查询，监视器，等等。</li>
+<li>每个链表节点由一个 <code v-pre>listNode</code> 结构来表示，每个节点都有一个指向前置节点和后置节点的指针，所以 Redis 的链表实现是双端链表。</li>
+<li>每个链表使用一个 <code v-pre>list</code> 结构来表示，这个结构带有表头节点指针、表尾节点指针、以及链表长度等信息。</li>
+<li>因为链表表头节点的前置节点和表尾节点的后置节点都指向 <code v-pre>NULL</code> ，所以 Redis 的链表实现是无环链表。</li>
+<li>通过为链表设置不同的类型特定函数，Redis 的链表可以用于保存各种不同类型的值。</li>
+</ul>
+</div></template>
+
+

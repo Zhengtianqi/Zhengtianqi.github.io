@@ -1,0 +1,50 @@
+<template><div><h2 id="_1、悲观锁" tabindex="-1"><a class="header-anchor" href="#_1、悲观锁" aria-hidden="true">#</a> 1、悲观锁</h2>
+<p>假设会发生并发冲突，屏蔽一切可能违反数据完整性的操作（具有强烈的独占和排他性）</p>
+<p>​           依赖数据库的锁机制实现，以保证操作最大程度的独占性。</p>
+<p>​     百度百科：正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
+<h2 id="_2、缺点" tabindex="-1"><a class="header-anchor" href="#_2、缺点" aria-hidden="true">#</a> 2、缺点</h2>
+<p>数据库性能的大量开销，特别是对长事务而言，这样的开销无法承受</p>
+<h2 id="_3、实现方法" tabindex="-1"><a class="header-anchor" href="#_3、实现方法" aria-hidden="true">#</a> 3、实现方法</h2>
+<p>​    <strong>Mysql中 :</strong></p>
+<p>​    在sql后面加上 for update或者for update nowait</p>
+<p>​    for update和for update nowait区别：</p>
+<p>​         1. for update 锁定当前操作数据，其他事务等待</p>
+<p>​         2. for update nowait 锁定当前数据，其他事务发现数据被锁定，立即返回&quot;ORA-00054错误，内容是资源正忙, 但指定以 NOWAIT 方式获取资源&quot;</p>
+<p>​         例如：select * from account where name=&quot;123&quot; for update</p>
+<p>​         优点：无论是在单机还是分布式中，只要使用的是同一个数据库，那么悲观锁就能起到作用。</p>
+<p>​         缺点：锁定数据后，必将影响其他操作，在大流量的情况下，操作速度变慢</p>
+<p>​    <strong>JAVA中 ：</strong></p>
+<p>​        独占锁是一种悲观锁，synchronized就是一种独占锁，它假设最坏的情况，并且只有在确保其它线程不会造成干扰的情况下执行，会导致其它所有需要锁的线程挂起，等待持有锁的线程释放锁。</p>
+<h2 id="_4、使用场景举例" tabindex="-1"><a class="header-anchor" href="#_4、使用场景举例" aria-hidden="true">#</a> 4、使用场景举例</h2>
+<p>以MySQL InnoDB为例</p>
+<p>Demo：</p>
+<p>​</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>   begin<span class="token punctuation">;</span>
+
+        select amount from item where item_id <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">for</span> update<span class="token punctuation">;</span>
+
+ <span class="token comment">// 通过amount来做出一些行为,例如告诉用户库存不足,购买失败,然后只有amount > 1才进入更新库存操作</span>
+
+        update item set amount <span class="token operator">=</span> amount <span class="token operator">-</span> <span class="token number">1</span> where item_id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        commit<span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>​    由于是串行执行,其他事务的for update必须等该当前事务的 for update 语句执行,所以我们不必担心我们获得的amount被修改过,因为它永远是最新的</p>
+<h3 id="_0、乐观锁" tabindex="-1"><a class="header-anchor" href="#_0、乐观锁" aria-hidden="true">#</a> 0、乐观锁：</h3>
+<p>不是真正的锁，而是一种实现 : 是一种实现的</p>
+<h3 id="_1、乐观锁" tabindex="-1"><a class="header-anchor" href="#_1、乐观锁" aria-hidden="true">#</a> 1、乐观锁：</h3>
+<p>假设不会发生并发冲突，只有在提交操作时检查是否违反数据完整性，乐观锁不能解决脏读问题</p>
+<p>​            乐观锁大多都基于数据版本（version）记录机制实现，何谓数据版本？即为数据增加一个版本标识，在基于数据库表的版本解决方案中，一般是通过为数据表增加一个“version”字段来实现。读取出数据时，将此版本一同读出，之后更新时，对此版本后 +1。此时，将提交的版本数据与数据库表对应记录的当前版本信息对比时，如果提交的数据版本号大于数据库当前版本号，则予以更新，否则认为是过期数据。</p>
+<h3 id="_2、优缺点" tabindex="-1"><a class="header-anchor" href="#_2、优缺点" aria-hidden="true">#</a> 2、优缺点：</h3>
+<p>​        优点 ：可以多个事务同时进行，然后根据返回的不同结果做相应的操作，避免了长事务中的数据库加锁开销。</p>
+<p>​        缺点 ：乐观锁机制往往基于系统中的数据存储逻辑，因此也具备一定的局限性，如在上例中，由于乐观锁机制是在我们的系统中实现，来自外部系统的用户余额更新操作不受我们系统的控制，因此可能会造成脏数据被更新到数据库中。</p>
+<p>在系统设计阶段，我们应该充分考虑到这些情况出现的可能性，并进行相应调整（如将乐观锁策略在数据库存储过程中实过程中实现，对外只开放基于此存储过程的数据更新途径，而不是将数据库表直接对外公开）。</p>
+<h3 id="_3、步骤" tabindex="-1"><a class="header-anchor" href="#_3、步骤" aria-hidden="true">#</a> 3、步骤 :</h3>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>	<span class="token comment">// 1.查询出商品信息</span>
+	select <span class="token punctuation">(</span>status<span class="token punctuation">,</span>status<span class="token punctuation">,</span>version<span class="token punctuation">)</span> from t_goods where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+	<span class="token comment">// 2.根据商品信息生成订单</span>
+	<span class="token comment">// 3.修改商品</span>
+	update t_goods
+	set status<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>version<span class="token operator">=</span>version<span class="token operator">+</span><span class="token number">1</span> where id<span class="token operator">=</span>#<span class="token punctuation">{</span>id<span class="token punctuation">}</span> and versio<span class="token punctuation">{</span><span class="token number">139</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+
+

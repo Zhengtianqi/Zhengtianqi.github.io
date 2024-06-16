@@ -1,0 +1,94 @@
+<template><div><h1 id="_1、问题描述" tabindex="-1"><a class="header-anchor" href="#_1、问题描述" aria-hidden="true">#</a> 1、问题描述</h1>
+<p>当我们使用springcloud+nacos架构时,由于使用nacos进行负载的原因,组内小伙伴经常调用到其他人的电脑。</p>
+<p>针对此问题我们可以采用的方案：</p>
+<ul>
+<li>（方案1）利用nacos的特性,进行区分namespace或者group,每个人用不同的namespace或者group。该方式需要每个开发人员改yml文件且不能提交,比较麻烦。</li>
+<li>（方案2）不使用openfeign不使用gateway,使用restTemplate,调用前进行判断是否为开发环境,开发环境使用localhost。</li>
+<li>（方案3）该方案我目前采用的,无需每个人进行特别的配置。首先我们使用openfeign且使用gateway；其中nacos的namespace区分dev、test、hotfix、prod；group大家都是用的默认的DEFAULT_GROUP。需要修改的是gateway配置和增加openfeign参数<br>
+若有更好的方法,也请分享我,万分感谢~<br>
+下面详细介绍方案2和方案3：</li>
+</ul>
+<h1 id="_2、方案2" tabindex="-1"><a class="header-anchor" href="#_2、方案2" aria-hidden="true">#</a> 2、方案2</h1>
+<p>使用RestTemplate进行服务调用</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code><span class="token comment">// nacos 服务注册与发现</span>
+<span class="token annotation punctuation">@Autowired</span>
+<span class="token keyword">private</span> <span class="token class-name">NamingService</span> namingService<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Autowired</span>
+<span class="token keyword">private</span> <span class="token class-name">RestTemplate</span> restTemplate<span class="token punctuation">;</span>
+<span class="token comment">// 当前环境</span>
+<span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${spring.profiles.active:#{prod}}"</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> env<span class="token punctuation">;</span>
+<span class="token doc-comment comment">/**
+ * 在不使用feign组件时,使用nacos的NamingService配合RestTemplate的实现服务的发现及调用
+ */</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/hello/{name}"</span><span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token class-name">RequestMethod</span><span class="token punctuation">.</span><span class="token constant">GET</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">echo</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 获取服务实例列表 参数分别为实例名、是否为健康实例</span>
+        <span class="token class-name">String</span> sendUrl <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+        <span class="token class-name">Instance</span> instance <span class="token operator">=</span> namingService<span class="token punctuation">.</span><span class="token function">selectOneHealthyInstance</span><span class="token punctuation">(</span><span class="token string">"server-provider"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 如果是dev环境则调用localhost</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"dev"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sendUrl <span class="token operator">=</span> <span class="token string">"http://localhost:"</span> <span class="token operator">+</span> instance<span class="token punctuation">.</span><span class="token function">getPort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"/echo/"</span> <span class="token operator">+</span> name<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            sendUrl <span class="token operator">=</span> <span class="token string">"http://"</span> <span class="token operator">+</span> instance<span class="token punctuation">.</span><span class="token function">getIp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> instance<span class="token punctuation">.</span><span class="token function">getPort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"/echo/"</span> <span class="token operator">+</span> name<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">String</span> result <span class="token operator">=</span> restTemplate<span class="token punctuation">.</span><span class="token function">getForObject</span><span class="token punctuation">(</span>sendUrl<span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//打印log</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NacosException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h1 id="_2、方案3" tabindex="-1"><a class="header-anchor" href="#_2、方案3" aria-hidden="true">#</a> 2、方案3</h1>
+<p>step1：配置dev的gateway,将动态获得服务地址改为固定的地址,配置如下</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>spring<span class="token operator">:</span>
+  cloud<span class="token operator">:</span>
+    gateway<span class="token operator">:</span>
+      discovery<span class="token operator">:</span>
+        locator<span class="token operator">:</span>
+          lowerCaseServiceId<span class="token operator">:</span> <span class="token boolean">true</span>
+          enabled<span class="token operator">:</span> <span class="token boolean">true</span>
+      routes<span class="token operator">:</span>
+        # 认证中心
+        <span class="token operator">-</span> id<span class="token operator">:</span> auth
+          # 该处写死<span class="token punctuation">,</span>则只调用本地的程序
+          # uri<span class="token operator">:</span> lb<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>auth
+          uri<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">9200</span>
+          predicates<span class="token operator">:</span>
+            <span class="token operator">-</span> <span class="token class-name">Path</span><span class="token operator">=</span><span class="token operator">/</span>auth<span class="token doc-comment comment">/**
+          filters:
+            # 验证码处理
+            - CacheRequestFilter
+            - ValidateCodeFilter
+            - StripPrefix=1
+        # 文件服务
+        - id: file
+          # 该处写死,则只调用本地的程序
+          # uri: lb://file
+          uri: http://localhost:9300
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+</span></code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>step2：配置openfeign接口,增加url参数</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code><span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span>contextId <span class="token operator">=</span> <span class="token string">"remoteFileService"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token class-name">ServiceNameConstants</span><span class="token punctuation">.</span><span class="token constant">FILE_SERVICE</span><span class="token punctuation">,</span> fallbackFactory <span class="token operator">=</span> <span class="token class-name">RemoteFileFallbackFactory</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> url <span class="token operator">=</span> <span class="token string">"${servicename.file}"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">RemoteFileService</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/inner/file/upload"</span><span class="token punctuation">,</span> consumes <span class="token operator">=</span> <span class="token class-name">MediaType</span><span class="token punctuation">.</span><span class="token constant">MULTIPART_FORM_DATA_VALUE</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">R</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SysFile</span><span class="token punctuation">></span></span> <span class="token function">upload</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">LoginUser</span> loginUser<span class="token punctuation">,</span>
+                             <span class="token annotation punctuation">@RequestPart</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"file"</span><span class="token punctuation">)</span> <span class="token class-name">MultipartFile</span> file<span class="token punctuation">,</span>
+                             <span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"filePath"</span><span class="token punctuation">)</span> <span class="token class-name">String</span> filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>上述一般@FeignClient中参数的url若不指定,则会根据value去找nacos中对应的ip和端口。<br>
+所以我们需要配置url为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>s</mi><mi>e</mi><mi>r</mi><mi>v</mi><mi>i</mi><mi>c</mi><mi>e</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi></mrow><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">{servicename.file},</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">ser</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mord mathnormal">nam</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span></span><span class="mpunct">,</span></span></span></span>{servicename.file}会读取yaml文件中的配置,而我们只需要增加namespace为dev的yaml文件,如下：</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>servicename<span class="token operator">:</span>
+        file<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">9300</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>发布到其他环境的yaml则需要配置为</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>servicename<span class="token operator">:</span>
+        file<span class="token operator">:</span> ''
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>经过上述配置,我们可以保证进入gateway的请求,只会代理到localhost。使用openfeign的请求,则会调用配置好的url。生产环境则会因为url为空,会去根据value进行负载</p>
+</div></template>
+
+

@@ -1,0 +1,50 @@
+<template><div><h1 id="引言" tabindex="-1"><a class="header-anchor" href="#引言" aria-hidden="true">#</a> 引言</h1>
+<p>​		网络协议中，TCP/IP有两个具有代表性的传输层协议，分别是TCP和UDP。</p>
+<h1 id="_1、tcp-ip网络模型" tabindex="-1"><a class="header-anchor" href="#_1、tcp-ip网络模型" aria-hidden="true">#</a> 1、TCP/IP网络模型</h1>
+<p>​		计算机与网络设备要相互通信，双方就必须基于相同的方法和规则。而我们就把这种规则称为协议（protocol）</p>
+<p>​		TCP/IP 是互联网相关的各类协议族的总称，比如：TCP，UDP，IP，FTP，HTTP，ICMP，SMTP 等都属于 TCP/IP 族内的协议。</p>
+<figure><img src="/assets/images/TCPIP模型.png" alt="img" tabindex="0" loading="lazy"><figcaption>img</figcaption></figure>
+<h1 id="_2、udp" tabindex="-1"><a class="header-anchor" href="#_2、udp" aria-hidden="true">#</a> 2、UDP</h1>
+<p>​		UDP协议全称是用户数据报协议，在网络中它与TCP协议一样用于处理数据包，是一种无连接的协议。</p>
+<p>​		在OSI模型中，UDP在第四层传输层，处于IP协议的上一层。</p>
+<p>​		UDP有不提供数据包分组、组装和不能对数据包进行排序的缺点，也就是说，当报文发送之后，是无法得知其是否安全完整到达的。特点如下：</p>
+<h2 id="_1-面向无连接" tabindex="-1"><a class="header-anchor" href="#_1-面向无连接" aria-hidden="true">#</a> （1）面向无连接</h2>
+<p>​		首先 UDP 是不需要和 TCP一样在发送数据前进行三次握手建立连接的，想发数据就可以开始发送了。并且也只是数据报文的搬运工，不会对数据报文进行任何拆分和拼接操作。</p>
+<p>具体来说就是：</p>
+<p>​		在发送端，应用层将数据传递给传输层的 UDP 协议，UDP 只会给数据增加一个 UDP 头标识下是 UDP 协议，然后就传递给网络层了<br>
+​		在接收端，网络层将数据传递给传输层，UDP 只去除 IP 报文头就传递给应用层，不会任何拼接操作</p>
+<h2 id="_2-单播、多播、广播" tabindex="-1"><a class="header-anchor" href="#_2-单播、多播、广播" aria-hidden="true">#</a> （2）单播、多播、广播</h2>
+<p>​		UDP 不止支持一对一的传输方式，同样支持一对多，多对多，多对一的方式，也就是说 UDP 提供了单播，多播，广播的功能。</p>
+<h2 id="_3-不可靠性" tabindex="-1"><a class="header-anchor" href="#_3-不可靠性" aria-hidden="true">#</a> （3）不可靠性</h2>
+<p>​		有可能收不到、数据可能不完整（丢包）</p>
+<h2 id="_4-头部开销小、传输高效" tabindex="-1"><a class="header-anchor" href="#_4-头部开销小、传输高效" aria-hidden="true">#</a> （4）头部开销小、传输高效</h2>
+<figure><img src="/assets/images/UDPHeader.png" alt="image-20200721081546701" tabindex="0" loading="lazy"><figcaption>image-20200721081546701</figcaption></figure>
+<p>UDP 头部包含了以下几个数据：</p>
+<p>​		两个十六位的端口号，分别为源端口（可选字段）和目标端口<br>
+​		整个数据报文的长度<br>
+​		整个数据报文的检验和（IPv4 可选 字段），该字段用于发现头部信息和数据中的错误<br>
+​		因此 UDP 的头部开销小，只有八字节，相比 TCP 的至少二十字节要少得多，在传输数据报文时是很高效的</p>
+<h1 id="_3、tcp" tabindex="-1"><a class="header-anchor" href="#_3、tcp" aria-hidden="true">#</a> 3、TCP</h1>
+<p>​		TCP协议全称是传输控制协议是一种面向连接的、可靠的、基于字节流的传输层通信协议，由 IETF 的RFC 793定义。TCP 是面向连接的、可靠的流协议。流就是指不间断的数据结构。</p>
+<h2 id="_1-tcp连接" tabindex="-1"><a class="header-anchor" href="#_1-tcp连接" aria-hidden="true">#</a> （1）TCP连接</h2>
+<p>三次握手、四次挥手</p>
+<h2 id="_2-特点" tabindex="-1"><a class="header-anchor" href="#_2-特点" aria-hidden="true">#</a> （2）特点</h2>
+<p>面向连接：</p>
+<p>​		面向连接，是指发送数据之前必须在两端建立连接。建立连接的方法是“三次握手”，这样能建立可靠的连接。建立连接，是为数据的可靠传输打下了基础。</p>
+<p>仅支持单播传输：</p>
+<p>​		每条TCP传输连接只能有两个端点，只能进行点对点的数据传输，不支持多播和广播传输方式。</p>
+<p>面向字节流：<br>
+TCP不像UDP一样那样一个个报文独立地传输，而是在不保留报文边界的情况下以字节流方式进行传输。</p>
+<p>可靠传输：</p>
+<p>​		对于可靠传输，判断丢包，误码靠的是TCP的段编号以及确认号。TCP为了保证报文传输的可靠，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到的字节发回一个相应的确认(ACK)；如果发送端实体在合理的往返时延(RTT)内未收到确认，那么对应的数据（假设丢失了）将会被重传。</p>
+<p>提供拥塞控制：</p>
+<p>​		当网络出现拥塞的时候，TCP能够减小向网络注入数据的速率和数量，缓解拥塞</p>
+<p>TCP提供全双工通信：<br>
+TCP允许通信双方的应用程序在任何时候都能发送数据，因为TCP连接的两端都设有缓存，用来临时存放双向通信的数据。当然，TCP可以立即发送一个数据段，也可以缓存一段时间以便一次发送更多的数据段（最大的数据段大小取决于MSS）</p>
+<h2 id="_4、对比" tabindex="-1"><a class="header-anchor" href="#_4、对比" aria-hidden="true">#</a> 4、对比</h2>
+<figure><img src="/assets/images/UDPTCPcompare.png" alt="image-20200721082159974" tabindex="0" loading="lazy"><figcaption>image-20200721082159974</figcaption></figure>
+<p>​		TCP向上层提供面向连接的可靠服务 ，UDP向上层提供无连接不可靠服务。虽然 UDP 并没有 TCP 传输来的准确，但是也能在很多实时性要求高的地方有所作为<br>
+​		对数据准确性要求高，速度可以相对较慢的，可以选用TCP</p>
+</div></template>
+
+

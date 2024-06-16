@@ -1,0 +1,33 @@
+<template><div><h2 id="_1、tcp三次握手协议-打开连接" tabindex="-1"><a class="header-anchor" href="#_1、tcp三次握手协议-打开连接" aria-hidden="true">#</a> 1、TCP三次握手协议（打开连接）</h2>
+<figure><img src="/assets/images/三次握手协议1.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>第一次： A城发信，B城收到了------&gt; 此时B城就会明白 ：A城的发信能力和自己的收信能力是没问题的</p>
+<p>第二次：B城发信，A城收到了-----&gt; 此时A城就会明白 ：A城的发信能力和收信能力都是没问题的，B城的发信能力和收信能力都是没问题的。但是B不知道自己发信能力如何，所以要进行第三次握手</p>
+<p>第三次：A城发信，B城收到了，此时B城就会明白，B城的发信能力和自己的收信能力是没有问题的。</p>
+<p>更加简洁的图片</p>
+<figure><img src="/assets/images/三次握手协议2.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h2 id="_2、tcp四次挥手协议-关闭连接" tabindex="-1"><a class="header-anchor" href="#_2、tcp四次挥手协议-关闭连接" aria-hidden="true">#</a> 2、TCP四次挥手协议（关闭连接）</h2>
+<figure><img src="/assets/images/四次挥手协议.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>第一次：A和B打电话，通话即将结束后，A说“我有事先忙了，我得关闭链接了”，</p>
+<p>第一次握手(SYN=1, seq=x)</p>
+<p>客户端发送一个TCP的SYN 标志位置1的包，指明客户端打算连接的服务器的端口，以及初始序号X,保存在包头的序列号(Sequence Number)字段里。</p>
+<p>发送完毕后，客户端进入SYN_SEND 状态。</p>
+<p>第二次握手(SYN=1, ACK=1, seq=y, ACKnum=x+1):</p>
+<p>服务器发回确认包(ACK)应答。即SYN 标志位和ACK 标志位均为1。服务器端选择自己ISN 序列号，放到Seq 域里，同时将确认序号(Acknowledgement Number)设置为客户的ISN 加1，即X+1。</p>
+<p>发送完毕后，服务器端进入SYN_RCVD 状态。</p>
+<p>第三次握手(ACK=1，ACKnum=y+1)</p>
+<p>客户端再次发送确认包(ACK)，SYN标志位为0，ACK标志位为1，并且把服务器发来ACK的序号字段+1，放在确定字段中发送给对方，并且在数据段放写ISN发完毕后，客户端进入ESTABLISHED 状态，当服务器端接收到这个包时，也进入ESTABLISHED 状态，TCP握手结束。</p>
+<h3 id="_2-四次挥手" tabindex="-1"><a class="header-anchor" href="#_2-四次挥手" aria-hidden="true">#</a> （2）四次挥手</h3>
+<figure><img src="/assets/images/四次挥手协议2.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>第一次挥手(FIN=1，seq=x)</p>
+<p>假设客户端想要关闭连接，客户端发送一个FIN 标志位置为1的包，表示自己已经没有数据可以发送了，但是仍然可以接受数据。发送完毕后，客户端进入FIN_WAIT_1 状态。</p>
+<p>第二次挥手(ACK=1，ACKnum=x+1)</p>
+<p>服务器端确认客户端的FIN包，发送一个确认包，表明自己接受到了客户端关闭连接的请求，但还没有准备好关闭连接。发送完毕后，服务器端进入CLOSE_WAIT 状态，客户端接收到这个确认包之后，进入FIN_WAIT_2 状态，等待服务器端关闭连接。</p>
+<p>第三次挥手(FIN=1，seq=w)</p>
+<p>服务器端准备好关闭连接时，向客户端发送结束连接请求，FIN置为1。发送完毕后，服务器端进入LAST_ACK 状态，等待来自客户端的最后一个ACK。</p>
+<p>第四次挥手(ACK=1，ACKnum=w+1)</p>
+<p>客户端接收到来自服务器端的关闭请求，发送一个确认包，并进入TIME_WAIT状态，等待可能出现的要求重传的ACK包。</p>
+<p>服务器端接收到这个确认包之后，关闭连接，进入CLOSED 状态。</p>
+<p>客户端等待了某个固定时间（两个最大段生命周期，2MSL，2 Maximum Segment Lifetime）之后，没有收到服务器端的ACK，认为服务器端已经正常关闭连接，于是自己也关闭连接，进入CLOSED状态。</p>
+</div></template>
+
+

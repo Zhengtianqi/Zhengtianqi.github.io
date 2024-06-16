@@ -1,0 +1,160 @@
+<template><div><h1 id="一、搭建docker私有仓库" tabindex="-1"><a class="header-anchor" href="#一、搭建docker私有仓库" aria-hidden="true">#</a> 一、搭建docker私有仓库</h1>
+<p>本文使用阿里云私有仓库（个人免费版），阿里云---&gt;容器镜像服务</p>
+<figure><img src="/assets/images/image-20220411212506831.png" alt="image-20220411212506831" tabindex="0" loading="lazy"><figcaption>image-20220411212506831</figcaption></figure>
+<h1 id="二、docker打包" tabindex="-1"><a class="header-anchor" href="#二、docker打包" aria-hidden="true">#</a> 二、docker打包</h1>
+<p>1、程序目录</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>ll
+    
+<span class="token operator">-</span>rw<span class="token operator">-</span>r<span class="token operator">--</span>r<span class="token operator">--</span> <span class="token number">1</span> root root      <span class="token number">872</span> <span class="token number">4</span>月  <span class="token number">11</span> <span class="token number">22</span><span class="token operator">:</span><span class="token number">03</span> dockerfile
+<span class="token operator">-</span>rw<span class="token operator">-</span>r<span class="token operator">--</span>r<span class="token operator">--</span> <span class="token number">1</span> root root     <span class="token number">8678</span> <span class="token number">4</span>月  <span class="token number">11</span> <span class="token number">21</span><span class="token operator">:</span><span class="token number">53</span> jdk<span class="token operator">-</span><span class="token number">8</span>u251<span class="token operator">-</span>linux<span class="token operator">-</span>x64<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz
+<span class="token operator">-</span>rw<span class="token operator">-</span>r<span class="token operator">--</span>r<span class="token operator">--</span> <span class="token number">1</span> root root <span class="token number">75306958</span> <span class="token number">4</span>月  <span class="token number">11</span> <span class="token number">21</span><span class="token operator">:</span><span class="token number">47</span> ruoyi<span class="token punctuation">.</span>jar
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><figure><img src="/assets/images/image-20220411220512656.png" alt="image-20220411220547876" tabindex="0" loading="lazy"><figcaption>image-20220411220547876</figcaption></figure>
+<p>2、编写dockerfile并打包</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code><span class="token constant">FROM</span> uquote<span class="token operator">/</span>jdk8<span class="token operator">-</span>tomee1<span class="token punctuation">.</span><span class="token number">7.3</span><span class="token operator">-</span>plume
+## 编写人
+<span class="token constant">MAINTAINER</span> zhengtianqi
+# 在docker容器构建时拷贝程序
+<span class="token constant">ADD</span> ruoyi<span class="token punctuation">.</span>jar ruoyi<span class="token punctuation">.</span>jar
+# 容器暴露的端口号，需要与jar包在容器中运行使用端口号一致
+<span class="token constant">EXPOSE</span> <span class="token number">80</span>
+# 容器启动之后执行的命令， java <span class="token operator">-</span>jar <span class="token constant">ROOT</span><span class="token punctuation">.</span>jar
+<span class="token constant">ENTRYPOINT</span> <span class="token punctuation">[</span><span class="token string">"java"</span><span class="token punctuation">,</span><span class="token string">"-jar"</span><span class="token punctuation">,</span><span class="token string">"ruoyi.jar"</span><span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code># 打包
+docker build <span class="token operator">-</span>t test<span class="token operator">:</span>latest <span class="token punctuation">.</span>
+# 查看
+docker images
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>3、登录阿里云镜像仓库</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>docker login <span class="token operator">--</span>username<span class="token operator">=</span>z130<span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token number">66717</span> registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>4、将镜像推送到阿里云镜像仓库Registry</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>docker tag <span class="token punctuation">[</span><span class="token class-name">ImageId</span><span class="token punctuation">]</span> registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span>zhengtianqi<span class="token operator">/</span>demo<span class="token operator">:</span><span class="token punctuation">[</span>镜像版本号<span class="token punctuation">]</span>
+docker push registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span>zhengtianqi<span class="token operator">/</span>demo<span class="token operator">:</span><span class="token punctuation">[</span>镜像版本号<span class="token punctuation">]</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>5、查看阿里云镜像仓库Registry中的镜像</p>
+<figure><img src="/assets/images/image-20220411221525635.png" alt="image-20220411221525635" tabindex="0" loading="lazy"><figcaption>image-20220411221525635</figcaption></figure>
+<p>6、拉取镜像</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>docker pull registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span>zhengtianqi<span class="token operator">/</span>demo<span class="token operator">:</span>latest
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h1 id="三、k8s" tabindex="-1"><a class="header-anchor" href="#三、k8s" aria-hidden="true">#</a> 三、k8s</h1>
+<p>1、创建yaml文件</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>kubectl create deployment <span class="token punctuation">[</span>pod名称<span class="token punctuation">]</span> <span class="token operator">--</span>image<span class="token operator">=</span><span class="token punctuation">[</span>docker私有仓库地址<span class="token operator">/</span>镜像<span class="token operator">:</span>版本号<span class="token punctuation">]</span> <span class="token operator">-</span>o yaml <span class="token operator">--</span>dry<span class="token operator">-</span>run<span class="token operator">=</span>client <span class="token operator">></span> <span class="token punctuation">[</span>yaml文件名称<span class="token punctuation">]</span><span class="token punctuation">.</span>yaml
+示例：
+kubectl create deployment demo <span class="token operator">--</span>port<span class="token operator">=</span><span class="token number">80</span> <span class="token operator">--</span>replicas<span class="token operator">=</span><span class="token number">3</span> <span class="token operator">--</span>image<span class="token operator">=</span>registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span>zhengtianqi<span class="token operator">/</span>demo<span class="token operator">:</span>latest <span class="token operator">-</span>o yaml <span class="token operator">--</span>dry<span class="token operator">-</span>run<span class="token operator">=</span>client <span class="token operator">></span> demo<span class="token punctuation">.</span>yaml
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>2、查看yaml文件</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>apiVersion<span class="token operator">:</span> apps<span class="token operator">/</span>v1
+kind<span class="token operator">:</span> <span class="token class-name">Deployment</span>
+metadata<span class="token operator">:</span>
+  creationTimestamp<span class="token operator">:</span> <span class="token keyword">null</span>
+  labels<span class="token operator">:</span>
+    app<span class="token operator">:</span> demo
+  name<span class="token operator">:</span> demo
+spec<span class="token operator">:</span>
+  replicas<span class="token operator">:</span> <span class="token number">3</span>
+  ports<span class="token operator">:</span>
+  <span class="token operator">-</span> port<span class="token operator">:</span> <span class="token number">80</span>
+    targetPort<span class="token operator">:</span> <span class="token number">80</span>  
+  selector<span class="token operator">:</span>
+    matchLabels<span class="token operator">:</span>
+      app<span class="token operator">:</span> demo
+  strategy<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  template<span class="token operator">:</span>
+    metadata<span class="token operator">:</span>
+      creationTimestamp<span class="token operator">:</span> <span class="token keyword">null</span>
+      labels<span class="token operator">:</span>
+        app<span class="token operator">:</span> demo
+    spec<span class="token operator">:</span>
+      containers<span class="token operator">:</span>
+      <span class="token operator">-</span> image<span class="token operator">:</span> registry<span class="token punctuation">.</span>cn<span class="token operator">-</span>beijing<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com<span class="token operator">/</span>zhengtianqi<span class="token operator">/</span>demo<span class="token operator">:</span>latest
+        name<span class="token operator">:</span> demo
+        resources<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+status<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>3、通过yaml创建服务</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>kubectl create <span class="token operator">-</span>f demo<span class="token punctuation">.</span>yaml
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><figure><img src="/assets/images/image-20220411222247494.png" alt="image-20220411222247494" tabindex="0" loading="lazy"><figcaption>image-20220411222247494</figcaption></figure>
+<p>4、查看创建状态</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>kubectl get pod
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>5、创建日志查看</p>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code>kubectl describe pod
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>6、杀死当前pod</p>
+<div class="language-text line-numbers-mode" data-ext="text"><pre v-pre class="language-text"><code>kubectl delete deployment &lt;deployment名> -n &lt;namespace>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>7、pod升级</p>
+<p><a href="https://blog.csdn.net/zzq900503/article/details/101221899" target="_blank" rel="noopener noreferrer">Kubernetes--k8s---滚动更新--零停机不停服发布服务<ExternalLinkIcon/></a></p>
+<p><a href="http://idcsec.com/2019/03/05/kubernetes%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%EF%BC%88%E6%97%A0%E4%B8%AD%E6%96%AD%E5%B9%B3%E6%BB%91%E5%8F%91%E5%B8%83%EF%BC%89/" target="_blank" rel="noopener noreferrer">Kubernetes滚动更新（无中断平滑发布） (idcsec.com)<ExternalLinkIcon/></a></p>
+<h1 id="附-yaml文件详解" tabindex="-1"><a class="header-anchor" href="#附-yaml文件详解" aria-hidden="true">#</a> 附：yaml文件详解</h1>
+<div class="language-java line-numbers-mode" data-ext="java"><pre v-pre class="language-java"><code># yaml格式的pod定义文件完整内容：
+apiVersion<span class="token operator">:</span> v1           #必选，版本号，例如v1
+kind<span class="token operator">:</span> <span class="token class-name">Pod</span>                #必选，<span class="token class-name">Pod</span>
+metadata<span class="token operator">:</span>                #必选，元数据
+  name<span class="token operator">:</span> string           #必选，<span class="token class-name">Pod</span>名称
+  namespace<span class="token operator">:</span> string      #必选，<span class="token class-name">Pod</span>所属的命名空间
+  labels<span class="token operator">:</span>                #自定义标签
+    <span class="token operator">-</span> name<span class="token operator">:</span> string       #自定义标签名字
+  annotations<span class="token operator">:</span>           #自定义注释列表
+    <span class="token operator">-</span> name<span class="token operator">:</span> string
+spec<span class="token operator">:</span>                    #必选，<span class="token class-name">Pod</span>中容器的详细定义
+  containers<span class="token operator">:</span>            #必选，<span class="token class-name">Pod</span>中容器列表
+  <span class="token operator">-</span> name<span class="token operator">:</span> string         #必选，容器名称
+    image<span class="token operator">:</span> string        #必选，容器的镜像名称
+    imagePullPolicy<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token class-name">Always</span> <span class="token operator">|</span> <span class="token class-name">Never</span> <span class="token operator">|</span> <span class="token class-name">IfNotPresent</span><span class="token punctuation">]</span> #获取镜像的策略 <span class="token class-name">Alawys</span>表示下载镜像 <span class="token class-name">IfnotPresent</span>表示优先使用本地镜像，否则下载镜像，<span class="token class-name">Nerver</span>表示仅使用本地镜像
+    command<span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>                  #容器的启动命令列表，如不指定，使用打包时使用的启动命令
+    args<span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>                     #容器的启动命令参数列表
+    workingDir<span class="token operator">:</span> string                 #容器的工作目录
+    volumeMounts<span class="token operator">:</span>                      #挂载到容器内部的存储卷配置
+    <span class="token operator">-</span> name<span class="token operator">:</span> string                     #引用pod定义的共享存储卷的名称，需用volumes<span class="token punctuation">[</span><span class="token punctuation">]</span>部分定义的的卷名
+      mountPath<span class="token operator">:</span> string               #存储卷在容器内mount的绝对路径，应少于<span class="token number">512</span>字符
+      readOnly<span class="token operator">:</span> <span class="token keyword">boolean</span>               #是否为只读模式
+    ports<span class="token operator">:</span>                           #需要暴露的端口库号列表
+    <span class="token operator">-</span> name<span class="token operator">:</span> string                   #端口号名称
+      containerPort<span class="token operator">:</span> <span class="token keyword">int</span>             #容器需要监听的端口号
+      hostPort<span class="token operator">:</span> <span class="token keyword">int</span>                  #容器所在主机需要监听的端口号，默认与<span class="token class-name">Container</span>相同
+      protocol<span class="token operator">:</span> string               #端口协议，支持<span class="token constant">TCP</span>和<span class="token constant">UDP</span>，默认<span class="token constant">TCP</span>
+    env<span class="token operator">:</span>                             #容器运行前需设置的环境变量列表
+    <span class="token operator">-</span> name<span class="token operator">:</span> string                   #环境变量名称
+      value<span class="token operator">:</span> string                  #环境变量的值
+    resources<span class="token operator">:</span>                       #资源限制和请求的设置
+      limits<span class="token operator">:</span>                        #资源限制的设置
+        cpu<span class="token operator">:</span> string                  #<span class="token class-name">Cpu</span>的限制，单位为core数，将用于docker run <span class="token operator">--</span>cpu<span class="token operator">-</span>shares参数
+        memory<span class="token operator">:</span> string               #内存限制，单位可以为<span class="token class-name">Mib</span><span class="token operator">/</span><span class="token class-name">Gib</span>，将用于docker run <span class="token operator">--</span>memory参数
+      requests<span class="token operator">:</span>                       #资源请求的设置
+        cpu<span class="token operator">:</span> string                   #<span class="token class-name">Cpu</span>请求，容器启动的初始可用数量
+        memory<span class="token operator">:</span> string                #内存请求，容器启动的初始可用数量
+    livenessProbe<span class="token operator">:</span>                    #对<span class="token class-name">Pod</span>内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可
+      exec<span class="token operator">:</span>                           #对<span class="token class-name">Pod</span>容器内检查方式设置为exec方式
+        command<span class="token operator">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>             #exec方式需要制定的命令或脚本
+      httpGet<span class="token operator">:</span>                        #对<span class="token class-name">Pod</span>内个容器健康检查方法设置为<span class="token class-name">HttpGet</span>，需要制定<span class="token class-name">Path</span>、port
+        path<span class="token operator">:</span> string
+        port<span class="token operator">:</span> number
+        host<span class="token operator">:</span> string
+        scheme<span class="token operator">:</span> string
+        <span class="token class-name">HttpHeaders</span><span class="token operator">:</span>
+        <span class="token operator">-</span> name<span class="token operator">:</span> string
+          value<span class="token operator">:</span> string
+      tcpSocket<span class="token operator">:</span>                       #对<span class="token class-name">Pod</span>内个容器健康检查方式设置为tcpSocket方式
+         port<span class="token operator">:</span> number
+       initialDelaySeconds<span class="token operator">:</span> <span class="token number">0</span>       #容器启动完成后首次探测的时间，单位为秒
+       timeoutSeconds<span class="token operator">:</span> <span class="token number">0</span>            #对容器健康检查探测等待响应的超时时间，单位秒，默认<span class="token number">1</span>秒
+       periodSeconds<span class="token operator">:</span> <span class="token number">0</span>             #对容器监控检查的定期探测时间设置，单位秒，默认<span class="token number">10</span>秒一次
+       successThreshold<span class="token operator">:</span> <span class="token number">0</span>
+       failureThreshold<span class="token operator">:</span> <span class="token number">0</span>
+       securityContext<span class="token operator">:</span>
+         privileged<span class="token operator">:</span><span class="token boolean">false</span>
+    restartPolicy<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token class-name">Always</span> <span class="token operator">|</span> <span class="token class-name">Never</span> <span class="token operator">|</span> <span class="token class-name">OnFailure</span><span class="token punctuation">]</span>#<span class="token class-name">Pod</span>的重启策略，<span class="token class-name">Always</span>表示一旦不管以何种方式终止运行，kubelet都将重启，<span class="token class-name">OnFailure</span>表示只有<span class="token class-name">Pod</span>以非<span class="token number">0</span>退出码退出才重启，<span class="token class-name">Nerver</span>表示不再重启该<span class="token class-name">Pod</span>
+    nodeSelector<span class="token operator">:</span> obeject          #设置<span class="token class-name">NodeSelector</span>表示将该<span class="token class-name">Pod</span>调度到包含这个label的node上，以key：value的格式指定
+    imagePullSecrets<span class="token operator">:</span>              #<span class="token class-name">Pull</span>镜像时使用的secret名称，以key：secretkey格式指定
+    <span class="token operator">-</span> name<span class="token operator">:</span> string
+    hostNetwork<span class="token operator">:</span><span class="token boolean">false</span>     #是否使用主机网络模式，默认为<span class="token boolean">false</span>，如果设置为<span class="token boolean">true</span>，表示使用宿主机网络
+    volumes<span class="token operator">:</span>                    #在该pod上定义共享存储卷列表
+    <span class="token operator">-</span> name<span class="token operator">:</span> string              #共享存储卷名称 （volumes类型有很多种）
+      emptyDir<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>              #类型为emtyDir的存储卷，与<span class="token class-name">Pod</span>同生命周期的一个临时目录。为空值
+      hostPath<span class="token operator">:</span> string         #类型为hostPath的存储卷，表示挂载<span class="token class-name">Pod</span>所在宿主机的目录
+        path<span class="token operator">:</span> string           #<span class="token class-name">Pod</span>所在宿主机的目录，将被用于同期中mount的目录
+      secret<span class="token operator">:</span>                  #类型为secret的存储卷，挂载集群与定义的secre对象到容器内部
+        scretname<span class="token operator">:</span> string  
+        items<span class="token operator">:</span>     
+        <span class="token operator">-</span> key<span class="token operator">:</span> string
+          path<span class="token operator">:</span> string
+      configMap<span class="token operator">:</span>             #类型为configMap的存储卷，挂载预定义的configMap对象到容器内部
+        name<span class="token operator">:</span> string
+        items<span class="token operator">:</span>
+        <span class="token operator">-</span> key<span class="token operator">:</span> string
+          path<span class="token operator">:</span> string
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+
+
