@@ -125,7 +125,7 @@ public static void main(String[] args) throws Exception {
     System.out.println(upperfuture.get());
 }
 ```
-示例3：运行完成的异步任务的结果 (thenAccept/thenRun)
+示例4：运行完成的异步任务的结果 (thenAccept/thenRun)
 在 future 的管道里有两种典型的“最终”阶段方法。他们在你使用 future 的值的时候做好准备，当 thenAccept() 提供最终的值时，thenRun 执行 Runnable。
 Consumer 接口方法 void accept(T t); 包含一个参数，但是没有返回值
 ```java
@@ -144,6 +144,47 @@ public static void main(String[] args) throws Exception {
     // 等待将来完成，然后返回结果。
     future.get();
 }
+```
+示例5：CompletableFuture的runAsync(Runnable, Executor)
+使用指定的线程池执行异步代码。此异步方法无法返回值。
+```java
+public static void main(String[] args) {
+        //当前调用者线程为:main
+        System.out.println("当前调用者线程为:" + Thread.currentThread().getName());
+        
+        //todo 根据阿里规约 建议真实开发时使用 ThreadPoolExecutor 定义线程池
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
+        
+        CompletableFuture.runAsync(() -> {
+            // 异步方法内当前执行线程为:pool-1-thread-1
+            System.out.println("异步方法内当前执行线程为:" + Thread.currentThread().getName());
+            System.out.println(111);
+        }, threadPool);
+        
+        threadPool.shutdown();
+    }
+```
+示例6：supplyAsync(Supplier , Executor)
+使用指定线程池 来执行可获取返回值的异步任务
+```java
+    public static void main(String[] args)  {
+        // todo 根据阿里规约 建议真实开发时使用 ThreadPoolExecutor 定义线程池
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
+        CompletableFuture<String> supplyAsync = CompletableFuture.supplyAsync(() -> {
+            // 异步方法内当前执行线程为:pool-1-thread-1
+            System.out.println("异步方法内当前执行线程为:" + Thread.currentThread().getName());
+            // 模拟耗时与返回结果
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "hello,world";
+        },threadPool);
+        // 获取异步线程执行结果
+        System.out.println(supplyAsync.join());
+        threadPool.shutdown();
+    }
 ```
 
 总结：使用CompletableFuture–Supplier方法定义异步任务链可以解决之前使用Future–Callable方法引入的一些问题：
