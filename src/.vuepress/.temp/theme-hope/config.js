@@ -1,16 +1,16 @@
 import { defineClientConfig } from "@vuepress/client";
-import { VPLink } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-shared/lib/client/index.js";
+import { VPLink } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-shared/lib/client/index.js";
 
-import { HopeIcon, Layout, NotFound, useScrollPromise, injectDarkmode, setupDarkmode, setupSidebarItems } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/export.js";
+import { HopeIcon, Layout, NotFound, useScrollPromise, injectDarkmode, setupDarkmode, setupSidebarItems } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/export.js";
 
-import { defineAutoCatalogIconComponent } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-auto-catalog/lib/client/index.js"
-import { BlogCategory, BlogHome, BlogType, BloggerInfo, Timeline, setupBlog } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/modules/blog/export.js";
-import "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/modules/blog/styles/all.scss";
-import { GlobalEncrypt, LocalEncrypt } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/modules/encrypt/export.js";
-import "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/modules/encrypt/styles/all.scss"
-import Slide from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-md-enhance/lib/client/SlidePage.js";
+import { defineAutoCatalogIconComponent } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-auto-catalog/lib/client/index.js"
+import { BlogCategory, BlogHome, BlogType, BloggerInfo, Timeline, setupBlog } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/modules/blog/export.js";
+import "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/modules/blog/styles/all.scss";
+import { GlobalEncrypt, LocalEncrypt } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/modules/encrypt/export.js";
+import "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/modules/encrypt/styles/all.scss"
+import Slide from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-md-enhance/lib/client/SlidePage.js";
 
-import "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-theme-hope/lib/bundle/styles/all.scss";
+import "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-theme-hope/lib/bundle/styles/all.scss";
 
 defineAutoCatalogIconComponent(HopeIcon);
 

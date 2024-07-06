@@ -1,13 +1,13 @@
 import { defineClientConfig } from "@vuepress/client";
-import { hasGlobalComponent } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-shared/lib/client/index.js";
+import { hasGlobalComponent } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-shared/lib/client/index.js";
 import { h } from "vue";
 
-import { useScriptTag } from "D:/IdeaProjects/blog/zhengtianqi/node_modules/@vueuse/core/index.mjs";
-import Badge from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-components/lib/client/components/Badge.js";
-import FontIcon from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-components/lib/client/components/FontIcon.js";
-import BackToTop from "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-components/lib/client/components/BackToTop.js";
+import { useScriptTag } from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/@vueuse/core/index.mjs";
+import Badge from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-components/lib/client/components/Badge.js";
+import FontIcon from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-components/lib/client/components/FontIcon.js";
+import BackToTop from "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-components/lib/client/components/BackToTop.js";
 
-import "D:/IdeaProjects/blog/zhengtianqi/node_modules/vuepress-plugin-components/lib/client/styles/sr-only.scss";
+import "D:/IdeaProjects/blog/github/Zhengtianqi.github.io/node_modules/vuepress-plugin-components/lib/client/styles/sr-only.scss";
 
 export default defineClientConfig({
   enhance: ({ app }) => {
