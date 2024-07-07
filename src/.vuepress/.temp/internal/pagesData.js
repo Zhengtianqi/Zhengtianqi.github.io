@@ -489,4 +489,6 @@ export const pagesData = {
   "v-4f468d65": () => import(/* webpackChunkName: "v-4f468d65" */"D:/IdeaProjects/blog/github/Zhengtianqi.github.io/src/.vuepress/.temp/pages/tag/分布式事务/index.html.js").then(({ data }) => data),
   // path: /tag/kafka/
   "v-257204d2": () => import(/* webpackChunkName: "v-257204d2" */"D:/IdeaProjects/blog/github/Zhengtianqi.github.io/src/.vuepress/.temp/pages/tag/kafka/index.html.js").then(({ data }) => data),
+  // path: /posts/guarantee/%E5%86%8D%E6%8B%85%E4%BF%9D.html
+  "v-24145a40": () => import(/* webpackChunkName: "v-24145a40" */"D:/IdeaProjects/blog/github/Zhengtianqi.github.io/src/.vuepress/.temp/pages/posts/guarantee/再担保.html.js").then(({ data }) => data),
 }
