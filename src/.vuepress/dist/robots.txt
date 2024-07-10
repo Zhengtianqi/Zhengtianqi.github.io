@@ -1,5 +1,0 @@
-
-User-agent:*
-Disallow:
-
-Sitemap: https://zhengtianqi.gitee.io/sitemap.xml
