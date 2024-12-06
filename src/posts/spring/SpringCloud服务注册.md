@@ -1,6 +1,6 @@
 ---
 title: SpringCloud服务注册
-author: 郑天祺
+author: ztq
 tag:
   - SpringCloud
 category:

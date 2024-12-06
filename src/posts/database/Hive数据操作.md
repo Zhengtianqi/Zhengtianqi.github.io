@@ -1,6 +1,6 @@
 ---
 title: Hive数据操作（1）
-author: 郑天祺
+author: ztq
 tag:
 
   - hive
@@ -22,7 +22,7 @@ OVERWRITE INTO TABLE employees
 PARTITION (country = 'US', state = 'CA')  
 ```
 
-​		如果分区目录不存在的话，会先创建分区目录，然后再将数据拷贝到该目录下。
+		如果分区目录不存在的话，会先创建分区目录，然后再将数据拷贝到该目录下。
 
 # 二、设置分区
 

@@ -1,6 +1,6 @@
 ---
 title: mysql 数据安全的“双1模式”
-author: 郑天祺
+author: ztq
 tag:
 
   - mysql

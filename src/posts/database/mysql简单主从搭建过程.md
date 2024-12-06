@@ -14,13 +14,13 @@ date: 2022-04-11 23:32:00
 
 [MySql集群简介-告诉你为什么要用集群部署 - 掘金 (juejin.cn)](https://juejin.cn/post/6985187754493607966)
 
-[MySQL高可用集群方案 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/102798762)
+[mysql高可用集群方案 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/102798762)
 
 [MYSQL集群简介及对比 - 掘金 (juejin.cn)](https://juejin.cn/post/7027910561459503141)
 
-[MySQL八大集群架构的优点和缺点总结](https://www.yisu.com/zixun/527196.html)
+[mysql八大集群架构的优点和缺点总结](https://www.yisu.com/zixun/527196.html)
 
-# 二、MySQL安装（一主一从）
+# 二、mysql安装（一主一从）
 
 一台作为主服务器，一台作为从服务器，主服务器进行写操作，从服务器进行读操作。
 

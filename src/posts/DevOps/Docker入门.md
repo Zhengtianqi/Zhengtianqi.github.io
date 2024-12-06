@@ -1,6 +1,6 @@
 ---
 title: Docker入门
-author: 郑天祺
+author: ztq
 tag:
   - docker
 category:
@@ -12,8 +12,8 @@ date: 2020-12-14 13:13:00
 
 ## docker概念		
 
-​		docker和虚拟机VM结构非常相似，但是docker并非虚拟机技术，容器除了运行其中的应用之外，基本不消耗额外的系统资源，虚拟机需要单独分配 独占内存、磁盘等资源；
-​		docker最初的设计优势，正是它比虚拟机更节省内存，启动更快。Docker不停地给大家宣传，”虚拟机需要数分钟启动，而Docker容器只需要50毫秒”。
+		docker和虚拟机VM结构非常相似，但是docker并非虚拟机技术，容器除了运行其中的应用之外，基本不消耗额外的系统资源，虚拟机需要单独分配 独占内存、磁盘等资源；
+		docker最初的设计优势，正是它比虚拟机更节省内存，启动更快。Docker不停地给大家宣传，”虚拟机需要数分钟启动，而Docker容器只需要50毫秒”。
 
 ![image-20201214131527522](/assets/images/image-20201214131527522.png)
 
@@ -29,7 +29,7 @@ date: 2020-12-14 13:13:00
 •	Docker Registry : 这个可认为是Docker Images的仓库，就像git的仓库一样，用来管理Docker镜像的，提供了Docker镜像的上传、下载和浏览等功能，并且提供安全的账号管理可以管理只有自己可见的私人image。就像git的仓库一样，docker也提供了官方的Registry，叫做Dock Hub(http://hub.Docker.com)
 •	Docker Container : 俗称Docker的容器，这个是最关键的东西了。Docker Container是真正跑项目程序、消耗机器资源、提供服务的地方，Docker Container通过Docker Images启动，在Docker Images的基础上运行你需要的代码。你可以认为Docker Container提供了系统硬件环境，然后使用了Docker Images这些制作好的系统盘，再加上你的项目代码，跑起来就可以提供服务了。 听到这里，可能你会觉得是不是有点像一个VM利用保存的备份或者快照跑起来环境一样，其实是挺像的，但是实际上是有本质的区别，后面我会细说。
 
-​       (C/S) 架构模式， 使用远程API来管理和创建 Docker容器。Docker容器通过镜像来创建，容器与镜像的关系类 似于面向对象编程中的对象与类；
+       (C/S) 架构模式， 使用远程API来管理和创建 Docker容器。Docker容器通过镜像来创建，容器与镜像的关系类 似于面向对象编程中的对象与类；
 
 ## docker安装
 
@@ -87,7 +87,7 @@ docker images
   docker run -p 8081:8080 tomcat 
 ```
 
-​	若端口被占用，可以指定容器和主机的映射端口 前者是外围访问端口：后者是容器内部端口
+	若端口被占用，可以指定容器和主机的映射端口 前者是外围访问端口：后者是容器内部端口
 
 ```java
 docker run -dit -p 4000:4000 centos 

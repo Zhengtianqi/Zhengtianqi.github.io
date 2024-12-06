@@ -1,6 +1,6 @@
 ---
 title: String、 StringBuilder、StringBuffer区别
-author: 郑天祺
+author: ztq
 tag:
   - String
   - StringBuilder
@@ -15,14 +15,14 @@ date: 2020-07-21 15:43:00
 
 ## （1）运行速度
 
-​		StringBuilder > StringBuffer > String
-​		String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。
+		StringBuilder > StringBuffer > String
+		String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。
 
-​		因为String修改其实是new了一个新对象，原来的String被JVM的垃圾回收机制（GC）给回收掉了。
+		因为String修改其实是new了一个新对象，原来的String被JVM的垃圾回收机制（GC）给回收掉了。
 
 ![image-20200721154908228](/assets/images/StringUpdate.png)
 
-​		Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。
+		Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。
 
 ## （2）线程安全
 

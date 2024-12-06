@@ -1,6 +1,6 @@
 ---
 title: SpringCloud服务消费
-author: 郑天祺
+author: ztq
 tag:
   - SpringCloud
 category: []

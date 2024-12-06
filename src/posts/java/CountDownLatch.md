@@ -12,9 +12,9 @@ date: 2021-08-07 13:25:00
 
 # 1、CountDownLatch简介
 
-​		CountDownLatch是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待，直到其他线程执行完后再执行。
+		CountDownLatch是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待，直到其他线程执行完后再执行。
 
-​		类似的任务可以使用线程的  join()  方法实现：在等待时间点调用其他线程的  join()  方法，当前线程就会等待join线程执行完之后才继续执行，但 CountDownLatch 实现更加简单，并且比 join 的功能更多。
+		类似的任务可以使用线程的  join()  方法实现：在等待时间点调用其他线程的  join()  方法，当前线程就会等待join线程执行完之后才继续执行，但 CountDownLatch 实现更加简单，并且比 join 的功能更多。
 
 CountDownLatch函数列表
 
@@ -108,7 +108,7 @@ public class CountDownLatchTest {
 
 # 3、CountDownLatch源码分析
 
-​		分析CountDownLatch的源码我们可以知道，它是使用了一个内部同步器AQS来实现屏蔽功能的。只有当count的值为零时，同步器的tryAcquireShared的结果为1，其他时候都是-1
+		分析CountDownLatch的源码我们可以知道，它是使用了一个内部同步器AQS来实现屏蔽功能的。只有当count的值为零时，同步器的tryAcquireShared的结果为1，其他时候都是-1
 
 ```java
      private static final class Sync extends AbstractQueuedSynchronizer {

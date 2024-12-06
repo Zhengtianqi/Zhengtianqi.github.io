@@ -1,6 +1,6 @@
 ---
 title: JVM类加载过程
-author: 郑天祺
+author: ztq
 tag:
   - JVM
 category:

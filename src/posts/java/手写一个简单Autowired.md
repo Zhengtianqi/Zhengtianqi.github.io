@@ -1,6 +1,6 @@
 ---
 title: 手写一个简单Autowired
-author: 郑天祺
+author: ztq
 tag:
   - spring
 category:

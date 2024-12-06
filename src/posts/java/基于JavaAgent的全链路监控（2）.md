@@ -1,6 +1,6 @@
 ---
 title: 基于JavaAgent的全链路监控（2）
-author: 郑天祺
+author: ztq
 tag:
   - javaagent
 category:
@@ -13,7 +13,7 @@ date: 2020-07-19 16:54:00
 
 ## 1、介绍
 
-​		方法耗时利用前人轮子字节码操作工具ByteBuddy：Byte Buddy是一个代码生成和操作库，用于在Java应用程序运行时创建和修改Java类，而无需编译器的帮助。 除了Java类库附带的代码生成实用程序外，Byte Buddy还允许创建任意类，并且不限于实现用于创建运行时代理的接口。 此外，Byte Buddy提供了一个方便的API，可以使用Java代理或在构建过程中手动更改类。
+		方法耗时利用前人轮子字节码操作工具ByteBuddy：Byte Buddy是一个代码生成和操作库，用于在Java应用程序运行时创建和修改Java类，而无需编译器的帮助。 除了Java类库附带的代码生成实用程序外，Byte Buddy还允许创建任意类，并且不限于实现用于创建运行时代理的接口。 此外，Byte Buddy提供了一个方便的API，可以使用Java代理或在构建过程中手动更改类。
 
 ## 2、pom.xml
 

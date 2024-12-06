@@ -1,6 +1,6 @@
 ---
 title: WordCount简析
-author: 郑天祺
+author: ztq
 tag:
   - HADOOP
 category:

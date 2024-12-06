@@ -1,6 +1,6 @@
 ---
 title: Hive数据操作（3）
-author: 郑天祺
+author: ztq
 tag:
   - hive
 category:
@@ -10,7 +10,7 @@ date: 2020-01-20 14:27:00
 
 # 一、类型转换
 
-​		（1）cast() 函数，可以使用这个函数对指定的值进行显式的类型转换。
+		（1）cast() 函数，可以使用这个函数对指定的值进行显式的类型转换。
 
 例如：
 
@@ -21,7 +21,7 @@ SELECT name, salary FROM employees WHERE cast(salary AS FLOAT) < 100000.0;
 
 注：将浮点数转换成整数的推荐方式是round()或者floor()函数，而不是使用类型转换操作符cast
 
-​		（2）类型转换 BINARY 值（hive v0.8.0）
+		（2）类型转换 BINARY 值（hive v0.8.0）
 
 ```java
 // 只支持将 BINARY 转换为 STRING 类型(也可以 STRING 转为 BINARY)
@@ -30,7 +30,7 @@ SELECT (2.0 * cast(cast(b string) as double)) from src;
 
 # 二、抽样查询
 
-​		对于非常大的数据集，有时用户需要使用的是一个具有代表性的查询结果而不是全部结果。Hive可以通过对表进行分桶抽样来满足这个需求。
+		对于非常大的数据集，有时用户需要使用的是一个具有代表性的查询结果而不是全部结果。Hive可以通过对表进行分桶抽样来满足这个需求。
 
 例如：
 
@@ -54,7 +54,7 @@ hive> SELECT * from numbers TABLESAMPLE(BUCKET 2 OUT OF 2 ON number) s;
 
 # 三、数据块抽样
 
-​		Hive 提供了另一种按照抽样百分比进行抽样的方式，这种是基于行数的，按照输入路径下的数据块百分比进行抽样：
+		Hive 提供了另一种按照抽样百分比进行抽样的方式，这种是基于行数的，按照输入路径下的数据块百分比进行抽样：
 
 ```java
 hive> SELECT * from numbersflat TABLESAMPLE(0.1 * PERCENT) s;
@@ -64,6 +64,6 @@ hive> SELECT * from numbersflat TABLESAMPLE(0.1 * PERCENT) s;
 
 # 四、UNION ALL
 
-​		UNION ALL 可以将 2个或多个表进行合并。
+		UNION ALL 可以将 2个或多个表进行合并。
 
-​		每一个 union 子查询都必须具有相同的列，而且对应的每个字段的字段类型必须是一致的。
+		每一个 union 子查询都必须具有相同的列，而且对应的每个字段的字段类型必须是一致的。

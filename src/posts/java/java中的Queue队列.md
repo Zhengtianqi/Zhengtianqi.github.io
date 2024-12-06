@@ -1,6 +1,6 @@
 ---
 title: java中的Queue队列
-author: 郑天祺
+author: ztq
 tag:
   - java
 category:
@@ -11,8 +11,8 @@ date: 2020-12-14 13:04:00
 
 # 1、介绍
 
-​        Queue： 基本上，一个队列就是一个先入先出（FIFO）的数据结构
-​        Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedList实现了Deque接 口。
+        Queue： 基本上，一个队列就是一个先入先出（FIFO）的数据结构
+        Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedList实现了Deque接 口。
 
 # 2、Queue的实现：
 
@@ -21,7 +21,7 @@ date: 2020-12-14 13:04:00
 
 ## （1）没有实现的阻塞接口队列
 
-​		没有实现的阻塞接口的LinkedList： 实现了java.util.Queue接口和java.util.AbstractQueue接口
+		没有实现的阻塞接口的LinkedList： 实现了java.util.Queue接口和java.util.AbstractQueue接口
 　　内置的两个不阻塞队列： PriorityQueue 和 ConcurrentLinkedQueue
 
 - PriorityQueue     和 ConcurrentLinkedQueue 类在     Collection Framework 中加入两个具体集合实现。 
@@ -80,7 +80,7 @@ public class ConcurrentLinkedQueueDemo {
 用途： 
 		阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。
 
-​		阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。
+		阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。
 
 ## 1）ArrayBlockingQueue
 

@@ -1,6 +1,6 @@
 ---
 title: Http和Https的区别
-author: 郑天祺
+author: ztq
 tag:
   - https
 category:
@@ -13,15 +13,15 @@ date: 2020-09-11 11:11:00
 
 ## 1、HTTP
 
-​    HyperText Transfer Protocol：超文本传输协议，是一种用于分布式、协作式和超媒体信息系统的应用层协议。 简单来说就是一种发布和接收 HTML 页面的方法，被用于在 Web 浏览器和网站服务器之间传递信息。
+    HyperText Transfer Protocol：超文本传输协议，是一种用于分布式、协作式和超媒体信息系统的应用层协议。 简单来说就是一种发布和接收 HTML 页面的方法，被用于在 Web 浏览器和网站服务器之间传递信息。
 
-​    HTTP 默认工作在 TCP 协议 80 端口，用户访问网站 http:// 打头的都是标准 HTTP 服务。
+    HTTP 默认工作在 TCP 协议 80 端口，用户访问网站 http:// 打头的都是标准 HTTP 服务。
 
-​    HTTP 协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此，HTTP协议不适合传输一些敏感信息，比如：信用卡号、密码等支付信息。
+    HTTP 协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此，HTTP协议不适合传输一些敏感信息，比如：信用卡号、密码等支付信息。
 
 ## 2、HTTPS
 
-​    Hypertext Transfer Protocol Secure：超文本传输安全协议是一种透过计算机网络进行安全通信的传输协议。HTTPS 经由 HTTP 进行通信，但利用 SSL/TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。HTTPS 默认工作在 TCP 协议443端口。
+    Hypertext Transfer Protocol Secure：超文本传输安全协议是一种透过计算机网络进行安全通信的传输协议。HTTPS 经由 HTTP 进行通信，但利用 SSL/TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。HTTPS 默认工作在 TCP 协议443端口。
 
 ## 3、HTTPS和HTTP的区别
 

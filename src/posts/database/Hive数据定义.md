@@ -1,6 +1,6 @@
 ---
 title: Hive数据定义
-author: 郑天祺
+author: ztq
 tag:
   - hive
 category:
@@ -11,9 +11,9 @@ date: 2020-01-17 14:18:00
 
 # 一、Hive 与 Mysql不同
 
-​		Hive不支持行级插入操作、更新操作和删除操作，
+		Hive不支持行级插入操作、更新操作和删除操作，
 
-​		Hive不支持事务。	
+		Hive不支持事务。	
 
 # 二、Hive中的数据库
 
@@ -44,7 +44,7 @@ USE financials;
 DROP DATABASE IF EXISTS financials;
 ```
 
-​	
+	
 
 ```java
 // 8、级联删除数据库（含表）：
@@ -87,9 +87,9 @@ ALTER TABLE log_messages PARTITION(year = 2012, month = 1, day =1) SET FILEFORMA
 
 # 三、分区表、管理表
 
-​	数据分区：通常使用分区来水平分散压力，将数据从物理上转移到和使用最频繁的用户更近的地方，以及实现其他目的。
+	数据分区：通常使用分区来水平分散压力，将数据从物理上转移到和使用最频繁的用户更近的地方，以及实现其他目的。
 
-​	先按照 国家 ， 后按照 州 分区
+	先按照 国家 ， 后按照 州 分区
 
 ```java
 CREATE TABLE employees(
@@ -106,15 +106,15 @@ PARTITIONED BY (country STRING, state STRING)
 
 对比：
 
-​	（1）如果我们是在mydb数据库中创建的这个表，那么对于这个表只会有一个employees目录与之对应：
+	（1）如果我们是在mydb数据库中创建的这个表，那么对于这个表只会有一个employees目录与之对应：
 
-​	
+	
 
 ```java
 hdfs://master_server/user/hive/warehouse/mydb.db/employees
 ```
 
-​	（2）但是，Hive 现在将会创建好可以反映分区结构的子目录。如：
+	（2）但是，Hive 现在将会创建好可以反映分区结构的子目录。如：
 
 ```java
 ...

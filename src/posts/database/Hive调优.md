@@ -1,6 +1,6 @@
 ---
 title: Hive调优
-author: 郑天祺
+author: ztq
 tag:
 
   - hive
@@ -12,17 +12,17 @@ date: 2020-01-21 16:48:00
 
 # 一、使用EXPLAIN
 
-​		查看逻辑，更多用 EXPLAIN EXTENDED
+		查看逻辑，更多用 EXPLAIN EXTENDED
 
 # 二、限制调整LIMIT
 
 # 三、JOIN优化
 
-​		表足够小用map-side JOIN
+		表足够小用map-side JOIN
 
 # 四、本地模式
 
-​	对于小数据集，单机或单线程执行时间比较短
+	对于小数据集，单机或单线程执行时间比较短
 
 ```java
 hive> set oldjobtracker=${hiveconf.mapred.job.tracker};

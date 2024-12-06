@@ -1,6 +1,6 @@
 ---
 title: AtomicInteger
-author: 郑天祺
+author: ztq
 tag:
 
   - java基础

@@ -1,6 +1,6 @@
 ---
 title: Spring Bean作用域与生命周期
-author: 郑天祺
+author: ztq
 tag:
 
   - spring
@@ -38,17 +38,17 @@ date: 2019-11-14 16:52:00
 
 #### 1）假设存在dev_spring_boot 和 test_spring_boot两个数据库，使用注解@Profile定义两个Bean
 
-​    ![img](/assets/images/SpringBean3.png)
+    ![img](/assets/images/SpringBean3.png)
 
 #### 2）在 Java 启动项目中，我们只需要如下配置就能启动Profile机制：
 
-​	-Dspring.profiles.active=dev
+	-Dspring.profiles.active=dev
 
-​	注：Spring 会先判定是否存在 spring.profiles.active 配置后，再去查找 spring.profiles.default 配置的，所以 spring.profiles.active 的优先级要大于 spring.profiles.default
+	注：Spring 会先判定是否存在 spring.profiles.active 配置后，再去查找 spring.profiles.default 配置的，所以 spring.profiles.active 的优先级要大于 spring.profiles.default
 
 #### 3）按照 springboot 的规则
 
-​	-Dspring.profiles.active 配置的值记为 {profile} ，则它会用 application-{profiles}.properties 文件去代替原来默认的 application.properties文件
+	-Dspring.profiles.active 配置的值记为 {profile} ，则它会用 application-{profiles}.properties 文件去代替原来默认的 application.properties文件
 
 ## 2、使用 Spring EL
 

@@ -1,6 +1,6 @@
 ---
 title: ThreadLocal
-author: 郑天祺
+author: ztq
 tag:
 
   - java
@@ -21,9 +21,9 @@ ThreadLocal归纳下来就2类用途：
 （1）保存线程上下文信息，在任意需要的地方可以获取
 （2）线程安全的，避免某些情况需要考虑线程安全必须同步带来的性能损失
 
-​		由于ThreadLocal的特性，同一线程在某地方进行设置，在随后的任意地方都可以获取到。从而可以用来保存线程上下文信息。
+		由于ThreadLocal的特性，同一线程在某地方进行设置，在随后的任意地方都可以获取到。从而可以用来保存线程上下文信息。
 
-​		常用的比如每个请求怎么把一串后续关联起来，就可以用ThreadLocal进行set，在后续的任意需要记录日志的方法里面进行get获取到请求id，从而把整个请求串起来。还有比如Spring的事务管理，用ThreadLocal存储Connection，从而各个DAO可以获取同一Connection，可以进行事务回滚，提交等操作。
+		常用的比如每个请求怎么把一串后续关联起来，就可以用ThreadLocal进行set，在后续的任意需要记录日志的方法里面进行get获取到请求id，从而把整个请求串起来。还有比如Spring的事务管理，用ThreadLocal存储Connection，从而各个DAO可以获取同一Connection，可以进行事务回滚，提交等操作。
 
 # 二、用一下才知道它能干什么！
 

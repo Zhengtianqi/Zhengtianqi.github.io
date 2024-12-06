@@ -1,6 +1,6 @@
 ---
 title: HDFS shell操作（1）
-author: 郑天祺
+author: ztq
 tag:
   - hadoop
 category:
@@ -20,15 +20,15 @@ date: 2020-12-06 11:50:00
 
 命令：echo “I am student” > a.txt
 
-​       echo “I am teacher” > c.txt
+       echo “I am teacher” > c.txt
 
-​       echo “I like hadoop” > b.txt
+       echo “I like hadoop” > b.txt
 
-​       hdfs dfs -put a.txt /usr/local/hadoop/data/txtdir
+       hdfs dfs -put a.txt /usr/local/hadoop/data/txtdir
 
-​       hdfs dfs -copyFromLocal b.txt /usr/local/hadoop/data/txtdir
+       hdfs dfs -copyFromLocal b.txt /usr/local/hadoop/data/txtdir
 
-​       hdfs dfs -moveFromLocal c.txt /usr/local/hadoop/data/txtdir
+       hdfs dfs -moveFromLocal c.txt /usr/local/hadoop/data/txtdir
 
 截图：![image-20201206115351845](/assets/images/HDFS上传.png)
 
@@ -44,9 +44,9 @@ date: 2020-12-06 11:50:00
 
 命令：hdfs dfs -cat /usr/local/hadoop/data/txtdir/a.txt
 
-​       hdfs dfs -cat /usr/local/hadoop/data/txtdir/b.txt
+       hdfs dfs -cat /usr/local/hadoop/data/txtdir/b.txt
 
-​       hdfs dfs -cat /usr/local/hadoop/data/txtdir/c.txt
+       hdfs dfs -cat /usr/local/hadoop/data/txtdir/c.txt
 
 截图：![image-20201206115600801](/assets/images/image-20201206115600801.png)
 

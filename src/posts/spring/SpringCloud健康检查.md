@@ -1,6 +1,6 @@
 ---
 title: SpringCloud健康检查
-author: 郑天祺
+author: ztq
 tag:
   - SpringCloud
 category:

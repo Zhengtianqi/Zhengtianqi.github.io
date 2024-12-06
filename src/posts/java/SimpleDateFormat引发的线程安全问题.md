@@ -1,6 +1,6 @@
 ---
 title: SimpleDateFormat引发的线程安全问题
-author: 郑天祺
+author: ztq
 tag:
   - 并发
   - 线程安全
@@ -12,7 +12,7 @@ date: 2019-10-12 18:42:00
 
 # 	一、问题产生
 
-​	在写java程序时，有时间戳转换的操作。
+	在写java程序时，有时间戳转换的操作。
 
 ```java
 import java.text.ParseException;
@@ -92,27 +92,27 @@ java.lang.NumberFormatException: For input string: ".220188E.4220188"
 
 debug发现传出的参数不是自己想要的参数。可是为什么呢？
 
-​	因为它是线程不安全的，当并发环境下，如果考虑不周使用SimpleDateFormat方法可以会出现线程安全方面的问题。原因当问我们使用parse方法时，使用CalendarBuilder日历创建者类创建日期，其中calendar实例因为cpu时间片切换时共享变量进行clear操作，导致数据不一致。
+	因为它是线程不安全的，当并发环境下，如果考虑不周使用SimpleDateFormat方法可以会出现线程安全方面的问题。原因当问我们使用parse方法时，使用CalendarBuilder日历创建者类创建日期，其中calendar实例因为cpu时间片切换时共享变量进行clear操作，导致数据不一致。
 
 具体原因：https://blog.csdn.net/lululove19870526/article/details/83684568
 
 # 三、解决方案
 
-​	1、临时创建：对于每个转换都new一个实例，有背与我们代码简洁的初衷，放弃。
+	1、临时创建：对于每个转换都new一个实例，有背与我们代码简洁的初衷，放弃。
 
-​	2、synchronized：阻塞，让线程不在并发，对效率影响很大，放弃。
+	2、synchronized：阻塞，让线程不在并发，对效率影响很大，放弃。
 
-​	3、ThreadLocal：线程隔离机制，代码量减少了，和1一样也牺牲了部分空间，还是个不错的解决方法。
+	3、ThreadLocal：线程隔离机制，代码量减少了，和1一样也牺牲了部分空间，还是个不错的解决方法。
 
-​		https://www.jianshu.com/p/3c5d7f09dfbd
+		https://www.jianshu.com/p/3c5d7f09dfbd
 
-​	4、Apache的 DateFormatUtils 与 FastDateFormat：线程安全，但是木有parse()方法
+	4、Apache的 DateFormatUtils 与 FastDateFormat：线程安全，但是木有parse()方法
 
-​	5、Joda-Time：感觉不错，就是源码有点多没敢用，github目前2.4K star。
+	5、Joda-Time：感觉不错，就是源码有点多没敢用，github目前2.4K star。
 
 # 四、部分代码
 
-​	用了ThreadLocal
+	用了ThreadLocal
 
 ```java
 /**

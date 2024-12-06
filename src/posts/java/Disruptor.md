@@ -25,7 +25,7 @@ Disruptor类似于java的BlockingQueue。与队列一样，Disruptor的目的是
 
 3、针对极高的性能目标而实现的极度优化和无锁的设计；
 
-​    应用场景：
+    应用场景：
 
 ## 类图：
 
@@ -87,7 +87,7 @@ RingBuffer没有尾指针，只维护一个指向下一个可用位置的序号�
 
 **消费者读取数据：**
 
-​    ![img](/assets/images/4e12cc06.png)
+    ![img](/assets/images/4e12cc06.png)
 
  
 

@@ -1,6 +1,6 @@
 ---
 title: HttpClient
-author: 郑天祺
+author: ztq
 tag:
 
   - httpclient
@@ -12,13 +12,13 @@ date: 2020-07-15 17:12:00
 
 # 1、HttpClient介绍		
 
-​		HTTP 协议可能是现在 Internet 上使用得最多、最重要的协议了，越来越多的 Java 应用程序需要直接通过 HTTP 协议来访问网络资源。
+		HTTP 协议可能是现在 Internet 上使用得最多、最重要的协议了，越来越多的 Java 应用程序需要直接通过 HTTP 协议来访问网络资源。
 
-​		虽然在 JDK 的 java net包中已经提供了访问 HTTP 协议的基本功能，但是对于大部分应用程序来说，JDK 库本身提供的功能还不够丰富和灵活。
+		虽然在 JDK 的 java net包中已经提供了访问 HTTP 协议的基本功能，但是对于大部分应用程序来说，JDK 库本身提供的功能还不够丰富和灵活。
 
-​		HttpClient 是Apache HttpComponents 下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。HttpClient已经应用在很多的项目中，并支持HTTPS协议。
+		HttpClient 是Apache HttpComponents 下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。HttpClient已经应用在很多的项目中，并支持HTTPS协议。
 
-​		HttpClient 不是浏览器，它是一个客户端 HTTP 协议传输类库。HttpClient 被用来发送和接受 HTTP 消息。HttpClient 不会处理 HTTP 消息的内容，不会进行 javascript 解析，不会关心 content type，如果没有明确设置，HttpClient 也不会对请求进行格式化、重定向 url，或者其他任何和 HTTP 消息传输相关的功能。
+		HttpClient 不是浏览器，它是一个客户端 HTTP 协议传输类库。HttpClient 被用来发送和接受 HTTP 消息。HttpClient 不会处理 HTTP 消息的内容，不会进行 javascript 解析，不会关心 content type，如果没有明确设置，HttpClient 也不会对请求进行格式化、重定向 url，或者其他任何和 HTTP 消息传输相关的功能。
 
 
 # 2、HttpClientUtils

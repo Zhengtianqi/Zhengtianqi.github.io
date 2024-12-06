@@ -1,6 +1,6 @@
 ---
 title: HBASE shell操作（2）
-author: 郑天祺
+author: ztq
 tag:
 
   - hadoop

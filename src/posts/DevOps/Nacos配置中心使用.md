@@ -1,6 +1,6 @@
 ---
 title: Nacos配置中心使用
-author: 郑天祺
+author: ztq
 tag:
   - SpringCloud
   - nacos-config
@@ -150,7 +150,7 @@ spring:
   application:
     name: nacos-config-example
     group: sa
-    developer: zhengtianqi<郑天祺>
+    developer: zhengtianqi<ztq>
   cloud:
     nacos:
       config:

@@ -1,6 +1,6 @@
 ---
 title: TCP IP四层网络模型
-author: 郑天祺
+author: ztq
 tag:
   - TCP/IP
 category:
@@ -25,9 +25,9 @@ date: 2019-08-30 15:12:00
 
 ## 4、使用协议进行通讯
 
-​	socket是一种抽象层，应用程序通过它来发送和接收数据，就像应用程序打开一个文件句柄，把数据读写到磁盘上一样。主要的socket类型为：
-​	1.流套接字（stream socket）-TCP
-​	2.数据报文套接字（datagram socket）-UDP
+	socket是一种抽象层，应用程序通过它来发送和接收数据，就像应用程序打开一个文件句柄，把数据读写到磁盘上一样。主要的socket类型为：
+	1.流套接字（stream socket）-TCP
+	2.数据报文套接字（datagram socket）-UDP
 
 ![](/assets/images/使用协议进行通讯.png)
 
@@ -37,7 +37,7 @@ date: 2019-08-30 15:12:00
 
 6、TCP协议的通信过程
 
-​	对于TCP通信来说，每个TCPSocket的内核中都有一个发送缓冲区和一个接收缓冲区，TCP的全双工的工作模式及TCP的滑动窗口就是依赖于这两个独立的Buffer和该Buffer的填充状态。
+	对于TCP通信来说，每个TCPSocket的内核中都有一个发送缓冲区和一个接收缓冲区，TCP的全双工的工作模式及TCP的滑动窗口就是依赖于这两个独立的Buffer和该Buffer的填充状态。
 
 ![](/assets/images/TCP协议通讯过程.png)
 
