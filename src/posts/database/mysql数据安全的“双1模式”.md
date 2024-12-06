@@ -77,6 +77,7 @@ innodb_flush_log_at_trx_commit=1;
 - `server_id`：为每个mysql实例设置唯一的服务器ID，这对于主从复制是必需的。
 
 #### **示例配置**
+
 ```ini
 [mysqld]
 # 启用二进制日志
