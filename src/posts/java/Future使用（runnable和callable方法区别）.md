@@ -1,5 +1,5 @@
 ---
-title: Future使用
+title: Future使用：runnable和callable方法区别
 author: ztq
 tag:
   - java
