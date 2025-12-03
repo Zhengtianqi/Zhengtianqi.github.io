@@ -1,6 +1,6 @@
 ---
 title: docker镜像部署到k8s集群
-author: ztq
+author: zheng
 tag:
   - k8s
   - docker

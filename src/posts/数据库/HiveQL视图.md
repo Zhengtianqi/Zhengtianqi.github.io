@@ -1,6 +1,6 @@
 ---
 title: HiveQL视图
-author: ztq
+author: zheng
 tag:
 
   - hive

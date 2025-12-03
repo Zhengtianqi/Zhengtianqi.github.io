@@ -1,6 +1,6 @@
 ---
 title: Disruptor中发布事件相关类
-author: ztq
+author: zheng
 tag:
 
   - Disruptor

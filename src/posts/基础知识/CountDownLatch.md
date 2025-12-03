@@ -1,6 +1,6 @@
 ---
 title: CountDownLatch
-author: ztq
+author: zheng
 tag:
 
   - java
@@ -42,7 +42,7 @@ CountDownLatch和CyclicBarrier的区别：
 # 2、CountDownLatch使用示例
 
 ```java
-package com.ztq.task;
+package com.zheng.task;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

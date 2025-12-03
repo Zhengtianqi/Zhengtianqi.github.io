@@ -1,6 +1,6 @@
 ---
 title: 手写一个简单Autowired
-author: ztq
+author: zheng
 tag:
   - spring
 category:

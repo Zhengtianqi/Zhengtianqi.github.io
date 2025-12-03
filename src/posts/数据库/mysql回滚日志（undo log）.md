@@ -1,6 +1,6 @@
 ---
 title: mysql回滚日志（undo log）
-author: ztq
+author: zheng
 tag:
 
   - mysql

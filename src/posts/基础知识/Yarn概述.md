@@ -1,6 +1,6 @@
 ---
 title: Yarn概述
-author: ztq
+author: zheng
 tag:
 
   - HADOOP

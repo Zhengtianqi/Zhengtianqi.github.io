@@ -1,6 +1,6 @@
 ---
 title: Redis数据结构与对象（二）-链表
-author: ztq
+author: zheng
 tag:
   - redis
 category:

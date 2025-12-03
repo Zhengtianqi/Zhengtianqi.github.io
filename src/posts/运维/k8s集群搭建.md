@@ -1,6 +1,6 @@
 ---
 title: k8s集群搭建
-author: ztq
+author: zheng
 tag:
 
   - k8s

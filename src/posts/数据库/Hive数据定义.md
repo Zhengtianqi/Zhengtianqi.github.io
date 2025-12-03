@@ -1,6 +1,6 @@
 ---
 title: Hive数据定义
-author: ztq
+author: zheng
 tag:
   - hive
 category:

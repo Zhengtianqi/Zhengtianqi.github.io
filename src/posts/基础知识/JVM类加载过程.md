@@ -1,6 +1,6 @@
 ---
 title: JVM类加载过程
-author: ztq
+author: zheng
 tag:
   - JVM
 category:
@@ -78,7 +78,7 @@ Java语言是一种具有动态性的解释型语言，类（Class）只有被�
 # 7、例子
 
 ```java
-package com.ztq.clazz;
+package com.zheng.clazz;
 
 /**
  * class的加载顺序

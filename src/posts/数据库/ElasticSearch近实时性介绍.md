@@ -1,6 +1,6 @@
 ---
 title: ElasticSearch近实时性介绍
-author: ztq
+author: zheng
 tag:
   - es
 category:

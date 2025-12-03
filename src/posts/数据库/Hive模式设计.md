@@ -1,6 +1,6 @@
 ---
 title: Hive模式设计
-author: ztq
+author: zheng
 tag:
 
   - hive

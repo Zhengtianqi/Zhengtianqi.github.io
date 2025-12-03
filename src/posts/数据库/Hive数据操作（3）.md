@@ -1,6 +1,6 @@
 ---
 title: Hive数据操作（3）
-author: ztq
+author: zheng
 tag:
   - hive
 category:

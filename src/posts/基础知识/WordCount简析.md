@@ -1,6 +1,6 @@
 ---
 title: WordCount简析
-author: ztq
+author: zheng
 tag:
   - HADOOP
 category:

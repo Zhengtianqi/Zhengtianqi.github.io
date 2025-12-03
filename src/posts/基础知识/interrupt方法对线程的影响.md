@@ -4,7 +4,7 @@ tag:
   - java
 category:
   - java基础
-author: ztq
+author: zheng
 date: 2024-12-19 14:02:00
 ---
 在Java中，`interrupt()` 方法是 `Thread` 类中的一个实例方法，用于中断线程。它并不直接终止线程的执行，而是设置线程的中断状态（即把该线程的中断标志设为 true）。线程可以定期检查这个中断状态，以判断是否应该提前退出或改变行为。以下是 `interrupt()` 方法对线程的影响：

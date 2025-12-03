@@ -1,6 +1,6 @@
 ---
 title: Hive索引
-author: ztq
+author: zheng
 tag:
 
   - hive

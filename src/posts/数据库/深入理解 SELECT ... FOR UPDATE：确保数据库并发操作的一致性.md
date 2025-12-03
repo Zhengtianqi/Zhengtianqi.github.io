@@ -1,6 +1,6 @@
 ---
 title: 深入理解 SELECT ... FOR UPDATE：确保数据库并发操作的一致性
-author: ztq
+author: zheng
 tag:
 
   - mysql

@@ -1,6 +1,6 @@
 ---
 title: mysql简单主从搭建过程
-author: ztq
+author: zheng
 tag:
 
   - mysql

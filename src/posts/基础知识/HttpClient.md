@@ -1,6 +1,6 @@
 ---
 title: HttpClient
-author: ztq
+author: zheng
 tag:
 
   - httpclient
@@ -43,7 +43,7 @@ package cn.edu.bjut.entity;
 import java.io.Serializable;
 
 /**
- * @author ztq
+ * @author zheng
  */
 public class HttpClientResult implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -116,7 +116,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
- * @author ztq
+ * @author zheng
  */
 public class HttpClientUtils {
 

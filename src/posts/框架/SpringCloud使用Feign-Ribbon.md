@@ -1,6 +1,6 @@
 ---
 title: SpringCloud使用Feign+Ribbon
-author: ztq
+author: zheng
 tag:
   - SpringCloud
 category:

@@ -1,6 +1,6 @@
 ---
 title: springboot打jar包分离资源文件
-author: ztq
+author: zheng
 tag:
   - 打包
   - 运维

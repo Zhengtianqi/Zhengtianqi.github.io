@@ -1,6 +1,6 @@
 ---
 title: HDFS文件操作
-author: ztq
+author: zheng
 tag:
   - HDFS
   - HADOOP

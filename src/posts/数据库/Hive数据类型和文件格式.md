@@ -1,6 +1,6 @@
 ---
 title: Hive数据类型和文件格式
-author: ztq
+author: zheng
 tag:
   - hive
 category:

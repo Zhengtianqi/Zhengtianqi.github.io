@@ -1,6 +1,6 @@
 ---
 title: ip地址与子网掩码换算公式
-author: ztq
+author: zheng
 tag:
   - ip
   - 子网掩码

@@ -4,7 +4,7 @@ tag:
   - git
 category:
   - 软件管理
-author: ztq
+author: zheng
 date: 2019-08-29 10:28:00
 ---
 ## 1、Git介绍：

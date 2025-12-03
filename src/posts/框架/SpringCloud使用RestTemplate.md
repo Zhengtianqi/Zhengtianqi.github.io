@@ -1,6 +1,6 @@
 ---
 title: SpringCloud使用RestTemplate
-author: ztq
+author: zheng
 tag:
   - SpringCloud
 category:

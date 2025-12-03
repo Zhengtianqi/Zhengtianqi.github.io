@@ -1,6 +1,6 @@
 ---
 title: mysql重做日志（redo log）
-author: ztq
+author: zheng
 tag:
 
   - mysql

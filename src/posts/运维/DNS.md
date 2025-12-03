@@ -1,6 +1,6 @@
 ---
 title: DNS
-author: ztq
+author: zheng
 tag:
   - DNS
 category:

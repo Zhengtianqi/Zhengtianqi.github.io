@@ -1,6 +1,6 @@
 ---
 title: 初识redis（2）-基本特性
-author: ztq
+author: zheng
 tag:
   - redis
 category:

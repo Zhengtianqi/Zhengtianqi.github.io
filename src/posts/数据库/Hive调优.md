@@ -1,6 +1,6 @@
 ---
 title: Hive调优
-author: ztq
+author: zheng
 tag:
 
   - hive

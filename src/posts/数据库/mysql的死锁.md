@@ -1,6 +1,6 @@
 ---
 title: mysql的死锁
-author: ztq
+author: zheng
 tag:
   - mysql
 category:

@@ -1,6 +1,6 @@
 ---
 title: MapReduce概述
-author: ztq
+author: zheng
 tag:
   - HADOOP
 category:

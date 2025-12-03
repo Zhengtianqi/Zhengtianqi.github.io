@@ -1,6 +1,6 @@
 ---
 title: 分布式事务-springcloud-nacos-seata
-author: ztq
+author: zheng
 tag:
   - mysql
   - 分布式事务

@@ -1,6 +1,6 @@
 ---
 title: Disruptor
-author: ztq
+author: zheng
 tag:
 
   - Disruptor

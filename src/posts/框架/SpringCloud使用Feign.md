@@ -1,6 +1,6 @@
 ---
 title: SpringCloud使用Feign
-author: ztq
+author: zheng
 tag:
   - SpringCloud
 category:

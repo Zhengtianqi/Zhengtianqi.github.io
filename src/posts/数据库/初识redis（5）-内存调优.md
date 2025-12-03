@@ -1,6 +1,6 @@
 ---
 title: 初识redis（5）-内存调优
-author: ztq
+author: zheng
 tag:
 
   - redis

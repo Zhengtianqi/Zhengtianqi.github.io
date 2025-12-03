@@ -1,6 +1,6 @@
 ---
 title: Spring Bean作用域与生命周期
-author: ztq
+author: zheng
 tag:
 
   - spring

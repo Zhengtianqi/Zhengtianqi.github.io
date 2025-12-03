@@ -1,6 +1,6 @@
 ---
 title: 初识redis（3）-持久化
-author: ztq
+author: zheng
 tag:
   - redis
 category:

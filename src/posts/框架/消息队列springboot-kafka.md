@@ -1,6 +1,6 @@
 ---
 title: kafka架构设计
-author: ztq
+author: zheng
 tag:
   - kafka
 category:
@@ -223,7 +223,7 @@ public class MessageServiceKafkaImpl implements MessageService {
                 System.out.println("生产者发送失败（kafka），id：" + id);
             }
         });
-//        kafkaTemplate.send("ztq"， id);
+//        kafkaTemplate.send("zheng"， id);
     }
 }
 

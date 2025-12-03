@@ -1,6 +1,6 @@
 ---
 title: SimpleDateFormat引发的线程安全问题
-author: ztq
+author: zheng
 tag:
   - 并发
   - 线程安全

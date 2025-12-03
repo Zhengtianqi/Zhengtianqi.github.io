@@ -1,6 +1,6 @@
 ---
 title: Hash解决冲突的方法
-author: ztq
+author: zheng
 tag:
 
   - 哈希表

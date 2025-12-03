@@ -1,6 +1,6 @@
 ---
 title: JVM垃圾回收算法
-author: ztq
+author: zheng
 tag:
 
   - JVM

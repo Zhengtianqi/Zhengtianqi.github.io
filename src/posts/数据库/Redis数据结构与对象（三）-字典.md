@@ -1,6 +1,6 @@
 ---
 title: Redis数据结构与对象（三）-字典
-author: ztq
+author: zheng
 tag:
 
   - redis

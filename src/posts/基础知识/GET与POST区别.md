@@ -1,6 +1,6 @@
 ---
 title: GET与POST区别
-author: ztq
+author: zheng
 tag:
   - GET/POST
 category:

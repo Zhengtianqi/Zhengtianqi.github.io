@@ -1,6 +1,6 @@
 ---
 title: 初识redis（4）-主从架构
-author: ztq
+author: zheng
 tag:
 
   - redis

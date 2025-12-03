@@ -1,6 +1,6 @@
 ---
 title: nginx配置
-author: ztq
+author: zheng
 tag:
   - nginx
 category:

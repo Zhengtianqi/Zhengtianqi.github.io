@@ -1,6 +1,6 @@
 ---
 title: Redis数据结构与对象（一）-简单动态字符串
-author: ztq
+author: zheng
 tag:
 
   - redis

@@ -1,6 +1,6 @@
 ---
 title: JDK并发包常用类
-author: ztq
+author: zheng
 tag:
   - java
 category:

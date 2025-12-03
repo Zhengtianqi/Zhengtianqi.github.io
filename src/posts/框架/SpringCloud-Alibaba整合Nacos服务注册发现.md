@@ -1,6 +1,6 @@
 ---
 title: SpringCloud-Alibaba整合Nacos服务注册发现
-author: ztq
+author: zheng
 tag:
   - SpringCloud
 category:

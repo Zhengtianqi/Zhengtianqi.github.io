@@ -1,6 +1,6 @@
 ---
 title: java中的Queue队列
-author: ztq
+author: zheng
 tag:
   - java
 category:
