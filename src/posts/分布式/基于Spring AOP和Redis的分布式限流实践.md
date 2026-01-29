@@ -175,6 +175,118 @@ public enum LimitType
 - Lua脚本性能调优
 - 缓存键值的设计避免热点Key问题
 
+### 4. 整体代码
+```java
+/**
+ * 限流注解
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface RateLimiter {
+    /**
+     * 限流key
+     */
+    String key() default "rate_limit:";
+
+    /**
+     * 限流时间,单位秒
+     */
+    int time() default 60;
+
+    /**
+     * 限流次数
+     */
+    int count() default 5;
+
+    /**
+     * 限流类型
+     */
+    LimitType limitType() default LimitType.DEFAULT;
+
+    /**
+     * 是否黑名单
+     */
+    boolean joinBlackList() default false;
+}
+
+
+/**
+ * 限流处理
+ */
+@Aspect
+@Component
+public class RateLimiterAspect {
+    private static final Logger log = LoggerFactory.getLogger(RateLimiterAspect.class);
+
+    private RedisTemplate<Object, Object> redisTemplate;
+
+    private RedisScript<Long> limitScript;
+    @Autowired
+    private ApiTokenService apiTokenService;
+
+    @Autowired
+    private BlackListService blackListService;
+
+    @Autowired
+    public void setRedisTemplate1(RedisTemplate<Object, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    @Autowired
+    public void setLimitScript(RedisScript<Long> limitScript) {
+        this.limitScript = limitScript;
+    }
+
+    @Before("@annotation(rateLimiter)")
+    public void doBefore(JoinPoint point, RateLimiter rateLimiter) throws Throwable {
+        LoginMember loginMember = apiTokenService.getLoginMember(ServletUtils.getRequest());
+        Map<String,Object> map = new HashMap<>();
+        map.put("phone", loginMember.getPhone());
+        map.put("isValid", "1");
+        List<BlackListDto> blackLists= blackListService.getList(map);
+        if (!blackLists.isEmpty()){
+            throw new RateLimiterException("访问已达上线，请与我司联系！");
+        }
+        String key = rateLimiter.key();
+        int time = rateLimiter.time();
+        int count = rateLimiter.count();
+        String combineKey = getCombineKey(rateLimiter, point);
+        List<Object> keys = Collections.singletonList(combineKey);
+        try {
+            Long number = redisTemplate.execute(limitScript, keys, count, time);
+            if (null == number || number.intValue() > count) {
+                if (rateLimiter.joinBlackList()){
+                    BlackList blackList = new BlackList();
+                    blackList.setPhone(loginMember.getPhone());
+                    blackList.setIsValid("1");
+                    blackList.setOperTime(DateUtil.getToday());
+                    blackListService.insert(blackList);
+                }
+                throw new RateLimiterException("访问已达上线，请稍后重试！");
+            }
+            log.info("限制请求'{}',当前请求'{}',缓存key'{}'", count, number.intValue(), key);
+        } catch (Exception e) {
+            throw new RateLimiterException("访问已达上线，请与我司联系！");
+        }
+    }
+
+    public String getCombineKey(RateLimiter rateLimiter, JoinPoint point) {
+        StringBuffer stringBuffer = new StringBuffer(rateLimiter.key());
+        if (rateLimiter.limitType() == LimitType.LOGIN_PHONE) {
+            LoginMember loginMember = apiTokenService.getLoginMember(ServletUtils.getRequest());
+            stringBuffer.append(loginMember.getPhone()).append("-");
+        }
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        Class<?> targetClass = method.getDeclaringClass();
+        stringBuffer.append(targetClass.getName()).append("-").append(method.getName());
+        return stringBuffer.toString();
+    }
+}
+```
+
+
 ## 总结
 
 这套限流方案具有以下优点：
