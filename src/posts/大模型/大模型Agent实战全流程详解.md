@@ -60,7 +60,7 @@ date: 2026-05-12 14:58:00
 
 # 一、先搞懂：大模型Agent的核心逻辑与关键构成
 
-在动手实战前，我们首先要明确：**不是所有LLM应用都是Agent**。简单的问答机器人、文本生成工具，仅能完成单一信息处理，缺乏自主决策和流程控制能力，只能算作LLM的初级应用；而真正的大模型Agent，是一个以LLM为核心，整合记忆、规划、工具能力，能够自主达成复杂目标的智能系统，其核心公式可概括为：`Agent = LLM（大脑）\\+ 工具（手脚）\\+ 记忆（经验）\\+ 规划（策略）`。
+在动手实战前，我们首先要明确：**不是所有LLM应用都是Agent**。简单的问答机器人、文本生成工具，仅能完成单一信息处理，缺乏自主决策和流程控制能力，只能算作LLM的初级应用；而真正的大模型Agent，是一个以LLM为核心，整合记忆、规划、工具能力，能够自主达成复杂目标的智能系统，其核心公式可概括为：`Agent = LLM（大脑）+ 工具（手脚）+ 记忆（经验）+ 规划（策略）`。
 
 ## 1.1 四大核心模块（必懂，实战的基础）
 
@@ -124,20 +124,20 @@ pip install requests python-pptx
 通过LangChain连接GPT-4o，配置API密钥（需在OpenAI官网申请），设置基础参数（温度、最大 tokens），控制Agent的推理精度与创造性。
 
 ```python
-from langchain\_openai import ChatOpenAI
-from dotenv import load\_dotenv
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
 import os
 
 # 加载环境变量（存储API密钥，避免硬编码）
-load\_dotenv()
-openai\_api\_key = os.getenv("OPENAI\_API\_KEY")
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # 初始化LLM核心
 llm = ChatOpenAI(
     model="gpt-4o",
-    api\_key=openai\_api\_key,
+    api_key=openai_api_key,
     temperature=0.3,  # 温度越低，推理越严谨，避免幻觉
-    max\_tokens=2048
+    max_tokens=2048
 )
 ```
 
@@ -147,24 +147,24 @@ llm = ChatOpenAI(
 
 ```python
 from langchain.memory import ConversationBufferMemory
-from langchain\_community.vectorstores import Chroma
-from langchain\_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
 
 # 初始化短期记忆（存储当前对话上下文）
-short\_term\_memory = ConversationBufferMemory(
-    memory\_key="chat\_history",
-    return\_messages=True  # 以消息列表形式返回，便于Agent理解
+short_term_memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True  # 以消息列表形式返回，便于Agent理解
 )
 
 # 初始化长期记忆（向量数据库，存储历史经验、用户偏好）
-embeddings = OpenAIEmbeddings(api\_key=openai\_api\_key)
-long\_term\_memory = Chroma(
-    persist\_directory="./chroma\_db",  # 记忆存储路径
-    embedding\_function=embeddings,
-    collection\_name="agent\_memory"
+embeddings = OpenAIEmbeddings(api_key=openai_api_key)
+long_term_memory = Chroma(
+    persist_directory="./chroma_db",  # 记忆存储路径
+    embedding_function=embeddings,
+    collection_name="agent_memory"
 )
 # 启用持久化，避免重启后丢失记忆
-long\_term\_memory.persist()
+long_term_memory.persist()
 ```
 
 ### 3.3 工具模块开发（赋予“手脚”）
@@ -176,35 +176,35 @@ from langchain.tools import tool
 
 # 工具1：获取会议记录（模拟日历API调用，实际可替换为企业日历接口）
 @tool
-def get\_meeting\_records(week: str) -> str:
+def get_meeting_records(week: str) -> str:
     """获取指定周的会议记录，参数week格式为“2026-W19”（年-周数）"""
     # 模拟API返回结果，实际开发中替换为真实接口调用
-    meeting\_records = f"""
+    meeting_records = f"""
     2026-W19会议记录：
     1. 周一10:00-11:00 产品需求会，参会人：产品、研发、测试，核心内容：确定V2.0版本迭代计划，截止日期6月10日；
     2. 周三14:00-15:30 技术评审会，参会人：研发、架构师，核心内容：优化数据库性能，由张三负责。
     """
-    return meeting\_records
+    return meeting_records
 
 # 工具2：OCR文本提取（处理会议图片/录音转写文本）
 @tool
-def ocr\_extract\_text(image\_path: str) -> str:
-    """从图片中提取文本，参数image\_path为图片本地路径"""
+def ocr_extract_text(image_path: str) -> str:
+    """从图片中提取文本，参数image_path为图片本地路径"""
     from PIL import Image
     import pytesseract
-    image = Image.open(image\_path)
-    text = pytesseract.image\_to\_string(image, lang="chi\_sim")
+    image = Image.open(image_path)
+    text = pytesseract.image_to_string(image, lang="chi_sim")
     return f"OCR提取结果：{text}"
 
 # 工具3：待办同步至项目管理工具（模拟API调用）
 @tool
-def sync\_todo(todo\_list: str) -> str:
-    """将待办事项同步至项目管理工具，参数todo\_list为待办文本，每行一个待办"""
+def sync_todo(todo_list: str) -> str:
+    """将待办事项同步至项目管理工具，参数todo_list为待办文本，每行一个待办"""
     # 模拟同步结果
-    return f"待办已同步，同步内容：\\n{todo\_list}"
+    return f"待办已同步，同步内容：n{todo_list}"
 
 # 工具列表，供Agent调用
-tools = \[get\_meeting\_records, ocr\_extract\_text, sync\_todo]
+tools = [get_meeting_records, ocr_extract_text, sync_todo]
 ```
 
 ### 3.4 规划模块开发（赋予“策略”）
@@ -213,22 +213,22 @@ tools = \[get\_meeting\_records, ocr\_extract\_text, sync\_todo]
 
 ```python
 from langchain.agents import PlanAndExecuteAgent, AgentExecutor
-from langchain.agents.plan\_and\_execute import PlanAndExecute
+from langchain.agents.plan_and_execute import PlanAndExecute
 from langchain.tools import Tool
 
 # 组装规划与执行逻辑
-agent = PlanAndExecuteAgent.from\_llm\_and\_tools(
+agent = PlanAndExecuteAgent.from_llm_and_tools(
     llm=llm,
     tools=tools,
-    memory=short\_term\_memory  # 关联短期记忆
+    memory=short_term_memory  # 关联短期记忆
 )
 
 # 初始化Agent执行器，控制执行流程
-agent\_executor = AgentExecutor(
+agent_executor = AgentExecutor(
     agent=agent,
     tools=tools,
     verbose=True,  # 开启详细日志，便于调试
-    max\_iterations=10  # 最大执行步数，避免无限循环
+    max_iterations=10  # 最大执行步数，避免无限循环
 )
 ```
 
@@ -241,23 +241,23 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 # 构建长期记忆检索链，让Agent能从长期记忆中获取信息
-retrieval\_chain = RetrievalQA.from\_chain\_type(
+retrieval_chain = RetrievalQA.from_chain_type(
     llm=llm,
-    chain\_type="stuff",
-    retriever=long\_term\_memory.as\_retriever(search\_kwargs={"k": 3})  # 每次检索3条相关记忆
+    chain_type="stuff",
+    retriever=long_term_memory.as_retriever(search_kwargs={"k": 3})  # 每次检索3条相关记忆
 )
 
 # 整合长期记忆与Agent，实现“记忆+决策+执行”一体化
-def run\_agent(user\_input: str):
+def run_agent(user_input: str):
     # 先从长期记忆中检索相关信息
-    memory\_info = retrieval\_chain.invoke(user\_input)
+    memory_info = retrieval_chain.invoke(user_input)
     # 将记忆信息传入Agent，执行任务
-    result = agent\_executor.invoke({
-        "input": f"用户需求：{user\_input}\\n相关历史记忆：{memory\_info\['result']}"
+    result = agent_executor.invoke({
+        "input": f"用户需求：{user_input}n相关历史记忆：{memory_info['result']}"
     })
     # 将本次任务结果存入长期记忆，供后续复用
-    long\_term\_memory.add\_texts(\[f"用户需求：{user\_input}\\n执行结果：{result\['output']}"])
-    return result\['output']
+    long_term_memory.add_texts([f"用户需求：{user_input}n执行结果：{result['output']}"])
+    return result['output']
 ```
 
 ## Step 4：测试调试（关键环节，避免上线踩坑）
@@ -305,20 +305,20 @@ Agent开发完成后，需进行多场景测试，重点验证“任务拆解准
 
 ```text
 1. 规划阶段：用户需求是获取2026-W19会议记录→提取待办→同步工具→反馈核心待办，拆解为4个子任务：
-   - 调用get\_meeting\_records工具，获取2026-W19会议记录；
+   - 调用get_meeting_records工具，获取2026-W19会议记录；
    - 从会议记录中提取待办事项，整理规范格式；
-   - 调用sync\_todo工具，同步待办至项目管理工具；
+   - 调用sync_todo工具，同步待办至项目管理工具；
    - 总结核心待办，反馈给用户。
 
 2. 执行阶段：
-   - 调用get\_meeting\_records("2026-W19")，获取会议记录；
+   - 调用get_meeting_records("2026-W19")，获取会议记录；
    - 提取待办：1. 研发团队完成V2.0版本迭代，截止6月10日；2. 张三负责优化数据库性能；
-   - 调用sync\_todo("1. 研发团队：V2.0版本迭代，截止6月10日；2. 张三：优化数据库性能")，同步成功；
+   - 调用sync_todo("1. 研发团队：V2.0版本迭代，截止6月10日；2. 张三：优化数据库性能")，同步成功；
    - 总结核心待办：本次会议核心待办为2项，重点关注V2.0版本迭代进度。
 
 3. 反馈结果：
    已完成以下操作：
-   1. 获取2026-W19会议记录：\[会议详情省略]
+   1. 获取2026-W19会议记录：[会议详情省略]
    2. 提取待办事项：
       - 研发团队：完成V2.0版本迭代，截止日期2026年6月10日；
       - 张三：优化数据库性能，无明确截止日期。
