@@ -8,10 +8,10 @@ on:
   # 在主分支有推送时触发
   push:
     branches:
-      - main
+      - master
     paths:
-      - 'docs/**'
-      - 'README.md'
+      - 'src/**'
+      - '*.md'
       - '.github/workflows/docs.yml'
 
 permissions:
