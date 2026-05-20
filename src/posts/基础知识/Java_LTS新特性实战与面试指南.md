@@ -29,12 +29,12 @@ date: 2026-05-20 15:22:00
 
 ```mermaid
 graph LR
-    A[新项目] --> B{JDK版本?}
-    B -->|存量系统| C[JDK 8]
-    B -->|新项目| D[需求?}
-    D -->|Spring Boot 2.x| E[JDK 11]
-    D -->|Spring Boot 3.x| F[JDK 17+]
-    D -->|AI/大数据| G[JDK 21]
+ A[新项目] --> B{"JDK版本?"}
+ B -->|"存量系统"| C["JDK 8"]
+ B -->|"新项目"| D{"需求?"}
+ D -->|"Spring Boot 2.x"| E["JDK 11"]
+ D -->|"Spring Boot 3.x"| F["JDK 17+"]
+ D -->|"AI/大数据"| G["JDK 21"]
 ```
 
 ---
