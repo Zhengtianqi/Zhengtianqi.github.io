@@ -704,7 +704,7 @@ public class ModernJavaDemo {
 
 ```
 必考题：
-├── JDK 8: Lambda/Stream/Optional/日���API
+├── JDK 8: Lambda/Stream/Optional
 ├── JDK 11: var/HTTP Client/字符串新API
 ├── JDK 17: records/sealed/文本块
 └── JDK 21: 虚拟线程/ZGC
