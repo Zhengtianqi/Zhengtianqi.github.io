@@ -177,3 +177,286 @@ class Solution {
 - 如果链表是**正序**存储？→ 先反转链表，或用栈辅助
 - 如果要做**减法**？→ 类似思路，借位代替进位
 - 如果要做**乘法**？→ 嵌套循环 + 多路归并进位
+
+---
+
+## 🚀 扩展题目详解
+
+### 扩展一：两数相加 II（正序链表）
+
+**LeetCode 445. Add Two Numbers II**
+
+如果链表是**正序**存储（高位 → 低位），例如 `7→2→4→3` 表示 7243，直接从头遍历就无法对齐低位了。
+
+#### 解法一：反转链表法
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // 1. 反转两个链表
+        l1 = reverse(l1);
+        l2 = reverse(l2);
+        
+        // 2. 按原题思路相加
+        ListNode sum = addReversed(l1, l2);
+        
+        // 3. 反转结果（恢复正序）
+        return reverse(sum);
+    }
+    
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+    
+    private ListNode addReversed(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int carry = 0;
+        
+        while (l1 != null || l2 != null) {
+            int val1 = (l1 != null) ? l1.val : 0;
+            int val2 = (l2 != null) ? l2.val : 0;
+            int sum = val1 + val2 + carry;
+            carry = sum / 10;
+            tail.next = new ListNode(sum % 10);
+            tail = tail.next;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        
+        if (carry > 0) {
+            tail.next = new ListNode(carry);
+        }
+        
+        return dummy.next;
+    }
+}
+```
+
+#### 解法二：栈辅助法（不修改原链表）
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        
+        // 将链表值压入栈（栈顶 = 低位）
+        while (l1 != null) {
+            stack1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            stack2.push(l2.val);
+            l2 = l2.next;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        int carry = 0;
+        
+        // 从栈顶弹出相加（从低位到高位）
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry > 0) {
+            int val1 = stack1.isEmpty() ? 0 : stack1.pop();
+            int val2 = stack2.isEmpty() ? 0 : stack2.pop();
+            int sum = val1 + val2 + carry;
+            carry = sum / 10;
+            
+            // 头插法构建结果链表
+            ListNode node = new ListNode(sum % 10);
+            node.next = dummy.next;
+            dummy.next = node;
+        }
+        
+        return dummy.next;
+    }
+}
+```
+
+#### 对比
+
+| 方法 | 时间复杂度 | 空间复杂度 | 是否修改原链表 |
+|:---|:---:|:---:|:---:|
+| 反转链表 | O(max(m,n)) | O(1) | ✅ 是 |
+| 栈辅助 | O(max(m,n)) | O(m+n) | ❌ 否 |
+
+---
+
+### 扩展二：两数相减
+
+**问题**：给定两个逆序存储的非负整数链表，返回它们的差（假设被减数 ≥ 减数）。
+
+#### 核心思路
+
+与加法类似，只是将**进位**改为**借位**：
+- 加法：`sum = val1 + val2 + carry`，`carry = sum / 10`
+- 减法：`diff = val1 - val2 - borrow`，若 `diff < 0` 则 `diff += 10`，`borrow = 1`
+
+#### Java 实现
+
+```java
+class Solution {
+    public ListNode subtractTwoNumbers(ListNode l1, ListNode l2) {
+        // 假设 l1 >= l2
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int borrow = 0; // 借位
+        
+        while (l1 != null || l2 != null) {
+            int val1 = (l1 != null) ? l1.val : 0;
+            int val2 = (l2 != null) ? l2.val : 0;
+            
+            int diff = val1 - val2 - borrow;
+            
+            if (diff < 0) {
+                diff += 10;
+                borrow = 1;
+            } else {
+                borrow = 0;
+            }
+            
+            tail.next = new ListNode(diff);
+            tail = tail.next;
+            
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        
+        // 去除前导零（如 100 - 99 = 001 → 1）
+        return removeLeadingZeros(dummy.next);
+    }
+    
+    private ListNode removeLeadingZeros(ListNode head) {
+        while (head != null && head.val == 0 && head.next != null) {
+            head = head.next;
+        }
+        return head;
+    }
+}
+```
+
+#### 示例
+
+```
+输入：(5 → 2 → 4) - (3 → 1)  即 425 - 13
+输出：2 → 1 → 4              即 412
+
+| 步骤 | l1 | l2 | borrow | diff | 结果位 | 链表       |
+|:---:|:--:|:--:|:------:|:----:|:------:|:----------|
+| 1   | 5  | 3  | 0      | 2    | 2      | 2 → null  |
+| 2   | 2  | 1  | 0      | 1    | 1      | 2 → 1 → null |
+| 3   | 4  | 0  | 0      | 4    | 4      | 2 → 1 → 4 → null |
+```
+
+---
+
+### 扩展三：两数相乘
+
+**问题**：给定两个逆序存储的非负整数链表，返回它们的积。
+
+#### 核心思路
+
+乘法比加减法复杂，需要：
+1. **嵌套循环**：用 l2 的每一位去乘 l1 的整个数
+2. **错位相加**：l2 的第 i 位乘 l1 的结果需要左移 i 位（相当于乘以 10^i）
+3. **多路归并**：将所有部分积相加
+
+#### Java 实现
+
+```java
+class Solution {
+    public ListNode multiplyTwoNumbers(ListNode l1, ListNode l2) {
+        // 特殊情况：任一为 0 则结果为 0
+        if (isZero(l1) || isZero(l2)) {
+            return new ListNode(0);
+        }
+        
+        ListNode result = new ListNode(0); // 初始化为 0
+        
+        int position = 0; // l2 当前位的权重（10^position）
+        
+        while (l2 != null) {
+            // 计算 l2 当前位 × l1 的结果
+            ListNode partial = multiplyByDigit(l1, l2.val);
+            
+            // 左移 position 位（末尾补 0）
+            for (int i = 0; i < position; i++) {
+                partial = shiftLeft(partial);
+            }
+            
+            // 累加到结果
+            result = addTwoNumbers(result, partial);
+            
+            l2 = l2.next;
+            position++;
+        }
+        
+        return result;
+    }
+    
+    // 链表 × 单个数字
+    private ListNode multiplyByDigit(ListNode l, int digit) {
+        if (digit == 0) {
+            return new ListNode(0);
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int carry = 0;
+        
+        while (l != null || carry > 0) {
+            int val = (l != null) ? l.val : 0;
+            int product = val * digit + carry;
+            carry = product / 10;
+            tail.next = new ListNode(product % 10);
+            tail = tail.next;
+            if (l != null) l = l.next;
+        }
+        
+        return dummy.next;
+    }
+    
+    // 左移一位（末尾补 0，相当于 ×10）
+    private ListNode shiftLeft(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        return dummy;
+    }
+    
+    private boolean isZero(ListNode head) {
+        return head != null && head.val == 0 && head.next == null;
+    }
+}
+```
+
+#### 示例
+
+```
+输入：(2 → 4 → 3) × (1 → 5)  即 342 × 51
+输出：2 → 2 → 0 → 7 → 1      即 17442
+
+计算过程：
+       342
+     ×  51
+     -----
+       342    ← 1 × 342
+     17100    ← 5 × 342 × 10
+     -----
+     17442
+```
+
+#### 复杂度分析
+
+| 操作 | 时间复杂度 | 空间复杂度 |
+|:---|:---:|:---:|
+| 加法 | O(max(m,n)) | O(max(m,n)) |
+| 减法 | O(max(m,n)) | O(max(m,n)) |
+| 乘法 | O(m × n) | O(m + n) |
+
+---
