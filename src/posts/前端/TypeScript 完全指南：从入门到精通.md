@@ -2832,10 +2832,5 @@ TypeScript 的学习是一个持续的过程，建议在实际项目中不断练
 ### 推荐资源
 
 - [TypeScript 官方文档](https://www.typescriptlang.org/docs/)
-- [TypeScript 深度学习](https://tsdeepdiv.e/)
-- [TypeScript 编程指南](https://github.com/Microsoft/TypeScript-Handbook)
-- [TypeScript 每周](https://typescriptweekly.com/)
 
 ---
-
-*本文最后更新时间：2024 年*
