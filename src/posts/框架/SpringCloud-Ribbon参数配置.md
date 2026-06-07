@@ -4,7 +4,7 @@ author: zheng
 tag:
   - SpringCloud
 category: spring
-date: 2020-12-14 11:33:00
+date: 2020-12-14
 ---
 
 # Ribbon策略类型

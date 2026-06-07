@@ -4,7 +4,7 @@ author: zheng
 tag:
   - hadoop
 category: 大数据
-date: 2020-12-06 11:50:00
+date: 2020-12-06
 ---
 
 ## 1、创建一个HDFS目录

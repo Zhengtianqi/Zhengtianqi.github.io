@@ -5,7 +5,7 @@ tag:
 
   - mysql
 category: 数据库
-date: 2024-12-06 15:48:00
+date: 2024-12-06
 ---
 
 mysql的重做日志（Redo Log）是InnoDB存储引擎中用于实现事务持久性和崩溃恢复的重要机制。以下是关于mysql重做日志的关键点总结：

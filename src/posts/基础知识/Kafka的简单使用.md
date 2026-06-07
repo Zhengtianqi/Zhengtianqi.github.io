@@ -5,7 +5,7 @@ tag:
   - SpringCloud
 category: spring
   
-date: 2020-12-14 12:59:00
+date: 2020-12-14
 ---
 
 # 1、安装kafka

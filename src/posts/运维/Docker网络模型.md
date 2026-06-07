@@ -4,7 +4,7 @@ author: zheng
 tag:
   - docker
 category: CICD
-date: 2022-09-01 13:26:00
+date: 2022-09-01
 ---
 Docker虚拟化技术底层是基于LXC+Cgroups+AUFS（Overlay）技术实现，而我们有熟知Cgroups是Linux内核提供的一种可以限制、记录、隔离进程组（Process Groups）所使用的物理资源的机制。
 Docker虚拟化的产物是Docker容器，基于Docker Engine启动容器时，默认会给容器指定和分配各种子系统：CPU子系统、Memory子系统、IO子系统、NET子系统等。

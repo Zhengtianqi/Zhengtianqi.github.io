@@ -4,7 +4,7 @@ author: zheng
 tag:
   - SpringCloud
 category: spring
-date: 2020-12-14 11:30:00
+date: 2020-12-14
 ---
 
 # 1、添加依赖

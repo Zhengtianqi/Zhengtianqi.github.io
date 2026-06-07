@@ -4,7 +4,7 @@ author: zheng
 tag:
   - SpringCloud
 category: spring
-date: 2020-12-14 11:31:00
+date: 2020-12-14
 ---
 
 注意：默认端点 path 前面有一级 /actuator ，例如：http://服务地址/actuator/info

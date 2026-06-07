@@ -4,7 +4,7 @@ author: zheng
 tag:
   - RAG
 category: 大模型
-date: 2026-05-12 14:25:00
+date: 2026-05-12
 ---
 
 # 大模型RAG实战全流程详解

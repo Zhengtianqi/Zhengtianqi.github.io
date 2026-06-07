@@ -4,7 +4,7 @@ author: zheng
 tag:
   - TypeScript
 category: 前端
-date: 2026-05-30 00:09:00
+date: 2026-05-30
 ---
 
 # TypeScript 完全指南：从入门到精通

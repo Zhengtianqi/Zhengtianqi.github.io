@@ -4,7 +4,7 @@ author: zheng
 tag:
   - mybatis
 category: 数据库
-date: 2023-04-17 09:28:00
+date: 2023-04-17
 ---
 一、添加注解
 先添加注解，有四种方式：

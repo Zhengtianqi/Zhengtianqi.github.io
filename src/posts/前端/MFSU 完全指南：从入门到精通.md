@@ -4,7 +4,7 @@ author: zheng
 tag:
   - MFSU
 category: 前端
-date: 2026-05-30 09:00:00
+date: 2026-05-30
 ---
 
 # MFSU 完全指南：从入门到精通

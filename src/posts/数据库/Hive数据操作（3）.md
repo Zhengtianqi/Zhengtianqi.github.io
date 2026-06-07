@@ -4,7 +4,7 @@ author: zheng
 tag:
   - hive
 category: 大数据
-date: 2020-01-20 14:27:00
+date: 2020-01-20
 ---
 
 # 一、类型转换

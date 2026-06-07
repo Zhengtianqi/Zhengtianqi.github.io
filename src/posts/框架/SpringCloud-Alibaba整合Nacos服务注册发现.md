@@ -5,7 +5,7 @@ tag:
   - SpringCloud
 category: spring
   
-date: 2019-12-03 15:18:00
+date: 2019-12-03
 ---
 
 # 一、服务注册

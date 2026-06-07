@@ -5,7 +5,7 @@ tag:
   - java
   - 文件
 category: java基础
-date: 2022-09-14 09:53:00
+date: 2022-09-14
 ---
 # 1、介绍
 ## （1）Java.io包

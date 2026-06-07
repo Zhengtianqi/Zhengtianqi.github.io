@@ -6,7 +6,7 @@ tag:
   - elk
 category: CICD
   
-date: 2021-04-13 14:40:00
+date: 2021-04-13
 ---
 
 

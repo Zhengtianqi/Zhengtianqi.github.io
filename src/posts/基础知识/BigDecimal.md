@@ -4,7 +4,7 @@ author: zheng
 tag:
   - BigDecimal
 category: java基础
-date: 2022-12-07 15:19:00
+date: 2022-12-07
 ---
 # 1、介绍
 Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数，但在实际应用中，可能需要对更大或者更小的数进行运算和处理。

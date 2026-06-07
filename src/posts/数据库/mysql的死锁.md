@@ -4,7 +4,7 @@ author: zheng
 tag:
   - mysql
 category: 数据库
-date: 2024-12-06 16:43:00
+date: 2024-12-06
 ---
 ### 1. **死锁的概念**
 

@@ -5,7 +5,7 @@ tag:
 
   - k8s
 category: CICD
-date: 2022-04-04 21:42:00
+date: 2022-04-04
 
 ---
 

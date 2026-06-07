@@ -4,7 +4,7 @@ author: zheng
 tag:
   - redis
 category: 数据库
-date: 2021-07-31 12:49:00
+date: 2021-07-31
 ---
 
 # 1、Redis数据结构介绍

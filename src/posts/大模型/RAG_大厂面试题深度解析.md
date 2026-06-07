@@ -6,7 +6,7 @@ tag:
   - Document Loader
   - 知识库
 category: 大模型
-date: 2026-05-25 16:54:00
+date: 2026-05-25
 ---
 
 # 2026年RAG大厂面试题汇总：向量检索、混合检索、Rerank、幻觉处理高频问题与回答思路

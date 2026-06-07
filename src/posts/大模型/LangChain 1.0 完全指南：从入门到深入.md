@@ -5,7 +5,7 @@ tag:
   - AI
   - LangChain
 category: 大模型
-date: 2026-05-13 15:22:00
+date: 2026-05-13
 ---
 
 # LangChain 1.0 完全指南：从入门到深入

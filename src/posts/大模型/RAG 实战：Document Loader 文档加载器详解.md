@@ -6,7 +6,7 @@ tag:
   - Document Loader
   - 知识库
 category: 大模型
-date: 2026-05-13 16:57:00
+date: 2026-05-13
 ---
 
 # RAG 实战：Document Loader 文档加载器详解
