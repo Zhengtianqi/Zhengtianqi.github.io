@@ -3,8 +3,7 @@ title: ElasticSearch近实时性介绍
 author: zheng
 tag:
   - es
-category:
-  - 大数据
+category: 大数据
 date: 2020-07-15 10:51:00
 ---
 

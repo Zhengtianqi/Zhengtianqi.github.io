@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - mysql
-category:
-  - 数据库
+category: 数据库
 date: 2024-12-06 15:48:00
 ---
 

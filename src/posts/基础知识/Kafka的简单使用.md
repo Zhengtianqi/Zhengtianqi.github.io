@@ -3,8 +3,7 @@ title: Kafka的简单使用
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
   
 date: 2020-12-14 12:59:00
 ---

@@ -4,8 +4,7 @@ author: zheng
 tag:
   - AI
   - LangChain
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-13 15:22:00
 ---
 

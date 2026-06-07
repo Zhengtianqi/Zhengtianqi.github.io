@@ -4,8 +4,7 @@ author: zheng
 tag:
   - mysql
   - 分布式事务
-category:
-  - 分布式
+category: 分布式
 date: 2022-08-31 11:35:00
 ---
 

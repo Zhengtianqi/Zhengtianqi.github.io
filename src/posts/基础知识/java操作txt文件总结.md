@@ -4,8 +4,7 @@ author: zheng
 tag:
   - java
   - 文件
-category:
-  - java基础
+category: java基础
 date: 2022-09-14 09:53:00
 ---
 # 1、介绍

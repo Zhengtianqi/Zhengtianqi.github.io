@@ -3,8 +3,7 @@ title: 排序之比较器Comparator<T>
 author: zheng
 tag:
   - java
-category:
-  - java基础
+category: java基础
 date: 2020-01-02 11:34:00
 
 ---

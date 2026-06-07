@@ -3,8 +3,7 @@ title: Docker网络模型
 author: zheng
 tag:
   - docker
-category:
-  - CICD
+category: CICD
 date: 2022-09-01 13:26:00
 ---
 Docker虚拟化技术底层是基于LXC+Cgroups+AUFS（Overlay）技术实现，而我们有熟知Cgroups是Linux内核提供的一种可以限制、记录、隔离进程组（Process Groups）所使用的物理资源的机制。

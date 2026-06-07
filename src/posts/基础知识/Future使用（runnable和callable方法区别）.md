@@ -3,8 +3,7 @@ title: Future使用：runnable和callable方法区别
 author: zheng
 tag:
   - java
-category:
-  - java基础
+category: java基础
 date: 2023-09-23 10:15:00
 ---
 所谓异步调用其实就是实现一个可无需等待被调用函数的返回值而让操作继续运行的方法。

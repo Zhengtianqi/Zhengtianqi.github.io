@@ -2,8 +2,7 @@
 title: SpringCloud异常配置
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
 date: 2020-12-14 11:34:00
 
 ---

@@ -3,8 +3,7 @@ title: SpringCloud Hystrix参数配置
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
   
 date: 2020-12-14 11:33:00
 ---

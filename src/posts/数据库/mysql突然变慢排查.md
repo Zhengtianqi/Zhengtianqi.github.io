@@ -3,8 +3,7 @@ title: mysql突然变慢排查
 author: zheng
 tag:
   - mysql
-category:
-  - 数据库
+category: 数据库
 date: 2021-10-16 11:02:00
 
 ---

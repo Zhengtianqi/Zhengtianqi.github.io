@@ -3,8 +3,7 @@ title: mybatis-plus插件统一处理createTime，createBy，updateBy
 author: zheng
 tag:
   - mybatis
-category:
-  - 数据库
+category: 数据库
 date: 2023-04-17 09:28:00
 ---
 一、添加注解

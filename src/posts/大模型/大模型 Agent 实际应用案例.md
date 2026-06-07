@@ -3,8 +3,7 @@ title: 大模型Agent实际应用案例
 author: zheng
 tag:
   - Agent
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-12 14:58:00
 ---
 

@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - 分布式锁
-category:
-  - 分布式
+category: 分布式
 date: 2026-01-26 10:00:00
 
 ---

@@ -3,7 +3,7 @@ title: SpringCloud服务消费
 author: zheng
 tag:
   - SpringCloud
-category: []
+category: spring
 date: 2020-12-14 11:32:00
 
 ---

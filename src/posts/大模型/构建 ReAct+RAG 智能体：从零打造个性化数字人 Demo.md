@@ -5,8 +5,7 @@ tag:
   - ReAct
   - RAG
   - 智能体
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-13 14:47:00
 ---
 

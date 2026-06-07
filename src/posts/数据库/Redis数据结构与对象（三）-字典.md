@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - redis
-category:
-  - 数据库
+category: 数据库
 date: 2022-01-25 15:58:00
 
 ---

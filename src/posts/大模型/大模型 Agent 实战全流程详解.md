@@ -5,8 +5,7 @@ tag:
   - Agent
   - LLM
   - 大模型
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-12 14:58:00
 ---
 

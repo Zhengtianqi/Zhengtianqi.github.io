@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - hive
-category:
-  - 大数据
+category: 大数据
 date: 2020-01-20 16:27:00
 
 ---

@@ -3,8 +3,7 @@ title: ElasticSearch客户端
 author: zheng
 tag:
   - es
-category:
-  - 大数据
+category: 大数据
   
 date: 2020-07-15 11:10:00
 ---

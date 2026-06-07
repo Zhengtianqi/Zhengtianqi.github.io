@@ -3,8 +3,7 @@ title: GET与POST区别
 author: zheng
 tag:
   - GET/POST
-category:
-  - 网络
+category: 网络
 date: 2020-07-21 08:29:00
 
 ---

@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - spring
-category:
-  - java基础
+category: java基础
 date: 2019-11-14 16:52:00
 
 ---

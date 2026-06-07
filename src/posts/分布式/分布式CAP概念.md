@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - CAP
-category:
-  - 分布式
+category: 分布式
 date: 2020-12-14 13:47:00
 
 ---

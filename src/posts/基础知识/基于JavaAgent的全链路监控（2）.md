@@ -3,8 +3,7 @@ title: 基于JavaAgent的全链路监控（2）
 author: zheng
 tag:
   - javaagent
-category:
-  - java基础
+category: java基础
 date: 2020-07-19 16:54:00
 
 ---

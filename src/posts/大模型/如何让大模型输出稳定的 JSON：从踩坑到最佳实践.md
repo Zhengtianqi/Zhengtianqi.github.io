@@ -5,8 +5,7 @@ tag:
   - 大模型
   - JSON
   - 提示词工程
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-30 09:15:00
 ---
 

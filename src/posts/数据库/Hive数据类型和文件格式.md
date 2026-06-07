@@ -3,8 +3,7 @@ title: Hive数据类型和文件格式
 author: zheng
 tag:
   - hive
-category:
-  - 大数据
+category: 大数据
 date: 2020-01-17 13:41:00
 
 ---

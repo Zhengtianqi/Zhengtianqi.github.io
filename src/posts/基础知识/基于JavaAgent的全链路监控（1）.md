@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - javaagent
-category:
-  - java基础
+category: java基础
 date: 2020-07-17 13:11:00
 
 ---

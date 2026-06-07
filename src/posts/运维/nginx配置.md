@@ -3,8 +3,7 @@ title: nginx配置
 author: zheng
 tag:
   - nginx
-category:
-  - CICD
+category: CICD
 date: 2022-09-14 11:48:00
 ---
 # 一、负载均衡策略

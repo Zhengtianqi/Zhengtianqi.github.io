@@ -4,8 +4,7 @@ author: zheng
 tag:
   - k8s
   - elk
-category:
-  - CICD
+category: CICD
   
 date: 2021-04-13 14:40:00
 ---

@@ -3,8 +3,7 @@ title: HDFS shell操作（1）
 author: zheng
 tag:
   - hadoop
-category:
-  - 大数据
+category: 大数据
 date: 2020-12-06 11:50:00
 ---
 

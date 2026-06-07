@@ -3,8 +3,7 @@ title: Netty介绍及简单示例
 author: zheng
 tag:
   - Netty
-category:
-  - java基础
+category: java基础
 date: 2022-09-07 14:12:00
 ---
 # 一、介绍

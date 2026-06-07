@@ -3,8 +3,7 @@ title: java中的Queue队列
 author: zheng
 tag:
   - java
-category:
-  - java基础
+category: java基础
 date: 2020-12-14 13:04:00
 
 ---

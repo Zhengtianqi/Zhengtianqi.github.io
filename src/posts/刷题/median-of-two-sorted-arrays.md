@@ -4,8 +4,7 @@ author: zheng
 tag:
   - java基础
   - LeetCode
-category:
-  - 刷题
+category: 刷题
 date: 2026-06-02 14:02:00
 ---
 

@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - JVM
-category:
-  - 面试
+category: 面试
 date: 2020-09-18 09:18:00
 
 ---

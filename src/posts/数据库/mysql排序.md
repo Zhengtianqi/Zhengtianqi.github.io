@@ -2,8 +2,7 @@
 title: mysql排序
 tag:
   - mysql
-category:
-  - 数据库
+category: 数据库
 author: zheng
 date: 2019-11-20 20:35:00
 ---

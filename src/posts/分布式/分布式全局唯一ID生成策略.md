@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - 分布式
-category:
-  - 分布式
+category: 分布式
 date: 2019-10-09 12:00:00
 
 ---

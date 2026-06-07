@@ -4,8 +4,7 @@ author: zheng
 tag:
   - SEO
   - 搜索引擎优化
-category:
-  - 产品与协作
+category: 产品与协作
 date: 2026-05-13 15:00:00
 
 ---

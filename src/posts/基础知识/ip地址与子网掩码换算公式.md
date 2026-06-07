@@ -4,8 +4,7 @@ author: zheng
 tag:
   - ip
   - 子网掩码
-category:
-  - 网络
+category: 网络
 date: 2022-05-05 11:12:00
 
 ---

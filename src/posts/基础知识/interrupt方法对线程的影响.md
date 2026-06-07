@@ -2,8 +2,7 @@
 title: interrupt方法对线程的影响
 tag:
   - java
-category:
-  - java基础
+category: java基础
 author: zheng
 date: 2024-12-19 14:02:00
 ---

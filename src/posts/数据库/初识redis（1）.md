@@ -3,8 +3,7 @@ title: 初识redis（1）-数据结构
 author: zheng
 tag:
   - redis
-category:
-  - 数据库
+category: 数据库
 date: 2021-07-31 12:49:00
 ---
 

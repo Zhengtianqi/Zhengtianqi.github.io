@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - java基础
-category:
-  - 面试
+category: 面试
 date: 2020-07-24 15:52:00
 
 ---

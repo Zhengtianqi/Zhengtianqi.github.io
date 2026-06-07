@@ -3,8 +3,7 @@ title: Redis数据结构与对象（二）-链表
 author: zheng
 tag:
   - redis
-category:
-  - 数据库
+category: 数据库
 date: 2022-01-23 16:18:00
 
 ---

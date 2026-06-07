@@ -4,8 +4,7 @@ author: zheng
 tag:
   - IO
   - 阻塞与非阻塞
-category:
-  - 网络
+category: 网络
 date: 2019-08-30 17:34:00
 
 ---

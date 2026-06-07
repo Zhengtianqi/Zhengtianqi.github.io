@@ -3,8 +3,7 @@ title: MapReduce概述
 author: zheng
 tag:
   - HADOOP
-category:
-  - 大数据
+category: 大数据
 date: 2019-12-16 17:13:00
 
 ---

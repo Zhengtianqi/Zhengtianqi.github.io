@@ -3,8 +3,7 @@ title: SpringCloud使用RestTemplate
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
   
 date: 2020-12-14 12:37:00
 ---

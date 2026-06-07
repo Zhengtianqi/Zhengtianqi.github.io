@@ -3,8 +3,7 @@ title: SpringCloud服务构建
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
 date: 2020-12-14 11:30:00
 ---
 

@@ -3,8 +3,7 @@ title: SpringCloud使用nacos多人开发负载调用问题实践
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
   
 date: 2023-10-12 10:17:00
 ---

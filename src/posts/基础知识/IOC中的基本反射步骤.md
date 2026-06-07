@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - spring
-category:
-  - spring
+category: spring
 date: 2020-09-13 09:22:00
 
 ---

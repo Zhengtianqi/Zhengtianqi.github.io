@@ -4,8 +4,7 @@ author: zheng
 tag:
   - 并发
   - 线程安全
-category:
-  - java基础
+category: java基础
 date: 2019-10-12 18:42:00
 
 ---

@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - java
-category:
-  - java基础
+category: java基础
 date: 2021-08-07 13:25:00
 
 ---

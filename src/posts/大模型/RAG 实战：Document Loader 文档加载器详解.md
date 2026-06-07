@@ -5,8 +5,7 @@ tag:
   - RAG
   - Document Loader
   - 知识库
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-13 16:57:00
 ---
 

@@ -3,8 +3,7 @@ title: SpringCloud使用Feign+Ribbon+Hystrix
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
 date: 2020-12-14 12:39:00
 ---
 

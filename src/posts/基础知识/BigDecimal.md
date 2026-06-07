@@ -3,8 +3,7 @@ title: BigDecimal
 author: zheng
 tag:
   - BigDecimal
-category:
-  - java基础
+category: java基础
 date: 2022-12-07 15:19:00
 ---
 # 1、介绍

@@ -3,8 +3,7 @@ title: Transformer 大厂面试题汇总：应用开发者视角
 author: zheng
 tag:
   - Transformer
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-25 10:53:00
 ---
 

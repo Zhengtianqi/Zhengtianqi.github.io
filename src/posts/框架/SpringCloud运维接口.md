@@ -3,8 +3,7 @@ title: SpringCloud运维接口
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
 date: 2020-12-14 11:31:00
 ---
 

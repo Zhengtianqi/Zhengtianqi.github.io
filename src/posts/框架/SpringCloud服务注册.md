@@ -3,8 +3,7 @@ title: SpringCloud服务注册
 author: zheng
 tag:
   - SpringCloud
-category:
-  - spring
+category: spring
 date: 2020-12-14 11:32:00
 ---
 

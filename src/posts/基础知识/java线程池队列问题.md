@@ -3,8 +3,7 @@ title: java线程池队列问题
 author: zheng
 tag:
   - 线程
-category:
-  - java基础
+category: java基础
 date: 2024-12-06 16:59:00
 ---
 问题：

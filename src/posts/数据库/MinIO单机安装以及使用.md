@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - 分布式存储
-category:
-  - 数据库
+category: 数据库
 date: 2022-03-22 21:55:00
 
 ---

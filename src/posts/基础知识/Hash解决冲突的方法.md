@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - 哈希表
-category:
-  - 面试
+category: 面试
 date: 2020-09-18 13:02:00
 
 ---

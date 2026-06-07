@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - mysql
-category:
-  - 数据库
+category: 数据库
 date: 2024-12-06 15:49:00
 ---
 mysql的回滚日志（Undo Log）是InnoDB存储引擎中用于支持事务的ACID特性、实现多版本并发控制（MVCC）以及提供回滚功能的重要组成部分。以下是关于mysql回滚日志的关键点总结：

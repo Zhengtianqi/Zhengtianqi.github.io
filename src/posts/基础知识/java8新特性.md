@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - JDK1.8新特性
-category:
-  - java基础
+category: java基础
 date: 2019-11-14 14:18:00
 ---
 	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话：

@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - k8s
-category:
-  - CICD
+category: CICD
 date: 2022-04-04 21:42:00
 
 ---

@@ -4,8 +4,7 @@ author: zheng
 tag:
   - SpringCloud
   - nacos-config
-category:
-  - spring
+category: spring
   
 date: 2019-11-25 16:38:00
 ---

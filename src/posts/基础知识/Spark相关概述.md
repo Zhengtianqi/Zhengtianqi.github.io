@@ -4,8 +4,7 @@ author: zheng
 tag:
 
   - Spark
-category:
-  - 大数据
+category: 大数据
 date: 2019-12-18 13:41:00
 
 ---

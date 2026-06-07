@@ -4,8 +4,7 @@ author: zheng
 tag:
   - 向量数据库
   - Milvus
-category:
-  - 数据库
+category: 数据库
 date: 2022-11-08 14:28:00
 ---
 # 一、介绍

@@ -4,8 +4,7 @@ author: zheng
 tag:
   - 打包
   - 运维
-category:
-  - CICD
+category: CICD
 date: 2023-03-17 09:21:00
 ---
 # 一、配置pom文件插件

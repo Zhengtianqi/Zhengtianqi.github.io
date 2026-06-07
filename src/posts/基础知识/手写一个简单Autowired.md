@@ -3,8 +3,7 @@ title: 手写一个简单Autowired
 author: zheng
 tag:
   - spring
-category:
-  - spring
+category: spring
 date: 2020-09-11 10:49:00
 
 ---

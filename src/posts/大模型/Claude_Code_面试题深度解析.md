@@ -3,8 +3,7 @@ title: Claude Code 大厂面试题汇总：源码泄露、Agent Loop、系统提
 author: zheng
 tag:
   - ClaudeCode
-category:
-  - 大模型
+category: 大模型
 date: 2026-05-25 15:53:00
 ---
 
