@@ -1,6 +1,6 @@
 ---
 title: HBASE shell操作（2）
-author: zheng
+
 tags:
 
   - hadoop

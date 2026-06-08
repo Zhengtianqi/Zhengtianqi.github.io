@@ -1,6 +1,6 @@
 ---
 title: 初识redis（1）-数据结构
-author: zheng
+
 tags:
   - redis
 category: 数据库

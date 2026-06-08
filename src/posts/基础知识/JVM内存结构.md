@@ -1,6 +1,6 @@
 ---
 title: JVM内存结构
-author: zheng
+
 tags:
 
   - JVM

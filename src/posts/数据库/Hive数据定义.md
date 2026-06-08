@@ -1,6 +1,6 @@
 ---
 title: Hive数据定义
-author: zheng
+
 tags:
   - hive
 category: 大数据

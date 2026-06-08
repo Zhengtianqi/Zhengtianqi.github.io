@@ -1,6 +1,6 @@
 ---
 title: WordCount简析
-author: zheng
+
 tags:
   - HADOOP
 category: 大数据

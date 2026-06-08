@@ -1,6 +1,6 @@
 ---
 title: 分布式CAP概念
-author: zheng
+
 tags:
 
   - CAP

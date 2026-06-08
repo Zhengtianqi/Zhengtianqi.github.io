@@ -1,6 +1,6 @@
 ---
 title: Future使用：runnable和callable方法区别
-author: zheng
+
 tags:
   - java
 category: java基础

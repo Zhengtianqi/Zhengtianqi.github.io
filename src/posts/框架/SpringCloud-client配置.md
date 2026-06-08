@@ -1,6 +1,6 @@
 ---
 title: SpringCloud client配置
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

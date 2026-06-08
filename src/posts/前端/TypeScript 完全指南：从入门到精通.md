@@ -1,6 +1,6 @@
 ---
 title: TypeScript 完全指南：从入门到精通
-author: zheng
+
 tags:
   - TypeScript
 category: 前端

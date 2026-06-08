@@ -1,6 +1,6 @@
 ---
 title: java8新特性
-author: zheng
+
 tags:
 
   - JDK1.8新特性

@@ -1,6 +1,6 @@
 ---
 title: SpringCloud服务注册
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

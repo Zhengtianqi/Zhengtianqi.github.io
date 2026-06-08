@@ -1,6 +1,6 @@
 ---
 title: MapReduce概述
-author: zheng
+
 tags:
   - HADOOP
 category: 大数据

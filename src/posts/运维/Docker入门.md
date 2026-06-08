@@ -1,6 +1,6 @@
 ---
 title: Docker入门
-author: zheng
+
 tags:
   - docker
 category: CICD

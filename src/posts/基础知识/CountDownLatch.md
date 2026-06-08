@@ -1,6 +1,6 @@
 ---
 title: CountDownLatch
-author: zheng
+
 tags:
 
   - java

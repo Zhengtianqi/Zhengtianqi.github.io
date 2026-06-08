@@ -1,6 +1,6 @@
 ---
 title: HDFS概述
-author: zheng
+
 tags:
 
   - HDFS

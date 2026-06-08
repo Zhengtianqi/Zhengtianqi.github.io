@@ -1,6 +1,6 @@
 ---
 title: JVM类加载过程
-author: zheng
+
 tags:
   - JVM
 category: 面试

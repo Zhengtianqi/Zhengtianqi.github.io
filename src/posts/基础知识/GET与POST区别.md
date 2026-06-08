@@ -1,6 +1,6 @@
 ---
 title: GET与POST区别
-author: zheng
+
 tags:
   - GET/POST
 category: 网络

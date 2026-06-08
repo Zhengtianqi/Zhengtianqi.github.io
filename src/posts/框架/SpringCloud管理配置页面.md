@@ -1,6 +1,6 @@
 ---
 title: SpringCloud管理配置页面
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

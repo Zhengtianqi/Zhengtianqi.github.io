@@ -1,6 +1,6 @@
 ---
 title: SpringMVC全局异常处理器
-author: zheng
+
 tags:
   - SpringMVC
 category: spring

@@ -1,6 +1,6 @@
 ---
 title: SpringCloud服务构建
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

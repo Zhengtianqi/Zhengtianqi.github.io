@@ -1,6 +1,6 @@
 ---
 title: SpringCloud健康检查
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

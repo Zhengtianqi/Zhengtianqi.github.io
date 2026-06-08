@@ -1,6 +1,6 @@
 ---
 title: HDFS shell操作（1）
-author: zheng
+
 tags:
   - hadoop
 category: 大数据

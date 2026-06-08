@@ -1,6 +1,6 @@
 ---
 title: AI产品经理转型与实战指南
-author: zheng
+
 tags:
   - 产品与协作
 date: 2026-06-07

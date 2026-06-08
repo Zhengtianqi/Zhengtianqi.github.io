@@ -1,6 +1,6 @@
 ---
 title: MapReduce平均数计算
-author: zheng
+
 tags:
 
   - hadoop

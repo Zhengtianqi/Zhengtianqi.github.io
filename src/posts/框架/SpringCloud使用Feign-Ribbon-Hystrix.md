@@ -1,6 +1,6 @@
 ---
 title: SpringCloud使用Feign+Ribbon+Hystrix
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

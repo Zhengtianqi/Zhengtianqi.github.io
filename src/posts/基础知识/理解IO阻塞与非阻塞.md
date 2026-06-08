@@ -1,6 +1,6 @@
 ---
 title: 理解IO阻塞与非阻塞
-author: zheng
+
 tags:
   - IO
   - 阻塞与非阻塞

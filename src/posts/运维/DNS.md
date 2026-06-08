@@ -1,6 +1,6 @@
 ---
 title: DNS
-author: zheng
+
 tags:
   - DNS
 category: 网络

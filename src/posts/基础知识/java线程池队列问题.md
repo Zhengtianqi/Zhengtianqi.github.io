@@ -1,6 +1,6 @@
 ---
 title: java线程池队列问题
-author: zheng
+
 tags:
   - 线程
 category: java基础

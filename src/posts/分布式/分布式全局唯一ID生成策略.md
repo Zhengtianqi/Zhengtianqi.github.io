@@ -1,6 +1,6 @@
 ---
 title: 分布式全局唯一ID生成策略
-author: zheng
+
 tags:
 
   - 分布式

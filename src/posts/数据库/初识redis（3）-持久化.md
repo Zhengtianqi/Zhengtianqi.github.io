@@ -1,6 +1,6 @@
 ---
 title: 初识redis（3）-持久化
-author: zheng
+
 tags:
   - redis
 category: 数据库

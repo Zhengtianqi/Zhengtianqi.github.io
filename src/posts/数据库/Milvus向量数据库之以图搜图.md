@@ -1,6 +1,6 @@
 ---
 title: Milvus向量数据库之以图搜图
-author: zheng
+
 tags:
   - 向量数据库
   - Milvus

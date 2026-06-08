@@ -1,6 +1,6 @@
 ---
 title: mybatis-plus插件统一处理createTime，createBy，updateBy
-author: zheng
+
 tags:
   - mybatis
 category: 数据库

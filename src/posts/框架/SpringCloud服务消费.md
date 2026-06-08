@@ -1,6 +1,6 @@
 ---
 title: SpringCloud服务消费
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

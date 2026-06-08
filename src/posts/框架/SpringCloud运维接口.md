@@ -1,6 +1,6 @@
 ---
 title: SpringCloud运维接口
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

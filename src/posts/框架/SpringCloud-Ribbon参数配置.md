@@ -1,6 +1,6 @@
 ---
 title: SpringCloud Ribbon参数配置
-author: zheng
+
 tags:
   - SpringCloud
 category: spring

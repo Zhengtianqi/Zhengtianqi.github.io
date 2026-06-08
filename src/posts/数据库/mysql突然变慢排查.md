@@ -1,6 +1,6 @@
 ---
 title: mysql突然变慢排查
-author: zheng
+
 tags:
   - mysql
 category: 数据库

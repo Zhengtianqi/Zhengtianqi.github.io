@@ -1,6 +1,6 @@
 ---
 title: ElasticSearch客户端
-author: zheng
+
 tags:
   - es
 category: 大数据

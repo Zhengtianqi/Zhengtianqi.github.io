@@ -1,6 +1,6 @@
 ---
 title: Yarn概述
-author: zheng
+
 tags:
 
   - HADOOP

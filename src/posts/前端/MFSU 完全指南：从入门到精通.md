@@ -1,6 +1,6 @@
 ---
 title: MFSU 完全指南：从入门到精通
-author: zheng
+
 tags:
   - MFSU
 category: 前端

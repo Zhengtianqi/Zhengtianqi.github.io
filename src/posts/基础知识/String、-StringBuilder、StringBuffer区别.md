@@ -1,6 +1,6 @@
 ---
 title: String、 StringBuilder、StringBuffer区别
-author: zheng
+
 tags:
   - String
   - StringBuilder

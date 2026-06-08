@@ -1,6 +1,6 @@
 ---
 title: ThreadLocal
-author: zheng
+
 tags:
 
   - java

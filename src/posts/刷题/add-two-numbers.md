@@ -1,6 +1,6 @@
 ---
 title: LeetCode 2. 两数相加（Add Two Numbers）
-author: zheng
+
 tags:
   - java基础
   - LeetCode

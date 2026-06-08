@@ -1,6 +1,6 @@
 ---
 title: mysql事务
-author: zheng
+
 tags:
 
   - mysql

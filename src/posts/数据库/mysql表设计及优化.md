@@ -1,6 +1,6 @@
 ---
 title: mysql表设计及优化
-author: zheng
+
 tags:
 
   - mysql

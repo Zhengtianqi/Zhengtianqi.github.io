@@ -1,6 +1,6 @@
 ---
 title: BigDecimal
-author: zheng
+
 tags:
   - BigDecimal
 category: java基础

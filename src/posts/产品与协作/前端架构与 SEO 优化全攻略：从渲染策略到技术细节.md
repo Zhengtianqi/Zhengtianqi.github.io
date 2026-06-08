@@ -1,6 +1,6 @@
 ---
 title: 前端架构与 SEO 优化全攻略：从渲染策略到技术细节
-author: zheng
+
 tags:
   - SEO
   - 搜索引擎优化

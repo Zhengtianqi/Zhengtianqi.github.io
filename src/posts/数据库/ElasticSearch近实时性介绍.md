@@ -1,6 +1,6 @@
 ---
 title: ElasticSearch近实时性介绍
-author: zheng
+
 tags:
   - es
 category: 大数据

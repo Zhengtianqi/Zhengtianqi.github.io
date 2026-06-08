@@ -1,6 +1,6 @@
 ---
 title: Netty介绍及简单示例
-author: zheng
+
 tags:
   - Netty
 category: java基础

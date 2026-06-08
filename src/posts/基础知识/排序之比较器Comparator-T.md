@@ -1,6 +1,6 @@
 ---
 title: 排序之比较器Comparator<T>
-author: zheng
+
 tags:
   - java
 category: java基础

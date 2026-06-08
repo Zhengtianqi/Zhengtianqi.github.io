@@ -1,6 +1,6 @@
 ---
 title: BigKey问题
-author: zheng
+
 tags:
   - redis
 category: 数据库

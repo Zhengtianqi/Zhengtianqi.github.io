@@ -1,6 +1,6 @@
 ---
 title: 产品经理的技术决策方法论：从PDM选型看五维评估框架
-author: zheng
+
 tags:
   - 产品与协作
 date: 2026-06-07

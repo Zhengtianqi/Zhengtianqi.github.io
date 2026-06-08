@@ -1,6 +1,6 @@
 ---
 title: LeetCode 1. 两数之和（Two Sum）
-author: zheng
+
 tags:
   - java基础
   - LeetCode

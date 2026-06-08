@@ -1,6 +1,6 @@
 ---
 title: TCP IP四层网络模型
-author: zheng
+
 tags:
   - TCP/IP
 category: 网络

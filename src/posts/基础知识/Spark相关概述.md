@@ -1,6 +1,6 @@
 ---
 title: Spark相关概述
-author: zheng
+
 tags:
 
   - Spark

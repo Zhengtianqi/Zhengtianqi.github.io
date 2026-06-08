@@ -1,6 +1,6 @@
 ---
 title: java中的Queue队列
-author: zheng
+
 tags:
   - java
 category: java基础
@@ -143,7 +143,7 @@ public class LinkedBlockingQueueDemo {
  * <p>
  * add方法添加元素时，是自下而上的调整堆，取出元素时，是自上而下的调整堆顺序；
  *
- * @Author: zhengtianqi
+ * @tianqi
  * @Date: 2019/7/8 15:54
  */
 public class PriorityBlockingQueueDemo {

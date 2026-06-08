@@ -1,6 +1,6 @@
 ---
 title: LeetCode 4. Median of Two Sorted Arrays
-author: zheng
+
 tags:
   - java基础
   - LeetCode

@@ -1,6 +1,6 @@
 ---
 title: kafka架构设计
-author: zheng
+
 tags:
   - kafka
 category: 分布式

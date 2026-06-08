@@ -1,6 +1,6 @@
 ---
 title: 大模型Agent实际应用案例
-author: zheng
+
 tags:
   - Agent
 category: 大模型

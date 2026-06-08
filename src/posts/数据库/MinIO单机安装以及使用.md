@@ -1,6 +1,6 @@
 ---
 title: MinIO单机安装以及使用
-author: zheng
+
 tags:
 
   - 分布式存储

@@ -3,7 +3,7 @@ title: Git梳理
 tags:
   - git
 category: 软件管理
-author: zheng
+
 date: 2019-08-29
 ---
 ## 1、Git介绍：

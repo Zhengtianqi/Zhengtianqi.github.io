@@ -1,6 +1,6 @@
 ---
 title: Hive数据操作（3）
-author: zheng
+
 tags:
   - hive
 category: 大数据

@@ -1,6 +1,6 @@
 ---
 title: Hive数据操作（2）
-author: zheng
+
 tags:
 
   - hive

@@ -1,6 +1,6 @@
 ---
 title: k8s构建ELK日志平台
-author: zheng
+
 tags:
   - k8s
   - elk
