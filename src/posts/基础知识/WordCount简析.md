@@ -1,7 +1,7 @@
 ---
 title: WordCount简析
 author: zheng
-tag:
+tags:
   - HADOOP
 category: 大数据
 date: 2019-12-18

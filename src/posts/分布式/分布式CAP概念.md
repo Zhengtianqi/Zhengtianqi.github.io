@@ -1,7 +1,7 @@
 ---
 title: 分布式CAP概念
 author: zheng
-tag:
+tags:
 
   - CAP
 category: 分布式

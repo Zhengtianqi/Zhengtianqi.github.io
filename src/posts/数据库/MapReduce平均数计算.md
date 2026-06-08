@@ -1,7 +1,7 @@
 ---
 title: MapReduce平均数计算
 author: zheng
-tag:
+tags:
 
   - hadoop
 category: 大数据

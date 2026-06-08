@@ -1,7 +1,7 @@
 ---
 title: mysql突然变慢排查
 author: zheng
-tag:
+tags:
   - mysql
 category: 数据库
 date: 2021-10-16

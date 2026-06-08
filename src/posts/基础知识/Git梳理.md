@@ -1,6 +1,6 @@
 ---
 title: Git梳理
-tag:
+tags:
   - git
 category: 软件管理
 author: zheng

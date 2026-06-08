@@ -1,7 +1,7 @@
 ---
 title: HBASE shell操作（2）
 author: zheng
-tag:
+tags:
 
   - hadoop
 category: 大数据

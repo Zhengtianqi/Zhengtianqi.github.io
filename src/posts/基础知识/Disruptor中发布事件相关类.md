@@ -1,7 +1,7 @@
 ---
 title: Disruptor中发布事件相关类
 author: zheng
-tag:
+tags:
 
   - Disruptor
 category: 分布式

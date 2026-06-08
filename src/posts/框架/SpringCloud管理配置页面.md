@@ -1,7 +1,7 @@
 ---
 title: SpringCloud管理配置页面
 author: zheng
-tag:
+tags:
   - SpringCloud
 category: spring
 date: 2020-12-14

@@ -1,7 +1,7 @@
 ---
 title: IOC中的基本反射步骤
 author: zheng
-tag:
+tags:
 
   - spring
 category: spring

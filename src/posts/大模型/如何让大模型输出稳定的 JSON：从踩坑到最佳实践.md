@@ -1,7 +1,7 @@
 ---
 title: 如何让大模型输出稳定的 JSON：从踩坑到最佳实践
 author: zheng
-tag:
+tags:
   - 大模型
   - JSON
   - 提示词工程

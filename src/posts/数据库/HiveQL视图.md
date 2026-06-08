@@ -1,7 +1,7 @@
 ---
 title: HiveQL视图
 author: zheng
-tag:
+tags:
 
   - hive
 category: 大数据

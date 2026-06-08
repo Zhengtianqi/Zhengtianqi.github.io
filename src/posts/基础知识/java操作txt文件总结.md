@@ -1,7 +1,7 @@
 ---
 title: java操作txt文件总结
 author: zheng
-tag:
+tags:
   - java
   - 文件
 category: java基础

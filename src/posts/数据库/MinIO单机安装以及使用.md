@@ -1,7 +1,7 @@
 ---
 title: MinIO单机安装以及使用
 author: zheng
-tag:
+tags:
 
   - 分布式存储
 category: 数据库

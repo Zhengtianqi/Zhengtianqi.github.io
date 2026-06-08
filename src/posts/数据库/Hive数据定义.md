@@ -1,7 +1,7 @@
 ---
 title: Hive数据定义
 author: zheng
-tag:
+tags:
   - hive
 category: 大数据
 date: 2020-01-17

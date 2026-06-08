@@ -1,7 +1,7 @@
 ---
 title: 理解IO阻塞与非阻塞
 author: zheng
-tag:
+tags:
   - IO
   - 阻塞与非阻塞
 category: 网络

@@ -1,7 +1,7 @@
 ---
 title: HDFS文件操作
 author: zheng
-tag:
+tags:
   - HDFS
   - HADOOP
 category: 大数据

@@ -1,7 +1,7 @@
 ---
 title: JVM垃圾回收算法
 author: zheng
-tag:
+tags:
 
   - JVM
 category: 面试

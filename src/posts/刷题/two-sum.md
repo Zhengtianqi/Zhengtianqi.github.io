@@ -1,7 +1,7 @@
 ---
 title: LeetCode 1. 两数之和（Two Sum）
 author: zheng
-tag:
+tags:
   - java基础
   - LeetCode
 category: 刷题

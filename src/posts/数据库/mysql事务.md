@@ -1,7 +1,7 @@
 ---
 title: mysql事务
 author: zheng
-tag:
+tags:
 
   - mysql
 category: 数据库

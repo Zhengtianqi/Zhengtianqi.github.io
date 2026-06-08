@@ -1,7 +1,7 @@
 ---
 title: mysql表设计及优化
 author: zheng
-tag:
+tags:
 
   - mysql
 category: 数据库

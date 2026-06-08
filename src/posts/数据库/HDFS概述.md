@@ -1,7 +1,7 @@
 ---
 title: HDFS概述
 author: zheng
-tag:
+tags:
 
   - HDFS
   - HADOOP

@@ -1,7 +1,7 @@
 ---
 title: Hive索引
 author: zheng
-tag:
+tags:
 
   - hive
 category: 大数据

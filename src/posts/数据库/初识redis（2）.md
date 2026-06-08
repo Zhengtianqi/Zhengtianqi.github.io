@@ -1,7 +1,7 @@
 ---
 title: 初识redis（2）-基本特性
 author: zheng
-tag:
+tags:
   - redis
 category: 数据库
 date: 2021-08-01

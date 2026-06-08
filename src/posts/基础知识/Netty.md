@@ -1,7 +1,7 @@
 ---
 title: Netty介绍及简单示例
 author: zheng
-tag:
+tags:
   - Netty
 category: java基础
 date: 2022-09-07

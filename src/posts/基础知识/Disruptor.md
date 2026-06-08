@@ -1,7 +1,7 @@
 ---
 title: Disruptor
 author: zheng
-tag:
+tags:
 
   - Disruptor
 category: 分布式

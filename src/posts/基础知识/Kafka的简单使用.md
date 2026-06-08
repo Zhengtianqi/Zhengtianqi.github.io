@@ -1,7 +1,7 @@
 ---
 title: Kafka的简单使用
 author: zheng
-tag:
+tags:
   - SpringCloud
 category: spring
   

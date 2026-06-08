@@ -1,7 +1,7 @@
 ---
 title: mysql的死锁
 author: zheng
-tag:
+tags:
   - mysql
 category: 数据库
 date: 2024-12-06

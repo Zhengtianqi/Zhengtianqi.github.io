@@ -1,7 +1,7 @@
 ---
 title: DNS
 author: zheng
-tag:
+tags:
   - DNS
 category: 网络
 date: 2020-07-21

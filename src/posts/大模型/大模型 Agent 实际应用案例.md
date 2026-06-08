@@ -1,7 +1,7 @@
 ---
 title: 大模型Agent实际应用案例
 author: zheng
-tag:
+tags:
   - Agent
 category: 大模型
 date: 2026-05-12

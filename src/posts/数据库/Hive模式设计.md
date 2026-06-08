@@ -1,7 +1,7 @@
 ---
 title: Hive模式设计
 author: zheng
-tag:
+tags:
 
   - hive
 category: 大数据

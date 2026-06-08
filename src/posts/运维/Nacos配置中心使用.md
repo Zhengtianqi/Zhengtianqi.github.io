@@ -1,7 +1,7 @@
 ---
 title: Nacos配置中心使用
 author: zheng
-tag:
+tags:
   - SpringCloud
   - nacos-config
 category: spring

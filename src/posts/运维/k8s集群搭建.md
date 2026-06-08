@@ -1,7 +1,7 @@
 ---
 title: k8s集群搭建
 author: zheng
-tag:
+tags:
 
   - k8s
 category: CICD

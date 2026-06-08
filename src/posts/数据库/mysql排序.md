@@ -1,6 +1,6 @@
 ---
 title: mysql排序
-tag:
+tags:
   - mysql
 category: 数据库
 author: zheng

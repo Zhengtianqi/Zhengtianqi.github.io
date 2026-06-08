@@ -1,7 +1,7 @@
 ---
 title: SpringCloud Hystrix参数配置
 author: zheng
-tag:
+tags:
   - SpringCloud
 category: spring
   

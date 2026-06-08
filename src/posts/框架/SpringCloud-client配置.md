@@ -1,7 +1,7 @@
 ---
 title: SpringCloud client配置
 author: zheng
-tag:
+tags:
   - SpringCloud
 category: spring
 date: 2020-12-14

@@ -1,7 +1,7 @@
 ---
 title: Hive调优
 author: zheng
-tag:
+tags:
 
   - hive
 category: 大数据

@@ -1,7 +1,7 @@
 ---
 title: CountDownLatch
 author: zheng
-tag:
+tags:
 
   - java
 category: java基础

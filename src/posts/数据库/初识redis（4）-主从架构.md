@@ -1,7 +1,7 @@
 ---
 title: 初识redis（4）-主从架构
 author: zheng
-tag:
+tags:
 
   - redis
 category: 数据库

@@ -1,7 +1,7 @@
 ---
 title: JVM内存结构
 author: zheng
-tag:
+tags:
 
   - JVM
 category: 面试

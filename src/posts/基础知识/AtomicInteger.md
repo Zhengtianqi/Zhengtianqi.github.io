@@ -1,7 +1,7 @@
 ---
 title: AtomicInteger
 author: zheng
-tag:
+tags:
 
   - java基础
 category: 面试

@@ -1,7 +1,7 @@
 ---
 title: 大模型RAG实战全流程详解
 author: zheng
-tag:
+tags:
   - RAG
 category: 大模型
 date: 2026-05-12

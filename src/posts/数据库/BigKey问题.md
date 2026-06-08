@@ -1,7 +1,7 @@
 ---
 title: BigKey问题
 author: zheng
-tag:
+tags:
   - redis
 category: 数据库
 date: 2024-12-06

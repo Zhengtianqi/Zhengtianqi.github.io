@@ -1,7 +1,7 @@
 ---
 title: SpringCloud使用RestTemplate
 author: zheng
-tag:
+tags:
   - SpringCloud
 category: spring
   

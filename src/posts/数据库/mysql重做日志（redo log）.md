@@ -1,7 +1,7 @@
 ---
 title: mysql重做日志（redo log）
 author: zheng
-tag:
+tags:
 
   - mysql
 category: 数据库

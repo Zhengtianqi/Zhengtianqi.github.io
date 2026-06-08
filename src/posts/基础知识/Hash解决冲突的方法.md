@@ -1,7 +1,7 @@
 ---
 title: Hash解决冲突的方法
 author: zheng
-tag:
+tags:
 
   - 哈希表
 category: 面试

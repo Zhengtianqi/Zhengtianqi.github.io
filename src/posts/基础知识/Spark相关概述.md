@@ -1,7 +1,7 @@
 ---
 title: Spark相关概述
 author: zheng
-tag:
+tags:
 
   - Spark
 category: 大数据

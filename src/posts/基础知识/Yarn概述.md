@@ -1,7 +1,7 @@
 ---
 title: Yarn概述
 author: zheng
-tag:
+tags:
 
   - HADOOP
 category: 大数据

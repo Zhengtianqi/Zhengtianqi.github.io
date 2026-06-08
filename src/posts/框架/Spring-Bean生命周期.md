@@ -1,7 +1,7 @@
 ---
 title: Spring Bean作用域与生命周期
 author: zheng
-tag:
+tags:
 
   - spring
 category: java基础

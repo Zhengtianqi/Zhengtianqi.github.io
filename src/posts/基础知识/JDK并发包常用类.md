@@ -1,7 +1,7 @@
 ---
 title: JDK并发包常用类
 author: zheng
-tag:
+tags:
   - java
 category: java基础
 date: 2022-04-08

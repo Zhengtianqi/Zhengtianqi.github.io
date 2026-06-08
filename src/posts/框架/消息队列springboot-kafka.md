@@ -1,7 +1,7 @@
 ---
 title: kafka架构设计
 author: zheng
-tag:
+tags:
   - kafka
 category: 分布式
 date: 2022-10-28

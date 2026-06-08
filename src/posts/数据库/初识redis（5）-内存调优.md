@@ -1,7 +1,7 @@
 ---
 title: 初识redis（5）-内存调优
 author: zheng
-tag:
+tags:
 
   - redis
 category: 数据库

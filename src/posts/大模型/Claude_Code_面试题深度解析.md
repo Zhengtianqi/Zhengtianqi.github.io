@@ -1,7 +1,7 @@
 ---
 title: Claude Code 大厂面试题汇总：源码泄露、Agent Loop、系统提示词、工具链、上下文管理、安全机制全拆解
 author: zheng
-tag:
+tags:
   - ClaudeCode
 category: 大模型
 date: 2026-05-25

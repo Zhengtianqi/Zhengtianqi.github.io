@@ -1,7 +1,7 @@
 ---
 title: LeetCode 2. 两数相加（Add Two Numbers）
 author: zheng
-tag:
+tags:
   - java基础
   - LeetCode
 category: 刷题

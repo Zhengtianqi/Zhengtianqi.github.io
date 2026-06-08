@@ -1,7 +1,7 @@
 ---
 title: ElasticSearch近实时性介绍
 author: zheng
-tag:
+tags:
   - es
 category: 大数据
 date: 2020-07-15

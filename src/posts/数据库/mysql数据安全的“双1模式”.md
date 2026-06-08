@@ -1,7 +1,7 @@
 ---
 title: mysql 数据安全的“双1模式”
 author: zheng
-tag:
+tags:
 
   - mysql
 category: 数据库

@@ -1,7 +1,7 @@
 ---
 title: springboot打jar包分离资源文件
 author: zheng
-tag:
+tags:
   - 打包
   - 运维
 category: CICD
