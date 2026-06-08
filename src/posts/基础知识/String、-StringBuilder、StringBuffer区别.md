@@ -1,7 +1,7 @@
 ---
 title: String、 StringBuilder、StringBuffer区别
 
-tags:
+tag:
   - String
   - StringBuilder
   - StringBuffer

@@ -1,7 +1,7 @@
 ---
 title: Docker入门
 
-tags:
+tag:
   - docker
 category: CICD
 date: 2020-12-14

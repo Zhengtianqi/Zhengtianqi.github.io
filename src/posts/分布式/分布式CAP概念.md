@@ -1,7 +1,7 @@
 ---
 title: 分布式CAP概念
 
-tags:
+tag:
 
   - CAP
 category: 分布式

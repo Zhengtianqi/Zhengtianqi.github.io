@@ -1,7 +1,7 @@
 ---
 title: ip地址与子网掩码换算公式
 
-tags:
+tag:
   - ip
   - 子网掩码
 category: 网络

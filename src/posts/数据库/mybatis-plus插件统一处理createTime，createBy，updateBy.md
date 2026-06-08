@@ -1,7 +1,7 @@
 ---
 title: mybatis-plus插件统一处理createTime，createBy，updateBy
 
-tags:
+tag:
   - mybatis
 category: 数据库
 date: 2023-04-17

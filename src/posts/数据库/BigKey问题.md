@@ -1,7 +1,7 @@
 ---
 title: BigKey问题
 
-tags:
+tag:
   - redis
 category: 数据库
 date: 2024-12-06

@@ -1,7 +1,7 @@
 ---
 title: HiveQL视图
 
-tags:
+tag:
 
   - hive
 category: 大数据

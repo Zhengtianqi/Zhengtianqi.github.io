@@ -1,7 +1,7 @@
 ---
 title: HDFS文件操作
 
-tags:
+tag:
   - HDFS
   - HADOOP
 category: 大数据

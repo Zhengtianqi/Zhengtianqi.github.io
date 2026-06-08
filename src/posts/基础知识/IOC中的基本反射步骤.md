@@ -1,7 +1,7 @@
 ---
 title: IOC中的基本反射步骤
 
-tags:
+tag:
 
   - spring
 category: spring

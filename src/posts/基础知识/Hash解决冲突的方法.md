@@ -1,7 +1,7 @@
 ---
 title: Hash解决冲突的方法
 
-tags:
+tag:
 
   - 哈希表
 category: 面试

@@ -1,7 +1,7 @@
 ---
 title: 模型微调面试详解：SFT、RLHF、DPO、PPO、强化学习和基模变强后的优化价值
 
-tags:
+tag:
   - 微调
 category: 大模型
 date: 2026-05-26

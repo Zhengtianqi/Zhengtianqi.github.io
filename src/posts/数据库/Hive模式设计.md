@@ -1,7 +1,7 @@
 ---
 title: Hive模式设计
 
-tags:
+tag:
 
   - hive
 category: 大数据

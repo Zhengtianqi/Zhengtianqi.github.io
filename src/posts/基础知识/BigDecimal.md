@@ -1,7 +1,7 @@
 ---
 title: BigDecimal
 
-tags:
+tag:
   - BigDecimal
 category: java基础
 date: 2022-12-07

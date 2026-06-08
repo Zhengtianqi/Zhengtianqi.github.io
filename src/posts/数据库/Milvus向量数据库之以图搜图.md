@@ -1,7 +1,7 @@
 ---
 title: Milvus向量数据库之以图搜图
 
-tags:
+tag:
   - 向量数据库
   - Milvus
 category: 数据库

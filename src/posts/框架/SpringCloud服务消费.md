@@ -1,7 +1,7 @@
 ---
 title: SpringCloud服务消费
 
-tags:
+tag:
   - SpringCloud
 category: spring
 date: 2020-12-14

@@ -1,7 +1,7 @@
 ---
 title: LeetCode 4. Median of Two Sorted Arrays
 
-tags:
+tag:
   - java基础
   - LeetCode
 category: 刷题

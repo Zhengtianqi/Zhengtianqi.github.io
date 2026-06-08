@@ -1,7 +1,7 @@
 ---
 title: JVM垃圾回收算法
 
-tags:
+tag:
 
   - JVM
 category: 面试

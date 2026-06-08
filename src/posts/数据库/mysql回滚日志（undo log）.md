@@ -1,7 +1,7 @@
 ---
 title: mysql回滚日志（undo log）
 
-tags:
+tag:
 
   - mysql
 category: 数据库

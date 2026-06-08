@@ -1,6 +1,6 @@
 ---
 title: interrupt方法对线程的影响
-tags:
+tag:
   - java
 category: java基础
 

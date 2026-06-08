@@ -1,6 +1,6 @@
 ---
 title: Git梳理
-tags:
+tag:
   - git
 category: 软件管理
 

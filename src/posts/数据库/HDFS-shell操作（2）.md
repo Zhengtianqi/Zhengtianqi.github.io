@@ -1,7 +1,7 @@
 ---
 title: HBASE shell操作（2）
 
-tags:
+tag:
 
   - hadoop
 category: 大数据

@@ -1,7 +1,7 @@
 ---
 title: SpringCloud服务注册
 
-tags:
+tag:
   - SpringCloud
 category: spring
 date: 2020-12-14

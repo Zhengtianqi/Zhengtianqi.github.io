@@ -1,7 +1,7 @@
 ---
 title: CountDownLatch
 
-tags:
+tag:
 
   - java
 category: java基础

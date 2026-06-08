@@ -1,7 +1,7 @@
 ---
 title: mysql事务
 
-tags:
+tag:
 
   - mysql
 category: 数据库

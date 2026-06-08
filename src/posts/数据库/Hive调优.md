@@ -1,7 +1,7 @@
 ---
 title: Hive调优
 
-tags:
+tag:
 
   - hive
 category: 大数据

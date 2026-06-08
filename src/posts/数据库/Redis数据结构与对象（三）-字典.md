@@ -1,7 +1,7 @@
 ---
 title: Redis数据结构与对象（三）-字典
 
-tags:
+tag:
 
   - redis
 category: 数据库

@@ -1,7 +1,7 @@
 ---
 title: SpringMVC全局异常处理器
 
-tags:
+tag:
   - SpringMVC
 category: spring
 date: 2023-04-17

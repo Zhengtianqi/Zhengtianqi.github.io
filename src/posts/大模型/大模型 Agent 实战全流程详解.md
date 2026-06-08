@@ -1,7 +1,7 @@
 ---
 title: 大模型 Agent 实战全流程详解
 
-tags:
+tag:
   - Agent
   - LLM
   - 大模型

@@ -1,6 +1,6 @@
 ---
 title: maven梳理
-tags:
+tag:
 
   - maven
 category: 软件管理

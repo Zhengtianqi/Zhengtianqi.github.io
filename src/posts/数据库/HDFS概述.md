@@ -1,7 +1,7 @@
 ---
 title: HDFS概述
 
-tags:
+tag:
 
   - HDFS
   - HADOOP

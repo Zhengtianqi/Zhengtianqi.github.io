@@ -1,7 +1,7 @@
 ---
 title: SpringCloud运维接口
 
-tags:
+tag:
   - SpringCloud
 category: spring
 date: 2020-12-14

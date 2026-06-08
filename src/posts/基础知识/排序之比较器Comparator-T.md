@@ -1,7 +1,7 @@
 ---
 title: 排序之比较器Comparator<T>
 
-tags:
+tag:
   - java
 category: java基础
 date: 2020-01-02

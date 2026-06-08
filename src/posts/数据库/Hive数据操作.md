@@ -1,7 +1,7 @@
 ---
 title: Hive数据操作（1）
 
-tags:
+tag:
 
   - hive
 category: 大数据

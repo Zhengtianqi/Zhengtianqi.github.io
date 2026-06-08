@@ -1,7 +1,7 @@
 ---
 title: MapReduce概述
 
-tags:
+tag:
   - HADOOP
 category: 大数据
 date: 2019-12-16

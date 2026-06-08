@@ -1,7 +1,7 @@
 ---
 title: AtomicInteger
 
-tags:
+tag:
 
   - java基础
 category: 面试

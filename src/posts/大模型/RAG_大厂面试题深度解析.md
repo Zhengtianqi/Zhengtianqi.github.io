@@ -1,7 +1,7 @@
 ---
 title: RAG 实战：Document Loader 文档加载器详解
 
-tags:
+tag:
   - RAG
   - Document Loader
   - 知识库

@@ -1,7 +1,7 @@
 ---
 title: Redis数据结构与对象（一）-简单动态字符串
 
-tags:
+tag:
 
   - redis
 category: 数据库

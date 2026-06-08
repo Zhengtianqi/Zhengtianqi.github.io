@@ -1,7 +1,7 @@
 ---
 title: 初识redis（3）-持久化
 
-tags:
+tag:
   - redis
 category: 数据库
 date: 2021-08-01

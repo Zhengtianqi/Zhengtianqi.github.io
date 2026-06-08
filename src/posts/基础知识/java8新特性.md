@@ -1,7 +1,7 @@
 ---
 title: java8新特性
 
-tags:
+tag:
 
   - JDK1.8新特性
 category: java基础

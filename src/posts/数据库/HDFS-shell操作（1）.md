@@ -1,7 +1,7 @@
 ---
 title: HDFS shell操作（1）
 
-tags:
+tag:
   - hadoop
 category: 大数据
 date: 2020-12-06

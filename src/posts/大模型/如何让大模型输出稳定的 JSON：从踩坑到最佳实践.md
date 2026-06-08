@@ -1,7 +1,7 @@
 ---
 title: 如何让大模型输出稳定的 JSON：从踩坑到最佳实践
 
-tags:
+tag:
   - 大模型
   - JSON
   - 提示词工程
@@ -155,7 +155,7 @@ const schema = {
   properties: {
     name: { type: "string", description: "用户姓名" },
     age: { type: "integer", description: "用户年龄" },
-    tags: { 
+    tag: { 
       type: "array",
       items: { type: "string" },
       description: "用户标签"
@@ -406,7 +406,7 @@ const userSchema = {
     name: { type: "string", minLength: 1 },
     age: { type: "integer", minimum: 0, maximum: 150 },
     email: { type: "string", format: "email" },
-    tags: { 
+    tag: { 
       type: "array",
       items: { type: "string" }
     }
@@ -428,7 +428,7 @@ function testSchemaValidation(data) {
 // 测试数据
 const testData = [
   { name: "张三", age: 25 },  // ✓ 有效
-  { name: "张三", age: 25, tags: ["工程师"] },  // ✓ 有效
+  { name: "张三", age: 25, tag: ["工程师"] },  // ✓ 有效
   { name: "", age: 25 },  // ✗ name 不能为空
   { name: "张三", age: -5 },  // ✗ age 不能为负
   { name: "张三", age: 25, unknown: "field" }  // ✗ 不允许额外字段

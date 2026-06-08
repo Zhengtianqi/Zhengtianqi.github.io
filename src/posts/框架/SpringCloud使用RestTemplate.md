@@ -1,7 +1,7 @@
 ---
 title: SpringCloud使用RestTemplate
 
-tags:
+tag:
   - SpringCloud
 category: spring
   

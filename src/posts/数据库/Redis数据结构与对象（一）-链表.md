@@ -1,7 +1,7 @@
 ---
 title: Redis数据结构与对象（二）-链表
 
-tags:
+tag:
   - redis
 category: 数据库
 date: 2022-01-23

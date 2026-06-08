@@ -1,7 +1,7 @@
 ---
 title: SimpleDateFormat引发的线程安全问题
 
-tags:
+tag:
   - 并发
   - 线程安全
 category: java基础

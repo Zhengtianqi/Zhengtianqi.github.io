@@ -1,7 +1,7 @@
 ---
 title: Disruptor中发布事件相关类
 
-tags:
+tag:
 
   - Disruptor
 category: 分布式

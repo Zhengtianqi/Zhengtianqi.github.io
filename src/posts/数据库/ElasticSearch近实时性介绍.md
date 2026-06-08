@@ -1,7 +1,7 @@
 ---
 title: ElasticSearch近实时性介绍
 
-tags:
+tag:
   - es
 category: 大数据
 date: 2020-07-15

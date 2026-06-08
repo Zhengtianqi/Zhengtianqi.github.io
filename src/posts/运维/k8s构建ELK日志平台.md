@@ -1,7 +1,7 @@
 ---
 title: k8s构建ELK日志平台
 
-tags:
+tag:
   - k8s
   - elk
 category: CICD

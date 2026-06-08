@@ -1,7 +1,7 @@
 ---
 title: JAVA数据类型易混概念
 
-tags:
+tag:
 
   - java
 category: java基础

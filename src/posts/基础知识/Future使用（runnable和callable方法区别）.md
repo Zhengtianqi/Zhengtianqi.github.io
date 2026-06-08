@@ -1,7 +1,7 @@
 ---
 title: Future使用：runnable和callable方法区别
 
-tags:
+tag:
   - java
 category: java基础
 date: 2023-09-23

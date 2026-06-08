@@ -1,7 +1,7 @@
 ---
 title: TypeScript 完全指南：从入门到精通
 
-tags:
+tag:
   - TypeScript
 category: 前端
 date: 2026-05-30
@@ -1129,7 +1129,7 @@ function sum(...numbers: number[]): number {
 }
 
 // 混合参数
-function process(name: string, ...tags: string[]): string {
+function process(name: string, ...tag: string[]): string {
   return `${name}: ${tags.join(", ")}`;
 }
 ```

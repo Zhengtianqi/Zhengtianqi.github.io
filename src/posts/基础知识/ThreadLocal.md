@@ -1,7 +1,7 @@
 ---
 title: ThreadLocal
 
-tags:
+tag:
 
   - java
 category: java基础

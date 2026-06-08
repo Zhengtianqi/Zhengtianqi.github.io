@@ -1,7 +1,7 @@
 ---
 title: SQL Server 与 MySQL 跨数据库联查完全指南
 
-tags:
+tag:
 
   - redis
 category: 数据库

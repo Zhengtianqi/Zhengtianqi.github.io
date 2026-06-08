@@ -1,7 +1,7 @@
 ---
 title: JVM内存结构
 
-tags:
+tag:
 
   - JVM
 category: 面试

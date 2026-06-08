@@ -1,6 +1,6 @@
 ---
 title: mysql排序
-tags:
+tag:
   - mysql
 category: 数据库
 

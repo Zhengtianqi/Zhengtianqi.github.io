@@ -1,7 +1,7 @@
 ---
 title: GET与POST区别
 
-tags:
+tag:
   - GET/POST
 category: 网络
 date: 2020-07-21

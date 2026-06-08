@@ -1,7 +1,7 @@
 ---
 title: LangChain 1.0 完全指南：从入门到深入
 
-tags:
+tag:
   - AI
   - LangChain
 category: 大模型

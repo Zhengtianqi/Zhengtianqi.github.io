@@ -1,7 +1,7 @@
 ---
 title: ElasticSearch客户端
 
-tags:
+tag:
   - es
 category: 大数据
   

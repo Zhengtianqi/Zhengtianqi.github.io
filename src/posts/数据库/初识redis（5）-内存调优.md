@@ -1,7 +1,7 @@
 ---
 title: 初识redis（5）-内存调优
 
-tags:
+tag:
 
   - redis
 category: 数据库

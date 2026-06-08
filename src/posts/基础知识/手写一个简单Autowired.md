@@ -1,7 +1,7 @@
 ---
 title: 手写一个简单Autowired
 
-tags:
+tag:
   - spring
 category: spring
 date: 2020-09-11

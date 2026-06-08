@@ -1,7 +1,7 @@
 ---
 title: java线程池队列问题
 
-tags:
+tag:
   - 线程
 category: java基础
 date: 2024-12-06

@@ -1,7 +1,7 @@
 ---
 title: mysql重做日志（redo log）
 
-tags:
+tag:
 
   - mysql
 category: 数据库

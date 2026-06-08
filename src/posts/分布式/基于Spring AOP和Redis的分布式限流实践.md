@@ -1,7 +1,7 @@
 ---
 title: 基于Spring AOP和Redis的分布式限流实践
 
-tags:
+tag:
 
   - 分布式锁
 category: 分布式

@@ -1,7 +1,7 @@
 ---
 title: Disruptor
 
-tags:
+tag:
 
   - Disruptor
 category: 分布式

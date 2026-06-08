@@ -1,7 +1,7 @@
 ---
 title: nginx配置
 
-tags:
+tag:
   - nginx
 category: CICD
 date: 2022-09-14

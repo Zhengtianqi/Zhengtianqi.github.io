@@ -1,7 +1,7 @@
 ---
 title: SpringCloud健康检查
 
-tags:
+tag:
   - SpringCloud
 category: spring
 date: 2020-12-14

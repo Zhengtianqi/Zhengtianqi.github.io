@@ -1,7 +1,7 @@
 ---
 title: WordCount简析
 
-tags:
+tag:
   - HADOOP
 category: 大数据
 date: 2019-12-18

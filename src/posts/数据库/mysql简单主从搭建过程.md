@@ -1,7 +1,7 @@
 ---
 title: mysql简单主从搭建过程
 
-tags:
+tag:
 
   - mysql
 category: 数据库
