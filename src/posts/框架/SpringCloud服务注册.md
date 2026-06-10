@@ -1,8 +1,6 @@
 ---
 title: SpringCloud服务注册
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "服务注册", "微服务"]
 category: spring
 date: 2020-12-14
 ---

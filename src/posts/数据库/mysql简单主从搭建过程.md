@@ -1,9 +1,6 @@
 ---
 title: mysql简单主从搭建过程
-
-tag:
-
-  - mysql
+tag: ["MySQL", "主从复制", "数据库"]
 category: 数据库
 date: 2022-04-11
 

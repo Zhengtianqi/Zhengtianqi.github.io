@@ -1,9 +1,6 @@
 ---
 title: CountDownLatch
-
-tag:
-
-  - java
+tag: ["并发编程", "同步工具", "CountDownLatch"]
 category: java基础
 date: 2021-08-07
 

@@ -1,10 +1,7 @@
 ---
 title: SpringCloud Hystrix参数配置
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Hystrix", "熔断降级"]
 category: spring
-  
 date: 2020-12-14
 ---
 

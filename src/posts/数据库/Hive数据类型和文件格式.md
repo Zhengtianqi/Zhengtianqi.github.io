@@ -1,11 +1,8 @@
 ---
 title: Hive数据类型和文件格式
-
-tag:
-  - hive
+tag: ["Hive", "大数据", "数据类型"]
 category: 大数据
 date: 2020-01-17
-
 ---
 
 # 一、基本数据类型

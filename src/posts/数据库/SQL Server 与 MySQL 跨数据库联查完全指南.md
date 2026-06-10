@@ -1,9 +1,6 @@
 ---
 title: SQL Server 与 MySQL 跨数据库联查完全指南
-
-tag:
-
-  - redis
+tag: ["SQL Server", "MySQL", "跨数据库查询"]
 category: 数据库
 date: 2026-01-09
 ---

@@ -1,11 +1,8 @@
 ---
 title: DNS
-
-tag:
-  - DNS
+tag: ["DNS", "网络", "运维"]
 category: 网络
 date: 2020-07-21
-
 ---
 
 # 1、介绍  

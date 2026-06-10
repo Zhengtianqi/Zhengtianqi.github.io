@@ -1,12 +1,8 @@
 ---
 title: HttpClient
-
-tag:
-
-  - httpclient
+tag: ["HTTP", "Java网络", "HttpClient"]
 category: 网络
 date: 2020-07-15
-
 ---
 
 # 1、HttpClient介绍		

@@ -1,9 +1,6 @@
 ---
 title: 分布式事务-springcloud-nacos-seata
-
-tag:
-  - mysql
-  - 分布式事务
+tag: ["分布式事务", "Seata", "SpringCloud"]
 category: 分布式
 date: 2022-08-31
 ---

@@ -1,11 +1,8 @@
 ---
 title: 基于JavaAgent的全链路监控（2）
-
-tag:
-  - javaagent
+tag: ["JavaAgent", "全链路监控", "字节码操作"]
 category: java基础
 date: 2020-07-19
-
 ---
 
 # 《利用javaagent进行方法耗时的监控》

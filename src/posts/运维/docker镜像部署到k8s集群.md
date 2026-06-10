@@ -1,12 +1,8 @@
 ---
 title: docker镜像部署到k8s集群
-
-tag:
-  - k8s
-  - docker
+tag: ["Docker", "K8s", "容器化", "部署"]
 category: CICD
 date: 2022-04-11
-
 ---
 
 # 一、搭建docker私有仓库

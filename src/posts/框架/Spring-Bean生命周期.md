@@ -1,12 +1,8 @@
 ---
 title: Spring Bean作用域与生命周期
-
-tag:
-
-  - spring
+tag: ["Spring", "Bean生命周期"]
 category: java基础
 date: 2019-11-14
-
 ---
 
 # 一、Spring Bean生命周期

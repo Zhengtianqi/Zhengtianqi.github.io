@@ -1,11 +1,10 @@
 ---
 title: nginx配置
-
-tag:
-  - nginx
+tag: ["Nginx", "负载均衡", "配置"]
 category: CICD
 date: 2022-09-14
 ---
+
 # 一、负载均衡策略
 负载均衡用于从“upstream”模块定义的后端服务器列表中选取一台服务器接受用户的请求。一个最基本的upstream模块是这样的，模块内的server是服务器列表：
 ```java

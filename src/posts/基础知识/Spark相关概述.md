@@ -1,12 +1,8 @@
 ---
 title: Spark相关概述
-
-tag:
-
-  - Spark
+tag: ["Spark", "大数据"]
 category: 大数据
 date: 2019-12-18
-
 ---
 
 # 一、Spark的核心组件是：

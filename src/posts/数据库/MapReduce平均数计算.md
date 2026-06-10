@@ -1,12 +1,8 @@
 ---
 title: MapReduce平均数计算
-
-tag:
-
-  - hadoop
+tag: ["MapReduce", "HADOOP", "大数据"]
 category: 大数据
 date: 2020-12-06
-
 ---
 
 ## 1、建立三个文档

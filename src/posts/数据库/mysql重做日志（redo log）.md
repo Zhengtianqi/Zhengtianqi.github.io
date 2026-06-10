@@ -1,9 +1,6 @@
 ---
 title: mysql重做日志（redo log）
-
-tag:
-
-  - mysql
+tag: ["MySQL", "redo log", "数据库"]
 category: 数据库
 date: 2024-12-06
 ---

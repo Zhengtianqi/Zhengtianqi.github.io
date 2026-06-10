@@ -1,12 +1,8 @@
 ---
 title: Redis数据结构与对象（三）-字典
-
-tag:
-
-  - redis
+tag: ["Redis", "数据结构", "字典"]
 category: 数据库
 date: 2022-01-25
-
 ---
 
 ## 字典的实现

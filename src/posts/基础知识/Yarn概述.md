@@ -1,12 +1,8 @@
 ---
 title: Yarn概述
-
-tag:
-
-  - HADOOP
+tag: ["HADOOP", "Yarn", "大数据"]
 category: 大数据
 date: 2019-12-18
-
 ---
 
 # 一、组件介绍	

@@ -1,8 +1,6 @@
 ---
 title: SpringCloud client配置
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "配置", "微服务"]
 category: spring
 date: 2020-12-14
 ---

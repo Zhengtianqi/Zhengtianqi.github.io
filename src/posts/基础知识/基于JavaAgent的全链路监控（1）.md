@@ -1,12 +1,8 @@
 ---
 title: 基于JavaAgent的全链路监控（1）
-
-tag:
-
-  - javaagent
+tag: ["JavaAgent", "监控", "AOP"]
 category: java基础
 date: 2020-07-17
-
 ---
 
 # 《手写一个最简单的javaagent》

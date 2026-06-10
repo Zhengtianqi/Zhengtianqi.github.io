@@ -1,8 +1,6 @@
 ---
 title: SpringCloud健康检查
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "健康检查"]
 category: spring
 date: 2020-12-14
 ---

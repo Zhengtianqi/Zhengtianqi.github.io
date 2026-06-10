@@ -1,11 +1,8 @@
 ---
 title: mysql突然变慢排查
-
-tag:
-  - mysql
+tag: ["MySQL", "性能优化", "数据库"]
 category: 数据库
 date: 2021-10-16
-
 ---
 
 # 一、查看当前Mysql所有的进程

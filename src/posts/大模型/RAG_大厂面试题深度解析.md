@@ -1,10 +1,6 @@
 ---
 title: RAG 实战：Document Loader 文档加载器详解
-
-tag:
-  - RAG
-  - Document Loader
-  - 知识库
+tag: ["RAG", "大模型", "面试", "向量检索"]
 category: 大模型
 date: 2026-05-25
 ---

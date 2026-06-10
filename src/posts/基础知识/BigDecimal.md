@@ -1,8 +1,6 @@
 ---
 title: BigDecimal
-
-tag:
-  - BigDecimal
+tag: ["java基础", "BigDecimal"]
 category: java基础
 date: 2022-12-07
 ---

@@ -1,9 +1,6 @@
 ---
 title: LeetCode 2. 两数相加（Add Two Numbers）
-
-tag:
-  - java基础
-  - LeetCode
+tag: ["LeetCode", "算法", "链表"]
 category: 刷题
 date: 2026-05-26
 ---

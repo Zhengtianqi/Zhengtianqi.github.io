@@ -1,9 +1,6 @@
 ---
 title: LeetCode 3. 无重复字符的最长子串（Longest Substring Without Repeating Characters）
-
-tag:
-  - java基础
-  - LeetCode
+tag: ["LeetCode", "算法", "滑动窗口", "字符串"]
 category: 刷题
 date: 2026-05-26
 ---

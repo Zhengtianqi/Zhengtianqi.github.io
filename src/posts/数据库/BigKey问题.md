@@ -1,8 +1,6 @@
 ---
 title: BigKey问题
-
-tag:
-  - redis
+tag: ["Redis", "性能优化", "数据库"]
 category: 数据库
 date: 2024-12-06
 ---

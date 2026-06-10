@@ -1,9 +1,6 @@
 ---
 title: LeetCode 4. Median of Two Sorted Arrays
-
-tag:
-  - java基础
-  - LeetCode
+tag: ["LeetCode", "算法", "二分查找"]
 category: 刷题
 date: 2026-06-02
 ---

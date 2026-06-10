@@ -1,8 +1,6 @@
 ---
 title: SpringCloud Ribbon参数配置
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Ribbon", "负载均衡"]
 category: spring
 date: 2020-12-14
 ---

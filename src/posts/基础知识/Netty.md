@@ -1,11 +1,10 @@
 ---
 title: Netty介绍及简单示例
-
-tag:
-  - Netty
+tag: ["Netty", "NIO", "网络框架"]
 category: java基础
 date: 2022-09-07
 ---
+
 # 一、介绍
 ## 简介
 netty是一个异步、基于事件驱动的网络应用框架，用以快速开发高性能、高可用的网络IO程序

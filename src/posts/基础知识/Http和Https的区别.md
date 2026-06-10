@@ -1,11 +1,8 @@
 ---
 title: Http和Https的区别
-
-tag:
-  - https
+tag: ["HTTP", "HTTPS"]
 category: 网络
 date: 2020-09-11
-
 ---
 
 # 一、基本概念

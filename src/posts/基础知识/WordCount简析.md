@@ -1,11 +1,8 @@
 ---
 title: WordCount简析
-
-tag:
-  - HADOOP
+tag: ["HADOOP", "MapReduce"]
 category: 大数据
 date: 2019-12-18
-
 ---
 
 ```java

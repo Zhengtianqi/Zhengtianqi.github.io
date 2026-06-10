@@ -1,11 +1,8 @@
 ---
 title: java中的Queue队列
-
-tag:
-  - java
+tag: ["java基础", "Queue", "数据结构"]
 category: java基础
 date: 2020-12-14
-
 ---
 
 # 1、介绍

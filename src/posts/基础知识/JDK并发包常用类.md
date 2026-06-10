@@ -1,11 +1,8 @@
 ---
 title: JDK并发包常用类
-
-tag:
-  - java
+tag: ["java基础", "并发编程", "JDK"]
 category: java基础
 date: 2022-04-08
-
 ---
 
 # 1、工具类

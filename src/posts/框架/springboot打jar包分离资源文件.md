@@ -1,12 +1,10 @@
 ---
 title: springboot打jar包分离资源文件
-
-tag:
-  - 打包
-  - 运维
+tag: ["SpringBoot", "打包", "运维"]
 category: CICD
 date: 2023-03-17
 ---
+
 # 一、配置pom文件插件
 ```xml
     <build>

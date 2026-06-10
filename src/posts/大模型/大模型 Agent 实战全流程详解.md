@@ -1,10 +1,6 @@
 ---
 title: 大模型 Agent 实战全流程详解
-
-tag:
-  - Agent
-  - LLM
-  - 大模型
+tag: ["AI Agent", "大模型", "实践"]
 category: 大模型
 date: 2026-05-12
 ---

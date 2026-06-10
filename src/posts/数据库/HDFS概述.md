@@ -1,13 +1,8 @@
 ---
 title: HDFS概述
-
-tag:
-
-  - HDFS
-  - HADOOP
+tag: ["HDFS", "HADOOP", "大数据"]
 category: 大数据
 date: 2019-12-16
-
 ---
 
 本文权威指南读书笔记

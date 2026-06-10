@@ -1,12 +1,8 @@
 ---
 title: mysql事务
-
-tag:
-
-  - mysql
+tag: ["MySQL", "事务", "数据库"]
 category: 数据库
 date: 2020-07-21
-
 ---
 
 # 1、介绍

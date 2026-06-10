@@ -1,12 +1,8 @@
 ---
 title: mysql表设计及优化
-
-tag:
-
-  - mysql
+tag: ["MySQL", "数据库", "表设计", "优化"]
 category: 数据库
 date: 2019-08-31
-
 ---
 
 ## 一、一些建议

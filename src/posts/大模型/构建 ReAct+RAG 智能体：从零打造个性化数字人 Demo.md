@@ -1,10 +1,6 @@
 ---
 title: 构建 ReAct+RAG 智能体：从零打造个性化数字人 Demo
-
-tag:
-  - ReAct
-  - RAG
-  - 智能体
+tag: ["ReAct", "RAG", "AI Agent"]
 category: 大模型
 date: 2026-05-13
 ---

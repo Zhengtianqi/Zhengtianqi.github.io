@@ -1,10 +1,7 @@
 ---
 title: SpringCloud使用RestTemplate
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "RestTemplate", "HTTP客户端"]
 category: spring
-  
 date: 2020-12-14
 ---
 

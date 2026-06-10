@@ -1,13 +1,8 @@
 ---
 title: String、 StringBuilder、StringBuffer区别
-
-tag:
-  - String
-  - StringBuilder
-  - StringBuffer
+tag: ["java基础", "String"]
 category: java基础
 date: 2020-07-21
-
 ---
 
 # 1、介绍

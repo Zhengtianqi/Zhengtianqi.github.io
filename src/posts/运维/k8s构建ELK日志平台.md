@@ -1,11 +1,7 @@
 ---
 title: k8s构建ELK日志平台
-
-tag:
-  - k8s
-  - elk
+tag: ["Kubernetes", "ELK", "日志平台"]
 category: CICD
-  
 date: 2021-04-13
 ---
 

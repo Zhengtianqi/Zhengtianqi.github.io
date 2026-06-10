@@ -1,12 +1,8 @@
 ---
 title: Hive调优
-
-tag:
-
-  - hive
+tag: ["Hive", "性能优化", "大数据"]
 category: 大数据
 date: 2020-01-21
-
 ---
 
 # 一、使用EXPLAIN

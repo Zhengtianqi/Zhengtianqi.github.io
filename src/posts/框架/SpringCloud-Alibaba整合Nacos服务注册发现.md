@@ -1,10 +1,7 @@
 ---
 title: SpringCloud-Alibaba整合Nacos服务注册发现
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Nacos", "服务注册发现"]
 category: spring
-  
 date: 2019-12-03
 ---
 

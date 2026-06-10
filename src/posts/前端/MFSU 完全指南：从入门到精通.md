@@ -1,8 +1,6 @@
 ---
 title: MFSU 完全指南：从入门到精通
-
-tag:
-  - MFSU
+tag: ["MFSU", "前端", "构建优化"]
 category: 前端
 date: 2026-05-30
 ---

@@ -1,11 +1,8 @@
 ---
 title: 排序之比较器Comparator<T>
-
-tag:
-  - java
+tag: ["java基础", "排序", "Comparator"]
 category: java基础
 date: 2020-01-02
-
 ---
 
 # 一、Comparator和Comparable区别

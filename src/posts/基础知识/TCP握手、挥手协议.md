@@ -1,12 +1,8 @@
 ---
 title: TCP握手、挥手协议
-
-tag:
-
-  - TCP/IP
+tag: ["TCP/IP", "网络协议"]
 category: 网络
 date: 2019-08-30
-
 ---
 
 ## 1、TCP三次握手协议（打开连接）

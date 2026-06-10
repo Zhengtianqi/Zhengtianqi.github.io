@@ -1,12 +1,8 @@
 ---
 title: 初识redis（4）-主从架构
-
-tag:
-
-  - redis
+tag: ["Redis", "主从架构", "数据库"]
 category: 数据库
 date: 2021-08-02
-
 ---
 
 # 1、Redis “主 - 从” 机制

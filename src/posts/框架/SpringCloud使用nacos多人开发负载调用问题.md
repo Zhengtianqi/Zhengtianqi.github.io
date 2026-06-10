@@ -1,10 +1,7 @@
 ---
 title: SpringCloud使用nacos多人开发负载调用问题实践
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Nacos", "负载均衡"]
 category: spring
-  
 date: 2023-10-12
 ---
 

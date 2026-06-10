@@ -1,11 +1,10 @@
 ---
 title: kafka架构设计
-
-tag:
-  - kafka
+tag: ["Kafka", "消息队列", "SpringBoot"]
 category: 分布式
 date: 2022-10-28
 ---
+
 # 1、应用场景
 
 同时为发布和订阅提供高吞吐量、消息持久化、分布式功能、支持数据并行加载到Hadoop中

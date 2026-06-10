@@ -1,11 +1,10 @@
 ---
 title: mybatis-plus插件统一处理createTime，createBy，updateBy
-
-tag:
-  - mybatis
+tag: ["MyBatis-Plus", "插件", "ORM"]
 category: 数据库
 date: 2023-04-17
 ---
+
 一、添加注解
 先添加注解，有四种方式：
 ```java

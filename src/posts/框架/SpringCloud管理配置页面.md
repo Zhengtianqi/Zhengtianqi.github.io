@@ -1,8 +1,6 @@
 ---
 title: SpringCloud管理配置页面
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "配置中心"]
 category: spring
 date: 2020-12-14
 ---

@@ -1,10 +1,7 @@
 ---
 title: SpringCloud使用Feign+Ribbon
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Feign", "Ribbon"]
 category: spring
-  
 date: 2020-12-14
 ---
 

@@ -1,11 +1,8 @@
 ---
 title: 手写一个简单Autowired
-
-tag:
-  - spring
+tag: ["Spring", "DI", "反射"]
 category: spring
 date: 2020-09-11
-
 ---
 
 # 1、按照惯例

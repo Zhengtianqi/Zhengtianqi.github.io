@@ -1,10 +1,7 @@
 ---
 title: SpringCloud使用Feign
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "Feign", "HTTP客户端"]
 category: spring
-  
 date: 2020-12-14
 ---
 

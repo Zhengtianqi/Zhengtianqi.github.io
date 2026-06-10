@@ -1,8 +1,6 @@
 ---
 title: 大模型Agent实际应用案例
-
-tag:
-  - Agent
+tag: ["大模型", "Agent", "实践"]
 category: 大模型
 date: 2026-05-12
 ---

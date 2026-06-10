@@ -1,8 +1,6 @@
 ---
 title: 一文讲透AI的七层关系：从Token到Agent，搞懂AI任务执行的完整链路
-
-tag:
-  - AI
+tag: ["AI", "大模型", "技术架构"]
 category: 大模型
 date: 2026-05-09
 ---

@@ -1,10 +1,7 @@
 ---
 title: Kafka的简单使用
-
-tag:
-  - SpringCloud
-category: spring
-  
+tag: ["Kafka", "消息队列"]
+category: 分布式
 date: 2020-12-14
 ---
 

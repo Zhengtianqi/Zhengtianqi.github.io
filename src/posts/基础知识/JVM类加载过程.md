@@ -1,11 +1,8 @@
 ---
 title: JVM类加载过程
-
-tag:
-  - JVM
+tag: ["JVM", "类加载", "面试"]
 category: 面试
 date: 2020-09-27
-
 ---
 
 # 0、图解

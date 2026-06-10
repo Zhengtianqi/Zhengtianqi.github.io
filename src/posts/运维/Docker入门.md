@@ -1,8 +1,6 @@
 ---
 title: Docker入门
-
-tag:
-  - docker
+tag: ["Docker", "容器化"]
 category: CICD
 date: 2020-12-14
 ---

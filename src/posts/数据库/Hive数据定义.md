@@ -1,11 +1,8 @@
 ---
 title: Hive数据定义
-
-tag:
-  - hive
+tag: ["Hive", "大数据", "数据定义"]
 category: 大数据
 date: 2020-01-17
-
 ---
 
 # 一、Hive 与 Mysql不同

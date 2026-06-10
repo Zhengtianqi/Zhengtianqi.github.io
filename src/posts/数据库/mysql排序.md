@@ -1,9 +1,7 @@
 ---
 title: mysql排序
-tag:
-  - mysql
+tag: ["MySQL", "数据库"]
 category: 数据库
-
 date: 2019-11-20
 ---
 

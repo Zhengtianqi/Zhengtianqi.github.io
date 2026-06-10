@@ -1,11 +1,8 @@
 ---
 title: TCP IP四层网络模型
-
-tag:
-  - TCP/IP
+tag: ["TCP/IP", "网络模型", "网络协议"]
 category: 网络
 date: 2019-08-30
-
 ---
 
 ## 1、用户发送请求

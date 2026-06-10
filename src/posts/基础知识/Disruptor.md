@@ -1,9 +1,6 @@
 ---
 title: Disruptor
-
-tag:
-
-  - Disruptor
+tag: ["Disruptor", "高性能", "消息队列"]
 category: 分布式
 date: 2021-04-13
 ---

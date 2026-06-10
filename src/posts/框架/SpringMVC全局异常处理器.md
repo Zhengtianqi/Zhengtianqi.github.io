@@ -1,11 +1,10 @@
 ---
 title: SpringMVC全局异常处理器
-
-tag:
-  - SpringMVC
+tag: ["SpringMVC", "异常处理", "Java"]
 category: spring
 date: 2023-04-17
 ---
+
 # 一、引言
 SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？
 Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。

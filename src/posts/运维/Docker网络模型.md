@@ -1,11 +1,10 @@
 ---
 title: Docker网络模型
-
-tag:
-  - docker
+tag: ["Docker", "网络模型", "容器化"]
 category: CICD
 date: 2022-09-01
 ---
+
 Docker虚拟化技术底层是基于LXC+Cgroups+AUFS（Overlay）技术实现，而我们有熟知Cgroups是Linux内核提供的一种可以限制、记录、隔离进程组（Process Groups）所使用的物理资源的机制。
 Docker虚拟化的产物是Docker容器，基于Docker Engine启动容器时，默认会给容器指定和分配各种子系统：CPU子系统、Memory子系统、IO子系统、NET子系统等。
 启动一个容器，会分配Network Namespace（子系统）提供了一份独立的网络环境，包括网卡、路由、Iptables规则等，容器跟其他容器的Network Namespace是相互隔离的。

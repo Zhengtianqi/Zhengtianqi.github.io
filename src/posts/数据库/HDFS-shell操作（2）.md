@@ -1,12 +1,8 @@
 ---
 title: HBASE shell操作（2）
-
-tag:
-
-  - hadoop
+tag: ["HBASE", "HADOOP", "大数据"]
 category: 大数据
 date: 2020-12-06
-
 ---
 
 

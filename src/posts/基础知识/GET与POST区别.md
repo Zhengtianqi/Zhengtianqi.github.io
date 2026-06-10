@@ -1,11 +1,8 @@
 ---
 title: GET与POST区别
-
-tag:
-  - GET/POST
+tag: ["HTTP", "GET", "POST"]
 category: 网络
 date: 2020-07-21
-
 ---
 
 # 1、介绍

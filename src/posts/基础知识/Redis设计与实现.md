@@ -1,12 +1,8 @@
 ---
 title: Redis数据结构与对象（一）-简单动态字符串
-
-tag:
-
-  - redis
+tag: ["Redis", "数据结构", "数据库"]
 category: 数据库
 date: 2022-01-22
-
 ---
 
 # 数据结构与对象

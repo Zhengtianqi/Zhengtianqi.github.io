@@ -1,12 +1,8 @@
 ---
 title: JVM内存结构
-
-tag:
-
-  - JVM
+tag: ["JVM", "内存模型", "运行时数据区"]
 category: 面试
 date: 2020-09-27
-
 ---
 
 ![](/assets/images/JVMMemory.png)

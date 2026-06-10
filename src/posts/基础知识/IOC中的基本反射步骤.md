@@ -1,12 +1,8 @@
 ---
 title: IOC中的基本反射步骤
-
-tag:
-
-  - spring
+tag: ["Spring", "反射", "DI"]
 category: spring
 date: 2020-09-13
-
 ---
 
 # 1、controller

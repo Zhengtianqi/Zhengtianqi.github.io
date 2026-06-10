@@ -1,11 +1,8 @@
 ---
 title: MapReduce概述
-
-tag:
-  - HADOOP
+tag: ["MapReduce", "HADOOP", "大数据"]
 category: 大数据
 date: 2019-12-16
-
 ---
 
 # 一、基本模型

@@ -1,12 +1,10 @@
 ---
 title: java操作txt文件总结
-
-tag:
-  - java
-  - 文件
+tag: ["Java基础", "文件操作", "IO流"]
 category: java基础
 date: 2022-09-14
 ---
+
 # 1、介绍
 ## （1）Java.io包
 ### File类

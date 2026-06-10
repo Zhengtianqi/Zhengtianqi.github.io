@@ -1,8 +1,6 @@
 ---
 title: 初识redis（1）-数据结构
-
-tag:
-  - redis
+tag: ["Redis", "数据结构"]
 category: 数据库
 date: 2021-07-31
 ---

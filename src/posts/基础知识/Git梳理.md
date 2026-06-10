@@ -1,9 +1,7 @@
 ---
 title: Git梳理
-tag:
-  - git
+tag: ["Git", "版本控制"]
 category: 软件管理
-
 date: 2019-08-29
 ---
 ## 1、Git介绍：

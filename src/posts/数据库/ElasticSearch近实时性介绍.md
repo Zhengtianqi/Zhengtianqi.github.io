@@ -1,8 +1,6 @@
 ---
 title: ElasticSearch近实时性介绍
-
-tag:
-  - es
+tag: ["ElasticSearch", "搜索引擎"]
 category: 大数据
 date: 2020-07-15
 ---

@@ -1,8 +1,6 @@
 ---
 title: Transformer 大厂面试题汇总：应用开发者视角
-
-tag:
-  - Transformer
+tag: ["Transformer", "大模型", "面试"]
 category: 大模型
 date: 2026-05-25
 ---

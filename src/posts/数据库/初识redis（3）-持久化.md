@@ -1,11 +1,8 @@
 ---
 title: 初识redis（3）-持久化
-
-tag:
-  - redis
+tag: ["Redis", "持久化", "数据库"]
 category: 数据库
 date: 2021-08-01
-
 ---
 
 # 1、Redis 数据持久化概念

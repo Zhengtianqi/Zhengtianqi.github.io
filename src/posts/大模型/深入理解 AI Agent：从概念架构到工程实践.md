@@ -1,8 +1,6 @@
 ---
 title: 深入理解 AI Agent：从概念架构到工程实践
-
-tag:
-  - Agent
+tag: ["AI Agent", "大模型", "架构设计"]
 category: 大模型
 date: 2026-05-13
 ---

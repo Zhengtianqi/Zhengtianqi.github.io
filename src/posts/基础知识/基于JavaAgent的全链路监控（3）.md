@@ -1,12 +1,8 @@
 ---
 title: 基于JavaAgent的全链路监控（3）
-
-tag:
-
-  - javaagent
+tag: ["JavaAgent", "JVM监控", "字节码操作"]
 category: java基础
 date: 2020-07-19
-
 ---
 
 # 《利用javaagent进行 JVM内存与GC信息的采集》

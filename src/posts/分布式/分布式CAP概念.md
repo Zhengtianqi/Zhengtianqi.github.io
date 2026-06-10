@@ -1,12 +1,8 @@
 ---
 title: 分布式CAP概念
-
-tag:
-
-  - CAP
+tag: ["CAP", "分布式系统"]
 category: 分布式
 date: 2020-12-14
-
 ---
 
 		2000年7月，加州大学伯克利分校的Eric Brewer教授ACM PODC会议上提出CAP猜想。两年后，麻省理工学院的seth Gilbert和Nancy Lynch从理论上证明了CAP。之后，CAP理论正式成为分布式计算领域的公认理论。(理论是有时间期限的，没有绝对意义上的公理，是相对于目前计算机科学水平)；

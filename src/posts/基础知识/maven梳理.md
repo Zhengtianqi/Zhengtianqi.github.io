@@ -1,12 +1,10 @@
 ---
 title: maven梳理
-tag:
-
-  - maven
+tag: ["maven", "构建工具"]
 category: 软件管理
-
 date: 2019-08-28
 ---
+
 # Maven使用
 
 ## maven的命令：

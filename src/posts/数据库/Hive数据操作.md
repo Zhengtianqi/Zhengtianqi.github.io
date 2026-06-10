@@ -1,12 +1,8 @@
 ---
 title: Hive数据操作（1）
-
-tag:
-
-  - hive
+tag: ["Hive", "大数据"]
 category: 大数据
 date: 2020-01-17
-
 ---
 
 # 一、加载数据		

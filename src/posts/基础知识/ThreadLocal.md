@@ -1,12 +1,8 @@
 ---
 title: ThreadLocal
-
-tag:
-
-  - java
+tag: ["ThreadLocal", "并发编程", "java基础"]
 category: java基础
 date: 2020-03-28
-
 ---
 
 引言：本博客《SimpleDateFormat引发的线程安全问题》中提到，可以利用 ThreadLocal 来解决SimpleDateFormat的线程安全问题。之后看到阿里巴巴开发规范中也有提到，SimpleDateFormat禁止使用static进行修饰。

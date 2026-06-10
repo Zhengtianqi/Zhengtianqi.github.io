@@ -1,12 +1,8 @@
 ---
 title: AtomicInteger
-
-tag:
-
-  - java基础
+tag: ["java基础", "并发编程", "原子类"]
 category: 面试
 date: 2020-07-24
-
 ---
 
 # 1、介绍		

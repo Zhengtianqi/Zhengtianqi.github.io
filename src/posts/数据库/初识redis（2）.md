@@ -1,8 +1,6 @@
 ---
 title: 初识redis（2）-基本特性
-
-tag:
-  - redis
+tag: ["Redis", "数据库", "基本特性"]
 category: 数据库
 date: 2021-08-01
 ---

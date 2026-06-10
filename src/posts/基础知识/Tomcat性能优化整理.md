@@ -1,12 +1,8 @@
 ---
 title: Tomcat性能优化整理
-
-tag:
-
-  - tomcat
+tag: ["Tomcat", "性能优化", "服务器配置"]
 category: 面试
 date: 2020-11-17
-
 ---
 
 # 1、JVM参数调优

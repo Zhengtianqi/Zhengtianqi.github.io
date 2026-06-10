@@ -1,10 +1,6 @@
 ---
 title: TCP与UDP的区别
-
-tag:
-
-  - TCP/IP
-  - UDP
+tag: ["TCP", "UDP", "网络协议"]
 category: 网络
 date: 2020-07-21
 

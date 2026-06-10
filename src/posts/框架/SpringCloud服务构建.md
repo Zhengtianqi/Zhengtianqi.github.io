@@ -1,8 +1,6 @@
 ---
 title: SpringCloud服务构建
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "服务构建"]
 category: spring
 date: 2020-12-14
 ---

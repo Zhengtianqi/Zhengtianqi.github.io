@@ -1,12 +1,8 @@
 ---
 title: HDFS文件操作
-
-tag:
-  - HDFS
-  - HADOOP
+tag: ["HDFS", "HADOOP", "大数据"]
 category: 大数据
 date: 2019-12-16
-
 ---
 
 # 	一、读文件

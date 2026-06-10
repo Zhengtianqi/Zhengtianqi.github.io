@@ -1,8 +1,6 @@
 ---
 title: SpringCloud运维接口
-
-tag:
-  - SpringCloud
+tag: ["SpringCloud", "运维", "Actuator"]
 category: spring
 date: 2020-12-14
 ---

@@ -1,8 +1,6 @@
 ---
 title: docker本机打镜像
-
-tag:
-  - docker
+tag: ["Docker", "镜像"]
 category: CICD
 date: 2021-07-18
 ---

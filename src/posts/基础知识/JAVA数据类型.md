@@ -1,12 +1,8 @@
 ---
 title: JAVA数据类型易混概念
-
-tag:
-
-  - java
+tag: ["java基础", "数据类型"]
 category: java基础
 date: 2020-01-06
-
 ---
 
 1、整型

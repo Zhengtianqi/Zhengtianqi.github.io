@@ -1,9 +1,6 @@
 ---
 title: LeetCode 1. 两数之和（Two Sum）
-
-tag:
-  - java基础
-  - LeetCode
+tag: ["LeetCode", "算法", "数组", "双指针"]
 category: 刷题
 date: 2026-05-26
 ---

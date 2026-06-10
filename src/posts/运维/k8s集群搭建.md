@@ -1,12 +1,8 @@
 ---
 title: k8s集群搭建
-
-tag:
-
-  - k8s
+tag: ["Kubernetes", "K8s", "容器编排"]
 category: CICD
 date: 2022-04-04
-
 ---
 
 ## 1. 安装要求

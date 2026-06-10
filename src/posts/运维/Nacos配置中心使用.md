@@ -1,11 +1,7 @@
 ---
 title: Nacos配置中心使用
-
-tag:
-  - SpringCloud
-  - nacos-config
+tag: ["Nacos", "配置中心", "SpringCloud"]
 category: spring
-  
 date: 2019-11-25
 ---
 

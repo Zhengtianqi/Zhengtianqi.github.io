@@ -1,9 +1,6 @@
 ---
 title: Hash解决冲突的方法
-
-tag:
-
-  - 哈希表
+tag: ["数据结构", "Hash", "哈希表"]
 category: 面试
 date: 2020-09-18
 
