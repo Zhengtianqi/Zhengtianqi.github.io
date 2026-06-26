@@ -5,8 +5,6 @@ category: 架构设计
 tag: ["DDD", "领域驱动设计", "架构", "Spring Boot"]
 ---
 
-# DDD 入门指南：从贫血模型到领域驱动
-
 ## 前言
 
 在传统 Spring Boot 项目开发中，我们习以为常的"Controller-Service-DAO"三层架构，往往会让代码逐渐演变成所谓的"贫血模型"。数据对象只有 getter/setter，业务逻辑散落在各个 Service 类中，随着系统复杂度增加，代码变得越来越难以维护。

@@ -5,9 +5,6 @@ category: 架构设计
 date: 2026-06-26
 ---
 
-CQRS与Event_Sourcing：事件驱动架构的实践指南
-# CQRS与Event Sourcing：事件驱动架构的实践指南
-
 ## 前言
 
 传统应用中，**读写操作使用同一个数据模型**：

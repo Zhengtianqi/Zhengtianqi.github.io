@@ -5,8 +5,6 @@ category: 前端
 date: 2026-06-26
 ---
 
-# Vue 3 完整指南：Composition API、Pinia 与实战项目
-
 ## 前言
 
 Vue 3 是前端框架的里程碑。相比Vue 2：
