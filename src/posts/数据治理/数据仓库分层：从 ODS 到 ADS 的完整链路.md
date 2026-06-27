@@ -1143,6 +1143,3 @@ def incrementalProcess(spark: SparkSession, dt: String): Unit = {
 ---
 
 *本文是数据仓库分层系列的入门篇，后续我们将深入探讨维度建模、数据质量、元数据管理等主题。*
-
-> 作者：数据团队  
-> 日期：2026年6月
