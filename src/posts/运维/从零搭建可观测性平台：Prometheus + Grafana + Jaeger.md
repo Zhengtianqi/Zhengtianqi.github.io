@@ -89,7 +89,7 @@ Metrics:    聚合后的数值指标
 
 ### 2.2 四种核心指标类型
 
-```promql
+```sql
 # 1. Counter（计数器）：只增不减
 http_requests_total{endpoint="/api/orders", method="POST"} 15234
 # 适合：请求总数、错误总数、处理字节数
@@ -121,7 +121,7 @@ http_request_duration_seconds{quantile="0.99"} 0.45
 
 ### 2.3 PromQL 常用查询
 
-```promql
+```sql
 # 基础查询
 up{job="order-service"}     # 服务是否存活
 jvm_memory_used_bytes        # JVM 内存使用
@@ -283,7 +283,7 @@ public class GuaranteeBusinessMetrics {
 
 **业务面板 PromQL**：
 
-```promql
+```sql
 # 担保创建速率（每分钟）
 rate(guarantee_created_total[1m]) * 60
 

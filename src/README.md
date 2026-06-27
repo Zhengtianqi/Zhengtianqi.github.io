@@ -1,42 +1,29 @@
 ---
-home: true
-layout: BlogHome
-icon: home
-title: 郑天祺的博客
-heroImage: /logo.svg
-heroText: 郑天祺的博客
-heroFullScreen: true
-tagline: 吾志所向，一往无前；愈挫愈勇，再接再厉。
-projects:
-  #  - icon: project
-  #   name: 项目名称
-  #   desc: 项目详细描述
-  #   link: https://你的项目链接
+layout: home
 
-  #  - icon: link
-  #    name: 链接名称
-  #    desc: 链接详细描述
-  #    link: https://链接地址
+hero:
+  name: "郑天祺的博客"
+  text: "吾志所向，一往无前"
+  tagline: 愈挫愈勇，再接再厉
+  image:
+    src: /logo.svg
+    alt: 郑天祺的博客
+  actions:
+    - theme: brand
+      text: 开始阅读
+      link: /posts/
+    - theme: alt
+      text: 关于我
+      link: /intro
 
-  #  - icon: book
-  #    name: 书籍名称
-  #    desc: 书籍详细描述
-  #    link: https://你的书籍链接
-
-  # - icon: article
-  #   name: 文章名称
-  #   desc: 文章详细描述
-  #   link: https://你的文章链接
-
-  # - icon: friend
-  #   name: 伙伴名称
-  #   desc: 伙伴详细介绍
-  #   link: https://你的伙伴链接
-
-  # - icon: /logo.svg
-  #   name: 自定义项目
-  #   desc: 自定义详细介绍
-  #   link: https://你的自定义链接
-
-footer: 欢迎
+features:
+  - icon: 📚
+    title: 技术文章
+    details: 分享 Java、分布式、数据库等技术领域的知识与经验
+  - icon: 🚀
+    title: 架构设计
+    details: 探讨系统架构、微服务、性能优化等实践方案
+  - icon: 💡
+    title: 学习笔记
+    details: 记录学习过程中的心得体会和关键知识点
 ---
