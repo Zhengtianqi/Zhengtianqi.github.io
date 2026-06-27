@@ -29,7 +29,7 @@ export default hopeTheme({
   displayFooter: true,
 
   blog: {
-    description: "一个程序开发",
+    description: "携一身温柔烟火，做有温度、懂共情的赶路人。",
     intro: "/intro.html",
     medias: {
       // Baidu: "https://example.com",
