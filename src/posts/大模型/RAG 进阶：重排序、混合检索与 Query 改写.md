@@ -7,9 +7,10 @@ date: 2026-06-27
 
 # RAG 进阶：重排序、混合检索与 Query 改写
 
-基础 RAG 的痛点：**检索到的不相关，相关检索不到，大模型还是幻觉**。本文覆盖企业级 RAG 的三大进阶优化技术。
+> 大语言模型是AI领域的革命性技术，它为自然语言处理和智能应用提供了强大的能力。
+> 本文介绍了大模型的核心概念和应用方式，帮助你进入AI应用开发领域。
 
----
+基础 RAG 的痛点：**检索到的不相关，相关检索不到，大模型还是幻觉**。本文覆盖企业级 RAG 的三大进阶优化技术。
 
 ## 一、基础 RAG 的问题
 
@@ -27,8 +28,6 @@ date: 2026-06-27
 1. **检索精度低**：向量检索只看语义相似，不看关键词匹配
 2. **排序不准**：Top-K 里最相关的不在前面
 3. **Query 质量差**：用户问法多变，原始 Query 不适合直接检索
-
----
 
 ## 二、Query 改写（检索前的优化）
 
@@ -119,8 +118,6 @@ docs = retriever.invoke("担保业务流程")
 # 返回去重后的 top-K 文档，召回率提升 30%+
 ```
 
----
-
 ## 三、混合检索（Hybrid Search）
 
 ### 3.1 为什么需要混合检索
@@ -186,8 +183,6 @@ def rrf_fusion(result_lists, k=60):
 
 # LangChain 中可用 ContextualCompressionRetriever + RRF
 ```
-
----
 
 ## 四、重排序（Reranking）
 
@@ -275,8 +270,6 @@ def rag_pipeline(query, vectorstore, reranker, llm, top_k=3):
     return answer
 ```
 
----
-
 ## 五、效果对比
 
 | 方案 | 召回率 | 准确率 | 延迟 |
@@ -289,8 +282,6 @@ def rag_pipeline(query, vectorstore, reranker, llm, top_k=3):
 
 > 延迟增加是值得的——准确率从 70% 提升到 95%，用户体感提升远大于 600ms 的延迟。
 
----
-
 ## 六、面试要点
 
 ### Q：RAG 检索效果不好怎么优化？
@@ -300,8 +291,6 @@ def rag_pipeline(query, vectorstore, reranker, llm, top_k=3):
 3. **重排序**：用 Cross-Encoder 对初筛结果精排，提升 Top-K 准确率
 4. **文档切分优化**：合理 Chunk Size、Overlap，避免语义断裂
 5. **Embedding 模型**：换用更好的模型如 BGE-M3、bge-large-zh
-
----
 
 ## 七、总结
 

@@ -1,11 +1,15 @@
----
+﻿---
 title: java中的Queue队列
 tag: ["java基础", "Queue", "数据结构"]
 category: java基础
 date: 2020-12-14
 ---
 
-# 1、介绍
+# java中的Queue队列
+
+> Queue是Java集合框架中的核心接口，它为数据处理提供了先进先出的访问顺序。
+> 本文介绍了Queue的不同实现和使用方式，帮助你构建高效的数据处理系统。
+
 
         Queue： 基本上，一个队列就是一个先入先出（FIFO）的数据结构
         Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedList实现了Deque接 口。

@@ -7,21 +7,8 @@ category: Go 语言
 
 # Go 并发编程：goroutine 和 channel 入门
 
-## 前言
-
-如果说 Go 语言有一个"杀手锏"特性，那一定是它的并发模型。goroutine（协程）和 channel（通道）的设计如此优雅，以至于 Go 社区有一句名言：
-
-> "不要通过共享内存来通信，而要通过通信来共享内存。"
-
-（Don't communicate by sharing memory; share memory by communicating.）
-
-本文从 Java 程序员的视角，带你深入理解 goroutine 和 channel，掌握 Go 并发编程的核心范式。
-
----
-
-## 一、并发 vs 并行：先搞清楚概念
-
-### 1.1 定义
+> Go 并发编程：goroutine 和 channel 入门是现代软件开发的核心挑战，它涉及多线程协调和资源共享等关键问题。
+> 本文介绍了Go 并发编程：goroutine 和 channel 入门的原理和最佳实践，帮助你构建高性能的并发系统。
 
 ```
 并发（Concurrency）：
@@ -50,8 +37,6 @@ go doSomething()
 go doSomethingElse()
 go doAnotherThing()
 ```
-
----
 
 ## 二、goroutine：轻量级用户态线程
 
@@ -131,8 +116,6 @@ func main() {
 
 // 对比：Java 要创建 10 万个线程会直接 OOM
 ```
-
----
 
 ## 三、channel：goroutine 之间的通信管道
 
@@ -321,8 +304,6 @@ func rangeExample() {
 }
 ```
 
----
-
 ## 四、同步原语
 
 ### 4.1 sync.WaitGroup
@@ -412,8 +393,6 @@ func GetDatabase() *Database {
     return db
 }
 ```
-
----
 
 ## 五、常见并发模式
 
@@ -593,8 +572,6 @@ func producerConsumer() {
 }
 ```
 
----
-
 ## 六、context 包：超时控制与取消传播
 
 ### 6.1 context 基础
@@ -718,8 +695,6 @@ func (r *Repository) QueryUser(ctx context.Context, id int64) (*User, error) {
 }
 ```
 
----
-
 ## 七、与 Java 并发的对比
 
 ### 7.1 核心概念映射
@@ -835,8 +810,6 @@ func getDashboard(userID int64) (*Dashboard, error) {
     }
 }
 ```
-
----
 
 ## 八、实战：并发爬虫
 
@@ -965,8 +938,6 @@ func main() {
 }
 ```
 
----
-
 ## 九、实战：并发 HTTP 服务
 
 ```go
@@ -1081,8 +1052,6 @@ func main() {
     log.Println("服务已安全关闭")
 }
 ```
-
----
 
 ## 十、常见坑与最佳实践
 
@@ -1202,8 +1171,6 @@ func main() {
 10. 用 select + time.After 避免永久阻塞
 ```
 
----
-
 ## 十一、总结
 
 Go 的并发模型可以归结为一句话：
@@ -1231,7 +1198,5 @@ Go 的并发模型可以归结为一句话：
 Go 的并发模型之美在于：它足够简单，简单到只用一个 `go` 关键字就能开启并发；又足够强大，强大到能构建出复杂的分布式系统。
 
 当你从 Java 的线程池、Future、CompletableFuture 中解放出来，用 goroutine 和 channel 表达并发逻辑时，你会发现——并发编程原来可以这么优雅。
-
----
 
 *本文基于 Go 1.22 编写。goroutine 调度行为可能随版本更新而变化。*

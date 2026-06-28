@@ -1,4 +1,4 @@
----
+﻿---
 title: OOM 排查实战：五种 OOM 类型的根因分析与修复
 tag: ["OOM", "JVM", "线上问题排查"]
 category: 线上问题排查
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # OOM 排查实战：五种 OOM 类型的根因分析与修复
 
-`java.lang.OutOfMemoryError` 不是只有 `Java heap space` 一种。不同 OOM 类型对应不同根因，排查方向完全不同。
+> OOM 排查实战：五种 OOM 类型的根因分析与修复是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了OOM 排查实战：五种 OOM 类型的根因分析与修复的核心概念和实践经验，帮助你深入理解这一技术领域。
 
----
+
+`java.lang.OutOfMemoryError` 不是只有 `Java heap space` 一种。不同 OOM 类型对应不同根因，排查方向完全不同。
 
 ## 一、五种 OOM 类型速查
 
@@ -20,8 +22,6 @@ date: 2026-06-27
 | 直接内存溢出 | Direct buffer memory | NIO/Netty 堆外内存泄漏 | ⭐⭐⭐⭐ |
 | 线程数耗尽 | unable to create new native thread | 线程泄漏/线程池配置不当 | ⭐⭐⭐⭐⭐ |
 | GC 开销超限 | GC overhead limit exceeded | GC 回收效率极低 | ⭐⭐⭐ |
-
----
 
 ## 二、Java Heap Space（堆内存溢出）
 
@@ -81,8 +81,6 @@ try (InputStream is = Files.newInputStream(path);
 }
 ```
 
----
-
 ## 三、Metaspace（元空间溢出）
 
 ### 3.1 典型报错
@@ -129,8 +127,6 @@ Class<?> clazz = loader.parseClass(script); // 每次都生成新类
 # Spring Cloud 微服务建议
 -XX:MaxMetaspaceSize=512m  # 框架本身类就很多
 ```
-
----
 
 ## 四、Direct Buffer Memory（直接内存溢出）
 
@@ -193,8 +189,6 @@ public class MyHandler extends SimpleChannelInboundHandler<ByteBuf> {
 // 4. 开启 Netty 内存泄露检测（测试环境）
 -Dio.netty.leakDetection.level=PARANOID
 ```
-
----
 
 ## 五、Unable to Create New Native Thread（线程数耗尽）
 
@@ -273,8 +267,6 @@ public class AsyncConfig implements AsyncConfigurer {
 * hard nproc 65535
 ```
 
----
-
 ## 六、GC Overhead Limit Exceeded
 
 ### 6.1 典型报错
@@ -295,8 +287,6 @@ JVM 检测到 **98% 的时间在做 GC，但只回收了 2% 的堆内存**，说
 # 如果不想让用户看到这个错误，可以禁用（不推荐，只是掩盖问题）
 -XX:-UseGCOverheadLimit
 ```
-
----
 
 ## 七、OOM 应急预案
 
@@ -341,8 +331,6 @@ kubectl scale deployment <app> --replicas=3
 -Xlog:gc*:file=/var/log/gc/gc.log:time,uptime,level,tags:filecount=10,filesize=50M
 ```
 
----
-
 ## 八、面试要点
 
 ### Q：线上 OOM 怎么排查？
@@ -359,8 +347,6 @@ kubectl scale deployment <app> --replicas=3
 2. 代码规范：禁止裸 new Thread、禁止全表查询、缓存必须有淘汰策略
 3. 监控告警：老年代使用率 >85% 告警、线程数 >500 告警
 4. 压测：上线前做长时间压测观察内存趋势
-
----
 
 ## 九、总结
 

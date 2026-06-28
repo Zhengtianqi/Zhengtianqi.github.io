@@ -5,30 +5,10 @@ category: 前端
 date: 2026-06-26
 ---
 
-## 前言
+# Vue 3 完整指南：Composition API、Pinia 与实战项目
 
-Vue 3 是前端框架的里程碑。相比Vue 2：
-
-```
-Vue 2:
-  ├─ Options API（选项式）
-  ├─ 全局Vuex状态管理
-  └─ 类型支持差
-
-Vue 3:
-  ├─ Composition API（组合式）← 更优雅
-  ├─ Pinia状态管理 ← 更简洁
-  ├─ 完整TypeScript支持
-  └─ 3倍更快 ← 重写了响应式系统
-```
-
-本文讲解Vue 3的核心特性和最佳实践。
-
----
-
-## 一、Composition API vs Options API
-
-### 1.1 对比
+> Vue 3 完整指南：Composition API、Pinia 与实战项目是系统间通信的核心，它决定了系统的可扩展性和易用性。
+> 本文介绍了Vue 3 完整指南：Composition API、Pinia 与实战项目的设计原则和最佳实践，帮助你构建高质量的接口。
 
 ```javascript
 // Vue 2: Options API（按类型分组）
@@ -225,8 +205,6 @@ const displayMessage = computed(() => {
 </script>
 ```
 
----
-
 ## 二、Pinia状态管理
 
 ### 2.1 vs Vuex
@@ -361,8 +339,6 @@ const handleLogout = () => {
 </template>
 ```
 
----
-
 ## 三、响应式系统
 
 ### 3.1 ref vs reactive
@@ -423,8 +399,6 @@ watch(
 user.value.profile.age = 31 // 触发
 ```
 
----
-
 ## 四、性能优化
 
 ### 4.1 v-show vs v-if
@@ -471,7 +445,6 @@ import VirtualScroller from 'vue-virtual-scroller'
   :items="hugeList"
   :item-height="50"
   :buffer="5"
->
   <template #default="{ item }">
     <div>{{ item.name }}</div>
   </template>
@@ -480,8 +453,6 @@ import VirtualScroller from 'vue-virtual-scroller'
 // 原理：只渲染可见区域的元素
 // 10000行 → 仅渲染10-15行 → 帧率稳定
 ```
-
----
 
 ## 总结
 

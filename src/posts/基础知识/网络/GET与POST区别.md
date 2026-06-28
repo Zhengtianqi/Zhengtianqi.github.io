@@ -1,11 +1,15 @@
----
+﻿---
 title: GET与POST区别
 tag: ["HTTP", "GET", "POST"]
 category: 网络
 date: 2020-07-21
 ---
 
-# 1、介绍
+# GET与POST区别
+
+> GET与POST区别是计算机网络的核心概念，它涉及数据传输、协议规范和网络安全等关键领域。
+> 本文系统介绍了GET与POST区别的原理和应用，帮助你理解网络通信机制。
+
 
 		最常用的利用GET和POST请求后端数据。GET和POST是HTTP与服务器交互的方式，交互方式还有DELETE、PUT、HEAD、OPTIONS、CONNECT等。
 

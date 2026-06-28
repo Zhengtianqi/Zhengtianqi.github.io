@@ -1,11 +1,15 @@
----
+﻿---
 title: IOC中的基本反射步骤
 tag: ["Spring", "反射", "DI"]
 category: spring
 date: 2020-09-13
 ---
 
-# 1、controller
+# IOC中的基本反射步骤
+
+> 反射是Java的核心特性，它为程序提供了运行时动态访问类信息的能力。
+> 本文介绍了反射的原理和使用方式，帮助你理解Spring等框架的底层机制。
+
 
 ```java
 package cn.edu.bjut.base.spring.controller;
@@ -73,4 +77,3 @@ public class TestReflect {
     }
 }
 ```
-

@@ -7,11 +7,8 @@ date: 2026-06-27
 
 # Spring 设计模式全解析：从 IOC 到 AOP 的模式之美
 
-> Spring 框架是设计模式的最佳教科书。有人说"读 Spring 源码就像逛设计模式博物馆"，这话不假。本文系统梳理 Spring 中用到的设计模式，从 IOC 容器到 AOP 织入，看看 Rod Johnson 怎么把 23 种设计模式用得炉火纯青。
-
-## 一、Spring 中的单例模式
-
-### 1.1 Bean 的默认作用域
+> Spring 设计模式全解析：从 IOC 到 AOP 的模式之美是软件工程中解决特定问题的经典方案，它提供了可复用的设计思路和代码结构。
+> 本文深入分析了Spring 设计模式全解析：从 IOC 到 AOP 的模式之美的适用场景、优缺点和实现方式，是提升代码质量的重要参考。
 
 Spring 的 Bean 默认就是单例的：
 
@@ -69,8 +66,6 @@ public class DefaultSingletonBeanRegistry {
 | 实现 | static + 私有构造 | ConcurrentHashMap |
 | 控制 | 类自己控制 | 容器统一管理 |
 | 可测试性 | 差（全局状态） | 好（可替换 Bean） |
-
----
 
 ## 二、Spring 中的工厂模式
 
@@ -136,8 +131,6 @@ XML 配置中的 `factory-method`：
     <constructor-arg value="123456"/>
 </bean>
 ```
-
----
 
 ## 三、Spring 中的模板方法模式
 
@@ -212,8 +205,6 @@ public class RestTemplate {
 | RedisTemplate | 连接管理、序列化 | RedisCallback |
 | TransactionTemplate | 事务管理 | TransactionCallback |
 | JmsTemplate | JMS 连接管理 | MessageCreator |
-
----
 
 ## 四、Spring 中的代理模式（AOP）
 
@@ -291,8 +282,6 @@ public class ReflectiveMethodInvocation implements MethodInvocation {
   → 拦截器1 (后置通知)
 ```
 
----
-
 ## 五、Spring 中的观察者模式
 
 ### 5.1 事件机制三要素
@@ -354,8 +343,6 @@ public class WelcomeEmailListener {
 }
 ```
 
----
-
 ## 六、Spring 中的策略模式
 
 ### 6.1 Resource 接口
@@ -401,8 +388,6 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy { ... 
 // 策略2：CGLIB
 public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationStrategy { ... }
 ```
-
----
 
 ## 七、Spring 中的适配器模式
 
@@ -458,8 +443,6 @@ public interface AdvisorAdapter {
 // ThrowsAdviceAdapter: 把 ThrowsAdvice 适配成拦截器
 ```
 
----
-
 ## 八、Spring 中的装饰器模式
 
 ### 8.1 BeanWrapper
@@ -478,8 +461,6 @@ wrapper.setPropertyValue("birthday", "2024-01-01");
 // 包装 Cache，使缓存操作参与事务
 Cache cache = new TransactionAwareCacheDecorator(actualCache);
 ```
-
----
 
 ## 九、Spring 中的责任链模式
 
@@ -512,8 +493,6 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
----
-
 ## 十、Spring 中的外观模式
 
 ### 10.1 ApplicationContext
@@ -535,8 +514,6 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 List<User> users = jdbcTemplate.query("SELECT * FROM user", 
     (rs, rowNum) -> new User(rs.getLong("id"), rs.getString("name")));
 ```
-
----
 
 ## 十一、Spring 中的组合模式
 
@@ -561,8 +538,6 @@ public class CompositeCacheManager implements CacheManager {
 ### 11.2 MergedBeanDefinition
 
 合并父子 BeanDefinition 时用到了组合思想。
-
----
 
 ## 十二、Spring 中的建造者模式
 
@@ -592,8 +567,6 @@ String uri = UriComponentsBuilder
     .toUriString();
 // https://api.example.com/users?page=1&size=10&sort=name,asc
 ```
-
----
 
 ## 十三、Spring 设计模式全景图
 
@@ -629,8 +602,6 @@ String uri = UriComponentsBuilder
 | 访问者 | BeanDefinitionVisitor |
 | 解释器 | SpelExpressionParser |
 
----
-
 ## 十四、面试要点
 
 **Q1：Spring 中用了哪些设计模式？**
@@ -652,8 +623,6 @@ String uri = UriComponentsBuilder
 **Q5：JdbcTemplate 解决了什么问题？**
 
 答：解决了 JDBC 的样板代码问题。传统 JDBC 需要手动管理 Connection、Statement、ResultSet 的开关和异常处理，JdbcTemplate 用模板方法模式固定了这些流程，开发者只需提供 SQL 和结果映射逻辑。
-
----
 
 ## 总结
 

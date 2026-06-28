@@ -1,9 +1,15 @@
----
+﻿---
 title: HDFS shell操作（1）
 tag: ["HDFS", "HADOOP", "大数据"]
 category: 大数据
 date: 2020-12-06
 ---
+
+# HDFS shell操作（1）
+
+> HDFS shell操作（1）是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了HDFS shell操作（1）的原理和应用场景，帮助你进入大数据领域。
+
 
 ## 1、创建一个HDFS目录
 

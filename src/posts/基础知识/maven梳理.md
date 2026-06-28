@@ -5,9 +5,10 @@ category: 软件管理
 date: 2019-08-28
 ---
 
-# Maven使用
+# maven梳理
 
-## maven的命令：
+> Maven是Java生态中最流行的项目管理和构建工具，它通过标准化的项目结构和依赖管理机制，极大地简化了项目构建流程。
+> 本文系统梳理了Maven的核心概念、常用命令和最佳实践，是Java开发者的必备参考。
 
 ```java
 maven常用命令
@@ -106,9 +107,8 @@ export MAVEN_OPTS="-Xms512m -Xmx1024m"
 
 （此设置是为了maven执行java时分配给大点的内存，解决容易引起maven导包或插件时卡顿）
   Windows：如下图
- 		<img src="/assets/images/maven配置.png">
+ <img src="/assets/images/maven配置.png">
          
-
 ### 	2.6 用户配置：
 
 把MAVEN_HOME/conf/seettings.xml  cp 到 ~/.m2/下，在.m2下的settings.xml中所作的配置就是用户级别的配置，而直接编辑MAVEN_HOME/conf/seettings.xml所作的配置是全局的配置

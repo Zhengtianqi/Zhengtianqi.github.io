@@ -1,15 +1,19 @@
----
+﻿---
 title: ElasticSearch客户端
 tag: ["ElasticSearch", "搜索引擎"]
 category: 大数据
 date: 2020-07-15
 ---
 
+# ElasticSearch客户端
+
+> ElasticSearch客户端是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了ElasticSearch客户端的原理和应用场景，帮助你进入大数据领域。
+
 以下为springboot整合elasticsearch
 
 es版本为7.2.1
 
-# 1、先引入es的依赖
 
 ```java
   <!-- ES  -->
@@ -108,7 +112,6 @@ public class EsRestHighLevelClient {
             }
         }
     }
-
 
     /**
      * 测试类
@@ -214,4 +217,3 @@ public class EsRestHighLevelClient {
         return personList;
     }
 ```
-

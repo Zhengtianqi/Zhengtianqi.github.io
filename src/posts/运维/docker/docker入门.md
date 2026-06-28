@@ -5,12 +5,10 @@ category: CICD
 date: 2020-12-14
 ---
 
+# Docker入门
 
-
-## docker概念		
-
-		docker和虚拟机VM结构非常相似，但是docker并非虚拟机技术，容器除了运行其中的应用之外，基本不消耗额外的系统资源，虚拟机需要单独分配 独占内存、磁盘等资源；
-		docker最初的设计优势，正是它比虚拟机更节省内存，启动更快。Docker不停地给大家宣传，”虚拟机需要数分钟启动，而Docker容器只需要50毫秒”。
+> Docker是容器化技术的代表，它为应用部署提供了轻量级、可移植的解决方案。
+> 本文介绍了Docker的核心概念和使用方式，帮助你掌握容器化部署技术。
 
 ![image-20201214131527522](/assets/images/image-20201214131527522.png)
 
@@ -146,16 +144,12 @@ mkdir dockerDemo && cd dockerDemo && touch Dockerfile
  vim Dockerfile
 ```
 
-
-
 ```java
 #############################################################  
 #base image
 FROM centos
 #MAINTAINER
 MAINTAINER [test@qq.com](mailto:test@qq.com)
-
- 
 
 #put nginx into /usr/local/src and unpack nginx
    ADD nginx-1.12.2.tar.gz /usr/local/src

@@ -5,7 +5,10 @@ category: 数据库
 date: 2021-10-16
 ---
 
-# 一、查看当前Mysql所有的进程
+# mysql突然变慢排查
+
+> mysql突然变慢排查是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了mysql突然变慢排查的原理和最佳实践，帮助你构建高效的数据存储方案。
 
 ```java
 show full processlist;
@@ -52,8 +55,6 @@ grep log_error /etc/my.cnf
 #2.打开错误日志进行查看
 tail -n 100 /dev/vdc1/home/mysql/3306/log/error.log
 ```
-
-
 
 # 附录
 
@@ -118,6 +119,3 @@ innodb_read_io_threads = 4
 innodb_lock_wait_timeout = 120                  # InnoDB事务在被回滚之前可以等待一个锁定的超时秒数。InnoDB在它自己的锁定表中自动检测事务死锁并且回滚事务。InnoDB用LOCK TABLES语句注意到锁定设置。默认值是50秒
 innodb_log_file_size = 32M                      # 此参数确定数据日志文件的大小，更大的设置可以提高性能，但也会增加恢复故障数据库所需的时间
 ```
-
-
-

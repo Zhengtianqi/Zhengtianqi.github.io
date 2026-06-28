@@ -1,11 +1,15 @@
----
+﻿---
 title: docker本机打镜像
 tag: ["Docker", "镜像"]
 category: CICD
 date: 2021-07-18
 ---
 
-# 1、安装docker
+# docker本机打镜像
+
+> docker本机打镜像是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了docker本机打镜像的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 
 ## （1）安装Gcc
 
@@ -48,8 +52,6 @@ yum makecache fast(centos 7)
 ```java
 yum -y install docker-ce docker-ce-cli containerd.io
 ```
-
-
 
 ## （6）启动docker
 
@@ -186,4 +188,3 @@ openjdk                         8-jdk-alpine   a3562aa0b991   2 years ago   105M
 
 [root@localhost ~]# docker run -d -p 8080:8080 -i 825d7f3967cf
 ```
-

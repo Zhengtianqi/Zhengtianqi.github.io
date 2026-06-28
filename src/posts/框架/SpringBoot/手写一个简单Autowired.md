@@ -1,11 +1,15 @@
----
+﻿---
 title: 手写一个简单Autowired
 tag: ["Spring", "DI", "反射"]
 category: spring
 date: 2020-09-11
 ---
 
-# 1、按照惯例
+# 手写一个简单Autowired
+
+> 手写一个简单Autowired是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了手写一个简单Autowired的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 
 首先写一个controller和service
 
@@ -90,4 +94,3 @@ public class TestAutowired {
     }
 }
 ```
-

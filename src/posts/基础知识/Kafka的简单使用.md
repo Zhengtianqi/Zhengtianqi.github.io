@@ -1,11 +1,15 @@
----
+﻿---
 title: Kafka的简单使用
 tag: ["Kafka", "消息队列"]
 category: 分布式
 date: 2020-12-14
 ---
 
-# 1、安装kafka
+# Kafka的简单使用
+
+> Kafka的简单使用是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了Kafka的简单使用的原理和解决方案，帮助你构建可靠的分布式系统。
+
 
 http://kafka.apache.org/quickstart  （linux版）
 

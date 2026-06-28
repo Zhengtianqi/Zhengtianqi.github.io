@@ -7,17 +7,8 @@ tag: ["API", "RESTful"]
 
 # API 设计规范：一个后端应该知道的 RESTful 最佳实践
 
-## 前言
-
-作为一个后端开发者，你写的 API 可能被前端、移动端、第三方系统调用。一个好的 API 设计不只是"能跑就行"，它决定了团队协作效率、系统可维护性和调用方的开发体验。
-
-我在职业生涯中见过太多"反模式"的 API 设计：URL 里全是动词、状态码永远 200、返回格式千奇百怪、命名毫无规范……这篇文章将系统性地梳理 RESTful API 设计的核心规范，让你写的每一个接口都经得起审视。
-
----
-
-## 一、REST 核心原则
-
-### 1.1 什么是 REST
+> API 设计规范：一个后端应该知道的 RESTful 最佳实践是系统设计的核心，它决定了系统的可扩展性、可靠性和可维护性。
+> 本文介绍了API 设计规范：一个后端应该知道的 RESTful 最佳实践的设计原则和实践经验，帮助你提升架构设计能力。
 
 REST（Representational State Transfer，表述性状态转移）由 Roy Fielding 在 2000 年博士论文中提出。它不是协议，而是一种**架构风格**，核心思想是：
 
@@ -37,8 +28,6 @@ Level 3: HATEOAS（超媒体控制）
 ```
 
 大多数企业级 API 做到 Level 2 就足够了。
-
----
 
 ## 二、URL 设计规范
 
@@ -107,8 +96,6 @@ POST /orders/{orderId}/refund      # 退款
 
 **原则**：优先尝试建模为资源，实在不行再用动词。
 
----
-
 ## 三、HTTP 方法的正确使用
 
 ### 3.1 方法语义
@@ -176,8 +163,6 @@ public class UserController {
     public Result<Void> delete(@PathVariable Long id) { }
 }
 ```
-
----
 
 ## 四、HTTP 状态码的正确选择
 
@@ -271,8 +256,6 @@ public ResponseEntity<?> create(@RequestBody @Valid UserRequest req) {
 - 账号被禁用
 → 需要提升权限，但不是重新登录的问题
 ```
-
----
 
 ## 五、统一返回体设计
 
@@ -405,8 +388,6 @@ public class GlobalExceptionHandler {
 }
 ```
 
----
-
 ## 六、错误码体系设计
 
 ### 6.1 错误码分段设计
@@ -498,8 +479,6 @@ public class BusinessException extends RuntimeException {
 throw new BusinessException(ErrorCode.ORDER_BIZ_002, HttpStatus.CONFLICT);
 ```
 
----
-
 ## 七、API 版本控制
 
 ### 7.1 三种版本策略对比
@@ -570,8 +549,6 @@ public class UserController { }
 - 新增错误码
 - 修改限流值
 ```
-
----
 
 ## 八、分页、排序、过滤设计
 
@@ -689,8 +666,6 @@ GET /api/users?name=like:张
 | `in:` | `status=in:active,pending` | 在列表中 |
 | `null:` | `deletedAt=null:true` | 是否为空 |
 
----
-
 ## 九、安全最佳实践
 
 ### 9.1 认证与授权
@@ -782,8 +757,6 @@ public Result<LoginVO> login(@RequestBody LoginRequest req) {
 }
 ```
 
----
-
 ## 十、OpenAPI / Swagger 文档化
 
 ### 10.1 SpringDoc 整合
@@ -851,8 +824,6 @@ API 设计流程：
   5. 联调对接
 ```
 
----
-
 ## 十一、总结
 
 ### 核心准则清单
@@ -875,7 +846,5 @@ API 设计流程：
 记住两个原则：
 1. **为调用方设计**：站在前端/第三方的角度思考接口好不好用
 2. **一致性大于完美**：不完美的统一规范好过各自为政的"最佳实践"
-
----
 
 *本文规范适用于 Spring Boot 3.x + Java 17+。*

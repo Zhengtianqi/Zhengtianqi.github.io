@@ -1,11 +1,15 @@
----
+﻿---
 title: 分布式事务-springcloud-nacos-seata
 tag: ["分布式事务", "Seata", "SpringCloud"]
 category: 分布式
 date: 2022-08-31
 ---
 
-# 一、Seata 是什么
+# 分布式事务-springcloud-nacos-seata
+
+> 分布式事务-springcloud-nacos-seata是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了分布式事务-springcloud-nacos-seata的原理和解决方案，帮助你构建可靠的分布式系统。
+
 
 Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。
 https://seata.io/zh-cn/docs/overview/what-is-seata.html
@@ -85,4 +89,3 @@ seata：https://seata.io/
 https://blog.csdn.net/qq_43437874/article/details/123131592
 
 https://blog.51cto.com/u_12856278/3631071
-

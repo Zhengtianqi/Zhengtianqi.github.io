@@ -7,11 +7,8 @@ date: 2026-06-27
 
 # 分布式追踪：从 Jaeger 到 OpenTelemetry
 
-> 当一个请求穿越 10 个微服务后变慢，你怎么定位是哪个服务的问题？日志看不出调用关系，监控只能看到聚合数据。分布式追踪就是解决这个问题的——它让你看到请求在每一个服务中的耗时和状态。
-
-## 一、为什么需要分布式追踪
-
-### 1.1 问题场景
+> 分布式追踪：从 Jaeger 到 OpenTelemetry是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了分布式追踪：从 Jaeger 到 OpenTelemetry的原理和解决方案，帮助你构建可靠的分布式系统。
 
 用户反馈"下单很慢"，但你的系统是这样的：
 
@@ -580,7 +577,6 @@ spec:
         - name: config
           configMap:
             name: otel-collector-config
----
 apiVersion: v1
 kind: Service
 metadata:

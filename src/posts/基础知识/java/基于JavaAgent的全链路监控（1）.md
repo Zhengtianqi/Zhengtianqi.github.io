@@ -1,11 +1,15 @@
----
+﻿---
 title: 基于JavaAgent的全链路监控（1）
 tag: ["JavaAgent", "监控", "AOP"]
 category: java基础
 date: 2020-07-17
 ---
 
-# 《手写一个最简单的javaagent》
+# 基于JavaAgent的全链路监控（1）
+
+> 监控是系统运维的核心，它帮助我们实时了解系统状态，及时发现和解决问题。
+> 本文介绍了监控系统的设计原则和常用工具，帮助你构建完善的监控体系。
+
 
 # 1、javaagent介绍
 
@@ -158,4 +162,3 @@ public class AgentTest {
 
     }
 ```
-

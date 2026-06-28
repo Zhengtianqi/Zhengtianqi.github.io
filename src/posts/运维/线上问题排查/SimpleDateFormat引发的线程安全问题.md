@@ -1,11 +1,15 @@
----
+﻿---
 title: SimpleDateFormat引发的线程安全问题
 tag: ["线程安全", "SimpleDateFormat", "并发编程"]
 category: java基础
 date: 2019-10-12
 ---
 
-# 	一、问题产生
+# SimpleDateFormat引发的线程安全问题
+
+> SimpleDateFormat引发的线程安全问题是Java并发编程的核心概念，它为程序提供了并行执行的能力，是提升系统性能的关键。
+> 本文系统介绍了SimpleDateFormat引发的线程安全问题的原理、使用方式和常见问题，帮助你掌握Java并发编程。
+
 
 	在写java程序时，有时间戳转换的操作。
 
@@ -42,8 +46,6 @@ public class DateTrans {
 }
 
 ```
-
-
 
 涉及时间戳转换时，每次我们都new一个SimpleDateFormat对象，用起来很麻烦。
 
@@ -99,7 +101,7 @@ debug发现传出的参数不是自己想要的参数。可是为什么呢？
 
 	3、ThreadLocal：线程隔离机制，代码量减少了，和1一样也牺牲了部分空间，还是个不错的解决方法。
 
-		https://www.jianshu.com/p/3c5d7f09dfbd
+https://www.jianshu.com/p/3c5d7f09dfbd
 
 	4、Apache的 DateFormatUtils 与 FastDateFormat：线程安全，但是木有parse()方法
 
@@ -118,7 +120,6 @@ debug发现传出的参数不是自己想要的参数。可是为什么呢？
  */
 public enum ConstantUtils {
     
-
     public static final ThreadLocal<SimpleDateFormat> IN_FORMAT = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyyMMddHHmmssSSS"));
     public static final ThreadLocal<SimpleDateFormat> VIEW_FORMAT = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
     public static final ThreadLocal<SimpleDateFormat> OUT_FORMAT = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
@@ -129,4 +130,3 @@ public enum ConstantUtils {
 // 调用
 ConstantUtils.IN_FORMAT.get().format(requestParams.getReleaseTime())
 ```
-

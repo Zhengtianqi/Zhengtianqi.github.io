@@ -1,11 +1,15 @@
----
+﻿---
 title: Hive数据定义
 tag: ["Hive", "大数据", "数据定义"]
 category: 大数据
 date: 2020-01-17
 ---
 
-# 一、Hive 与 Mysql不同
+# Hive数据定义
+
+> Hive数据定义是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了Hive数据定义的原理和应用场景，帮助你进入大数据领域。
+
 
 		Hive不支持行级插入操作、更新操作和删除操作，
 
@@ -39,8 +43,6 @@ USE financials;
 // 7、删除数据库：
 DROP DATABASE IF EXISTS financials;
 ```
-
-	
 
 ```java
 // 8、级联删除数据库（含表）：
@@ -79,8 +81,6 @@ ALTER TABLE log_messages SET TBLPROPERTIES(
 ALTER TABLE log_messages PARTITION(year = 2012, month = 1, day =1) SET FILEFORMAT SEQUENCEFILE;
 ```
 
-
-
 # 三、分区表、管理表
 
 	数据分区：通常使用分区来水平分散压力，将数据从物理上转移到和使用最频繁的用户更近的地方，以及实现其他目的。
@@ -103,8 +103,6 @@ PARTITIONED BY (country STRING, state STRING)
 对比：
 
 	（1）如果我们是在mydb数据库中创建的这个表，那么对于这个表只会有一个employees目录与之对应：
-
-	
 
 ```java
 hdfs://master_server/user/hive/warehouse/mydb.db/employees
@@ -150,4 +148,3 @@ SHOW PARTITIONS employees PARTITION(country='US', state='AK')
 ALTER TABLE log_messages ADD PARTITION(year = 2012,month = 1,day = 2)
 LOCATION 'hdfs://master_server/data/log_message/2012/01/02';
 ```
-

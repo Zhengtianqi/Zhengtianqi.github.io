@@ -5,10 +5,15 @@ category: spring
 date: 2023-04-17
 ---
 
-# 一、引言
-SpringBoot工程中对Controller配置全局异常处理。有些接口在发生异常时，如何对不同类型的接口使用不同的全局异常进行处理呢？
+# SpringMVC全局异常处理器
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 Spring提供了对@ControllerAdvice注解的配置，我们可以通过配置@ControllerAdvice对指定的Exception拦截。
-# 二、@ControllerAdvice注解使用方法
+# SpringMVC全局异常处理器
+
+
 ```java
 // 第一种
 @RestControllerAdvice
@@ -39,7 +44,7 @@ public class GlobalExceptionHandler {}
 @ControllerAdvice(annotations = {RestController.class})
 public class GlobalExceptionHandler {}
 ```
-# 三、示例
+# 示例
 ```java
 @RestControllerAdvice
 public class GlobalExceptionHandler

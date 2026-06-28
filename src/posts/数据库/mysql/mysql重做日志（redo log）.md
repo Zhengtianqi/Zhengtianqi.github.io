@@ -1,9 +1,15 @@
----
+﻿---
 title: mysql重做日志（redo log）
 tag: ["MySQL", "redo log", "数据库"]
 category: 数据库
 date: 2024-12-06
 ---
+
+# mysql重做日志（redo log）
+
+> mysql重做日志（redo log）是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了mysql重做日志（redo log）的原理和最佳实践，帮助你构建高效的数据存储方案。
+
 
 mysql的重做日志（Redo Log）是InnoDB存储引擎中用于实现事务持久性和崩溃恢复的重要机制。以下是关于mysql重做日志的关键点总结：
 

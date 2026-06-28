@@ -10,6 +10,10 @@
     "docs:preview": "vitepress preview src"
   },
   "devDependencies": {
-    "vitepress": "^1.6.3"
+    "vitepress": "^1.6.3",
+    "vitepress-theme-teek": "^1.6.0"
+  },
+  "dependencies": {
+    "pnpm": "^10.34.4"
   }
 }

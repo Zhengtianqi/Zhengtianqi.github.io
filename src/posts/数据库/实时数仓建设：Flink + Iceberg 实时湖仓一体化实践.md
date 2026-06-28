@@ -1,4 +1,4 @@
----
+﻿---
 title: 实时数仓建设：Flink + Iceberg 实时湖仓一体化实践
 tag: ["Flink", "Iceberg", "实时数仓", "湖仓一体"]
 category: 数据库
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # 实时数仓建设：Flink + Iceberg 实时湖仓一体化实践
 
-Lambda 架构太复杂（离线+实时两套链路），纯实时太贵（Kafka 存不下全量数据）。Flink + Iceberg 的湖仓一体架构是当下的最优解。
+> 实时数仓建设：Flink + Iceberg 实时湖仓一体化实践是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了实时数仓建设：Flink + Iceberg 实时湖仓一体化实践的原理和最佳实践，帮助你构建高效的数据存储方案。
 
----
+
+Lambda 架构太复杂（离线+实时两套链路），纯实时太贵（Kafka 存不下全量数据）。Flink + Iceberg 的湖仓一体架构是当下的最优解。
 
 ## 一、架构演进
 
@@ -35,8 +37,6 @@ MySQL → Flink CDC → Iceberg（存储） → Flink（计算） → 应用层
 一条链路，既支持批处理又支持流处理，存储统一
 ```
 
----
-
 ## 二、为什么是 Iceberg
 
 | 特性 | Hive | Hudi | Iceberg | Delta Lake |
@@ -50,8 +50,6 @@ MySQL → Flink CDC → Iceberg（存储） → Flink（计算） → 应用层
 | 社区 | Apache | Apache | Apache | Databricks |
 
 Iceberg 核心优势：**隐藏分区**和**Schema 演进**是最强的。
-
----
 
 ## 三、Flink CDC 实时入湖
 
@@ -154,8 +152,6 @@ icebergTable.executeInsert("iceberg_catalog.dw.orders");
 env.execute("mysql-to-iceberg");
 ```
 
----
-
 ## 四、Iceberg 高级特性
 
 ### 4.1 隐藏分区
@@ -224,8 +220,6 @@ ALTER TABLE orders REPLACE PARTITION FIELD
 -- 历史分区不变，新数据按月分区，查询自动兼容
 ```
 
----
-
 ## 五、数据查询
 
 ### 5.1 Trino/Presto 查询 Iceberg
@@ -259,8 +253,6 @@ SELECT * FROM iceberg_catalog.dw.orders /*+ OPTIONS('streaming'='true', 'monitor
 -- 每 10 秒扫描一次新数据，实现近实时
 ```
 
----
-
 ## 六、数据合并与压缩
 
 ### 6.1 小文件合并
@@ -289,8 +281,6 @@ CALL iceberg_catalog.system.expire_snapshots(
 
 -- 建议每天定时执行，避免元数据膨胀
 ```
-
----
 
 ## 七、生产环境最佳实践
 
@@ -329,8 +319,6 @@ DELETE FROM orders WHERE dt < '2026-03-01';
 | 写入延迟 | Flink → Iceberg | > 5 分钟 |
 | 数据文件大小 | 平均文件大小 | < 10MB |
 
----
-
 ## 八、面试要点
 
 ### Q：湖仓一体和传统数仓有什么区别？
@@ -351,8 +339,6 @@ Flink CDC 基于 Debezium，直接读取 MySQL binlog：
 1. 全量阶段：读取全表数据（不锁表，基于一致性快照）
 2. 增量阶段：切换到 binlog 读取，保证不丢不重
 3. 全量+增量无缝切换，不需要额外的 Kafka 中转
-
----
 
 ## 九、总结
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: CountDownLatch
 tag: ["并发编程", "同步工具", "CountDownLatch"]
 category: java基础
@@ -6,7 +6,11 @@ date: 2021-08-07
 
 ---
 
-# 1、CountDownLatch简介
+# CountDownLatch
+
+> CountDownLatch是Java并发包中的同步工具，它为多线程协调提供了灵活的等待机制。
+> 本文介绍了CountDownLatch的原理和使用方式，帮助你构建高效的并发程序。
+
 
 		CountDownLatch是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待，直到其他线程执行完后再执行。
 
@@ -73,7 +77,6 @@ public class CountDownLatchTest {
         pool.shutdown();
 
     }
-
 
     static class MyTask extends Thread {
         private String name;

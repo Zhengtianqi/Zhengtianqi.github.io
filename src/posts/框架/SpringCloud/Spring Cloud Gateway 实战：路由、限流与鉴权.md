@@ -7,17 +7,8 @@ tag: ["Gateway", "路由"]
 
 # Spring Cloud Gateway 实战：路由、限流与鉴权
 
-## 前言
-
-在微服务架构中，API 网关是流量的"前门"。它承担着路由转发、限流、鉴权、日志、跨域处理等横切关注点。Spring Cloud Gateway 作为 Spring 生态的网关解决方案，基于 WebFlux 反应式编程模型，性能出色，生态完善。
-
-本文从实战出发，系统讲解 Spring Cloud Gateway 的核心概念、路由配置、限流鉴权和生产环境调优。
-
----
-
-## 一、为什么需要 API 网关？
-
-### 1.1 微服务架构中的痛点
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
 
 ```
 没有网关时：
@@ -49,8 +40,6 @@ tag: ["Gateway", "路由"]
 | 学习曲线 | 中等 | 低 | 高 |
 
 **结论：新项目直接选 Spring Cloud Gateway。**
-
----
 
 ## 二、核心架构
 
@@ -122,8 +111,6 @@ public class GatewayApplication {
     }
 }
 ```
-
----
 
 ## 三、路由配置详解
 
@@ -248,8 +235,6 @@ public class DynamicRouteService {
 }
 ```
 
----
-
 ## 四、过滤器体系
 
 ### 4.1 内置 GatewayFilter
@@ -365,8 +350,6 @@ public class RequestIdGlobalFilter implements GlobalFilter, Ordered {
     }
 }
 ```
-
----
 
 ## 五、限流实现
 
@@ -503,8 +486,6 @@ public class GatewayConfig {
     }
 }
 ```
-
----
 
 ## 六、网关鉴权
 
@@ -691,8 +672,6 @@ public class UserContextInterceptor implements HandlerInterceptor {
 }
 ```
 
----
-
 ## 七、跨域配置
 
 ```yaml
@@ -738,8 +717,6 @@ public class CorsConfig {
     }
 }
 ```
-
----
 
 ## 八、灰度发布路由
 
@@ -797,8 +774,6 @@ public class CanaryRouteFilter implements GlobalFilter, Ordered {
     }
 }
 ```
-
----
 
 ## 九、生产环境调优
 
@@ -975,8 +950,6 @@ spring:
     max-in-memory-size: 10MB  # 限制内存中缓存的大小
 ```
 
----
-
 ## 十、总结
 
 本文从实战出发，覆盖了 Spring Cloud Gateway 的核心使用场景：
@@ -1001,7 +974,5 @@ spring:
 - 生产环境一定开启监控指标，关注网关的延迟和错误率
 
 网关是整个系统的入口，它挂了整个系统都不可用。花时间调优绝对值得。
-
----
 
 *本文基于 Spring Cloud 2023.x + Spring Cloud Gateway 4.1.x 编写。*

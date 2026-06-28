@@ -1,13 +1,17 @@
----
+﻿---
 title: Hive索引
 tag: ["Hive", "索引", "大数据"]
 category: 大数据
 date: 2020-01-21
 ---
 
+# Hive索引
+
+> Hive索引是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了Hive索引的原理和应用场景，帮助你进入大数据领域。
+
 		Hive没有键的概念，可以对一些字段建立索引来加速某些操作，一张表的索引储存在另外一张表中。EXPLAIN命令可以查看某个查询语句是否用到了索引。
 
-# 一、建索引语法
 
 ```java
 // 定义表
@@ -60,4 +64,3 @@ SHOW FORMATTED INDEX ON employees;
 // 不允许DROP TABLE前DROP INDEX
 DROP INDEX IF EXISTS employees_index ON TABLE employees;
 ```
-

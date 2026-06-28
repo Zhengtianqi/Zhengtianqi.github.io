@@ -7,11 +7,8 @@ category: 运维
 
 # DeepSeek V4 Pro 高可用部署方案
 
-> 单节点部署入门容易，生产落地必须高可用。本文从选型决策、架构设计、容量规划、负载均衡、自动扩缩容、故障自愈到监控告警，给出一套完整的 DeepSeek V4 Pro 企业级高可用方案。
-
----
-
-## 一、选型决策方法论
+> DeepSeek V4 Pro 高可用部署方案是保障系统稳定运行的关键，它涉及监控、告警、故障排查等多个方面。
+> 本文介绍了DeepSeek V4 Pro 高可用部署方案的最佳实践和工具使用，帮助你提升运维能力。
 
 在进入具体架构之前，先解决「为什么这么选」的问题。以下是四个关键决策维度：
 
@@ -70,8 +67,6 @@ graph TD
 
 > **决策规则**：月调用量 > 500 万 token + 有 GPU 运维能力 → 自建更划算；调用量波动大或无运维 → API 更灵活。推荐「API 为主 + 自建兜底」的混合架构。
 
----
-
 ## 二、容量规划方法论
 
 ### 2.1 单 Pod 吞吐估算
@@ -119,8 +114,6 @@ DeepSeek-V4-Pro (INT4)：
   单 Pod 最低 ≈ 135GB → 需要 2×A100 80GB
 ```
 
----
-
 ## 三、高可用架构全景
 
 ```mermaid
@@ -154,8 +147,6 @@ graph TD
 | **模型服务集群** | 多版本模型实例管理，自动扩缩容 | Kubernetes + vLLM |
 | **向量缓存层** | LRU+LFU 混合淘汰，缓存命中率 > 82% | Redis Cluster |
 | **元数据中枢** | 强一致分布式 KV，毫秒级模型版本切换 | TiDB / etcd |
-
----
 
 ## 四、负载均衡策略
 
@@ -272,8 +263,6 @@ end
 | Envoy + xDS + WASM | ≈ 800ms | 原生支持 | 原生 | 中大规模（< 200 节点） |
 | OpenResty + Lua | ≥ 5s | 需 Lua 扩展 | 内置 check 模块 | 中小规模（< 50 节点） |
 | 自研 Go LB (eBPF) | < 120ms | 内置语义头 | 自定义 | 超大规模（200+ 节点） |
-
----
 
 ## 五、Kubernetes 容器化部署
 
@@ -486,7 +475,6 @@ spec:
 ### 5.5 Service 与 Ingress
 
 ```yaml
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -502,7 +490,6 @@ spec:
     name: http
   sessionAffinity: None              # 无状态，不需要会话保持
 
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -526,8 +513,6 @@ spec:
     - name: deepseek-v4-pro-svc-bj
       port: 8000
 ```
-
----
 
 ## 六、自动扩缩容 (HPA)
 
@@ -620,8 +605,6 @@ spec:
         averageValue: "25"
 ```
 
----
-
 ## 七、三级熔断保护
 
 ```mermaid
@@ -681,8 +664,6 @@ async def health_check():
     status_code = 200 if is_healthy else 503
     return checks, status_code
 ```
-
----
 
 ## 八、监控与告警体系
 
@@ -772,8 +753,6 @@ groups:
       description: "Pod {{ $labels.pod }} 队列深度 {{ $value }}"
 ```
 
----
-
 ## 九、渐进式上线方法论
 
 直接全量上线是生产事故的头号诱因。以下是经过验证的灰度发布流程：
@@ -809,8 +788,6 @@ kubectl rollout undo deploy/deepseek-v4-pro --to-revision=3 -n ai-inference
 - [ ] 错误率 < 0.1%
 - [ ] 模型输出质量抽检（至少 10 条样本）
 - [ ] 告警通知渠道已开启
-
----
 
 ## 十、多区域容灾方案
 
@@ -872,8 +849,6 @@ kubectl rollout undo deploy/deepseek-v4-pro --to-revision=3 -n ai-inference
 | 单个节点故障 | < 30s（Pod 重新调度） | 请求重试 |
 | 整个 Region 故障 | < 60s（DNS 切换） | 秒级中断 |
 
----
-
 ## 十一、部署检查清单
 
 ### 11.1 上线前检查
@@ -913,8 +888,6 @@ kubectl get events -n ai-inference --sort-by='.lastTimestamp'
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta2/namespaces/ai-inference/pods/*/gpu_memory_utilization
 ```
 
----
-
 ## 十二、故障处理手册
 
 | 故障现象 | 可能原因 | 排查命令 | 处理方案 |
@@ -926,8 +899,6 @@ kubectl get --raw /apis/custom.metrics.k8s.io/v1beta2/namespaces/ai-inference/po
 | 模型版本不一致 | 滚动更新中断 | `kubectl rollout status` | `kubectl rollout undo` 回滚 |
 | CUDA 版本不匹配 | 镜像与宿主机驱动冲突 | `nvidia-smi` 查看 CUDA 版本 | 统一 CUDA 版本或切换镜像标签 |
 | KV Cache OOM | 长上下文并发过多 | 查看显存分布 | 降低 max-num-seqs 或启用 FP8 KV Cache |
-
----
 
 ## 十三、总结
 

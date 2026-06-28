@@ -5,22 +5,10 @@ category: 分布式
 date: 2026-06-25
 ---
 
-## 前言
+# Paxos/Raft：分布式一致性算法深入详解
 
-分布式系统中，最难的问题是：**如何在网络不可靠、节点可能宕机的环境下，让多个节点对某个值达成一致？**
-
-这就是 **共识问题（Consensus Problem）**。解决好这个问题，就能构建：
-- 高可用数据库（MySQL复制、PostgreSQL）
-- 分布式协调服务（Zookeeper、etcd）
-- 一致性存储（Google Bigtable、HDFS）
-
-本文从 **CAP定理** 出发，深入讲解 **Paxos** 和 **Raft** 两大共识算法的原理、差异与应用。
-
----
-
-## 一、共识问题的本质
-
-### 1.1 问题定义
+> Paxos/Raft：分布式一致性算法深入详解是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了Paxos/Raft：分布式一致性算法深入详解的原理和解决方案，帮助你构建可靠的分布式系统。
 
 **场景**：5个服务器需要选择一个值（如新的Leader）
 
@@ -64,8 +52,6 @@ Server 5: 选择 A
 | **Paxos** | Safety > Liveness（宁可卡住，不能出错） |
 | **Raft** | 在Safety基础上，优化Liveness |
 | **Bitcoin** | Liveness > Safety（允许暂时分叉） |
-
----
 
 ## 二、Paxos：最强的共识算法
 
@@ -203,8 +189,6 @@ B发送Prepare(4) → ...
 实际上，即使是Google、Amazon的工程师也容易出错。
 ```
 
----
-
 ## 三、Raft：易于理解的共识算法
 
 Raft由Stanford提出，目标是设计一个**易于理解的共识算法**。
@@ -238,7 +222,9 @@ class RaftNode:
         self.peers = peers
         self.state = "FOLLOWER"  # FOLLOWER | CANDIDATE | LEADER
         
-        # 持久化状态（必须写入磁盘）
+# Paxos/Raft：分布式一致性算法深入详解
+
+
         self.current_term = 0  # 当前任期
         self.voted_for = None  # 当前任期投票给谁
         self.log = []  # 日志条目
@@ -536,8 +522,6 @@ async def handle_vote_request(self, request):
 | 容错能力 | 相同（都是f < n/2） | 相同 |
 | 应用 | Google Chubby | etcd、Consul、HDFS 3.0 |
 
----
-
 ## 四、实战应用：etcd 中的 Raft
 
 ### 4.1 etcd架构
@@ -637,8 +621,6 @@ T4: 客户端重定向到新Leader
   网络恢复后，分组B加入，通过日志复制追上分组A
 ```
 
----
-
 ## 五、性能优化
 
 ### 5.1 快照机制
@@ -717,8 +699,6 @@ async def batch_write(self, commands, timeout=100):
     # 等待多数Follower回复
     # 返回结果
 ```
-
----
 
 ## 总结
 

@@ -1,9 +1,15 @@
----
+﻿---
 title: mybatis-plus插件统一处理createTime，createBy，updateBy
 tag: ["MyBatis-Plus", "插件", "ORM"]
 category: 数据库
 date: 2023-04-17
 ---
+
+# mybatis-plus插件统一处理createTime，createBy，updateBy
+
+> mybatis-plus插件统一处理createTime，createBy，updateBy是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了mybatis-plus插件统一处理createTime，createBy，updateBy的原理和最佳实践，帮助你构建高效的数据存储方案。
+
 
 一、添加注解
 先添加注解，有四种方式：

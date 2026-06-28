@@ -1,17 +1,21 @@
----
+﻿---
 title: 排序之比较器Comparator<T>
 tag: ["java基础", "排序", "Comparator"]
 category: java基础
 date: 2020-01-02
 ---
 
-# 一、Comparator和Comparable区别
+# 排序之比较器Comparator<T>
 
-		Comparator，又名比较器，是为了比较两个对象的大小而抽象出的一个接口，使用比较多。在java.util下。比较功能，对一些对象的集合施加了一个整体排序 。 可以将比较器传递给排序方法（如Collections.sort或Arrays.sort ），以便对排序顺序进行精确控制。
+> 排序之比较器Comparator<T>是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了排序之比较器Comparator<T>的核心概念和实践经验，帮助你深入理解这一技术领域。
 
-		Comparable，这个接口往往是可比较类实现的。在 java.lang 包下。Comparable接口对实现它的每个类的对象强加一个整体排序。 这个排序被称为类的自然排序。该接口有且只有一个方法int compareTo(T o)所以继承此接口需要实现该方法。compareTo返回值-1、0、1。  Collections.sort （和Arrays.sort ）可以自动对实现此接口的对象进行列表（和数组）排序。
 
-		上篇已经介绍Comparable的用法，此处只介绍Compatator：
+Comparator，又名比较器，是为了比较两个对象的大小而抽象出的一个接口，使用比较多。在java.util下。比较功能，对一些对象的集合施加了一个整体排序 。 可以将比较器传递给排序方法（如Collections.sort或Arrays.sort ），以便对排序顺序进行精确控制。
+
+Comparable，这个接口往往是可比较类实现的。在 java.lang 包下。Comparable接口对实现它的每个类的对象强加一个整体排序。 这个排序被称为类的自然排序。该接口有且只有一个方法int compareTo(T o)所以继承此接口需要实现该方法。compareTo返回值-1、0、1。  Collections.sort （和Arrays.sort ）可以自动对实现此接口的对象进行列表（和数组）排序。
+
+上篇已经介绍Comparable的用法，此处只介绍Compatator：
 
 # 二、Compatator用法
 
@@ -49,4 +53,3 @@ Collections.sort(students, Comparator.comparingInt(Student::getAge));
 // 也可以采用stream进行处理（分组，排序，求最大最小等sql几乎操作都可以）
 List<Student> studentStream = students.stream().sorted(Comparator.comparingInt(Student::getAge)).collect(Collectors.toList());
 ```
-

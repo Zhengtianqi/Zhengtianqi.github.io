@@ -7,11 +7,12 @@ date: 2026-06-27
 
 # Full GC 排查实战：从现象到根因的完整排查链路
 
+> Full GC 排查实战：从现象到根因的完整排查链路是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了Full GC 排查实战：从现象到根因的完整排查链路的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 线上系统突然报警，CPU 飙到 100%，接口响应从 50ms 飙到 5000ms，日志里全是 `Full GC` —— 这是每个 Java 后端都经历过的噩梦。
 
 本文不讲 GC 理论（假设你已经了解分代收集、CMS/G1 基础），聚焦于一个核心问题：**线上 Full GC 频繁，如何从现象一步步定位到根因，并最终解决？**
-
----
 
 ## 一、Full GC 的现象与影响
 
@@ -44,8 +45,6 @@ Full GC 的影响是毁灭性的：
 | Full GC | 老年代满 / Metaspace 满 / System.gc() / 分配失败 | 秒级甚至十几秒 | **必须处理** |
 
 > ⚠️ **关键认知**：Full GC 是 JVM 的"最后手段"，频繁 Full GC 说明内存管理出了问题，必须排查。
-
----
 
 ## 二、排查工具箱：你需要掌握的命令
 
@@ -112,8 +111,6 @@ trace com.example.Service method
 # 查看对象大小
 ognl '@java.lang.Runtime@getRuntime().freeMemory()'
 ```
-
----
 
 ## 三、Full GC 六大根因与排查路径
 
@@ -433,8 +430,6 @@ jcmd <pid> GC.heap_info
 -XX:+UseZGC  # JDK 15+ 生产可用，亚毫秒级停顿
 ```
 
----
-
 ## 四、完整排查流程图
 
 ```
@@ -470,8 +465,6 @@ jstat -gcutil <pid> 1000 10
     └── FGC 没有增长 → 排查其他原因（死循环/大量计算/锁竞争）
 ```
 
----
-
 ## 五、JVM 调优参数速查表
 
 ### 5.1 通用参数
@@ -504,8 +497,6 @@ jstat -gcutil <pid> 1000 10
 | -XX:ZAllocationSpikeTolerance | 分配突增容忍度 | 2.0 |
 | -XX:ConcGCThreads | 并发 GC 线程数 | CPU核数的 1/4 |
 
----
-
 ## 六、面试要点
 
 ### Q1：线上 Full GC 频繁，你怎么排查？
@@ -527,8 +518,6 @@ jstat -gcutil <pid> 1000 10
 1. 代码层面：静态集合用 WeakHashMap 或 Caffeine 替代；ThreadLocal 在 finally 中 remove；监听器及时注销
 2. 监控层面：接 Prometheus + Grafana 监控 JVM 内存，设置老年代使用率 >85% 告警
 3. 压测层面：上线前进行长时间压测，观察堆内存是否持续增长
-
----
 
 ## 七、总结
 

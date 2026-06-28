@@ -1,11 +1,15 @@
----
+﻿---
 title: SpringCloud使用Feign+Ribbon+Hystrix
 tag: ["SpringCloud", "Feign", "Ribbon", "Hystrix"]
 category: spring
 date: 2020-12-14
 ---
 
-# 1、引入依赖
+# SpringCloud使用Feign+Ribbon+Hystrix
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 ```java
 <dependency>

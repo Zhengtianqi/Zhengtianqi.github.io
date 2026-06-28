@@ -7,11 +7,8 @@ category: CICD
 
 # 部署策略对比：蓝绿 vs 金丝雀 vs 滚动，怎么选
 
-> 部署策略选错，轻则用户体验受损，重则生产事故。本文从原理到实践，帮你做出正确选择。
-
-## 1. 四种主流部署策略图解
-
-### 1.1 策略全景图
+> 部署策略对比：蓝绿 vs 金丝雀 vs 滚动，怎么选是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了部署策略对比：蓝绿 vs 金丝雀 vs 滚动，怎么选的核心概念和实践经验，帮助你深入理解这一技术领域。
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -55,8 +52,6 @@ category: CICD
 | 蓝绿部署 | 快 | 2x | 极快（秒级） | 高 | 零影响（切换瞬间除外） |
 | 金丝雀发布 | 慢 | 原有+ | 快 | 极高 | 小部分用户可能有影响 |
 | A/B 测试 | - | - | - | - | 见下文区分 |
-
----
 
 ## 2. 滚动更新：原理、K8s 实现、优缺点
 
@@ -183,8 +178,6 @@ kubectl rollout resume deployment/myapp
 
 **适用场景**：一般 Web 服务、API 服务，对兼容性要求不高的场景。
 
----
-
 ## 3. 蓝绿部署：原理、流量切换、成本分析
 
 ### 3.1 蓝绿部署原理
@@ -247,7 +240,6 @@ spec:
       - name: myapp
         image: myapp:1.0.0
 
----
 # ─── green-deployment.yaml ───
 apiVersion: apps/v1
 kind: Deployment
@@ -269,7 +261,6 @@ spec:
       - name: myapp
         image: myapp:2.0.0
 
----
 # ─── service.yaml（关键：通过修改 selector 切换流量） ───
 apiVersion: v1
 kind: Service
@@ -364,8 +355,6 @@ fi
   └── 非生产流量丢失：切换时正在处理的事务可能中断
 ```
 
----
-
 ## 4. 金丝雀发布：原理、流量规则、回滚机制
 
 ### 4.1 金丝雀发布原理
@@ -409,7 +398,6 @@ spec:
       - name: myapp
         image: myapp:1.0.0
 
----
 # myapp-v2（金丝雀版）
 apiVersion: apps/v1
 kind: Deployment
@@ -431,7 +419,6 @@ spec:
       - name: myapp
         image: myapp:2.0.0
 
----
 # ─── Istio VirtualService：控制流量分配 ───
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -459,7 +446,6 @@ spec:
         subset: v2
       weight: 10                  # 10% 流量 → v2
 
----
 # ─── DestinationRule：定义子集 ───
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
@@ -544,8 +530,6 @@ echo "✅ 指标正常，继续扩大到 50%..."
 └──────────────────────────────────────────────────────────┘
 ```
 
----
-
 ## 5. A/B 测试 vs 金丝雀发布的区别
 
 ### 5.1 本质不同
@@ -617,8 +601,6 @@ spec:
       weight: 50
 ```
 
----
-
 ## 6. 选择框架：根据业务场景选策略
 
 ### 6.1 决策树
@@ -669,8 +651,6 @@ spec:
 金融/合规团队：
   → 蓝绿部署。监管要求、审计、回滚必须在秒级完成。
 ```
-
----
 
 ## 7. 结合 Spring Cloud + K8s 的实践
 
@@ -830,8 +810,6 @@ public class CanaryWeightedLoadBalancer implements ReactorLoadBalancer<ServiceIn
     kubectl rollout status deployment/myapp --timeout=5m
     kubectl scale deployment myapp-canary --replicas=0
 ```
-
----
 
 ## 总结
 

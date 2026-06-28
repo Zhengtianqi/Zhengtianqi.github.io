@@ -1,4 +1,4 @@
----
+﻿---
 title: 安全编码 Checklist：OWASP Top 10 与 Java 后端防御实践
 tag: ["安全", "OWASP", "安全编码", "Java"]
 category: 安全
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # 安全编码 Checklist：OWASP Top 10 与 Java 后端防御实践
 
-安全不是出事后补洞，而是编码时就做好防御。本文按 OWASP Top 10 整理一份可直接落地的安全编码 Checklist。
+> 安全编码 Checklist：OWASP Top 10 与 Java 后端防御实践是系统设计的重要考量，它关系到用户数据和系统资源的保护。
+> 本文介绍了安全编码 Checklist：OWASP Top 10 与 Java 后端防御实践的原理和最佳实践，帮助你构建安全可靠的系统。
 
----
+
+安全不是出事后补洞，而是编码时就做好防御。本文按 OWASP Top 10 整理一份可直接落地的安全编码 Checklist。
 
 ## 一、OWASP Top 10（2025）速览
 
@@ -25,8 +27,6 @@ date: 2026-06-27
 | A08 | 软件与数据完整性失效 | 未验证的更新/反序列化 |
 | A09 | 日志与监控失效 | 安全事件无感知 |
 | A10 | 服务端请求伪造（SSRF） | 内网探测 |
-
----
 
 ## 二、A01 访问控制失效
 
@@ -66,8 +66,6 @@ public Result getFile(@RequestParam String filename) {
     return Result.success(Files.readAllBytes(path));
 }
 ```
-
----
 
 ## 三、A02 加密机制失效
 
@@ -122,8 +120,6 @@ server:
 private String apiKey;
 ```
 
----
-
 ## 四、A03 注入
 
 ### Checklist
@@ -158,8 +154,6 @@ ois.setObjectInputFilter(filterInfo ->
     : ObjectInputFilter.Status.REJECTED
 );
 ```
-
----
 
 ## 五、A05 安全配置错误
 
@@ -197,8 +191,6 @@ server:
     include-message: never
     include-binding-errors: never
 ```
-
----
 
 ## 六、A07 认证与身份验证
 
@@ -248,8 +240,6 @@ public Result login(HttpServletRequest request) {
 // 4. 不在 JWT 中放敏感信息（Base64 可解码）
 ```
 
----
-
 ## 七、A08 软件与数据完整性
 
 ### Checklist
@@ -287,8 +277,6 @@ mvn org.owasp:dependency-check-maven:check
 # 或使用 Snyk
 snyk test
 ```
-
----
 
 ## 八、A09 日志与监控
 
@@ -336,8 +324,6 @@ public void transfer(TransferRequest req, User user) {
 
 // ✅ 日志防篡改：接入 ELK + 日志签名
 ```
-
----
 
 ## 九、A10 SSRF（服务端请求伪造）
 
@@ -394,8 +380,6 @@ public String fetchUrl(@RequestParam String url) {
 }
 ```
 
----
-
 ## 十、完整安全 Checklist 汇总
 
 ### 编码阶段
@@ -429,8 +413,6 @@ public String fetchUrl(@RequestParam String url) {
 - [ ] 限流防暴力破解
 - [ ] 定期安全渗透测试
 
----
-
 ## 十一、面试要点
 
 ### Q：你的项目做了哪些安全防护？
@@ -449,8 +431,6 @@ public String fetchUrl(@RequestParam String url) {
 3. 登录失败 5 次锁定
 4. 限流防暴力枚举
 5. 验证码防自动化
-
----
 
 ## 十二、总结
 

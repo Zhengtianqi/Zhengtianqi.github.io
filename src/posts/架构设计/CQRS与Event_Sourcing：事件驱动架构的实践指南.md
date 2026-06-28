@@ -5,45 +5,10 @@ category: 架构设计
 date: 2026-06-26
 ---
 
-## 前言
+# CQRS与Event_Sourcing：事件驱动架构的实践指南
 
-传统应用中，**读写操作使用同一个数据模型**：
-
-```
-User Table:
-├─ id
-├─ name
-├─ email
-├─ created_at
-├─ updated_at
-└─ ...
-
-所有写操作：UPDATE user SET ...
-所有读操作：SELECT * FROM user WHERE ...
-```
-
-**问题**：
-- 读写使用同一个表，导致表结构臃肿（既要满足写入需求，也要满足读取需求）
-- 某些读操作需要JOIN多个表，性能低
-- 某些字段只用于特定的读操作，浪费存储空间
-
-**CQRS（Command Query Responsibility Segregation）** 的思想是：
-
-```
-将读写分离
-  ├─ 写（Command）：更新事件日志
-  └─ 读（Query）：查询优化的读模型
-```
-
-本文深入讲解CQRS和Event Sourcing的原理、实现与权衡。
-
----
-
-## 一、CQRS基本概念
-
-### 1.1 传统CRUD vs CQRS
-
-#### **传统CRUD：一个数据模型**
+> CQRS与Event_Sourcing：事件驱动架构的实践指南是系统设计的核心，它决定了系统的可扩展性、可靠性和可维护性。
+> 本文介绍了CQRS与Event_Sourcing：事件驱动架构的实践指南的设计原则和实践经验，帮助你提升架构设计能力。
 
 ```
 ┌──────────────┐
@@ -87,7 +52,9 @@ UPDATE SELECT
 ### 1.2 CQRS的核心思想
 
 ```python
-# 传统方式：同一个Service既处理命令，也处理查询
+# CQRS与Event_Sourcing：事件驱动架构的实践指南
+
+
 class UserService:
     def create_user(self, name, email):  # 写
         user = User(name=name, email=email)
@@ -122,8 +89,6 @@ class UserQueryService:
     def list_users(self, page=1):
         return self.query_db.user_list_projection.paginate(page)
 ```
-
----
 
 ## 二、Event Sourcing（事件溯源）
 
@@ -501,8 +466,6 @@ class UserQueryProjection:
         )
 ```
 
----
-
 ## 三、CQRS+Event Sourcing架构
 
 ### 3.1 完整架构
@@ -571,8 +534,6 @@ event_bus.subscribe('UserCreated', handler.on_user_created)
 event_bus.subscribe('UserEmailUpdated', handler.on_user_email_updated)
 ```
 
----
-
 ## 四、CQRS vs Event Sourcing
 
 两者经常一起用，但不必非要配对：
@@ -600,8 +561,6 @@ event_bus.subscribe('UserEmailUpdated', handler.on_user_email_updated)
 │  缺点：复杂度高，运维难度大            │
 └────────────────────────────────────────┘
 ```
-
----
 
 ## 五、常见问题与解决方案
 
@@ -649,8 +608,6 @@ T3: 用户看到：转账成功，但余额未扣减
   转账这类关键操作：使用传统ACID事务
   其他操作：使用CQRS+Event Sourcing
 ```
-
----
 
 ## 总结
 

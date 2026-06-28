@@ -5,15 +5,10 @@ tag: ["Java","虚拟线程","并发编程"]
 category: java基础
 ---
 
-## 前言
+# JDK 虚拟线程完全指南：原理、使用与常见问题
 
-JDK 21 正式将虚拟线程（Virtual Threads）作为一项特性发布，彻底改变了 Java 并发编程的格局。传统平台线程在面对高并发 I/O 密集型场景时，线程数受限于操作系统资源，开发者不得不借助异步编程或响应式框架来突破瓶颈。虚拟线程的出现让"每个请求一个线程"的简洁模型重新焕发生机——但用不对也会踩坑。
-
-本文将系统梳理虚拟线程的原理、与平台线程的区别、正确使用方式以及常见问题。
-
----
-
-## 1. 什么是虚拟线程
+> JDK 虚拟线程完全指南：原理、使用与常见问题是Java并发编程的核心概念，它为程序提供了并行执行的能力，是提升系统性能的关键。
+> 本文系统介绍了JDK 虚拟线程完全指南：原理、使用与常见问题的原理、使用方式和常见问题，帮助你掌握Java并发编程。
 
 虚拟线程是由 JDK 而非操作系统管理的轻量级线程。它的工作原理可以概括为：
 
@@ -39,8 +34,6 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
 上面这段代码可以轻松创建一万个并发任务，而不会耗尽系统资源——这在传统平台线程模型下几乎不可能。
 
----
-
 ## 2. 虚拟线程 vs 平台线程
 
 ### 核心差异对比
@@ -62,8 +55,6 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
 - **平台线程**：约 **10 GB** 内存（实际可能触发 OOM）
 - **虚拟线程**：约 **几十 MB**（虚拟线程的栈在堆上按需增长）
-
----
 
 ## 3. 创建虚拟线程的方式
 
@@ -126,8 +117,6 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
     return combine(user.resultNow(), order.resultNow());
 }
 ```
-
----
 
 ## 4. 适用场景
 
@@ -215,8 +204,6 @@ var computeExecutor = Executors.newFixedThreadPool(cores);
 **3. 使用大量 ThreadLocal 的场景**
 
 虚拟线程的数量可能是平台线程的千百倍，每个虚拟线程都持有 ThreadLocal 副本会导致严重的内存问题。
-
----
 
 ## 5. 常见问题与陷阱
 
@@ -329,7 +316,9 @@ ConcurrentHashMap<String, Context> contextCache = new ConcurrentHashMap<>();
 **解决方案**：
 
 ```bash
-# 启动时加上 pinning 检测
+# JDK 虚拟线程完全指南：原理、使用与常见问题
+
+
 java -Djdk.tracePinnedThreads=short -jar app.jar
 ```
 
@@ -356,8 +345,6 @@ config.setMinimumIdle(5);
 ```
 
 **核心原则**：虚拟线程解决的是"等待时的线程资源浪费"问题，不解决"等待资源本身不够"的问题。
-
----
 
 ## 6. 虚拟线程迁移策略
 
@@ -423,8 +410,6 @@ public Response handle(Request req) {
 - [ ] 移除不必要的线程池大小配置
 - [ ] 确认框架版本支持虚拟线程（Spring Boot 3.2+、Tomcat 10.1+）
 
----
-
 ## 7. 最佳实践总结
 
 ### ✅ Do
@@ -443,8 +428,6 @@ public Response handle(Request req) {
 4. **不要限制虚拟线程的数量**：`newVirtualThreadPerTaskExecutor()` 不需要像固定线程池那样设置大小
 5. **不要把虚拟线程当长期存活对象使用**：虚拟线程是一次性的，用完即弃
 
----
-
 ## 8. 总结
 
 虚拟线程是 Java 并发编程的一次范式转变。它让开发者能够用最简单的同步代码风格处理高并发场景，而无需被迫学习复杂的异步编程模型。
@@ -458,5 +441,3 @@ public Response handle(Request req) {
 - **结构化并发**是管理虚拟线程生命周期的推荐方式
 
 如果你正在使用 JDK 21+ 并且项目中有大量的 I/O 等待操作，虚拟线程值得认真考虑。从传统线程池迁移的改造成本通常很低，但收益显著。
-
----

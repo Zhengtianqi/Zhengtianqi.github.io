@@ -1,9 +1,15 @@
----
+﻿---
 title: WordCount简析
 tag: ["HADOOP", "MapReduce"]
 category: 大数据
 date: 2019-12-18
 ---
+
+# WordCount简析
+
+> WordCount简析是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了WordCount简析的原理和应用场景，帮助你进入大数据领域。
+
 
 ```java
 package org.apache.hadoop.examples;
@@ -125,4 +131,3 @@ public class WordCount {
 }
 
 ```
-

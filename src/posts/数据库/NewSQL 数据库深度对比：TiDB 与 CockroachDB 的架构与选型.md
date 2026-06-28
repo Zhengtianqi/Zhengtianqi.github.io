@@ -1,4 +1,4 @@
----
+﻿---
 title: NewSQL 数据库深度对比：TiDB 与 CockroachDB 的架构与选型
 tag: ["TiDB", "CockroachDB", "NewSQL", "分布式数据库"]
 category: 数据库
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # NewSQL 数据库深度对比：TiDB 与 CockroachDB 的架构与选型
 
-MySQL 分库分表到一定程度就是运维噩梦。NewSQL 数据库 promises "水平扩展 + SQL + ACID"，但 TiDB 和 CockroachDB 怎么选？
+> NewSQL 数据库深度对比：TiDB 与 CockroachDB 的架构与选型是系统设计的核心，它决定了系统的可扩展性、可靠性和可维护性。
+> 本文介绍了NewSQL 数据库深度对比：TiDB 与 CockroachDB 的架构与选型的设计原则和实践经验，帮助你提升架构设计能力。
 
----
+
+MySQL 分库分表到一定程度就是运维噩梦。NewSQL 数据库 promises "水平扩展 + SQL + ACID"，但 TiDB 和 CockroachDB 怎么选？
 
 ## 一、为什么需要 NewSQL
 
@@ -21,8 +23,6 @@ MySQL 分库分表到一定程度就是运维噩梦。NewSQL 数据库 promises 
 | TiDB / CockroachDB | 好 | 完整 | 完整 | 中等 |
 
 NewSQL 的核心价值：**像用 MySQL 一样用，但能水平扩展到 PB 级**。
-
----
 
 ## 二、TiDB 架构
 
@@ -46,8 +46,6 @@ PD（Placement Driver，调度）
 - HTAP：TiKV（行存）+ TiFlash（列存）同时支持 OLTP 和 OLAP
 - 兼容 MySQL 协议：应用层几乎不用改
 
----
-
 ## 三、CockroachDB 架构
 
 ```
@@ -65,8 +63,6 @@ CockroachDB Node（每个节点既计算又存储）
 - 地域分布式：原生支持多地域部署，数据可按地域放置
 - PostgreSQL 兼容：支持大部分 PG 语法
 
----
-
 ## 四、核心对比
 
 | 维度 | TiDB | CockroachDB |
@@ -80,8 +76,6 @@ CockroachDB Node（每个节点既计算又存储）
 | 生态 | 中国生态好 | 欧美生态好 |
 | 语言 | Go + Rust | Go |
 | 社区 | PingCAP（中国） | Cockroach Labs（美国） |
-
----
 
 ## 五、TiDB 实战
 
@@ -143,8 +137,6 @@ ALTER TABLE orders PLACEMENT POLICY='cn-east';
 -- 将订单数据放在华东节点
 ```
 
----
-
 ## 六、CockroachDB 实战
 
 ### 6.1 Docker 部署
@@ -203,8 +195,6 @@ SELECT * FROM orders WHERE create_time > '2026-06-01';
 -- 从最近的副本读取，降低延迟
 ```
 
----
-
 ## 七、选型决策
 
 ```
@@ -226,8 +216,6 @@ SELECT * FROM orders WHERE create_time > '2026-06-01';
 团队偏好无中心架构？
   → CockroachDB（无 PD 节点）
 ```
-
----
 
 ## 八、迁移注意事项
 
@@ -265,8 +253,6 @@ CREATE TABLE orders (
 );
 ```
 
----
-
 ## 九、面试要点
 
 ### Q：什么场景需要 NewSQL？
@@ -291,8 +277,6 @@ Percolator 模型，基于两阶段提交（2PC）：
 2. Commit：写入 Commit 记录，释放锁
 3. 清理：异步清理临时数据
 冲突时通过 MVCC 做快照隔离（SI）
-
----
 
 ## 十、总结
 

@@ -1,11 +1,15 @@
----
+﻿---
 title: 初识redis（3）-持久化
 tag: ["Redis", "持久化", "数据库"]
 category: 数据库
 date: 2021-08-01
 ---
 
-# 1、Redis 数据持久化概念
+# 初识redis（3）-持久化
+
+> 初识redis（3）-持久化是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了初识redis（3）-持久化的原理和最佳实践，帮助你构建高效的数据存储方案。
+
 
 Redis 的数据持久化，即：将内存中的数据存储到硬盘（本文中亦称之为 “落地”）。Redis 提供了 RDB 和 AOF 两种持久化的方法：
 •	RDB：基于特定的时间间隔将数据 “全量快照”，生成 RDB 文件并落地
@@ -112,4 +116,3 @@ AOF 文件自动 rewrite 机制，当 AOF 文件大小达到以下阈值，Redis
 •	增长百分比超过 auto-aof-rewrite-percentage（相对于上一次 rewrite 完成时的 AOF 文件）
 •	超过 auto-aof-rewrite-min-size
 通过设置 auto-aof-rewrite-percentage 为 0，即关闭 AOF 文件的自动 rewrite。
-

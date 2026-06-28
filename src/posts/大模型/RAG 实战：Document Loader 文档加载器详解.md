@@ -7,19 +7,8 @@ date: 2026-05-13
 
 # RAG 实战：Document Loader 文档加载器详解
 
-## 一、前言
-
-在 RAG（检索增强生成）架构中，**Document Loader 文档加载器**是整个链路的**入口第一环**。
-
-核心作用：把本地文件、网页、数据库、知识库等**各类异构数据源**，统一解析为 RAG 标准的 `Document` 文档对象，为后续**文本分割、向量化、向量入库、检索召回**提供原始素材。
-
-没有文档加载器，RAG 就无法接入外部私有知识库，也就失去了「私有数据增强大模型」的核心能力。
-
-本文基于 LangChain 生态，从零梳理 Document Loader 原理、常用加载器、实战代码、适配场景与避坑要点，可直接用于项目开发与学习。
-
-## 二、Document Loader 核心概念
-
-### 2.1 核心职责
+> 大语言模型是AI领域的革命性技术，它为自然语言处理和智能应用提供了强大的能力。
+> 本文介绍了大模型的核心概念和应用方式，帮助你进入AI应用开发领域。
 
 1. **读取数据源**：本地文件、PDF、Word、Markdown、网页、Excel、数据库、飞书/Notion 知识库等；
 
@@ -27,7 +16,7 @@ date: 2026-05-13
 
 3. **封装为 Document 对象**：统一结构，供后续 `TextSplitter` 切分、Embedding 向量化。
 
-### 2.2 Document 对象结构
+### 1.2 Document 对象结构
 
 LangChain 标准文档结构：
 
@@ -39,9 +28,9 @@ class Document:
 
 元数据作用：检索后溯源、过滤文档、引用出处、做权限控制。
 
-## 三、常用 Document Loader 分类
+## 二、常用 Document Loader 分类
 
-### 3.1 本地文件类 Loader（最常用）
+### 2.1 本地文件类 Loader（最常用）
 
 |加载器|支持格式|适用场景|
 |---|---|---|
@@ -51,7 +40,7 @@ class Document:
 |CSVLoader|.csv、Excel|结构化表格数据|
 |UnstructuredLoader|多格式兼容|未知格式、混合文档|
 
-### 3.2 网络&amp;在线资源 Loader
+### 2.2 网络&amp;在线资源 Loader
 
 - WebBaseLoader：抓取普通网页正文
 
@@ -61,13 +50,13 @@ class Document:
 
 - FeishuLoader：飞书文档、知识库加载
 
-### 3.3 数据库&amp;结构化 Loader
+### 2.3 数据库&amp;结构化 Loader
 
 - SQLDatabaseLoader：MySQL/Postgres 数据库表数据
 
 - JSONLoader：JSON 配置、接口返回数据
 
-## 四、环境依赖安装
+## 三、环境依赖安装
 
 ```bash
 # 基础 langchain
@@ -83,9 +72,9 @@ pip install docx2txt
 pip install beautifulsoup4 lxml
 ```
 
-## 五、实战代码示例
+## 四、实战代码示例
 
-### 5.1 加载本地 Markdown / TXT 文件
+### 4.1 加载本地 Markdown / TXT 文件
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -103,7 +92,7 @@ print(documents[0].page_content[:300])
 print("元数据：", documents[0].metadata)
 ```
 
-### 5.2 加载 PDF 文档
+### 4.2 加载 PDF 文档
 
 ```python
 from langchain_community.document_loaders import PyPDFLoader
@@ -117,7 +106,7 @@ for idx, doc in enumerate(documents):
     print("页码元数据：", doc.metadata)
 ```
 
-### 5.3 批量加载整个文件夹文档
+### 4.3 批量加载整个文件夹文档
 
 ```python
 from langchain_community.document_loaders import DirectoryLoader
@@ -133,7 +122,7 @@ documents = loader.load()
 print(f"批量加载文档总数：{len(documents)}")
 ```
 
-### 5.4 网页内容加载
+### 4.4 网页内容加载
 
 ```python
 from langchain_community.document_loaders import WebBaseLoader
@@ -145,21 +134,21 @@ documents = loader.load()
 print(documents[0].page_content[:500])
 ```
 
-## 六、Loader 常见问题与避坑
+## 五、Loader 常见问题与避坑
 
-1. **编码报错**
+5.1. **编码报错**
 加载 txt/md 时指定 `encoding="utf-8"`，Windows 文档可尝试 `gbk`。
 
-2. **PDF 乱码、公式无法解析**
+5.2. **PDF 乱码、公式无法解析**
 纯扫描版 PDF 普通 Loader 无法提取，需用 OCR 类加载器。
 
-3. **网页爬取多余广告、导航栏**
+5.3. **网页爬取多余广告、导航栏**
 WebBaseLoader 会自动提取正文，复杂网站可配合 BeautifulSoup 自定义筛选标签。
 
-4. **大文件一次性加载内存溢出**
+5.4. **大文件一次性加载内存溢出**
 使用 `loader.lazy_load()` 懒加载，迭代读取，避免一次性载入全部文档。
 
-## 七、Loader 在 RAG 完整链路中的位置
+## 六、Loader 在 RAG 完整链路中的位置
 
 ```plain text
 数据源 -> DocumentLoader 加载 -> TextSplitter 文本切分 
@@ -170,27 +159,25 @@ WebBaseLoader 会自动提取正文，复杂网站可配合 BeautifulSoup 自定
 
 Loader 是 RAG 链路**数据入口**，Loader 解析质量直接决定后续检索准确度和问答效果。
 
-## 八、总结
+## 七、总结
 
-1. Document Loader 是 RAG 接入私有数据的**第一道关口**，统一各类数据源为标准 Document；
+7.1. Document Loader 是 RAG 接入私有数据的**第一道关口**，统一各类数据源为标准 Document；
 
-2. 日常开发优先使用 `TextLoader、PyPDFLoader、DirectoryLoader` 满足 80% 本地知识库场景；
+7.2. 日常开发优先使用 `TextLoader、PyPDFLoader、DirectoryLoader` 满足 80% 本地知识库场景；
 
-3. 元数据 metadata 一定要保留，用于溯源、过滤、业务权限控制；
+7.3. 元数据 metadata 一定要保留，用于溯源、过滤、业务权限控制；
 
-4. 大文件、多文件推荐目录批量加载 + 懒加载，优化内存占用。
+7.4. 大文件、多文件推荐目录批量加载 + 懒加载，优化内存占用。
 
----
+本文基于 LangChain 最新版本编写，代码可直接复制运行，如需扩展 OCR 加载器、数据库加载等进阶用法，可留言补充。
 
-&gt; 本文基于 LangChain 最新版本编写，代码可直接复制运行，如需扩展 OCR 加载器、数据库加载等进阶用法，可留言补充。
+## 八、进阶用法：OCR 加载器（解决扫描版 PDF 解析问题）
 
-## 九、进阶用法：OCR 加载器（解决扫描版 PDF 解析问题）
-
-### 9.1 适用场景
+### 8.1 适用场景
 
 当遇到**纯扫描版 PDF、图片格式文档**时，普通 PyPDFLoader 无法提取文本（会出现乱码或空白），此时需使用 OCR（光学字符识别）类加载器，通过识别图片中的文字完成解析。
 
-### 9.2 依赖安装
+### 8.2 依赖安装
 
 ```bash
 # OCR 核心依赖
@@ -204,7 +191,7 @@ pip install pdf2image
 # Linux 额外安装：sudo apt-get install tesseract-ocr
 ```
 
-### 9.3 实战代码（OCR 加载扫描版 PDF）
+### 8.3 实战代码（OCR 加载扫描版 PDF）
 
 ```python
 from langchain_community.document_loaders import PyPDFLoader
@@ -256,7 +243,7 @@ print(scan_pdf_documents[0].page_content[:300])
 print("元数据：", scan_pdf_documents[0].metadata)
 ```
 
-### 9.4 OCR 加载器避坑要点
+### 8.4 OCR 加载器避坑要点
 
 1. **引擎安装问题**：必须安装 Tesseract OCR 引擎，否则会报错“pytesseract.pytesseract.TesseractNotFoundError”，需配置环境变量或在代码中指定引擎路径。
 

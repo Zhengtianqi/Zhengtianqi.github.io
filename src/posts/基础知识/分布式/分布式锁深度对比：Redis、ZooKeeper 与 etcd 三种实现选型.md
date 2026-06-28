@@ -1,4 +1,4 @@
----
+﻿---
 title: 分布式锁深度对比：Redis、ZooKeeper 与 etcd 三种实现选型
 tag: ["分布式锁", "Redis", "ZooKeeper", "etcd"]
 category: 分布式
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # 分布式锁深度对比：Redis、ZooKeeper 与 etcd 三种实现选型
 
-单机锁用 synchronized，分布式锁用什么？Redis RedLock？ZooKeeper 临时节点？etcd Lease？选错了就是生产事故。
+> Redis是高性能的内存数据库，广泛应用于缓存、会话管理和实时数据处理等场景。
+> 本文介绍了Redis的核心特性和使用场景，帮助你构建高性能的应用系统。
 
----
+
+单机锁用 synchronized，分布式锁用什么？Redis RedLock？ZooKeeper 临时节点？etcd Lease？选错了就是生产事故。
 
 ## 一、三种实现的核心原理
 
@@ -46,8 +48,6 @@ Lease + TXN（事务）
 释放：Revoke Lease 或删除 key
 ```
 
----
-
 ## 二、核心维度对比
 
 | 维度 | Redis | ZooKeeper | etcd |
@@ -78,8 +78,6 @@ ZooKeeper / etcd 不会有这个问题：
 - 临时节点/Lease 在 Session 活着时不会过期
 - Session 心跳维持，GC STW 不会导致锁丢失（只要 Session 超时 > STW 时间）
 ```
-
----
 
 ## 三、Redis 分布式锁实战
 
@@ -144,8 +142,6 @@ lock.tryLock(5, -1, TimeUnit.SECONDS);  // -1 表示启用 Watchdog
 lock.tryLock(5, 10, TimeUnit.SECONDS);  // 10 秒后强制释放，不续约
 ```
 
----
-
 ## 四、ZooKeeper 分布式锁实战
 
 ### 4.1 Curator 实现
@@ -192,8 +188,6 @@ public class OrderService {
     }
 }
 ```
-
----
 
 ## 五、etcd 分布式锁实战
 
@@ -244,8 +238,6 @@ public class OrderService {
 }
 ```
 
----
-
 ## 六、选型决策
 
 ```
@@ -264,8 +256,6 @@ public class OrderService {
 锁等待时间要求短（<100ms）？
   → Redis（ZK 和 etcd 的共识协议延迟更高）
 ```
-
----
 
 ## 七、常见陷阱
 
@@ -329,8 +319,6 @@ public void deductStock(Long productId, int quantity) {
 }
 ```
 
----
-
 ## 八、面试要点
 
 ### Q：Redis 分布式锁安全吗？
@@ -347,8 +335,6 @@ public void deductStock(Long productId, int quantity) {
 - **分布式并发，性能优先**：Redis 锁
 - **分布式并发，一致性优先**：ZK / etcd 锁
 - **简单场景**：数据库乐观锁（version 字段）或悲观锁（SELECT FOR UPDATE）
-
----
 
 ## 九、总结
 

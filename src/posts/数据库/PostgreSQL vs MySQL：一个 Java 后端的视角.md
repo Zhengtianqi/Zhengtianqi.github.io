@@ -7,13 +7,8 @@ date: 2026-06-12
 
 # PostgreSQL vs MySQL：一个 Java 后端的视角
 
-## 前言
-
-作为一个 Java 后端开发者，数据库选型几乎是每个项目启动时都要面对的灵魂拷问。PostgreSQL 和 MySQL 作为开源关系型数据库的双雄，各自拥有庞大的用户群体和生态系统。本文从 Java 后端的视角出发，深入对比两者的核心差异，帮助你在实际项目中做出更明智的选型决策。
-
-## 一、历史与定位
-
-### 1.1 MySQL 的发展历程
+> MySQL是世界上最流行的开源关系型数据库，它为Web应用提供了稳定可靠的数据存储方案。
+> 本文系统梳理了MySQL的核心概念和最佳实践，是后端开发者的必备知识。
 
 MySQL 诞生于 1995 年，由瑞典公司 MySQL AB 开发。其设计初衷是追求**简单、快速、易用**，最早定位为中小型 Web 应用的数据库解决方案。2008 年被 Sun Microsystems 收购，2009 年随 Sun 一起归入 Oracle 旗下。
 
@@ -38,8 +33,6 @@ PostgreSQL 的核心理念是："做最先进的开源数据库"（The World's M
 | 历史包袱 | 较重（早期版本功能简陋） | 较轻（起点高） |
 | 典型用户 | 互联网公司、中小型应用 | 企业级应用、GIS、数据分析 |
 | 社区风格 | 多个分支，生态分散 | 统一社区，方向明确 |
-
----
 
 ## 二、核心架构差异
 
@@ -82,8 +75,6 @@ CREATE TABLE logs (
 **PostgreSQL** 只有**一个存储引擎**，但通过强大的扩展机制实现类似功能。所有表统一管理，事务行为一致，不会有"某个表不支持事务"的尴尬。
 
 > **观点**：MySQL 的插件式引擎是一把双刃剑。灵活的同时也带来了碎片化——不同引擎的特性差异可能导致选错。PG 的统一引擎让人更省心，功能通过扩展（Extension）提供更加优雅。
-
----
 
 ## 三、MVCC 实现机制对比
 
@@ -174,8 +165,6 @@ public void batchUpdateInMySQL() {
 ```
 
 > **结论**：对于**读多写少**的场景，PG 的 MVCC 实现更优（无需 undo）。对于**更新密集**的场景，MySQL 更合适。但两者的差距在现代硬件上其实不大。
-
----
 
 ## 四、索引能力对比
 
@@ -300,8 +289,6 @@ CREATE INDEX idx_lower_email ON users ((LOWER(email)));
 - InnoDB 的聚簇索引带来更好的主键查询性能
 - 不依赖高级索引特性
 
----
-
 ## 五、SQL 标准兼容性
 
 ### 5.1 标准兼容对比
@@ -359,8 +346,6 @@ UNION
 SELECT u.id, u.name, o.amount FROM users u RIGHT JOIN orders o ON u.id = o.user_id
 WHERE u.id IS NULL;
 ```
-
----
 
 ## 六、扩展性生态
 
@@ -455,8 +440,6 @@ INSTALL COMPONENT 'file://component_validate_password';
 
 相比之下，PG 的 `CREATE EXTENSION` 一行命令搞定，扩展可以自由分发、一键安装，生态繁荣得多。
 
----
-
 ## 七、数据类型对比
 
 ### 7.1 JSON 支持
@@ -545,8 +528,6 @@ MySQL 只能通过关联表或在应用层处理数组，复杂度更高。
 | 范围类型 | ❌ | int4range, daterange 等 |
 | 枚举 | ENUM（不支持修改） | CREATE TYPE（更灵活） |
 | 自定义复合类型 | ❌ | CREATE TYPE ... AS () |
-
----
 
 ## 八、Java 生态集成对比
 
@@ -674,8 +655,6 @@ CREATE TABLE users (
 
 如果项目可能未来更换数据库，Flyway 的 Java 迁移更灵活（可在代码层适配）。
 
----
-
 ## 九、性能对比与调优
 
 ### 9.1 读性能
@@ -771,8 +750,6 @@ query_cache_type = 0              # 8.0 已移除
 tmp_table_size = 64M
 ```
 
----
-
 ## 十、运维与监控
 
 ### 10.1 备份恢复
@@ -830,8 +807,6 @@ WHERE table_schema = 'mydb'
 ORDER BY (data_length + index_length) DESC;
 ```
 
----
-
 ## 十一、选型建议：什么场景选哪个？
 
 ### 选择 PostgreSQL 的场景
@@ -863,8 +838,6 @@ ORDER BY (data_length + index_length) DESC;
 - **企业级/数据密集型**：PostgreSQL 明显更合适
 - **混合使用也不是坏事**：关键业务用 MySQL（运维成熟度），分析/报表用 PG
 
----
-
 ## 十二、总结
 
 | 维度 | PostgreSQL | MySQL |
@@ -881,7 +854,5 @@ ORDER BY (data_length + index_length) DESC;
 | 社区活跃度 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
 **最后的话**：选择数据库不是选择题而是判断题。弄清楚你的需求是什么，你的团队擅长什么，你的项目未来怎么发展。两个数据库都是优秀的开源产品，没有绝对的"谁更好"。作为 Java 后端开发者，两个都应该熟悉，这样才能在项目中做出最适合的技术决策。
-
----
 
 *本文写于 2024 年，MySQL 版本基于 8.0，PostgreSQL 版本基于 16。*

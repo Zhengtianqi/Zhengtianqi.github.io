@@ -7,19 +7,8 @@ date: 2026-05-13
 
 # 构建 ReAct+RAG 智能体：从零打造个性化数字人 Demo
 
-## 前言
-
-在大模型技术迅猛发展的今天，单纯依赖 LLM 的参数知识已无法满足复杂业务场景的需求。**ReAct（Reasoning + Acting）** 赋予模型动态推理与行动能力，**RAG（Retrieval-Augmented Generation）** 解决知识实时性与准确性问题，而**个性化数字人**则将二者融合，为用户提供拥有特定角色设定、记忆与知识体系的 AI 助手。
-
-本文将带你从零开始，构建一个集 **ReAct 推理框架 + RAG 知识检索 + 个性化角色记忆** 于一体的数字人 Demo，代码可直接运行。
-
-> 💡 **适合读者**：有 Python 基础，了解基本 LLM API 调用，对 Agent 开发感兴趣的工程师。
-
----
-
-## 核心概念解析
-
-### ReAct 框架
+> 大语言模型是AI领域的革命性技术，它为自然语言处理和智能应用提供了强大的能力。
+> 本文介绍了大模型的核心概念和应用方式，帮助你进入AI应用开发领域。
 
 ReAct 由 Yao et al. (2022) 提出，核心思想是让 LLM 在 **Reasoning（推理）** 和 **Acting（行动）** 之间交替循环，形成：
 
@@ -36,8 +25,6 @@ Thought → Action → Observation → Thought → Action → ...→ Final Answe
 
 **优势**：动态推理，可处理多步骤复杂任务；支持工具调用，突破 LLM 知识局限。
 
----
-
 ### RAG 检索增强生成
 
 RAG 的核心流程：
@@ -51,8 +38,6 @@ RAG 的核心流程：
 - **向量数据库**：FAISS、Chroma、Milvus 等
 - **Embedding 模型**：`text-embedding-ada-002`、`bge-m3` 等
 - **重排序（Rerank）**：用 Cross-Encoder 对召回结果二次排序，提升精准度
-
----
 
 ### Agent 智能体
 
@@ -74,8 +59,6 @@ Agent = LLM + Memory + Tools + Planning
 └─────────────────────────────────────┘
 ```
 
----
-
 ### 个性化数字人
 
 数字人在 Agent 基础上，额外加入：
@@ -84,8 +67,6 @@ Agent = LLM + Memory + Tools + Planning
 - **长期记忆（Long-term Memory）**：记住用户偏好、历史对话关键信息
 - **个人知识库（Personal KB）**：特定角色专属的 RAG 知识源
 - **情感状态（Emotion State）**：根据对话动态调整回应风格
-
----
 
 ## 整体架构设计
 
@@ -122,8 +103,6 @@ Agent = LLM + Memory + Tools + Planning
 │              提取关键信息 → 写入长期记忆存储                    │
 └────────────────────────────────────────────────────────────┘
 ```
-
----
 
 ## 环境搭建
 
@@ -174,8 +153,6 @@ class Config:
     TOP_K_RETRIEVAL = 5          # RAG 召回数量
     MEMORY_MAX_ITEMS = 50        # 长期记忆最大条数
 ```
-
----
 
 ## ReAct+RAG 智能体实现
 
@@ -269,8 +246,6 @@ class KnowledgeBase:
         if texts:
             self.add_documents(texts, metas)
 ```
-
----
 
 ### ReAct 推理循环
 
@@ -398,8 +373,6 @@ class ReActAgent:
         return "达到最大推理轮次，无法得出答案。"
 ```
 
----
-
 ### 工具注册与调用
 
 ```python
@@ -458,8 +431,6 @@ def create_tools(rag_retriever: RAGRetriever) -> dict:
         "summarize_memory": summarize_memory,
     }
 ```
-
----
 
 ## 个性化数字人集成
 
@@ -566,8 +537,6 @@ class MemoryManager:
             lines.append(f"- [{mem.get('category','其他')}] {mem['content']}")
         return "\n".join(lines)
 ```
-
----
 
 ### 个性化对话引擎
 
@@ -679,8 +648,6 @@ class DigitalHuman:
         return f"{self.profile['avatar']} {self.profile['greeting']}"
 ```
 
----
-
 ## 完整 Demo 代码
 
 ```python
@@ -726,8 +693,6 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-
----
 
 ## 运行效果展示
 
@@ -781,8 +746,6 @@ Final Answer: 好问题！两者适用场景确实不同 🎯
 🤖 小艾：好问题！...
 ```
 
----
-
 ## 优化方向与进阶思路
 
 ### 1. RAG 质量提升
@@ -830,8 +793,6 @@ class ReRanker:
     ├── 情感支持 → 心理小暖（RAG: 心理健康知识库）
     └── 商务咨询 → 商务小智（RAG: 行业报告库）
 ```
-
----
 
 ## 总结
 

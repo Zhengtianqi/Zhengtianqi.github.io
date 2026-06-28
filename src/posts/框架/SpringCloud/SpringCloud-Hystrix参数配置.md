@@ -1,13 +1,17 @@
----
+﻿---
 title: SpringCloud Hystrix参数配置
 tag: ["SpringCloud", "Hystrix", "熔断降级"]
 category: spring
 date: 2020-12-14
 ---
 
+# SpringCloud Hystrix参数配置
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 Hystrix修改默认配置有两种方式，注解参数注入，和application.yml配置文件配置。
 
-# 1、方法一：注解参数注入
 
 ```java
     @RequestMapping(value = "/helloHystrixA/{string}", method = RequestMethod.GET)

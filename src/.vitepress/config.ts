@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
-import { sidebar } from './sidebar'
 
 export default defineConfig({
+  cleanUrls: true,
   base: '/',
   lang: 'zh-CN',
   title: '郑天祺的博客',
@@ -18,20 +18,12 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '文章', link: '/posts/' },
       { text: '关于我', link: '/intro' }
     ],
-
-    sidebar: sidebar,
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/zhengtianqi' }
     ],
-
-    footer: {
-      message: '个人网站',
-      copyright: 'Copyright © 郑天祺'
-    },
 
     outline: {
       label: '目录'
@@ -45,8 +37,7 @@ export default defineConfig({
     lastUpdated: {
       text: '最后更新于',
       formatOptions: {
-        dateStyle: 'short',
-        timeStyle: 'short'
+        dateStyle: 'long'
       }
     },
 
@@ -76,4 +67,4 @@ export default defineConfig({
       }
     }
   }
-})
+});

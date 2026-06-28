@@ -1,11 +1,15 @@
----
+﻿---
 title: HttpClient
 tag: ["HTTP", "Java网络", "HttpClient"]
 category: 网络
 date: 2020-07-15
 ---
 
-# 1、HttpClient介绍		
+# HttpClient
+
+> HttpClient是计算机网络的核心概念，它涉及数据传输、协议规范和网络安全等关键领域。
+> 本文系统介绍了HttpClient的原理和应用，帮助你理解网络通信机制。
+
 
 		HTTP 协议可能是现在 Internet 上使用得最多、最重要的协议了，越来越多的 Java 应用程序需要直接通过 HTTP 协议来访问网络资源。
 
@@ -14,7 +18,6 @@ date: 2020-07-15
 		HttpClient 是Apache HttpComponents 下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。HttpClient已经应用在很多的项目中，并支持HTTPS协议。
 
 		HttpClient 不是浏览器，它是一个客户端 HTTP 协议传输类库。HttpClient 被用来发送和接受 HTTP 消息。HttpClient 不会处理 HTTP 消息的内容，不会进行 javascript 解析，不会关心 content type，如果没有明确设置，HttpClient 也不会对请求进行格式化、重定向 url，或者其他任何和 HTTP 消息传输相关的功能。
-
 
 # 2、HttpClientUtils
 
@@ -420,4 +423,3 @@ public class HttpClientUtils {
 }
 
 ```
-

@@ -1,11 +1,15 @@
----
+﻿---
 title: Http和Https的区别
 tag: ["HTTP", "HTTPS"]
 category: 网络
 date: 2020-09-11
 ---
 
-# 一、基本概念
+# Http和Https的区别
+
+> Http和Https的区别是计算机网络的核心概念，它涉及数据传输、协议规范和网络安全等关键领域。
+> 本文系统介绍了Http和Https的区别的原理和应用，帮助你理解网络通信机制。
+
 
 ## 1、HTTP
 
@@ -44,8 +48,6 @@ HTTPS 其实就是建构在 SSL/TLS 之上的 HTTP 协议，所以，要比较 H
 # 二、HTTPS的工作流程
 
 ![img](/assets/images/https-intro.png)
-
-
 
 1、客户端发起 HTTPS 请求
 

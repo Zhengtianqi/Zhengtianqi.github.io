@@ -1,11 +1,16 @@
----
+﻿---
 title: Milvus向量数据库之以图搜图
 tag: ["向量数据库", "Milvus", "AI"]
 category: 数据库
 date: 2022-11-08
 ---
 
-# 一、介绍
+# Milvus向量数据库之以图搜图
+
+> Milvus向量数据库之以图搜图是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了Milvus向量数据库之以图搜图的原理和最佳实践，帮助你构建高效的数据存储方案。
+
+
 Milvus 创建于 2019 年，其目标只有一个：存储、索引和管理由深度神经网络和其他机器学习 （ML） 模型生成的大量嵌入向量。
 作为专门设计用于处理对输入向量的查询的数据库，它能够以万亿级对向量进行索引。与现有关系数据库主要按照预定义模式处理结构化数据不同，Milvus 是自下而上设计的，用于处理从非结构化数据转换的嵌入向量。
 
@@ -133,7 +138,6 @@ from keras.applications.vgg16 import VGG16
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 
-
 class VGGNet:
     def __init__(self):
         keras.backend.clear_session()
@@ -197,7 +201,6 @@ schema = CollectionSchema(
     description="Test pic search"
 )
 collection_name = "pic"
-
 
 def create_collection():
     connect()
@@ -273,7 +276,6 @@ from utils.Connect import connect
 from utils.VggNet import VGGNet
 from pymilvus import Collection
 
-
 def search_pic(path):
     vgg = VGGNet()
     print(path)
@@ -310,11 +312,9 @@ def search_pic(path):
                 t['pic_url'] = s['pic_name']
     return result
 
-
 if __name__ == '__main__':
     search_pic("E:\zhengtianqi\git\search-for-pictures\data2\ILSVRC2012_img_val\cat.91.jpg")
 ```
 结果：
 ![img](/assets/images/ytst0.png)
 ![img](/assets/images/ytst.png)
-

@@ -1,17 +1,20 @@
----
+﻿---
 title: SpringCloud服务构建
 tag: ["SpringCloud", "服务构建"]
 category: spring
 date: 2020-12-14
 ---
 
-# 1、添加依赖
+# SpringCloud服务构建
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 建议使用官方提供的在线地址进行工程的初始化创建：https://start.spring.io
 
 添加Spring Cloud和Spring Cloud Alibaba依赖管理：
 	
-
 ```java
 <properties>
 		<java.version>1.8</java.version>
@@ -76,4 +79,3 @@ info:
     app:
         desc: 这是一条描述信息
 ```
-

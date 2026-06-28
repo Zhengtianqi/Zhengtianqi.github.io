@@ -7,11 +7,8 @@ category: 安全
 
 # 金融系统安全设计 Checklist：一个后端的自我修养
 
-> 金融系统不同于普通应用——安全不是一个 feature，而是地基。本文系统梳理金融后端开发中不可忽视的安全设计要点。
-
-## 1. 金融系统的安全要求总览
-
-### 1.1 为什么金融系统更"敏感"
+> 金融系统安全设计 Checklist：一个后端的自我修养是系统设计的重要考量，它关系到用户数据和系统资源的保护。
+> 本文介绍了金融系统安全设计 Checklist：一个后端的自我修养的原理和最佳实践，帮助你构建安全可靠的系统。
 
 金融系统面临的安全威胁远超普通应用：
 
@@ -59,8 +56,6 @@ category: 安全
 默认拒绝（Default Deny）
   └── 未明确允许的访问一律拒绝
 ```
-
----
 
 ## 2. 传输安全：HTTPS 强制与证书管理
 
@@ -171,8 +166,6 @@ public WebServerFactoryCustomizer<TomcatServletWebServerFactory> tomcatCustomize
     });
 }
 ```
-
----
 
 ## 3. 认证安全：多因素认证与会话管理
 
@@ -394,8 +387,6 @@ public class CustomSessionRegistry {
     }
 }
 ```
-
----
 
 ## 4. 数据安全：加密存储与脱敏展示
 
@@ -650,8 +641,6 @@ public class UserVO {
 }
 ```
 
----
-
 ## 5. 接口安全：防重放、防暴力破解与限流
 
 ### 5.1 防重放攻击
@@ -842,8 +831,6 @@ public class TransferController {
 }
 ```
 
----
-
 ## 6. 日志安全：审计日志与信息遮蔽
 
 ### 6.1 审计日志
@@ -1010,8 +997,6 @@ public class SensitiveDataConverter extends MessageConverter {
   - 日志输出到独立的安全服务器
 ```
 
----
-
 ## 7. SQL 注入、XSS、CSRF 防御
 
 ### 7.1 SQL 注入防御
@@ -1160,8 +1145,6 @@ ResponseCookie cookie = ResponseCookie.from("refresh_token", token)
 // 服务端比较两个值是否一致
 ```
 
----
-
 ## 8. 安全检查清单（可直接使用）
 
 ### 8.1 传输层安全
@@ -1246,8 +1229,6 @@ ResponseCookie cookie = ResponseCookie.from("refresh_token", token)
 - [ ] K8s Pod Security Policy / SecurityContext
 - [ ] 定期漏洞扫描和渗透测试
 - [ ] 灾备与应急响应计划
-
----
 
 ## 总结
 

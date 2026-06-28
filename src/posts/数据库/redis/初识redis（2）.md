@@ -1,11 +1,15 @@
----
+﻿---
 title: 初识redis（2）-基本特性
 tag: ["Redis", "数据库", "基本特性"]
 category: 数据库
 date: 2021-08-01
 ---
 
-# 1、排序
+# 初识redis（2）-基本特性
+
+> 初识redis（2）-基本特性是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了初识redis（2）-基本特性的原理和最佳实践，帮助你构建高效的数据存储方案。
+
 
 		Redis 的排序操作和其他编程语言的排序操作一样，都可以根据某种比较规则对一系列元素进行有序的排列。负责执行排序操作的SORT命令可以根据字符串、列表、集合、有序集合、散列这5种键里面存储着的数据，对列表、集合以及有序集合进行排序。如果读者之前曾经使用过关系数据库的话，那么可以将SORT命令看作是SQL语言里的order by子句。
 
@@ -41,4 +45,3 @@ SORT source-key [BY pattern] [LIMIT offset count] [GET pattern [GETpattern ...] 
 - PTTL key-name		查看给定键距离过期时间还有多少毫秒，这个命令在Redis 2.6或以上版本可用
 - PEXPIRE key-name milliseconds		让给定键在指定的毫秒数之后过期，这个命令在Redis 2.6或以上版本可用
 - PEXPIREAT key-name timestamp-milliseconds		将一个毫秒级精度的UNIX时间戳设置为给定键的过期时间，这个命令在 Redis 2.6或以上版本可用
-

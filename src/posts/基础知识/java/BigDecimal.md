@@ -1,10 +1,16 @@
----
+﻿---
 title: BigDecimal
 tag: ["java基础", "BigDecimal"]
 category: java基础
 date: 2022-12-07
 ---
-# 1、介绍
+
+# BigDecimal
+
+> BigDecimal是Java中处理高精度数值的核心类，它为金融计算提供了精确的数值表示。
+> 本文介绍了BigDecimal的原理和使用方式，帮助你避免浮点数精度问题。
+
+
 Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数，但在实际应用中，可能需要对更大或者更小的数进行运算和处理。
 一般情况下，对于那些不需要准确计算精度的数字，我们可以直接使用Float和Double处理，但是Double.valueOf(String) 和Float.valueOf(String)会丢失精度。所以开发中，如果我们需要精确计算的结果，则必须使用BigDecimal类来操作。
 BigDecimal所创建的是对象，故我们不能使用传统的+、-、*、/等算术运算符直接对其对象进行数学运算，而必须调用其相对应的方法。方法中的参数也必须是BigDecimal的对象。构造器是类的特殊方法，专门用来创建对象，特别是带有参数的对象。

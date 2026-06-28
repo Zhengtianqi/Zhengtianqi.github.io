@@ -1,11 +1,15 @@
----
+﻿---
 title: JVM类加载过程
 tag: ["JVM", "类加载", "面试"]
 category: 面试
 date: 2020-09-27
 ---
 
-# 0、图解
+# JVM类加载过程
+
+> JVM是Java程序的运行环境，它负责内存管理、垃圾回收和字节码执行，是理解Java性能的关键。
+> 本文深入分析了JVM的内存结构和工作原理，帮助你优化Java应用性能。
+
 
 ![image-20200927113941669](/assets/images/JVM类加载过程.png)
 
@@ -101,7 +105,6 @@ public class ClazzLoadSequence {
         }
     }
 
-
     public static void main(String[] args) {
         // 2
         System.out.println(T1.count);
@@ -111,4 +114,3 @@ public class ClazzLoadSequence {
 
 }
 ```
-

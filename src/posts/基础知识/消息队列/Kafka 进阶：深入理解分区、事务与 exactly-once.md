@@ -7,17 +7,8 @@ tag: ["Kafka", "分区", "事务", "exactly-once", "ISR"]
 
 # Kafka 进阶：深入理解分区、事务与 exactly-once
 
-## 前言
-
-大多数开发者对 Kafka 的理解停留在"发消息、收消息"的层面。但当你遇到消息丢失、消息重复、消息乱序这些生产问题时，才是真正需要深入理解 Kafka 内部机制的时候。
-
-本文从分区机制、ISR、幂等生产者、事务消息到 exactly-once 语义，带你逐层深入 Kafka 的核心原理。
-
----
-
-## 第一部分：分区机制深入
-
-### 1.1 Partition 是什么
+> 消息队列是分布式系统中解耦和异步处理的核心组件，它为系统提供了可靠的消息传递机制。
+> 本文介绍了消息队列的核心概念和使用场景，帮助你构建松耦合的分布式系统。
 
 Kafka Topic 被划分为多个 Partition（分区），每个 Partition 是一个**有序的、不可变的消息序列**。
 
@@ -106,8 +97,6 @@ public class CustomerIdPartitioner implements Partitioner {
 - 需要顺序保证 → 指定 Key（同一 Key 进入同一分区）
 - 需要均匀负载 → 不指定 Key（轮询）
 - 需要定制路由 → 自定义 Partitioner
-
----
 
 ## 第二部分：ISR 机制
 
@@ -208,8 +197,6 @@ replication.factor=3       # 3 副本
 unclean.leader.election.enable=false  # 不允许非 ISR 副本成为 Leader
 ```
 
----
-
 ## 第三部分：幂等生产者
 
 ### 3.1 为什么需要幂等生产者
@@ -263,8 +250,6 @@ public class KafkaConfig {
 - 仅在单个 Producer Session 内保证幂等（PID 重启后会变）
 - 不能跨 Topic 和跨 Partition 保证幂等
 - 不能保证消费者端的 exactly-once
-
----
 
 ## 第四部分：Kafka 事务
 
@@ -374,8 +359,6 @@ public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerCont
 ```
 
 **read_committed 的代价**：如果有事务未提交（长事务），当前消费者会一直被阻塞，直到事务提交或超时。需要通过 `transaction.timeout.ms` 控制事务超时时间。
-
----
 
 ## 第五部分：Exactly-Once 语义
 
@@ -522,8 +505,6 @@ public class InventoryHandler {
 }
 ```
 
----
-
 ## 第六部分：消费者 Rebalance 机制
 
 ### 6.1 Rebalance 触发的场景
@@ -603,8 +584,6 @@ Cooperative（2.4+推荐）：
   Consumer 2: [P3, P4, P5]  →  接受 P2   →  [P2, P3, P4, P5]
   只有 P2 短暂停止消费，其他分区继续
 ```
-
----
 
 ## 第七部分：调优参数
 
@@ -689,8 +668,6 @@ public void onMessage(ConsumerRecord<String, OrderEvent> record,
 }
 ```
 
----
-
 ## 总结
 
 ### 核心概念速查表
@@ -722,8 +699,6 @@ Level 4: 端到端 Exactly-Once
 ```
 
 **大多数场景到 Level 2 就够了**，金融交易到 Level 3-4。
-
----
 
 ## 参考资料
 
