@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'          # 会自动从 pnpm-lock.yaml 计算缓存 key
+          cache: 'pnpm'
 
       # 3. 安装依赖（等同于 npm ci）
       - name: Install dependencies
