@@ -10,6 +10,7 @@ on:
       - 'src/**'
       - '*.md'
       - '.github/workflows/docs.yml'
+      - '.nojekyll'
 
 permissions:
   contents: read
@@ -30,13 +31,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 1. 先安装pnpm，必须放在setup-node前面
+      # 安装pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      # 2. 配置node并绑定pnpm缓存
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -44,14 +44,15 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
-      - name: Build documentation
+      - name: Build VuePress docs
         run: pnpm run docs:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # 上传VuePress打包产物
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
