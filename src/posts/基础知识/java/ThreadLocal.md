@@ -8,26 +8,8 @@ updated: 2026-06-11
 
 # ThreadLocal 详解：原理、场景与最佳实践
 
-## 引言
-
-在 Java 并发编程中，经常面临两类问题：
-
-1. **上下文传递**：某个信息（如用户 ID、请求 TraceId）需要在方法调用链中传递，但显式传参会导致接口臃肿
-2. **线程安全**：某些工具类（如 `SimpleDateFormat`）非线程安全，但全局加锁又严重影响性能
-
-`ThreadLocal` 是 JDK 提供的**线程局部变量**机制，通过"每个线程持有独立副本"的设计思想，优雅地解决了上述两个问题。
-
-阿里巴巴开发规约中也明确要求：**SimpleDateFormat 禁止使用 static 修饰**，推荐使用 ThreadLocal 封装，因为它在多线程环境下非线程安全。
-
-![image-20200331153816952](/assets/images/simpleDateFormat-alibaba.png)
-
----
-
-## 一、概念与 API
-
-### 1.1 核心思想
-
-> **同一 ThreadLocal 实例在不同线程中读写，互不影响——每个线程拥有自己独立的变量副本。**
+> ThreadLocal 详解：原理、场景与最佳实践是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了ThreadLocal 详解：原理、场景与最佳实践的核心概念和实践经验，帮助你深入理解这一技术领域。
 
 可以将 ThreadLocal 类比为一个以线程为 Key 的 Map（尽管底层实现不同），同一个 ThreadLocal 对象，线程 A 往里 set，线程 B 取出来的是 null 而非线程 A 的值。
 
@@ -60,8 +42,6 @@ public class ThreadLocalBasicExample {
     }
 }
 ```
-
----
 
 ## 二、使用场景
 
@@ -160,8 +140,6 @@ private static final TransmittableThreadLocal<String> TRACE_ID =
 ExecutorService executor = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(10));
 ```
 
----
-
 ## 三、源码分析
 
 要深入理解 ThreadLocal，必须分析其内部实现。入口方法是 `get()` 和 `set()`。
@@ -222,8 +200,6 @@ Thread (线程)
 2. **使用开放定址法 + 线性探测**：ThreadLocalMap 不像 HashMap 使用链表/红黑树，而是用线性探测解决 Hash 冲突，因为 Entry 数量通常很少，且需要高效清理过期 Entry
 3. **Key 使用弱引用**：防止 ThreadLocal 实例本身无法被 GC（详见内存泄露分析）
 
----
-
 ## 四、内存泄露分析
 
 ### 4.1 泄露链路
@@ -281,8 +257,6 @@ try {
     threadLocal.remove();
 }
 ```
-
----
 
 ## 五、实战：线程池数据串线程问题
 
@@ -388,8 +362,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
 }
 ```
 
----
-
 ## 六、ThreadLocal vs synchronized
 
 | 维度 | ThreadLocal | synchronized |
@@ -405,8 +377,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
 - **数据本身就是"每个线程独立的"**（如上下文信息）→ ThreadLocal
 - **数据必须是多线程共享的**（如库存扣减）→ synchronized / Lock / CAS
 - **两者不互斥**：可以在同一项目中同时使用
-
----
 
 ## 七、使用方法论
 
@@ -446,8 +416,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
 | 存储大对象 | 每线程拷贝一份，内存翻 N 倍 | 存储轻量上下文（ID、少量元数据） |
 | 忘记 `withInitial()` | 每个调用点都要判空 + set，分散且易遗漏 | 统一在声明处初始化 |
 
----
-
 ## 八、总结
 
 | 维度 | 要点 |
@@ -459,5 +427,3 @@ public class SecurityInterceptor implements HandlerInterceptor {
 | **清理策略** | `try / finally { remove() }`，线程池场景下尤为重要 |
 | **替代方案** | JDK8+ 优先使用 `DateTimeFormatter`、`ThreadLocalRandom` 等线程安全类 |
 | **最佳实践** | `private static final` + `withInitial()` + `try / finally remove()` |
-
----

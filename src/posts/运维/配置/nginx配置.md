@@ -1,11 +1,17 @@
----
+﻿---
 title: nginx配置
 tag: ["Nginx", "负载均衡", "配置"]
 category: CICD
 date: 2022-09-14
 ---
 
-# 一、负载均衡策略
+# nginx配置
+
+> nginx配置是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了nginx配置的核心概念和实践经验，帮助你深入理解这一技术领域。
+
+
+## 一、负载均衡策略
 负载均衡用于从“upstream”模块定义的后端服务器列表中选取一台服务器接受用户的请求。一个最基本的upstream模块是这样的，模块内的server是服务器列表：
 ```java
 #动态服务器组
@@ -270,14 +276,14 @@ gzip_disable msie6;
 ```
 推荐配置如下：
 ```java
-gzip on;						#开启gzip压缩功能
-gzip_min_length 10k;			#设置允许压缩的页面最小字节数; 这里表示如果文件小于10个字节，就不用压缩，因为没有意义，本来就很小.
-gzip_buffers 4 16k;			#设置压缩缓冲区大小，此处设置为4个16K内存作为压缩结果流缓存
-gzip_http_version 1.1;			#压缩版本
-gzip_comp_level 6;			#设置压缩比率，最小为1，处理速度快，传输速度慢；9为最大压缩比，处理速度慢，传输速度快; 这里表示压缩级别，可以是0到9中的任一个，级别越高，压缩就越小，节省了带宽资源，但同时也消耗CPU资源，所以一般折中为6
-gzip types text/css text/xml application/javascript;		#制定压缩的类型,线上配置时尽可能配置多的压缩类型!
-gzip_disable "MSIE [1-6]\.";		#配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
-gzip vary on;					#选择支持vary header；改选项可以让前端的缓存服务器缓存经过gzip压缩的页面; 这个可以不写，表示在传送数据时，给客户端说明我使用了gzip压缩
+gzip on;#开启gzip压缩功能
+gzip_min_length 10k;	#设置允许压缩的页面最小字节数; 这里表示如果文件小于10个字节，就不用压缩，因为没有意义，本来就很小.
+gzip_buffers 4 16k;	#设置压缩缓冲区大小，此处设置为4个16K内存作为压缩结果流缓存
+gzip_http_version 1.1;	#压缩版本
+gzip_comp_level 6;	#设置压缩比率，最小为1，处理速度快，传输速度慢；9为最大压缩比，处理速度慢，传输速度快; 这里表示压缩级别，可以是0到9中的任一个，级别越高，压缩就越小，节省了带宽资源，但同时也消耗CPU资源，所以一般折中为6
+gzip types text/css text/xml application/javascript;#制定压缩的类型,线上配置时尽可能配置多的压缩类型!
+gzip_disable "MSIE [1-6]\.";#配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
+gzip vary on;	#选择支持vary header；改选项可以让前端的缓存服务器缓存经过gzip压缩的页面; 这个可以不写，表示在传送数据时，给客户端说明我使用了gzip压缩
 ```
 
 # 七、配置https示例
@@ -338,9 +344,6 @@ http {
             ssl_protocols TLSv1.2 TLSv1.3;
             ssl_prefer_server_ciphers on;
             location / {
-                #if ( $host = '152.136.121.33' ) {
-		#    return 301 https://zhengtianqi.asia$request_uri;
-		#}
                 proxy_pass http://webservers;
                 proxy_next_upstream http_500 http_504 http_502 error timeout invalid_header;
                 # 启用keep alive

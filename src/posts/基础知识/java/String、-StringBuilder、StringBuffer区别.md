@@ -1,11 +1,15 @@
----
+﻿---
 title: String、 StringBuilder、StringBuffer区别
 tag: ["java基础", "String"]
 category: java基础
 date: 2020-07-21
 ---
 
-# 1、介绍
+# String、 StringBuilder、StringBuffer区别
+
+> String是Java中最常用的类，它为文本处理提供了丰富的操作方法。
+> 本文深入分析了String、StringBuilder和StringBuffer的区别，帮助你选择合适的字符串处理方式。
+
 
 ## （1）运行速度
 
@@ -29,7 +33,5 @@ date: 2020-07-21
 # 2、对比
 
 ![image-20200721154514018](/assets/images/StringBuilder.png)
-
-
 
 参考：https://blog.csdn.net/itchuxuezhe_yang/article/details/89966303

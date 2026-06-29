@@ -1,9 +1,15 @@
----
+﻿---
 title: SpringCloud运维接口
 tag: ["SpringCloud", "运维", "Actuator"]
 category: spring
 date: 2020-12-14
 ---
+
+# SpringCloud运维接口
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 注意：默认端点 path 前面有一级 /actuator ，例如：http://服务地址/actuator/info
 
@@ -27,4 +33,3 @@ scheduledtasks	显示应用中的调度任务
 threaddump	执行一个线程dump
 heapdump	返回一个GZip压缩的JVM堆dump
 ```
-

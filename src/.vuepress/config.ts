@@ -14,6 +14,11 @@ export default defineUserConfig({
     ['meta', { name: 'bytedance-verification-code', content: 'zjHSprOdFlen2eSs8phv' }]
   ],
   theme,
+  // 开启磁盘缓存，二次构建速度提升50%+
+  cache: ".vuepress/.cache",
+  // 关闭全局预取/预加载（遍历所有页面，文件越多越卡）
+  shouldPrefetch: false,
+  shouldPreload: false,
   plugins: [
 
     searchProPlugin({

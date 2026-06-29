@@ -1,4 +1,4 @@
----
+﻿---
 title: vLLM 与 PagedAttention：大模型高性能推理服务实战
 tag: ["vLLM", "推理优化", "大模型部署"]
 category: 大模型
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # vLLM 与 PagedAttention：大模型高性能推理服务实战
 
-自己部署大模型，最痛的就是推理慢、显存不够。vLLM 凭借 PagedAttention 技术，吞吐量比 HuggingFace Transformers 高 24 倍，是目前最主流的开源推理框架。
+> 大语言模型是AI领域的革命性技术，它为自然语言处理和智能应用提供了强大的能力。
+> 本文介绍了大模型的核心概念和应用方式，帮助你进入AI应用开发领域。
 
----
+
+自己部署大模型，最痛的就是推理慢、显存不够。vLLM 凭借 PagedAttention 技术，吞吐量比 HuggingFace Transformers 高 24 倍，是目前最主流的开源推理框架。
 
 ## 一、为什么需要 vLLM
 
@@ -31,8 +33,6 @@ HuggingFace Transformers 原生推理：
 | Continuous Batching | 动态批处理，新请求随时加入 | 吞吐量提升 8-24 倍 |
 | Prefix Caching | 共享前缀缓存 | 多轮对话场景延迟降低 50% |
 | Tensor Parallelism | 张量并行 | 多 GPU 支持大模型 |
-
----
 
 ## 二、部署实战
 
@@ -101,8 +101,6 @@ for chunk in stream:
         print(chunk.choices[0].delta.content, end="", flush=True)
 ```
 
----
-
 ## 三、PagedAttention 原理
 
 ### 3.1 传统 KV Cache 的问题
@@ -139,8 +137,6 @@ Req3 → [Block 3]
 2. 无碎片 → 可以并发更多请求
 3. Block 可共享 → 前缀缓存天然支持
 ```
-
----
 
 ## 四、性能调优
 
@@ -213,8 +209,6 @@ docker run --gpus all -p 8000:8000 \
 # 72B 模型 AWQ 量化后约 36GB，单卡 A100 80G 可跑
 # 但双卡张量并行可以显著降低延迟
 ```
-
----
 
 ## 五、生产环境部署架构
 
@@ -314,8 +308,6 @@ Grafana 告警规则：
 | time_to_first_token_seconds | > 2s | 首 Token 延迟过高 |
 | e2e_request_latency_seconds | > 30s | 端到端延迟过高 |
 
----
-
 ## 六、面试要点
 
 ### Q：vLLM 为什么比 Transformers 快？
@@ -334,8 +326,6 @@ Grafana 告警规则：
 - **GPTQ**：略快但精度损失稍大（1-2%）
 - **FP8**：H100 专属，性能和精度的最佳平衡
 - **GGUF**：CPU 推理用，GPU 不推荐
-
----
 
 ## 七、总结
 

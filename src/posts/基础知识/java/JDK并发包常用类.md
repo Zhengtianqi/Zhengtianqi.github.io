@@ -1,11 +1,15 @@
----
+﻿---
 title: JDK并发包常用类
 tag: ["java基础", "并发编程", "JDK"]
 category: java基础
 date: 2022-04-08
 ---
 
-# 1、工具类
+# JDK并发包常用类
+
+> JDK并发包常用类是现代软件开发的核心挑战，它涉及多线程协调和资源共享等关键问题。
+> 本文介绍了JDK并发包常用类的原理和最佳实践，帮助你构建高性能的并发系统。
+
 
 提供并发控制手段: CountDownLatch、CyclicBarrier、Semaphore
 
@@ -74,8 +78,6 @@ CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Runnable() {
   }
 ```
 
-
-
 ## CountDownLatch和CyclicBarrier区别
 
 countDownLatch：
@@ -135,8 +137,6 @@ public class TestCar {
     }
 }
 ```
-
-
 
 ## Exchanger
 

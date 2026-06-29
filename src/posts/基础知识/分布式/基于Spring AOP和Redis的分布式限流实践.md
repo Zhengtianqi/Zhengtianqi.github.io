@@ -6,9 +6,11 @@ date: 2026-01-26
 
 ---
 
-## 概述
+# 基于Spring AOP和Redis的分布式限流实践
 
-在高并发系统中，限流是一种重要的保护机制，用于控制请求流量，防止系统被过多请求冲击导致服务不可用。本文将基于提供的代码实现，详细介绍如何使用Spring AOP和Redis实现一个灵活的分布式限流组件。
+> Redis是高性能的内存数据库，广泛应用于缓存、会话管理和实时数据处理等场景。
+> 本文介绍了Redis的核心特性和使用场景，帮助你构建高性能的应用系统。
+
 该例子利用mysql进行黑名单的自动登记。
 ## 限流组件架构
 
@@ -26,7 +28,6 @@ public @interface RateLimiter {
     boolean joinBlackList() default false;
 }
 ```
-
 
 **关键特性：**
 - **key**: 限流标识，用于区分不同的限流规则
@@ -47,7 +48,6 @@ public class RateLimiterAspect {
 }
 ```
 
-
 ## 限流实现原理
 
 ### 1. 黑名单检查机制
@@ -67,7 +67,6 @@ public void doBefore(JoinPoint point, RateLimiter rateLimiter) throws Throwable 
 }
 ```
 
-
 **流程说明：**
 - 获取当前登录用户信息
 - 查询该用户是否在黑名单中
@@ -84,7 +83,6 @@ if (null == number || number.intValue() > count) {
     throw new RateLimiterException("访问已达上限，请稍后重试！");
 }
 ```
-
 
 **核心优势：**
 - 使用Lua脚本保证原子性操作
@@ -107,7 +105,6 @@ public String getCombineKey(RateLimiter rateLimiter, JoinPoint point) {
     return stringBuffer.toString();
 }
 ```
-
 
 **支持的限流维度：**
 - 全局限流：基于方法级别
@@ -158,7 +155,6 @@ public enum LimitType
 )
 ```
 
-
 ### 2. 监控与告警
 
 - 记录限流触发日志，便于分析业务趋势
@@ -205,7 +201,6 @@ public @interface RateLimiter {
      */
     boolean joinBlackList() default false;
 }
-
 
 /**
  * 限流处理
@@ -281,7 +276,6 @@ public class RateLimiterAspect {
     }
 }
 ```
-
 
 ## 总结
 

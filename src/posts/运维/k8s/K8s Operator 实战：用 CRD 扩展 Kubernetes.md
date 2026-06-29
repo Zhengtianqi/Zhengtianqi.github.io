@@ -7,11 +7,8 @@ date: 2026-06-27
 
 # K8s Operator 实战：用 CRD 扩展 Kubernetes
 
-> Operator 是 K8s 最强大的扩展机制之一。它让你像管理原生资源一样管理复杂应用（如 MySQL 集群、Redis 集群）。本文从原理到实战，带你用 Java/Go 开发自己的 Operator。
-
-## 一、Operator 是什么
-
-### 1.1 从一个痛点说起
+> Kubernetes是容器编排领域的标准，它为容器化应用提供了自动化部署、扩缩容和管理能力。
+> 本文介绍了Kubernetes的核心概念和实践经验，帮助你构建云原生应用。
 
 假设你要在 K8s 上管理一个 MySQL 主从集群，传统做法需要：
 

@@ -7,13 +7,8 @@ date: 2026-05-20
 
 # Java LTS 版本新特性实战与面试指南（JDK 8 / 11 / 17 / 21）
 
-> 👨‍💻 适用人群：Java 开发者 | 面试求职者
-
----
-
-## 一、Java LTS 版本演进概览
-
-### 1.1 四大 LTS 版本时间线
+> JDK是Java开发的核心工具包，它为Java开发者提供了丰富的API支持。
+> 本文介绍了JDK的核心组件和新特性，帮助你充分利用Java生态。
 
 | 版本 | 发布年份 | 维护期 | 市场定位 |
 |------|----------|-------|----------|
@@ -33,8 +28,6 @@ graph LR
  D -->|"Spring Boot 3.x"| F["JDK 17+"]
  D -->|"AI/大数据"| G["JDK 21"]
 ```
-
----
 
 ## 二、JDK 8 新特性（2014）
 
@@ -80,8 +73,6 @@ public class LambdaDemo {
 }
 ```
 
----
-
 ### 2.2 Stream API
 
 #### 🔥 实战：数据处理
@@ -120,8 +111,6 @@ public class StreamDemo {
 }
 ```
 
----
-
 ### 2.3 Optional 类
 
 ```java
@@ -146,8 +135,6 @@ public class OptionalDemo {
     }
 }
 ```
-
----
 
 ### 2.4 新的日期时间 API
 
@@ -182,8 +169,6 @@ public class DateTimeDemo {
 }
 ```
 
----
-
 ### 2.5 JDK 8 面试题
 
 #### ❓ Q1：Stream 和 Collection 的区别？
@@ -208,8 +193,6 @@ Stream.of(1, 2, 3)
     .count();  // 只有此时才执行
 ```
 
----
-
 #### ❓ Q2：forEach 和 for-loop 的区别？
 
 **答案：**
@@ -217,8 +200,6 @@ Stream.of(1, 2, 3)
 - forEach 不能 return/break
 - Stream 可链式操作，代码更简洁
 - parallel() 可利用多核，但有线程安全问题
-
----
 
 ## 三、JDK 11 新特性（2018）
 
@@ -233,8 +214,6 @@ var stream = list.stream();
 // Lambda 参数支持 var
 list.forEach((var s) -> System.out.println(s));
 ```
-
----
 
 ### 3.2 标准 HTTP Client
 
@@ -265,8 +244,6 @@ public class HttpClientDemo {
 }
 ```
 
----
-
 ### 3.3 字符串 API 增强
 
 ```java
@@ -289,8 +266,6 @@ public class StringAPIDemo {
 }
 ```
 
----
-
 ### 3.4 文件 API 增强
 
 ```java
@@ -312,8 +287,6 @@ public class FileAPIDemo {
 }
 ```
 
----
-
 ### 3.5 JDK 11 面试题
 
 #### ❓ Q3：JDK 11 相比 JDK 8 的主要改进？
@@ -326,8 +299,6 @@ public class FileAPIDemo {
 - **Stream API**：`takeWhile()`、`dropWhile()`
 - **Optional API**：`isEmpty()`
 - **Epsilon GC**：无操作收集器
-
----
 
 ## 四、JDK 17 新特性（2021）
 
@@ -349,8 +320,6 @@ public non-sealed class Rectangle extends Shape {
 }
 ```
 
----
-
 ### 4.2 switch 增强（预览）
 
 ```java
@@ -365,8 +334,6 @@ public static String getType(Object obj) {
     };
 }
 ```
-
----
 
 ### 4.3 文本块（Text Blocks）
 
@@ -391,8 +358,6 @@ public class TextBlockDemo {
 }
 ```
 
----
-
 ### 4.4 records（记录类）
 
 ```java
@@ -415,8 +380,6 @@ System.out.println(person.name());  // Alice
 System.out.println(person.isAdult()); // true
 ```
 
----
-
 ### 4.5 增强 instanceof
 
 ```java
@@ -431,8 +394,6 @@ public class InstanceofDemo {
     }
 }
 ```
-
----
 
 ### 4.6 JDK 17 面试题
 
@@ -456,8 +417,6 @@ double eval(Expr e) {
 }
 ```
 
----
-
 #### ❓ Q5：record 和 class 的区别？
 
 **答案：**
@@ -468,8 +427,6 @@ double eval(Expr e) {
 | toString | 自动生成 | 需手动 |
 | 构造器 | 自动+自定义 | 需手动 |
 | 继承 | 不能 extends | 可以 extends |
-
----
 
 ## 五、JDK 21 新特性（2023）
 
@@ -504,8 +461,6 @@ public class VirtualThreadDemo {
 }
 ```
 
----
-
 ### 5.2 分代 ZGC（JDK 21 正式特性）
 
 ```bash
@@ -517,8 +472,6 @@ public class VirtualThreadDemo {
 # ✅ 无内存碎片
 # ✅ 支持 8MB - 16TB
 ```
-
----
 
 ### 5.3 字符串模板（String Templates）
 
@@ -538,8 +491,6 @@ public class StringTemplateDemo {
     }
 }
 ```
-
----
 
 ### 5.4 序列集合（Sequenced Collections）
 
@@ -568,8 +519,6 @@ public class SequencedDemo {
 }
 ```
 
----
-
 ### 5.5 模式匹配 for switch（增强）
 
 ```java
@@ -593,8 +542,6 @@ public class PatternMatchSwitchDemo {
 }
 ```
 
----
-
 ### 5.6 JDK 21 面试题
 
 #### ❓ Q6：虚拟线程和平台线程的区别？
@@ -617,8 +564,6 @@ for (int i = 0; i < 10000; i++) {
 }
 ```
 
----
-
 #### ❓ Q7：JDK 21 的主要新特性？
 
 **答案：**
@@ -627,8 +572,6 @@ for (int i = 0; i < 10000; i++) {
 - **分代 ZGC**：高性能 GC
 - **序列集合**：有序集合 API
 - **模式匹配 switch**：增强模式匹配
-
----
 
 ## 六、综合实战：版本特性对比
 
@@ -645,8 +588,6 @@ for (int i = 0; i < 10000; i++) {
 | sealed | - | - | ✅ | ✅ |
 | 虚拟线程 | - | - | - | ✅ |
 | 字符串模板 | - | - | - | ✅ |
-
----
 
 ### 6.2 迁移路径建议
 
@@ -666,8 +607,6 @@ if (isLegacySystem()) {
     use JDK 17;  // 最成熟稳定
 }
 ```
-
----
 
 ## 七、最佳实践
 
@@ -695,8 +634,6 @@ public class ModernJavaDemo {
 }
 ```
 
----
-
 ### 7.2 面试高频考点总结
 
 ```
@@ -706,8 +643,6 @@ public class ModernJavaDemo {
 ├── JDK 17: records/sealed/文本块
 └── JDK 21: 虚拟线程/ZGC
 ```
-
----
 
 > 📌 **提示**：面试主要问 JDK 8 和 JDK 17，JDK 21 的虚拟线程是加分项  
 > 🔥 **建议**：动手实践每个示例，理解背后的原理

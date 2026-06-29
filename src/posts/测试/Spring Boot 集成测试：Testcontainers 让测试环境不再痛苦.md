@@ -7,11 +7,8 @@ date: 2026-06-12
 
 # Spring Boot 集成测试：Testcontainers 让测试环境不再痛苦
 
-> "在我的机器上能跑" —— 这句话终结者。用 Testcontainers 让集成测试环境与生产保持一致。
-
-## 1. 集成测试 vs 单元测试
-
-### 1.1 两者的定位
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
 
 ```
 单元测试（Unit Test）
@@ -44,8 +41,6 @@ date: 2026-06-12
 ├── 纯业务逻辑（单元测试更合适）
 └── 简单 CRUD（Repository 层的集成测试已经覆盖）
 ```
-
----
 
 ## 2. Spring Boot Test 核心注解
 
@@ -190,8 +185,6 @@ class UserApiIntegrationTest {
 }
 ```
 
----
-
 ## 3. Testcontainers 简介：为什么比 H2 更好
 
 ### 3.1 H2 的问题
@@ -264,8 +257,6 @@ class UserApiIntegrationTest {
     <scope>test</scope>
 </dependency>
 ```
-
----
 
 ## 4. MySQL/Redis/Kafka 容器配置
 
@@ -390,8 +381,6 @@ abstract class BaseFullStackTest {
     }
 }
 ```
-
----
 
 ## 5. 实战：完整的 API 集成测试
 
@@ -583,8 +572,6 @@ class OrderIntegrationTest extends BaseIntegrationTest {
 }
 ```
 
----
-
 ## 6. 测试数据管理：@Sql 与 Flyway
 
 ### 6.1 使用 @Sql 注解
@@ -669,8 +656,6 @@ VALUES
 INSERT IGNORE INTO user_roles (user_id, role_id)
 VALUES (100, 1), (101, 2);
 ```
-
----
 
 ## 7. CI 中的集成测试：如何加速
 
@@ -797,8 +782,6 @@ class OrderFullIntegrationTest { }
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-
----
 
 ## 总结
 

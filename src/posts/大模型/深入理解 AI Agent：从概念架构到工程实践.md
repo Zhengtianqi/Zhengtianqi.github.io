@@ -5,19 +5,10 @@ category: 大模型
 date: 2026-05-13
 ---
 
-# 【进阶篇】深入理解 AI Agent：从概念架构到工程实践
+# 深入理解 AI Agent：从概念架构到工程实践
 
----
-
-## 前言
-
-随着大语言模型（LLM）能力的快速跃升，AI Agent 已从理论概念走向规模化落地。它不再是简单的"问答机器"，而是能够**感知环境、自主规划、调用工具、持续记忆、完成复杂任务**的智能体系统。
-
-本文将系统拆解 Agent 的核心概念组成、决策机制、典型应用场景，以及任务拆解方法论（CoT / ToT），同时深入讲解记忆模块设计与工具调用实现，帮助你从原理到实践全面掌握 Agent 工程。
-
----
-
-## 一、Agent 的概念组成
+> 深入理解 AI Agent：从概念架构到工程实践是系统设计的核心，它决定了系统的可扩展性、可靠性和可维护性。
+> 本文介绍了深入理解 AI Agent：从概念架构到工程实践的设计原则和实践经验，帮助你提升架构设计能力。
 
 一个完整的 AI Agent 系统，通常由以下五大核心模块构成：
 
@@ -79,8 +70,6 @@ Agent 执行决策并接收环境反馈，形成 **感知-决策-行动-反馈**
 感知(Perceive) → 思考(Think) → 行动(Act) → 观察(Observe) → 循环
 ```
 
----
-
 ## 二、Agent 的决策机制
 
 ### 2.1 ReAct 框架
@@ -120,8 +109,6 @@ Agent 在执行后对自身行为进行语言层面的自我批评与改进：
   ✓ 达标：输出最终结果
   ✗ 未达标：生成反思总结 → 带着经验重新执行
 ```
-
----
 
 ## 三、Agent 应用场景分析
 
@@ -186,8 +173,6 @@ Agent 读取项目结构 → 理解技术栈
 - 跨系统数据同步
 
 **适用场景：** 销售线索自动跟进、内容发布工作流、招聘流程自动化
-
----
 
 ## 四、任务拆解方法论：CoT 与 ToT
 
@@ -327,8 +312,6 @@ def tree_of_thought(problem, k=3, depth=3, strategy="BFS"):
 - 任务需要创意探索或有多个可行方案 → **ToT**
 - 资源有限但需要一定容错 → **Self-Consistency（多次 CoT 投票）**
 
----
-
 ## 五、记忆模块设计
 
 记忆是让 Agent 从"无状态工具"进化为"持续学习伙伴"的关键。
@@ -439,8 +422,6 @@ class LongTermMemory:
 | 重要性过滤 | 只存重要信息 | 资源受限场景 |
 | 时间衰减 | 旧记忆权重降低 | 实时性要求高的场景 |
 | 遗忘曲线 | 模拟人类遗忘 | 个人助手类产品 |
-
----
 
 ## 六、工具调用方法
 
@@ -665,8 +646,6 @@ def check_permission(self, tool_name: str, user_level: str):
     return True
 ```
 
----
-
 ## 七、构建生产级 Agent 的工程要点
 
 ### 7.1 可观测性
@@ -733,8 +712,6 @@ class CostAwareAgent:
         self.spent += estimated_cost
 ```
 
----
-
 ## 八、总结与展望
 
 ### 核心要点回顾
@@ -762,14 +739,9 @@ Agent = 感知 + 规划 + 记忆 + 工具 + 行动
 3. **具身 Agent**：与物理世界交互的机器人 Agent
 4. **Agent 安全**：防止越权、注入攻击、目标漂移的安全机制趋于成熟
 
----
-
 > **参考资源**
->
 > - Wei et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
 > - Yao et al. (2023). Tree of Thoughts: Deliberate Problem Solving with Large Language Models
 > - Yao et al. (2022). ReAct: Synergizing Reasoning and Acting in Language Models
 > - Anthropic. (2024). Building Effective Agents
 > - OpenAI. Function Calling Documentation
-
----

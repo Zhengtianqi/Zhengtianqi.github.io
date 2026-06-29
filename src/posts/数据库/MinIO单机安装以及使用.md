@@ -1,13 +1,19 @@
----
+﻿---
 title: MinIO单机安装以及使用
 tag: ["MinIO", "分布式存储", "对象存储"]
 category: 数据库
 date: 2022-03-22
 ---
 
-一、简介	
+# MinIO单机安装以及使用
 
-		MinIO 是在 GNU Affero 通用公共许可证 v3.0 下发布的高性能对象存储。它与 Amazon S3 云存储服务 API 兼容。使用 MinIO 为机器学习、分析和应用程序数据工作负载构建高性能基础架构。
+> MinIO单机安装以及使用是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了MinIO单机安装以及使用的原理和最佳实践，帮助你构建高效的数据存储方案。
+
+
+一、简介
+
+MinIO 是在 GNU Affero 通用公共许可证 v3.0 下发布的高性能对象存储。它与 Amazon S3 云存储服务 API 兼容。使用 MinIO 为机器学习、分析和应用程序数据工作负载构建高性能基础架构。
 
 相关文档：
 
@@ -16,8 +22,6 @@ date: 2022-03-22
 官方文档（中文）：http://docs.minio.org.cn/docs/master/minio-monitoring-guide
 
 官方首页（中文）http://www.minio.org.cn/
-
-
 
 二、单机版安装
 
@@ -65,8 +69,6 @@ docker run \
 docker ps
 ```
 
-
-
 三、JAVA API demo
 
 1、引入依赖
@@ -77,7 +79,7 @@ docker ps
 	<artifactId>okhttp</artifactId>
 	<version>4.8.1</version>
 </dependency>
-	
+
 <dependency>
 	<groupId>io.minio</groupId>
 	<artifactId>minio</artifactId>
@@ -225,7 +227,6 @@ public class S3Utils {
         s3Client.removeObject(RemoveObjectArgs.builder().bucket(bucket).object(objectName).build());
     }
 
-
     public static void main(String[] args) throws Exception {
         S3Utils.createBucket(SdkConstant.bucketName);
         File file = new File("C:\\Users\\27049\\Desktop\\minio docker.txt");
@@ -248,15 +249,11 @@ SdkConstant.endpoint MinIO所在地址（ip:9000）
 
 存储位置：指定的data目录/桶名/...文件夹名.../文件名
 
-
-
 getPresignedObjectUrl()返回的url最大支持7天，若想永久使用，则配置
 
 https://blog.csdn.net/instanceof_zjl/article/details/109601131?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-2-109601131.pc_agg_new_rank&utm_term=java+%E8%AE%BE%E7%BD%AE+minio%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E9%93%BE%E6%8E%A5&spm=1000.2123.3001.4430
 
 ![image-20220322221741703](/assets/images/image-20220322221741703.png)
-
-
 
 3、AmazonS3客户端（DLC）
 
@@ -268,8 +265,6 @@ https://blog.csdn.net/instanceof_zjl/article/details/109601131?utm_medium=distri
     <version>1.11.257</version>
 </dependency>
 ```
-
-
 
 ```java
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -286,13 +281,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
 public class AWSS3Util {
 
     private static String accessKey = "";
     private static String secretKey = "";
     private static String endpointUrl = "";
-
 
     private volatile static AWSS3Util awsS3Util;
     private volatile static AmazonS3 s3;
@@ -317,7 +310,6 @@ public class AWSS3Util {
         URL url = s3.getUrl(bucket, key);
         return url;
     }
-
 
     /**
      * 获取指定bucket内所有文件名
@@ -386,4 +378,3 @@ public class AWSS3Util {
     }
 }
 ```
-

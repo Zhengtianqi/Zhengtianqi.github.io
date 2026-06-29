@@ -7,11 +7,8 @@ category: 安全
 
 # JWT 落地实践：令牌设计、刷新与黑名单机制
 
-> 深入理解 JWT 的每一个细节，从原理到生产落地的完整指南
-
-## 1. JWT 三段式结构详解
-
-### 1.1 JWT 长什么样
+> JWT 落地实践：令牌设计、刷新与黑名单机制是系统设计的重要考量，它关系到用户数据和系统资源的保护。
+> 本文介绍了JWT 落地实践：令牌设计、刷新与黑名单机制的原理和最佳实践，帮助你构建安全可靠的系统。
 
 一个典型的 JWT 看起来像这样：
 
@@ -216,8 +213,6 @@ public class JwtExample {
     }
 }
 ```
-
----
 
 ## 2. 对称加密 vs 非对称加密
 
@@ -431,8 +426,6 @@ public class KeyRotationManager {
 }
 ```
 
----
-
 ## 3. Access Token + Refresh Token 双令牌方案
 
 ### 3.1 为什么需要双令牌
@@ -580,8 +573,6 @@ public boolean validateRefreshToken(String token) {
     }
 }
 ```
-
----
 
 ## 4. Token 刷新流程与并发刷新问题
 
@@ -787,8 +778,6 @@ public TokenPair refresh(String oldRefreshToken) {
 }
 ```
 
----
-
 ## 5. 黑名单/白名单机制实现
 
 ### 5.1 白名单 vs 黑名单
@@ -978,8 +967,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 }
 ```
 
----
-
 ## 6. Token 存储安全：前端存哪里
 
 ### 6.1 各种存储方式的对比
@@ -1094,8 +1081,6 @@ export function getToken() { return accessToken; }
 // 2. 页面加载时调用 /api/auth/refresh 获取新令牌
 // 3. 使用 Service Worker 在后台保持 Token
 ```
-
----
 
 ## 7. JWT 的局限性
 
@@ -1230,8 +1215,6 @@ if (!"refresh".equals(claims.get("type"))) {
 □ 前端实现并发刷新保护（Promise 缓存）
 □ 后端实现并发刷新保护（分布式锁）
 ```
-
----
 
 ## 总结
 

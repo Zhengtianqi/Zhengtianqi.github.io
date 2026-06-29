@@ -1,11 +1,15 @@
----
+﻿---
 title: 基于JavaAgent的全链路监控（3）
 tag: ["JavaAgent", "JVM监控", "字节码操作"]
 category: java基础
 date: 2020-07-19
 ---
 
-# 《利用javaagent进行 JVM内存与GC信息的采集》
+# 基于JavaAgent的全链路监控（3）
+
+> 监控是系统运维的核心，它帮助我们实时了解系统状态，及时发现和解决问题。
+> 本文介绍了监控系统的设计原则和常用工具，帮助你构建完善的监控体系。
+
 
 # 1、介绍
 
@@ -17,8 +21,6 @@ date: 2020-07-19
 title: 基于JavaAgent的全链路监控（2）的基础上增加
 
 ## （1）MyAgent.java
-
-		
 
 ```java
 package cn.edu.bjut.agent;
@@ -55,4 +57,3 @@ public class MyAgent {
     }
 }
 ```
-

@@ -7,17 +7,8 @@ tag: ["可观测性", "Prometheus", "Grafana", "Jaeger", "OpenTelemetry", "Sprin
 
 # 从零搭建可观测性平台：Prometheus + Grafana + Jaeger
 
-## 前言
-
-"线上出问题了，看日志才发现。"——这是运维的噩梦。可观测性（Observability）让系统变得"透明"，让你在问题发生前就能察觉，发生时能快速定位根因。
-
-本文带你从零搭建一套完整的可观测性平台，覆盖 **Metrics + Tracing + Logging** 三大支柱。
-
----
-
-## 第一部分：可观测性三大支柱
-
-### 1.1 三支柱全景
+> 从零搭建可观测性平台：Prometheus + Grafana + Jaeger是保障系统稳定运行的关键，它涉及监控、告警、故障排查等多个方面。
+> 本文介绍了从零搭建可观测性平台：Prometheus + Grafana + Jaeger的最佳实践和工具使用，帮助你提升运维能力。
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -59,8 +50,6 @@ Metrics:    聚合后的数值指标
             error_total{service="inventory"} = 5
 ```
 
----
-
 ## 第二部分：Prometheus 核心概念
 
 ### 2.1 架构概览
@@ -89,7 +78,7 @@ Metrics:    聚合后的数值指标
 
 ### 2.2 四种核心指标类型
 
-```promql
+```sql
 # 1. Counter（计数器）：只增不减
 http_requests_total{endpoint="/api/orders", method="POST"} 15234
 # 适合：请求总数、错误总数、处理字节数
@@ -121,7 +110,7 @@ http_request_duration_seconds{quantile="0.99"} 0.45
 
 ### 2.3 PromQL 常用查询
 
-```promql
+```sql
 # 基础查询
 up{job="order-service"}     # 服务是否存活
 jvm_memory_used_bytes        # JVM 内存使用
@@ -197,8 +186,6 @@ groups:
         annotations:
           summary: "{{ $labels.service }} P99 延迟超过 1 秒"
 ```
-
----
 
 ## 第三部分：Grafana 面板搭建
 
@@ -283,7 +270,7 @@ public class GuaranteeBusinessMetrics {
 
 **业务面板 PromQL**：
 
-```promql
+```sql
 # 担保创建速率（每分钟）
 rate(guarantee_created_total[1m]) * 60
 
@@ -297,8 +284,6 @@ guarantee_active_count
 histogram_quantile(0.99,
   rate(guarantee_disburse_duration_seconds_bucket[5m]))
 ```
-
----
 
 ## 第四部分：Jaeger + OpenTelemetry 全链路追踪
 
@@ -403,8 +388,6 @@ logging:
 
 这样当你在 Jaeger 中看到一个慢请求，可以直接用 traceId 去 ELK 中搜索对应的日志，实现 **Metrics → Tracing → Logging** 的完整链路。
 
----
-
 ## 第五部分：Spring Boot 项目接入实战
 
 ### 5.1 完整依赖配置
@@ -506,8 +489,6 @@ public class GuaranteeHealthIndicator implements HealthIndicator {
 }
 ```
 
----
-
 ## 第六部分：告警规则设计最佳实践
 
 ### 6.1 告警分级
@@ -587,8 +568,6 @@ receivers:
         priority: 'P1'
 ```
 
----
-
 ## 第七部分：Docker Compose 一键部署
 
 ```yaml
@@ -666,8 +645,6 @@ scrape_configs:
           environment: 'production'
 ```
 
----
-
 ## 总结
 
 ### 可观测性实施路线
@@ -704,8 +681,6 @@ Phase 4: 持续优化（持续）
 | Metrics | Prometheus + Grafana | Datadog, New Relic |
 | Tracing | Jaeger + OpenTelemetry | Zipkin, SkyWalking |
 | Logging | ELK / Loki | Splunk, 阿里云 SLS |
-
----
 
 ## 参考资料
 

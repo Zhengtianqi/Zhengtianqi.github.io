@@ -1,11 +1,15 @@
----
+﻿---
 title: Nacos配置中心使用
 tag: ["Nacos", "配置中心", "SpringCloud"]
 category: spring
 date: 2019-11-25
 ---
 
-# 一、启动Nacos Server
+# Nacos配置中心使用
+
+> Nacos配置中心使用是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了Nacos配置中心使用的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 
 1、启动方式可见 [Nacos 官网](https://nacos.io/zh-cn/docs/quick-start.html) 
 
@@ -227,8 +231,6 @@ public class NacosConfigExampleApplication {
     </dependencyManagement>
     
 ```
-
-
 
 # 四、效果
 

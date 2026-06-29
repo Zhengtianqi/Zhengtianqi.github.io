@@ -1,11 +1,15 @@
----
+﻿---
 title: SpringCloud Ribbon参数配置
 tag: ["SpringCloud", "Ribbon", "负载均衡"]
 category: spring
 date: 2020-12-14
 ---
 
-# Ribbon策略类型
+# SpringCloud Ribbon参数配置
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 ![image-20201214123508379](/assets/images/image-20201214123508379.png)
 
@@ -42,4 +46,3 @@ nacos.config.demo: #目标服务提供名称
         ServerListRefreshInterval: 30000 #刷新所服务列表间隔时间
         NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置对应的规则，其他ribbon自带的规则 可查看IRule接口的实现类
 ```
-

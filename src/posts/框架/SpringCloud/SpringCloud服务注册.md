@@ -1,11 +1,15 @@
----
+﻿---
 title: SpringCloud服务注册
 tag: ["SpringCloud", "服务注册", "微服务"]
 category: spring
 date: 2020-12-14
 ---
 
-# 1、pom.xml添加starter依赖
+# SpringCloud服务注册
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 ```java
 <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-alibaba-nacos-discovery -->

@@ -1,11 +1,15 @@
----
+﻿---
 title: AtomicInteger
 tag: ["java基础", "并发编程", "原子类"]
 category: 面试
 date: 2020-07-24
 ---
 
-# 1、介绍		
+# AtomicInteger
+
+> AtomicInteger是Java并发包中的原子类，它为多线程环境提供了无锁的原子操作能力。
+> 本文介绍了AtomicInteger的原理和使用方式，帮助你掌握Java并发编程。
+
 
 AtomicInteger属于JUC并发包下的原子类，继承关系如下：
 
@@ -75,7 +79,6 @@ public class Main {
 
 ```java
 package cn.edu.bjut;
-
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -199,8 +202,6 @@ param3：v + delta 表示要增加的值
 AtomicInteger的原理就是这，主要是通过Usafe的方式来完成的。Usafe又是通过CAS机制来实现的。
 
 CAS算法是乐观锁的一种，Java原子类中的递增操作就通过CAS自旋实现的。
-
-
 
 ## （2）、源码注释
 
@@ -409,4 +410,3 @@ public class AtomicInteger extends Number implements java.io.Serializable {
 	.................
 }
 ```
-

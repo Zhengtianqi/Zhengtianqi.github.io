@@ -5,19 +5,10 @@ category: 运维
 tag: ["SLI", "SLO", "SLA", "错误预算", "服务质量", "SRE"]
 ---
 
-# SLI/SLO/SLA：用数据衡量服务质量
+# SLI_SLO_SLA：用数据衡量服务质量
 
-## 前言
-
-"系统稳定吗？"——这个问题太模糊了。SRE（Site Reliability Engineering）的核心方法论之一就是用 SLI、SLO、SLA 三个层次来精确衡量和管理服务质量。
-
-本文带你理解这三个概念的关系、如何选择正确的 SLI、如何制定合理的 SLO，以及如何用"错误预算"来驱动技术决策。
-
----
-
-## 第一部分：SLI、SLO、SLA 是什么
-
-### 1.1 一层一层的关系
+> SLI_SLO_SLA：用数据衡量服务质量是保障系统稳定运行的关键，它涉及监控、告警、故障排查等多个方面。
+> 本文介绍了SLI_SLO_SLA：用数据衡量服务质量的最佳实践和工具使用，帮助你提升运维能力。
 
 ```
 SLA (Service Level Agreement)   ← 对外承诺（合同级）
@@ -56,8 +47,6 @@ SLA：AWS 对客户的承诺
 ```
 
 **SLO 比 SLA 更严格的原因**：预留缓冲空间。如果 SLO 和 SLA 一样，一旦 SLI 略有波动就触发违约赔偿，没有容错余地。
-
----
 
 ## 第二部分：如何选择 SLI
 
@@ -171,8 +160,6 @@ infrastructure:
 长窗口（30 天）→ SLO 达标判定
   "过去 30 天，可用性 = 99.92% → 未达到 99.95% 的 SLO"
 ```
-
----
 
 ## 第三部分：SLO 制定方法论
 
@@ -289,8 +276,6 @@ services:
       - name: "completion_time"
         objective: before 6:00 AM    # 必须在早上 6 点前完成
 ```
-
----
 
 ## 第四部分：错误预算
 
@@ -414,8 +399,6 @@ public class ErrorBudgetManager {
 }
 ```
 
----
-
 ## 第五部分：实战——为担保系统定义完整的 SLI/SLO
 
 ### 5.1 系统全景的 SLI/SLO 矩阵
@@ -531,8 +514,6 @@ groups:
           summary: "风控服务 P99 延迟超过 200ms SLO"
 ```
 
----
-
 ## 第六部分：SLO 文化落地
 
 ### 6.1 月度 SLO 评审
@@ -592,8 +573,6 @@ Level 5: "SLO 驱动业务决策"
   新功能有 SLO 要求
   合同 SLA 基于内部 SLO
 ```
-
----
 
 ## 总结
 

@@ -7,11 +7,8 @@ category: CICD
 
 # GitHub Actions 实战：Java 项目的 CI/CD 流水线搭建
 
-> 从零搭建一条完整的 Java 项目 CI/CD 流水线，包含编译、测试、代码扫描、Docker 镜像构建和多环境自动部署。
-
-## 1. CI/CD 核心概念与价值
-
-### 1.1 什么是 CI/CD
+> Git是现代软件开发中不可或缺的工具，它为团队协作和版本控制提供了强大的支持。
+> 本文系统梳理了Git的核心概念和常用操作，帮助你快速掌握这一重要工具。
 
 ```
 传统开发流程（无 CI/CD）：
@@ -19,7 +16,6 @@ category: CICD
 开发 → 本地测试 → 提交代码 → [等待] → 集成 → [发现冲突] → 排查 → 修复 →
 手动构建 → 手动测试 → 手动部署 → [部署失败!] → 排查 → 重新部署
 时间：数小时到数天
-
 
 现代 CI/CD 流程：
 
@@ -48,8 +44,6 @@ category: CICD
 | 市场生态 | GitHub Marketplace | Jenkins 插件生态 | 较少 |
 | 上手难度 | 低 | 中高 | 中 |
 | 免费额度 | 2000 min/月（公开仓库无限） | 自建无限制 | 400 min/月 |
-
----
 
 ## 2. GitHub Actions 工作流语法详解
 
@@ -145,8 +139,6 @@ jobs:
       - name: Build & Test
         run: mvn verify -B
 ```
-
----
 
 ## 3. 实战：Java Maven 项目的 CI 流水线
 
@@ -302,8 +294,6 @@ jobs:
         continue-on-error: true
 ```
 
----
-
 ## 4. Docker 镜像构建与推送
 
 ### 4.1 多阶段 Dockerfile
@@ -421,8 +411,6 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 ```
-
----
 
 ## 5. 多环境自动部署
 
@@ -571,8 +559,6 @@ jobs:
         # ... 类似 dev 的部署步骤
 ```
 
----
-
 ## 6. Matrix Build 并行构建
 
 ### 6.1 多 JDK 版本测试
@@ -624,8 +610,6 @@ jobs:
           # kubectl config use-context ${{ matrix.region }}
           # kubectl set image deployment/myapp myapp=$IMAGE:$VERSION
 ```
-
----
 
 ## 7. Secrets 管理与环境变量
 
@@ -712,8 +696,6 @@ jobs:
         run: echo "APP_ENV=$APP_ENV"  # 输出：production
 ```
 
----
-
 ## 8. 常见问题排查
 
 ### 8.1 问题速查表
@@ -786,8 +768,6 @@ act -s DOCKER_USERNAME=myuser -s DOCKER_TOKEN=mytoken
 # 指定事件
 act pull_request
 ```
-
----
 
 ## 总结
 

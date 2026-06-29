@@ -7,19 +7,8 @@ category: Go 语言
 
 # Java 程序员学 Go：核心差异与思维转换
 
-## 前言
-
-作为一个写了多年 Java 的程序员，切换到 Go 的过程就像从开自动挡汽车换成手动挡——一开始各种不习惯，但习惯后会发现一种朴素而直接的美。
-
-Go 的设计哲学是"少即是多"：语法极简、标准库强大、编译飞快。它刻意抛弃了 Java 的很多"高级特性"（泛型直到 1.18 才有，没有继承、没有注解），换来的是**极低的学习曲线**和**一致的编码风格**。
-
-这篇文章从一个 Java 程序员的视角，帮你快速完成从 Java 到 Go 的思维转换。
-
----
-
-## 一、Go 语言设计哲学
-
-### 1.1 Go 是什么
+> Java 程序员学 Go：核心差异与思维转换是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了Java 程序员学 Go：核心差异与思维转换的核心概念和实践经验，帮助你深入理解这一技术领域。
 
 Go（Golang）由 Google 于 2009 年发布。三位创始人：
 - **Ken Thompson**：UNIX 之父，B 语言设计者
@@ -61,8 +50,6 @@ Go（Golang）由 Google 于 2009 年发布。三位创始人：
 ❌ 没有 public/private 关键字 → 用首字母大小写
 ❌ 没有 implements 关键字 → 隐式接口实现
 ```
-
----
 
 ## 二、语法对比速览
 
@@ -191,8 +178,6 @@ go get github.com/gin-gonic/gin
 # go.mod 类似 pom.xml
 # go.sum 类似 pom.xml 的 checksum
 ```
-
----
 
 ## 三、面向对象差异
 
@@ -337,8 +322,6 @@ dog.Bark()
 // 但你可以通过接口达到多态效果
 ```
 
----
-
 ## 四、错误处理：最大的思维转换
 
 ### 4.1 Go 的错误处理哲学
@@ -451,8 +434,6 @@ func safeCall() {
 }
 ```
 
----
-
 ## 五、并发模型对比
 
 ### 5.1 goroutine vs Thread
@@ -554,8 +535,6 @@ func getDashboard(userID int64) (*Dashboard, error) {
     }
 }
 ```
-
----
 
 ## 六、实战：用 Go 重写 Spring Boot CRUD
 
@@ -906,8 +885,6 @@ func (h *UserHandler) Delete(c *gin.Context) {
 }
 ```
 
----
-
 ## 七、选型场景：什么时候用 Go
 
 ### Go 的优势场景
@@ -947,8 +924,6 @@ func (h *UserHandler) Delete(c *gin.Context) {
   ✅ 团队 Java 经验丰富
 ```
 
----
-
 ## 八、总结
 
 ### Java → Go 思维转换清单
@@ -987,7 +962,5 @@ func (h *UserHandler) Delete(c *gin.Context) {
 > Go 不是删减版的 Java——它是另一种编程哲学。
 
 少即是多。简即是美。
-
----
 
 *本文基于 Go 1.22 + Gin + GORM 编写。*

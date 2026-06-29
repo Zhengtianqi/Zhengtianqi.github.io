@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringCloud服务消费
 tag: ["SpringCloud", "服务消费", "微服务"]
 category: spring
@@ -6,9 +6,13 @@ date: 2020-12-14
 
 ---
 
+# SpringCloud服务消费
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 基于Alibaba Nacos Spring Cloud（服务发现）、Spring Cloud OpenFeign（声明式调用，同时整合了熔断器、负载均衡）
 
-# 1、pom.xml添加starter依赖
 
 ```java
 		<!-- Nacos服务发现 -->
@@ -94,4 +98,3 @@ public interface RemoteClient {
     String hello(@PathVariable("string") String string);
 
 ```
-

@@ -5,10 +5,13 @@ category: CICD
 date: 2022-09-01
 ---
 
-Docker虚拟化技术底层是基于LXC+Cgroups+AUFS（Overlay）技术实现，而我们有熟知Cgroups是Linux内核提供的一种可以限制、记录、隔离进程组（Process Groups）所使用的物理资源的机制。
-Docker虚拟化的产物是Docker容器，基于Docker Engine启动容器时，默认会给容器指定和分配各种子系统：CPU子系统、Memory子系统、IO子系统、NET子系统等。
+# Docker网络模型
+
+> Docker是容器化技术的代表，它为应用部署提供了轻量级、可移植的解决方案。
+> 本文介绍了Docker的核心概念和使用方式，帮助你掌握容器化部署技术。
+
 启动一个容器，会分配Network Namespace（子系统）提供了一份独立的网络环境，包括网卡、路由、Iptables规则等，容器跟其他容器的Network Namespace是相互隔离的。
-通过Docker run创建Docker容器时，可以使用–net选项指定Docker容器的网络模式，Docker默认有四种网络模式：
+> 通过Docker run创建Docker容器时，可以使用–net选项指定Docker容器的网络模式，Docker默认有四种网络模式：
 # 一、Docker的四大网络模式
 - 桥接模式（bridge)
 Docker容器的Bridge模式也是Docker默认的网络模式，该模式会为每个容器分配Network Namespace子系统，会自动给每个容器虚拟出自己的网卡、IP、网关、路由等信息，无需手工添加。默认创建的Docker容器会统一通过一对veth虚拟网卡，连接到一个虚拟网桥交换机Docker0上，所有的容器的网络加入到一个二层交换机网络里面，即同一宿主机的所有容器之间都是可以相互联通和访问的。

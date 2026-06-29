@@ -1,4 +1,4 @@
----
+﻿---
 title: 大模型RAG实战全流程详解
 tag: ["RAG", "大模型"]
 category: 大模型
@@ -6,6 +6,10 @@ date: 2026-05-12
 ---
 
 # 大模型RAG实战全流程详解
+
+> 大语言模型是AI领域的革命性技术，它为自然语言处理和智能应用提供了强大的能力。
+> 本文介绍了大模型的核心概念和应用方式，帮助你进入AI应用开发领域。
+
 
 在大模型落地过程中，我们总会遇到三个核心痛点：幻觉严重（一本正经地编造信息）、知识滞后（无法获取实时/私有数据）、私有数据安全（不能直接将敏感文档喂给公域大模型）。而RAG（Retrieval-Augmented Generation，检索增强生成），正是当前最主流、性价比最高的解决方案——让大模型在回答问题前，先去私有知识库“翻书”，基于检索到的真实信息生成答案，本质上是把大模型的“闭卷考试”变成“开卷考试”。
 
@@ -917,12 +921,15 @@ class RAGChain:
 ```
 ### 三、使用示例
 - 1. examples/basic_usage.py（基础问答示例）
+
 ```python
 import sys
+
 sys.path.append("..")  # 添加项目根目录到Python路径
 
-from src import DocumentLoader, TextSplitter, VectorStore, Retriever, RAGChain
+from docs import DocumentLoader, TextSplitter, VectorStore, Retriever, RAGChain
 import config
+
 
 def main():
     # 步骤1：加载并清洗文档
@@ -930,48 +937,51 @@ def main():
     loader = DocumentLoader(config.DOCS_DIR)
     documents = loader.load_directory()
     cleaned_documents = loader.clean_all_documents(documents)
-    
+
     # 步骤2：切分文档
     print("正在切分文档...")
     splitter = TextSplitter()
     chunks = splitter.split_documents(cleaned_documents)
-    
+
     # 步骤3：构建向量库
     print("正在构建向量库...")
     vector_store = VectorStore()
     vector_store.add_documents(chunks)
-    
+
     # 步骤4：创建检索器和RAG链
     print("正在初始化RAG系统...")
     retriever = Retriever(vector_store)
     rag_chain = RAGChain(retriever)
-    
+
     # 步骤5：交互式问答
     print("\nRAG系统初始化完成！输入'quit'退出")
     while True:
         question = input("\n请输入你的问题: ")
         if question.lower() == "quit":
             break
-        
+
         result = rag_chain.query(question)
         print("\n回答:")
         print(result["answer"])
-        
+
         if result["source_documents"]:
             print("\n参考来源:")
             for i, doc in enumerate(result["source_documents"]):
-                print(f"{i+1}. {doc['source']}")
+                print(f"{i + 1}. {doc['source']}")
+
 
 if __name__ == "__main__":
     main()
 ```
 - 2. examples/web_demo.py（Gradio Web 界面示例）
+
 ```python
 import sys
+
 sys.path.append("..")
 
 import gradio as gr
-from src import DocumentLoader, TextSplitter, VectorStore, Retriever, RAGChain
+from docs import DocumentLoader, TextSplitter, VectorStore, Retriever, RAGChain
 import config
 
 # 初始化RAG系统
@@ -990,36 +1000,38 @@ retriever = Retriever(vector_store)
 rag_chain = RAGChain(retriever)
 print("RAG系统初始化完成！")
 
+
 def answer_question(question):
     """回答问题并格式化输出"""
     result = rag_chain.query(question)
-    
+
     answer = result["answer"]
     sources = "\n\n**参考来源:**\n"
     for i, doc in enumerate(result["source_documents"]):
-        sources += f"{i+1}. {doc['source']}\n"
-    
+        sources += f"{i + 1}. {doc['source']}\n"
+
     return answer + sources
+
 
 # 创建Gradio界面
 with gr.Blocks(title="企业员工手册RAG问答助手") as demo:
     gr.Markdown("# 企业员工手册RAG问答助手")
     gr.Markdown("基于检索增强生成技术，精准回答员工手册相关问题")
-    
+
     with gr.Row():
         with gr.Column(scale=3):
             question_input = gr.Textbox(label="请输入你的问题", placeholder="例如：员工报销额度是多少？")
             submit_btn = gr.Button("提交", variant="primary")
-        
+
         with gr.Column(scale=5):
             answer_output = gr.Markdown(label="回答")
-    
+
     submit_btn.click(
         fn=answer_question,
         inputs=question_input,
         outputs=answer_output
     )
-    
+
     # 示例问题
     gr.Examples(
         examples=[

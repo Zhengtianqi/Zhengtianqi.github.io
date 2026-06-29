@@ -5,9 +5,10 @@ category: 大数据
 date: 2020-01-20
 ---
 
-		视图可以允许保存一个查询（并）像对待表一样对这个查询进行操作。（这是一个逻辑结构，因为它不像一个表会存储数据。
+# HiveQL视图
 
-# 一、使用视图来降低查询复杂度
+> HiveQL视图是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了HiveQL视图的原理和应用场景，帮助你进入大数据领域。
 
 	当查询长且复杂，通过使用视图将这个查询语句分割成多个小的、更可控的片段可以降低这种复杂度。
 
@@ -55,4 +56,3 @@ hive> CREATE VIEW safer_user_info AS
 CREATE VIEW orders(state, city, part) AS SELECT cols["state"], cols["city"], cols["part"]
 FROM dynamicatable WHERE cols["type"] = "request";
 ```
-

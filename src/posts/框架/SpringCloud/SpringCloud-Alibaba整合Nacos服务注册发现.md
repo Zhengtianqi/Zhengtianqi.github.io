@@ -1,11 +1,15 @@
----
+﻿---
 title: SpringCloud-Alibaba整合Nacos服务注册发现
 tag: ["SpringCloud", "Nacos", "服务注册发现"]
 category: spring
 date: 2019-12-03
 ---
 
-# 一、服务注册
+# SpringCloud-Alibaba整合Nacos服务注册发现
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 ## 1、引入依赖
 
@@ -54,7 +58,6 @@ public class NacosProviderDemoApplication {
 ![image-20191203152720691](/assets/images/nacos-producer.png)
 
 # 二、服务发现
-
 
 基于Alibaba Nacos Spring Cloud（服务发现）、Spring Cloud OpenFeign（声明式调用，同时整合了熔断器、负载均衡），推荐使用此方法。
 
@@ -204,4 +207,3 @@ public class ConsumerController {
     }
 }
 ```
-

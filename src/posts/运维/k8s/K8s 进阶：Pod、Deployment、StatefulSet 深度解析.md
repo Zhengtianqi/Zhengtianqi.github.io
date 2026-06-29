@@ -7,11 +7,8 @@ date: 2026-06-27
 
 # K8s 进阶：Pod、Deployment、StatefulSet 深度解析
 
-> 作为 Java 后端开发者，你可能已经会在 K8s 上部署简单的服务了。但当你面对线上故障、滚动更新出问题、有状态应用部署一团糟时，就需要深入理解 K8s 的核心工作负载模型。本文带你从进阶视角重新审视 Pod、Deployment 和 StatefulSet。
-
-## 一、Pod：不只是"容器的壳"
-
-### 1.1 Pod 的本质
+> Kubernetes是容器编排领域的标准，它为容器化应用提供了自动化部署、扩缩容和管理能力。
+> 本文介绍了Kubernetes的核心概念和实践经验，帮助你构建云原生应用。
 
 很多初学者认为 Pod 就是"包着一组容器的壳"，但这个理解太浅了。Pod 是 K8s 中**最小的可调度单元**，它存在的意义是：
 
@@ -314,7 +311,6 @@ spec:
     app: mysql
   ports:
     - port: 3306
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -440,7 +436,6 @@ data:
         password: ${MYSQL_PASSWORD}
       redis:
         host: redis-headless
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -448,7 +443,6 @@ metadata:
 type: Opaque
 stringData:
   MYSQL_PASSWORD: "MyStr0ngP@ss"
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -523,7 +517,6 @@ spec:
           configMap:
             name: app-config
       terminationGracePeriodSeconds: 60
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -535,7 +528,6 @@ spec:
     - port: 80
       targetPort: 8080
   type: ClusterIP
----
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

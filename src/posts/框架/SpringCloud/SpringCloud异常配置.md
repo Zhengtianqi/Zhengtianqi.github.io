@@ -1,11 +1,14 @@
----
+﻿---
 title: SpringCloud异常配置
 tag: ["SpringCloud", "异常处理", "微服务"]
 category: spring
 date: 2020-12-14
 ---
 
+# SpringCloud异常配置
 
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
 
 
 1.【强制】Java 类库中定义的可以通过预检查方式规避的 RuntimeException 异常不应该通过catch 的方式来处理，比如:NullPointerException，IndexOutOfBoundsException 等等。
@@ -43,7 +46,6 @@ date: 2020-12-14
 5)  对于Session中获取的数据，建议NPE检查，避免空指针。
 6)  级联调用obj.getA().getB().getC();一连串调用，易产生NPE。
 正例:使用 JDK8 的 Optional 类来防止 NPE 问题。
-
 
 11.【推荐】定义时区分unchecked/checked 异常，避免直接抛出newRuntimeException()， 更不允许抛出 Exception 或者 Throwable，应使用有业务含义的自定义异常。推荐业界已定义 过的自定义异常，如:DAOException / ServiceException等。
 

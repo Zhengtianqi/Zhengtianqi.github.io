@@ -5,31 +5,10 @@ category: 分布式
 date: 2026-06-25
 ---
 
-## 前言
+# Service Mesh实战：Istio 架构与落地指南
 
-在微服务架构中，服务通信是核心问题。传统做法是在**应用层**处理：
-
-```
-应用代码负责：
-├─ 服务发现
-├─ 负载均衡
-├─ 重试、超时、熔断
-├─ 监控、追踪、日志
-└─ 安全认证
-```
-
-这导致：
-- 每个服务都要重复实现
-- 多语言框架难以统一标准
-- 业务逻辑混杂基础设施逻辑
-
-**Service Mesh的目标**：将这些**跨切关注点（Cross-Cutting Concerns）** 从应用层剥离出来，集中管理在**网络层**。
-
----
-
-## 一、Service Mesh的本质
-
-### 1.1 定义
+> Service Mesh实战：Istio 架构与落地指南是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了Service Mesh实战：Istio 架构与落地指南的原理和解决方案，帮助你构建可靠的分布式系统。
 
 Service Mesh是一种**基础设施层**，用于管理服务之间的通信。
 
@@ -62,8 +41,6 @@ Service Mesh：
 | 流量控制 | 应用内实现 | 基础设施层 |
 | 可观测性 | 分散在各个应用 | 统一采集 |
 | 运维成本 | 应用升级需重新发版 | 无需更改应用代码 |
-
----
 
 ## 二、Istio架构详解
 
@@ -183,7 +160,9 @@ spec:
         maxRequestsPerConnection: 2
     loadBalancer:
       simple: LEAST_REQUEST  # 最少连接
-      # 或 ROUND_ROBIN / RANDOM / PASSTHROUGH
+# Service Mesh实战：Istio 架构与落地指南
+
+
     outlierDetection:
       consecutive5xxErrors: 5  # 连续5个5xx错误
       interval: 30s
@@ -275,8 +254,6 @@ spec:
     hosts:
     - "api.example.com"
 
----
-
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -320,8 +297,6 @@ spec:
     mode: STRICT  # 强制使用mTLS
     # 可选值：STRICT / PERMISSIVE / DISABLE
 
----
-
 # 定义允许访问的服务
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -344,8 +319,6 @@ spec:
         methods: ["POST", "PUT"]
         paths: ["/users/*"]
 ```
-
----
 
 ## 三、实战部署
 
@@ -379,7 +352,6 @@ metadata:
   labels:
     istio-injection: enabled  # 自动注入Sidecar
 
----
 # ProductPage服务
 apiVersion: v1
 kind: Service
@@ -393,7 +365,6 @@ spec:
   selector:
     app: productpage
 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -417,7 +388,6 @@ spec:
         ports:
         - containerPort: 9080
 
----
 # Reviews服务（v1, v2, v3）
 apiVersion: v1
 kind: Service
@@ -431,7 +401,6 @@ spec:
   selector:
     app: reviews
 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -455,7 +424,6 @@ spec:
         ports:
         - containerPort: 9080
 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -479,7 +447,6 @@ spec:
         ports:
         - containerPort: 9080
 
----
 # Ratings服务
 apiVersion: v1
 kind: Service
@@ -493,7 +460,6 @@ spec:
   selector:
     app: ratings
 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -568,7 +534,6 @@ spec:
         port:
           number: 9080
 
----
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -584,7 +549,6 @@ spec:
         subset: v1
       weight: 100
 
----
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -648,8 +612,6 @@ Metrics：
   - 延迟分布（P50/P99）
   - 依赖关系
 ```
-
----
 
 ## 四、性能影响与优化
 
@@ -740,8 +702,6 @@ spec:
                 numerator: 100
                 denominator: HUNDRED
 ```
-
----
 
 ## 总结
 

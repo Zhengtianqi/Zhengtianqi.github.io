@@ -1,13 +1,15 @@
----
+﻿---
 title: k8s构建ELK日志平台
 tag: ["Kubernetes", "ELK", "日志平台"]
 category: CICD
 date: 2021-04-13
 ---
 
-
-
 # k8s构建ELK日志平台
+
+> k8s构建ELK日志平台是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了k8s构建ELK日志平台的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 
 ## Pod中附加专用日志收集的容器
 
@@ -29,8 +31,6 @@ date: 2021-04-13
 
 缺点：每个Pod启动一个日志收集代理，增加资源消耗，并增加运维维护成本。
 
- 
-
 # 三、部署ELK日志平台
 
 ELK官网：
@@ -47,8 +47,6 @@ https://www.elastic.co/guide/en/logstash/current/installing-logstash.html
 $ yum install -y java-1.8.0-openjdk 
 ```
 
-
-
 ## 3.2 配置yum源
 
 ```java
@@ -62,8 +60,6 @@ enabled=1
 autorefresh=1 
 type=rpm-md 
 ```
-
-
 
 ## 3.3 安装ELK
 
@@ -142,8 +138,6 @@ tcp  0  0 0.0.0.0:9300  0.0.0.0:*  LISTEN  31645/java
 
 访问kibana：[http://10.16.13.52:5601](http://10.16.13.52:5601/)
 
- 
-
 # 四、采集k8s应用日志部署
 
 采集日志客户端采用Filebeat来进行采集日志，使用ConfigMap的形式来存储Filebeat的配置，采用ConfigMap形式部署Filebeat，然后将配置文件和日志挂载到Filebeat的Pod中，利用Filebeat采集k8s的集群日志。
@@ -175,8 +169,6 @@ data:
 
     output.logstash:
       hosts: ['172.16.194.128:5044'] # 这里写logstash启动的监听地址和端口
-
----
 
 apiVersion: apps/v1
 kind: DaemonSet # 使用DaemonSet方式将Filebeat部署到集群每个节点上
@@ -225,8 +217,6 @@ spec:
           name: k8s-logs-filebeat-config # 指定configmap挂载到Pod容器里
 ```
 
-
-
 ### 4.1.2 上传Filebeat配置文件
 
 ```
@@ -244,8 +234,6 @@ daemonset.apps/k8s-logs 2 2 0 2 0 <none> 5s
 kube-system k8s-logs-7wwlx 1/1 Running 0 5m
 kube-system k8s-logs-pd8m2 1/1 Running 0 5m
 ```
-
-
 
 ### 4.1.3 上传Filebeat配置文件是否成功
 
@@ -271,8 +259,6 @@ output.logstash:
 
 4.1.3过程也可以进入k8s管理页面 -> 命名空间选择 -> 配置与存储修改配置文件
 
-
-
 ### 4.1.4 创建/修改pod，更新项目配置文件
 
 ```java
@@ -286,8 +272,6 @@ NAME   DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
 deployment.extensions/root  3  3  3  3  592d 
 [root@]# kubectl edit deployment.extensions/root -n root
 ```
-
-
 
 4.1.4过程也可以进入k8s管理页面：命名空间选择qixiao -> 工作负载 -> 部署 -> qixiao –> 右侧三个点 –> 查看 /编辑YAML -> 复制出来修改 -> 修改完点击更新
 
@@ -333,8 +317,6 @@ type:
 [root@]# systemctl restart logstash
 ```
 
- 
-
 ### 4.2.3 logstash部署是否成功
 
 ```java
@@ -352,8 +334,6 @@ tcp6 0 0 :::9300 :::* LISTEN 119229/java
 tcp6 0 0 127.0.0.1:9600 :::* LISTEN 710/java
 ```
 
- 
-
 # 五、展示ELK日志
 
 ## 5.1 配置Kibana展示日志
@@ -361,10 +341,6 @@ tcp6 0 0 127.0.0.1:9600 :::* LISTEN 710/java
 左侧导航栏 -> 点击Management –> 点击Stack Management –> Kibana 索引模式 -> 创建索引模式 ）-> 时间字段@timestamp -> 创建成功
 
 ![img](/assets/images/1337b059.png)
-
- 
-
-
 
 ## 5.2 查看kibana日志
 
@@ -374,15 +350,9 @@ tcp6 0 0 127.0.0.1:9600 :::* LISTEN 710/java
 
 ![img](/assets/images/e18c9709.jpg)
 
- 
-
- 
-
 ## 5.3 绘制kibana图表
 
 左侧导航栏 -> Kibana -> dashboards –> 创建 仪表板 -> 新建
-
- 
 
 以TSVB为例：
 

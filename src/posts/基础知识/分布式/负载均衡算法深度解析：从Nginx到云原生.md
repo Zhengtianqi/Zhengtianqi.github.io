@@ -5,19 +5,10 @@ category: 分布式
 date: 2026-06-26
 ---
 
-## 前言
+# 负载均衡算法深度解析：从Nginx到云原生
 
-负载均衡是系统架构中最常用的组件。无论是Nginx、HAProxy、还是云原生的Service Mesh，都需要回答同一个问题：
-
-**"这个请求该发给哪个后端服务器？"**
-
-看似简单，但要在高并发、动态扩容、多地域等复杂场景下做出最优决策，需要深入理解各种算法的原理与权衡。
-
----
-
-## 一、负载均衡的层次
-
-### 1.1 四层 vs 七层
+> 负载均衡算法深度解析：从Nginx到云原生是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了负载均衡算法深度解析：从Nginx到云原生的原理和解决方案，帮助你构建可靠的分布式系统。
 
 ```
 ISO/OSI 模型：
@@ -62,8 +53,6 @@ ISO/OSI 模型：
 | 金融交易 (TCP协议) | 四层 (LVS/F5) | 高吞吐量，低延迟 |
 | 游戏服务器 (UDP) | 四层 (LVS) | UDP无连接 |
 | 微服务集群 | 七层 (Service Mesh) | 需要服务发现和熔断 |
-
----
 
 ## 二、七层负载均衡算法
 
@@ -134,7 +123,9 @@ class WeightedRoundRobinLB:
         """
         基于权重轮询
         """
-        # 生成权重序列
+# 负载均衡算法深度解析：从Nginx到云原生
+
+
         weighted_sequence = []
         for backend in self.backends:
             weighted_sequence.extend([backend] * backend['weight'])
@@ -416,8 +407,6 @@ class ResponseTimeWeightedLB:
         return selected
 ```
 
----
-
 ## 三、四层负载均衡 (LVS)
 
 ### 3.1 LVS原理
@@ -525,8 +514,6 @@ ipvsadm -L -n
 ipvsadm -C
 ```
 
----
-
 ## 四、云原生负载均衡
 
 ### 4.1 Kubernetes Service
@@ -596,7 +583,6 @@ spec:
         subset: canary
       weight: 10
 
----
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -632,8 +618,6 @@ spec:
       version: canary
 ```
 
----
-
 ## 五、性能对比与选型
 
 ### 5.1 性能基准
@@ -663,8 +647,6 @@ LVS (IP Hash)    | 1M+     | <0.1ms  | ✓
      ├─ 性能敏感 → 最少连接或LVS
      └─ 高级需求 → Istio + 智能路由
 ```
-
----
 
 ## 总结
 

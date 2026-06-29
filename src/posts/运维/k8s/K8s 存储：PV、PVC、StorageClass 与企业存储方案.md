@@ -7,11 +7,8 @@ date: 2026-06-27
 
 # K8s 存储：PV、PVC、StorageClass 与企业存储方案
 
-> 在 K8s 上跑无状态应用很简单，但一旦涉及数据库、消息队列等有状态应用，存储就是绕不开的话题。本文从 PV/PVC 基础概念讲起，一路到动态供给、CSI 插件、企业级存储方案，帮你彻底搞懂 K8s 存储。
-
-## 一、K8s 存储体系全景
-
-### 1.1 为什么需要存储抽象
+> Kubernetes是容器编排领域的标准，它为容器化应用提供了自动化部署、扩缩容和管理能力。
+> 本文介绍了Kubernetes的核心概念和实践经验，帮助你构建云原生应用。
 
 容器的文件系统是临时的——容器重启后数据就没了。早期 Docker 用 Volume 挂载宿主机目录，但这在 K8s 中行不通：
 
@@ -122,7 +119,6 @@ spec:
   nfs:
     server: 192.168.1.100
     path: /data/nfs/share1
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -175,7 +171,6 @@ parameters:
 reclaimPolicy: Delete                      # PVC 删除时自动回收
 volumeBindingMode: WaitForFirstConsumer    # 延迟绑定，等 Pod 调度后再创建 PV
 allowVolumeExpansion: true                 # 允许在线扩容
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

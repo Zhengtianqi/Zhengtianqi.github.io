@@ -1,4 +1,4 @@
----
+﻿---
 title: Web 安全实战：XSS、CSRF 与 SQL 注入的攻击与防御
 tag: ["安全", "XSS", "CSRF", "SQL注入", "Web安全"]
 category: 安全
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # Web 安全实战：XSS、CSRF 与 SQL 注入的攻击与防御
 
-OWASP Top 10 中，XSS、CSRF 和 SQL 注入至今仍是出现频率最高的安全漏洞。本文从攻击原理到防御方案，全链路覆盖。
+> Web 安全实战：XSS、CSRF 与 SQL 注入的攻击与防御是网络安全中常见的威胁，攻击者通过各种手段获取非法利益或破坏系统安全。
+> 本文介绍了Web 安全实战：XSS、CSRF 与 SQL 注入的攻击与防御的原理、危害和防御策略，帮助你构建更安全的系统。
 
----
+
+OWASP Top 10 中，XSS、CSRF 和 SQL 注入至今仍是出现频率最高的安全漏洞。本文从攻击原理到防御方案，全链路覆盖。
 
 ## 一、XSS（跨站脚本攻击）
 
@@ -108,8 +110,6 @@ server:
 add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';";
 ```
 
----
-
 ## 二、CSRF（跨站请求伪造）
 
 ### 2.1 攻击原理
@@ -185,8 +185,6 @@ public Result getData(@RequestHeader("X-Requested-With") String requestedWith) {
 }
 ```
 
----
-
 ## 三、SQL 注入
 
 ### 3.1 攻击原理
@@ -254,8 +252,6 @@ public User findByName(String name) {
 // 3. 搜索所有 Statement（应该用 PreparedStatement）
 ```
 
----
-
 ## 四、其他常见 Web 安全威胁
 
 ### 4.1 文件上传漏洞
@@ -321,8 +317,6 @@ public Result getOrder(@PathVariable Long id, @AuthenticationPrincipal UserPrinc
 }
 ```
 
----
-
 ## 五、Spring Security 安全配置清单
 
 ```java
@@ -361,8 +355,6 @@ public class SecurityConfig {
 }
 ```
 
----
-
 ## 六、面试要点
 
 ### Q：XSS 怎么防？
@@ -383,8 +375,6 @@ public class SecurityConfig {
 - `#{}` 是预编译参数化（PreparedStatement），自动防 SQL 注入
 - `${}` 是字符串拼接，有 SQL 注入风险
 - 规则：用户输入一律用 `#{}`，只有表名/列名等结构化 SQL 才用 `${}` 且必须白名单校验
-
----
 
 ## 七、总结
 

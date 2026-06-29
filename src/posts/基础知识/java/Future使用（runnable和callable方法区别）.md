@@ -1,14 +1,19 @@
----
+﻿---
 title: Future使用：runnable和callable方法区别
 tag: ["java基础", "多线程", "异步编程"]
 category: java基础
 date: 2023-09-23
 ---
 
+# Future使用：runnable和callable方法区别
+
+> Future是Java并发编程中的核心接口，它为异步任务提供了结果获取机制。
+> 本文介绍了Future的原理和使用方式，帮助你掌握Java异步编程。
+
 所谓异步调用其实就是实现一个可无需等待被调用函数的返回值而让操作继续运行的方法。
 在 Java 语言中，简单的讲就是另启一个线程来完成调用中的部分计算，使调用继续运行或返回，而不需要等待计算结果。但调用者仍需要取线程的计算结果。
 
-# 一、 Future 是什么
+
 ## 作用
 future 可以用于异步获取多线程任务结果 , Callable 用于产生结果，Future 用于获取结果
 ## 流程
@@ -189,7 +194,6 @@ public static void main(String[] args) {
 - 链中的每个任务都是独立的，因此，如果任务执行失败，我们可以通过exceptionally()块来处理它。
 - join()方法不需要在编译时处理受检的异常。
 - 我们可以设计一个异步任务模板，完善每个任务的状态处理。
-
 
 参考：
 - https://juejin.cn/post/6941010435512467493

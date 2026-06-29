@@ -7,11 +7,8 @@ date: 2026-05-26
 
 # LeetCode 3. 无重复字符的最长子串（Longest Substring Without Repeating Characters）
 
-> **难度**：中等 | **标签**：字符串、滑动窗口、哈希表
-
----
-
-## 📌 题目描述
+> LeetCode 3. 无重复字符的最长子串（Longest Substring Without Repeating Characters）是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了LeetCode 3. 无重复字符的最长子串（Longest Substring Without Repeating Characters）的核心概念和实践经验，帮助你深入理解这一技术领域。
 
 给定一个字符串 `s`，请你找出其中**不含有重复字符的最长子串**的长度。
 
@@ -32,8 +29,6 @@ date: 2026-05-26
          注意，"pwke" 是一个子序列，不是子串。
 ```
 
----
-
 ## 💡 多种解法对比
 
 | 解法 | 时间复杂度 | 空间复杂度 | 核心思想 | 推荐度 |
@@ -41,8 +36,6 @@ date: 2026-05-26
 | **暴力枚举** | O(n³) | O(min(m, n)) | 枚举所有子串，检查是否含重复 | ⭐ |
 | **滑动窗口（HashSet）** | O(2n) ≈ O(n) | O(min(m, n)) | 双指针 + Set 去重 | ⭐⭐⭐ |
 | **滑动窗口优化（HashMap）** | **O(n)** | O(min(m, n)) | 双指针 + Map 记录最后位置 | ⭐⭐⭐⭐⭐ |
-
----
 
 ## 解法一：暴力枚举（Brute Force）
 
@@ -97,8 +90,6 @@ class Solution {
 - 空间：O(min(m, n)) — Set 大小受字符集限制
 
 > ❌ LeetCode 会超时，仅作理解用。
-
----
 
 ## 解法二：滑动窗口（HashSet）
 
@@ -172,8 +163,6 @@ class Solution {
 ### 复杂度
 - 时间：O(2n) ≈ O(n) — 每个字符最多被访问两次（加入和移除各一次）
 - 空间：O(min(m, n)) — Set 大小
-
----
 
 ## 解法三：滑动窗口优化（HashMap）✅ 最优解
 
@@ -253,8 +242,6 @@ class Solution {
 | `left = max(left, map.get(c) + 1)` | 防止左边界回退（如 "abba" 案例） |
 | 窗口大小 = `right - left + 1` | 包含两端，注意 +1 |
 
----
-
 ## 📊 完整过程图解：以 "abcabcbb" 为例
 
 ```mermaid
@@ -303,8 +290,6 @@ graph LR
     style S6 fill:#ffffcc
 ```
 
----
-
 ## 🎯 总结
 
 | 要点 | 说明 |
@@ -319,8 +304,6 @@ graph LR
 - LeetCode 209: 长度最小的子数组
 - LeetCode 438: 找到字符串中所有字母异位词
 - LeetCode 567: 字符串的排列
-
----
 
 ## 🔗 复杂度对比总结
 

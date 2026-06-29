@@ -1,4 +1,4 @@
----
+﻿---
 title: 向量数据库企业级使用指南：Milvus 与 PGVector 深度对比
 tag: ["向量数据库", "Milvus", "PGVector", "RAG"]
 category: 大模型
@@ -7,9 +7,11 @@ date: 2026-06-27
 
 # 向量数据库企业级使用指南：Milvus 与 PGVector 深度对比
 
-做 RAG 项目最关键的基础设施就是向量数据库。选 Milvus 还是 PGVector？不是"谁更好"的问题，而是"什么场景用什么"。
+> 向量数据库企业级使用指南：Milvus 与 PGVector 深度对比是系统设计的核心，它决定了数据的存储方式和访问效率。
+> 本文介绍了向量数据库企业级使用指南：Milvus 与 PGVector 深度对比的原理和最佳实践，帮助你构建高效的数据存储方案。
 
----
+
+做 RAG 项目最关键的基础设施就是向量数据库。选 Milvus 还是 PGVector？不是"谁更好"的问题，而是"什么场景用什么"。
 
 ## 一、向量数据库核心能力
 
@@ -21,8 +23,6 @@ date: 2026-06-27
 | 分布式扩展 | 水平扩展、分片 | ⭐⭐⭐⭐ |
 | 事务支持 | ACID 事务 | ⭐⭐⭐ |
 | 运维成本 | 部署复杂度、监控 | ⭐⭐⭐⭐ |
-
----
 
 ## 二、Milvus vs PGVector 全面对比
 
@@ -37,8 +37,6 @@ date: 2026-06-27
 | 部署 | 独立集群（etcd + MinIO + Pulsar） | 随 PG 部署，零额外成本 |
 | 运维 | 高（多组件） | 低（已有 PG 则零增量） |
 | 适合场景 | 大规模向量、专用 AI 项目 | 中小规模、PG 已有栈 |
-
----
 
 ## 三、Milvus 实战
 
@@ -147,8 +145,6 @@ results = client.search(
 | HNSW | 100万-1000万 | 高 | 慢 | 极快 | 大数据，低延迟 |
 | IVF_SQ8 | 100万-1亿 | 低 | 中 | 快 | 内存受限场景 |
 | DiskANN | 1亿+ | 低（磁盘） | 慢 | 中 | 超大规模，成本敏感 |
-
----
 
 ## 四、PGVector 实战
 
@@ -269,8 +265,6 @@ List<Document> results = vectorStore.similaritySearch(
 );
 ```
 
----
-
 ## 五、选型决策框架
 
 ```
@@ -292,8 +286,6 @@ List<Document> results = vectorStore.similaritySearch(
 纯 AI 项目，不需要关系型数据？
   → Milvus（专用工具做专用的事）
 ```
-
----
 
 ## 六、性能调优
 
@@ -350,8 +342,6 @@ COPY documents (content, embedding, doc_type) FROM '/tmp/data.csv' WITH CSV;
 SET max_parallel_workers_per_gather = 4;
 ```
 
----
-
 ## 七、面试要点
 
 ### Q：Milvus 和 PGVector 怎么选？
@@ -366,8 +356,6 @@ SET max_parallel_workers_per_gather = 4;
 - **HNSW**：查询延迟低（<10ms），但内存占用高，适合对延迟敏感的场景
 - **IVF**：内存占用低，但查询延迟高，适合成本敏感的大规模场景
 - 生产环境推荐 HNSW，除非数据量过亿且内存受限
-
----
 
 ## 八、总结
 

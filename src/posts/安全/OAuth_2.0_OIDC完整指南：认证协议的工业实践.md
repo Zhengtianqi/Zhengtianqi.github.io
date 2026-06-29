@@ -5,27 +5,10 @@ category: 安全
 date: 2026-06-26
 ---
 
-## 前言
+# OAuth 2.0 / OIDC 完整指南：认证协议的工业实践
 
-在金融、支付等涉及用户隐私和资金安全的系统中，**认证和授权**是最关键的防线。
-
-```
-常见问题：
-1. 用户密码存在服务器，黑客盗库 → 用户密码泄露
-2. 应用直接持有用户密码，密码重置困难
-3. 多个应用都要求用户输入密码 → 钓鱼风险
-4. 第三方应用需要访问用户数据，但不能共享密码
-```
-
-**OAuth 2.0** 和 **OIDC（OpenID Connect）** 解决了这些问题，已成为行业标准。
-
-本文从原理出发，讲解两大协议的各个流程，并给出银行级别的落地方案。
-
----
-
-## 一、为什么需要OAuth 2.0
-
-### 1.1 传统方式的问题
+> OAuth 2.0 / OIDC 完整指南：认证协议的工业实践是系统设计的重要考量，它关系到用户数据和系统资源的保护。
+> 本文介绍了OAuth 2.0 / OIDC 完整指南：认证协议的工业实践的原理和最佳实践，帮助你构建安全可靠的系统。
 
 ```
 场景：用户想用第三方应用（如图片编辑器）来访问云存储中的照片
@@ -69,8 +52,6 @@ OAuth 2.0核心思想：用户不需要共享密码
   ✓ 权限细粒度控制（读、写、删除分别控制）
   ✓ 令牌可随时撤销
 ```
-
----
 
 ## 二、OAuth 2.0 四大授权流程
 
@@ -230,8 +211,6 @@ OAuth 2.0核心思想：用户不需要共享密码
   ✗ 涉及用户数据（需要用户授权）
 ```
 
----
-
 ## 三、OIDC（OpenID Connect）：OAuth的身份认证层
 
 ### 3.1 OAuth vs OIDC
@@ -304,8 +283,6 @@ Signature:
 8. 登录成功
 ```
 
----
-
 ## 四、实现示例：使用Google OAuth登录
 
 ### 4.1 前端（使用Google登录按钮）
@@ -345,7 +322,8 @@ function handleCredentialResponse(response) {
 ### 4.2 后端（验证ID Token并创建Session）
 
 ```python
-# Python with Flask
+# OAuth 2.0 / OIDC 完整指南：认证协议的工业实践
+
 
 from google.auth.transport import requests
 from google.oauth2 import id_token
@@ -458,8 +436,6 @@ def get_current_user():
     return {'user': user.to_dict()}
 ```
 
----
-
 ## 五、OAuth 2.0安全最佳实践
 
 ### 5.1 常见攻击与防护
@@ -564,8 +540,6 @@ response = requests.post(
     }
 )
 ```
-
----
 
 ## 总结
 

@@ -5,7 +5,10 @@ category: java基础
 date: 2019-11-14
 ---
 
-# 一、Spring Bean生命周期
+# Spring Bean作用域与生命周期
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
 
 ![img](/assets/images/clip_image002.png)
 
@@ -24,8 +27,6 @@ date: 2019-11-14
 - 其中流程节点针对于单个Bean，BeanPostProcessor是针对所有Bean而言。
 - 即使你定义了ApplicationContextAware接口，但是有时候并不会调用，这要根据你的IoC容器来决定。
 - Spring IoC     容器的最低要求是实现 BeanFactory 接口，而不是实现 ApplicationContext 接口。对于那些没有实现     ApplicationContext 接口的容器，对生命周期对应的 ApplicationContextAware     定义的方法也是不会被调用的，只有实现了 ApplicationContext 接口的容器，才会在生命周期调用 ApplicationContextAware 所定义的     setApplicationContext 方法。
-
-
 
 # 二、Spring Bean作用域
 
@@ -55,8 +56,6 @@ date: 2019-11-14
 String driver
 ```
 
- 
-
 ####   2）记录一个Bean初始化事件，如：
 
 ```java
@@ -75,7 +74,3 @@ private String otherBeanProp = null;
 ```
 
 还可以进行计算、三元运算、比较等。
-
- 
-
- 

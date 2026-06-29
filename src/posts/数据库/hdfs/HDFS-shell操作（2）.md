@@ -1,10 +1,14 @@
----
+﻿---
 title: HBASE shell操作（2）
 tag: ["HBASE", "HADOOP", "大数据"]
 category: 大数据
 date: 2020-12-06
 ---
 
+# HBASE shell操作（2）
+
+> HBASE shell操作（2）是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了HBASE shell操作（2）的原理和应用场景，帮助你进入大数据领域。
 
 
 a.创建学生成绩表，结果如下。
@@ -46,8 +50,6 @@ d.插入数据，rk002 ，f1中列name为lisi
 
 e.查看rk001的数据
 
-
-
 创建学生成绩表 
 
 create 'student','pratice','info',{NAME=>'course',VERSIONS=>3} 
@@ -68,8 +70,6 @@ put 'student','95001','course:math','85'
 
 put 'student','95001','course:english','89' 
 
- 
-
 put 'student','95002','info:name','Tom' 
 
 put 'student','95002','info:age','19' 
@@ -83,8 +83,6 @@ put 'student','95002','course:chinese','55,60'
 put 'student','95002','course:math','80' 
 
 put 'student','95002','course:english','71' 
-
- 
 
 put 'student','95003','info:name','Lily' 
 
@@ -100,37 +98,25 @@ put 'student','95003','course:math','65'
 
 put 'student','95003','course:english','' 
 
-
-
 查找95001的相关数据
 
 get 'student','95001' 
-
-
 
 查找95002 行、course 列族中 math 列的值 
 
 get 'student','95002',{COLUMN=>'course:math'} 
 
-
-
 查找成绩为80-90之间的相关数据 
 
 scan 'student',{COLUMN=>'course', FILTER=>"ValueFilter(>=,'binary:80') AND ValueFilter(<=,'binary:90')"}
-
-
 
 查找名字为Jom的相关数据 
 
 scan 'student',{FILTER=>"ValueFilter(=,'binary:Jom')"} 
 
-
-
 查找学生地址是山东省的相关数据
 
 scan 'student',{FILTER=>"ValueFilter(=,'substring:山东省')"} 
-
-
 
 删除学生95003的相关数据
 

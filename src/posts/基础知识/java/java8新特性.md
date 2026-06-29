@@ -1,13 +1,17 @@
----
+﻿---
 title: java8新特性
 tag: ["JDK1.8", "java基础"]
 category: java基础
 date: 2019-11-14
 ---
 
+# java8新特性
+
+> java8新特性是一个重要的技术主题，它在现代软件开发中扮演着关键角色。
+> 本文系统介绍了java8新特性的核心概念和实践经验，帮助你深入理解这一技术领域。
+
 	都9102年了，JAVA出到了13.0.1。现在预习一下JAVA8新特性应该还来得及；用代码说话：
 
-# 一、Stream（流）
 
 Stream（流）是一个来自数据源的元素队列并支持聚合操作
 
@@ -91,7 +95,6 @@ public class Java8StreamTest {
     }
 
 }
-
 
 ```
 
@@ -295,7 +298,6 @@ public class java8OptionalTest {
         System.out.println(sum(a, b));
     }
 
-
     private Integer sum(Optional<Integer> a, Optional<Integer> b) {
         // Optional.isPresent - 判断值是否存在
         System.out.println("第一个参数值存在" + a.isPresent());
@@ -311,7 +313,5 @@ public class java8OptionalTest {
 }
 
 ```
-
-
 
 参考文献：https://www.runoob.com/java/java8-new-features.html

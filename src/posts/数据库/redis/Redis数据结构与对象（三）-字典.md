@@ -5,7 +5,10 @@ category: 数据库
 date: 2022-01-25
 ---
 
-## 字典的实现
+# Redis数据结构与对象（三）-字典
+
+> Redis是高性能的内存数据库，广泛应用于缓存、会话管理和实时数据处理等场景。
+> 本文介绍了Redis的核心特性和使用场景，帮助你构建高性能的应用系统。
 
 Redis 的字典使用哈希表作为底层实现，一个哈希表里面可以有多个哈希表节点，而每个哈希表节点就保存了字典中的一个键值对。
 
@@ -121,7 +124,9 @@ typedef struct dictType {
 Redis 计算哈希值和索引值的方法如下：
 
 ```java
-# 使用字典设置的哈希函数，计算键 key 的哈希值
+# Redis数据结构与对象（三）-字典
+
+
 hash = dict->type->hashFunction(key);
  
 # 使用哈希表的 sizemask 属性和哈希值，计算出索引值
@@ -154,4 +159,3 @@ index = hash & dict->ht[0].sizemask = 8 & 3 = 0;
 MurmurHash 算法最初由 Austin Appleby 于 2008 年发明，这种算法的优点在于，即使输入的键是有规律的，算法仍能给出一个很好的随机分布性，并且算法的计算速度也非常快。
 
 MurmurHash 算法目前的最新版本为 MurmurHash3 ，而 Redis 使用的是 MurmurHash2 ，关于 MurmurHash 算法的更多信息可以参考该算法的主页：http://code.google.com/p/smhasher/ 。
-

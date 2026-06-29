@@ -7,11 +7,8 @@ category: 安全
 
 # Spring Security 从零到生产：认证授权体系搭建
 
-> 从概念到实战，手把手带你搭建生产级认证授权体系
-
-## 1. 认证与授权的核心概念
-
-### 1.1 什么是认证（Authentication）
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
 
 **认证**回答的问题是：**"你是谁？"**
 
@@ -125,8 +122,6 @@ SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 | 失败响应 | HTTP 401 Unauthorized | HTTP 403 Forbidden |
 | Spring 核心接口 | Authentication | GrantedAuthority |
 | 核心管理者 | AuthenticationManager | AccessDecisionManager |
-
----
 
 ## 2. Spring Security 过滤器链原理
 
@@ -289,8 +284,6 @@ public class SecurityConfig {
 - JWT 认证过滤器应放在 `UsernamePasswordAuthenticationFilter` **之前**，因为我们不需要表单登录
 - 日志/追踪过滤器应放在链的**最前面**
 - 限流过滤器应放在业务过滤器**之前**
-
----
 
 ## 3. RBAC 模型设计与实现
 
@@ -571,8 +564,6 @@ public class DynamicAuthorizationManager implements AuthorizationManager<Request
     }
 }
 ```
-
----
 
 ## 4. 实战：搭建完整的认证授权体系
 
@@ -1039,8 +1030,6 @@ public class UserController {
 }
 ```
 
----
-
 ## 5. JWT + Spring Security 集成
 
 ### 5.1 application.yml 配置
@@ -1136,8 +1125,6 @@ public class AuthService {
     }
 }
 ```
-
----
 
 ## 6. 常见配置误区
 
@@ -1249,8 +1236,6 @@ try {
     throw new InvalidTokenException("Token 无效");
 }
 ```
-
----
 
 ## 7. 总结与最佳实践
 

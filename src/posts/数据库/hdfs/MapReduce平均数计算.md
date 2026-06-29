@@ -1,9 +1,15 @@
----
+﻿---
 title: MapReduce平均数计算
 tag: ["MapReduce", "HADOOP", "大数据"]
 category: 大数据
 date: 2020-12-06
 ---
+
+# MapReduce平均数计算
+
+> MapReduce平均数计算是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。
+> 本文介绍了MapReduce平均数计算的原理和应用场景，帮助你进入大数据领域。
+
 
 ## 1、建立三个文档
 
@@ -16,8 +22,6 @@ date: 2020-12-06
 上传 到hdfs
 
 ![image-20201206121829515](/assets/images/image-20201206121829515.png)
-
-
 
 ## 2、代码
 

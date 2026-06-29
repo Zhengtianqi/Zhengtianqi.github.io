@@ -1,11 +1,15 @@
----
+﻿---
 title: SpringCloud健康检查
 tag: ["SpringCloud", "健康检查"]
 category: spring
 date: 2020-12-14
 ---
 
-# 服务健康检查：
+# SpringCloud健康检查
+
+> Spring是Java生态中最流行的企业级框架，它为企业应用提供了全面的解决方案。
+> 本文介绍了Spring框架的核心特性和使用方式，帮助你快速上手企业级开发。
+
 
 基于Spring Cloud体系，可以使用spring cloud  actuator组件
 
@@ -37,8 +41,6 @@ management:
 
 http://服务地址/actuator/health
 
-
-
 # 4、响应报文内容
 
 ```java
@@ -60,8 +62,6 @@ http://服务地址/actuator/health
 其中status状态含义如下
 
 ![image-20201214114013294](/assets/images/image-20201214114013294.png)
-
-
 
 # 5、服务自检主动通知
 

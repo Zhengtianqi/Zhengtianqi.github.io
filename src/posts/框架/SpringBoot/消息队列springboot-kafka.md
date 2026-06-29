@@ -1,11 +1,15 @@
----
+﻿---
 title: kafka架构设计
 tag: ["Kafka", "消息队列", "SpringBoot"]
 category: 分布式
 date: 2022-10-28
 ---
 
-# 1、应用场景
+# kafka架构设计
+
+> kafka架构设计是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了kafka架构设计的原理和解决方案，帮助你构建可靠的分布式系统。
+
 
 同时为发布和订阅提供高吞吐量、消息持久化、分布式功能、支持数据并行加载到Hadoop中
 
@@ -181,8 +185,6 @@ public interface MessageService {
     void sendMessage(String id);
 }
 
-
-
 package com.example.service.impl;
 
 import com.example.constant.Constant;
@@ -194,12 +196,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
-
 @Service
 public class MessageServiceKafkaImpl implements MessageService {
     @Autowired
     private KafkaTemplate<String， Object> kafkaTemplate;
-
 
     @Override
     public void sendMessage(String id) {
@@ -272,7 +272,6 @@ import java.util.UUID;
 @Service
 public class SendMessageTest {
 
-
     @Autowired
     private MessageService messageService;
 
@@ -285,4 +284,3 @@ public class SendMessageTest {
 }
 
 ```
-

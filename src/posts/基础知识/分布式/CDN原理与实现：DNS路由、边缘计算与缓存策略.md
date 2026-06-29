@@ -5,25 +5,10 @@ category: 分布式
 date: 2026-06-25
 ---
 
-## 前言
+# CDN原理与实现：DNS路由、边缘计算与缓存策略
 
-互联网中，距离和延迟是性能的大敌。用户在北京访问托管在深圳的服务器，需要跨越千公里网络，延迟至少50ms。
-
-**CDN（Content Delivery Network）** 的核心理念是：
-
-```
-远端服务器 ← 离用户最近的边缘节点
-↓
-通过全球分布的节点，将内容"推送"到用户身边
-```
-
-本文详解CDN的架构原理、DNS解析策略、边缘计算与缓存机制。
-
----
-
-## 一、CDN基本原理
-
-### 1.1 问题场景
+> CDN原理与实现：DNS路由、边缘计算与缓存策略是分布式系统中的核心话题，它涉及数据一致性、可用性和分区容错等关键挑战。
+> 本文深入分析了CDN原理与实现：DNS路由、边缘计算与缓存策略的原理和解决方案，帮助你构建可靠的分布式系统。
 
 ```
 without CDN:
@@ -97,8 +82,6 @@ CDN节点 (北京)
             └───────────────┘
 ```
 
----
-
 ## 二、DNS智能解析与地理位置感知
 
 ### 2.1 传统DNS的问题
@@ -118,7 +101,9 @@ example.com → A record → 123.45.67.89 (全局唯一IP)
 **关键思想**：根据用户**地理位置**，返回最近的CDN节点IP
 
 ```python
-# DNS查询处理流程
+# CDN原理与实现：DNS路由、边缘计算与缓存策略
+
+
 def handle_dns_query(domain, client_ip):
     """
     domain: 用户查询的域名 (e.g., img.example.com)
@@ -235,8 +220,6 @@ class HealthCheckDrivenDNS:
         
         return random.choice(healthy_nodes)['ip']
 ```
-
----
 
 ## 三、CDN边缘节点架构
 
@@ -413,8 +396,6 @@ class CDNPrefetch:
             
             await asyncio.sleep(86400)  # 24小时更新一次
 ```
-
----
 
 ## 四、CDN缓存策略
 
@@ -600,8 +581,6 @@ class CacheInvalidation:
             self.cache[url] = (response['body'], time.time() + 3600, time.time())
 ```
 
----
-
 ## 五、性能指标与监控
 
 ### 5.1 关键指标
@@ -671,8 +650,6 @@ class CDNMonitoring:
             
             await asyncio.sleep(60)
 ```
-
----
 
 ## 总结
 
