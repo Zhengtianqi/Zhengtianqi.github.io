@@ -1,6 +1,5 @@
 # .github/workflows/docs.yml
 name: Deploy documentation to GitHub Pages
-
 on:
   workflow_dispatch:
   push:
@@ -8,9 +7,9 @@ on:
       - master
     paths:
       - 'src/**'
-      - '*.md'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/docs.yml'
-      - '.nojekyll'
 
 permissions:
   contents: read
@@ -31,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 安装pnpm
+      # 安装 pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -46,18 +45,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build VuePress docs
-        run: pnpm run docs:build
+      # 执行 VuePress 打包，输出到 src/.vuepress/dist
+      - name: Build VuePress
+        run: pnpm run docs:build && touch src/.vuepress/dist/.nojekyll
+
+      # 打印目录确认打包产物存在
+      - name: Check dist dir
+        run: ls -la ./src/.vuepress/dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # 上传VuePress打包产物
-      - name: Upload artifact
+      # 只上传打包后的静态文件，不会带源码md
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './src/.vuepress/dist'
+          path: ./src/.vuepress/dist
 
+      # 部署：仅使用上面上传的dist文件，不会拉仓库源码
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
