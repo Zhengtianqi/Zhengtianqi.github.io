@@ -1,15 +1,14 @@
 # .github/workflows/docs.yml
-name: Deploy documentation to GitHub Pages
+name: Deploy VuePress to GitHub Pages
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: [ master ]
     paths:
-      - 'src/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - '.github/workflows/docs.yml'
+      - src/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/docs.yml
 
 permissions:
   contents: read
@@ -17,52 +16,44 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # 安装 pnpm
+      # 安装pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
+          node-version: 22
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
 
-      # 执行 VuePress 打包，输出到 src/.vuepress/dist
+      # 打包并自动在dist生成 .nojekyll
       - name: Build VuePress
-        run: pnpm run docs:build && touch src/.vuepress/dist/.nojekyll
+        run: pnpm run docs:build
 
-      # 打印目录确认打包产物存在
-      - name: Check dist dir
-        run: ls -la ./src/.vuepress/dist
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      # 只上传打包后的静态文件，不会带源码md
-      - name: Upload pages artifact
+      # 关键：只上传打包后的dist静态文件，不上传md源码
+      - name: Upload static dist
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./src/.vuepress/dist
 
-      # 部署：仅使用上面上传的dist文件，不会拉仓库源码
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Deploy Pages
+        id: deploy
         uses: actions/deploy-pages@v4
