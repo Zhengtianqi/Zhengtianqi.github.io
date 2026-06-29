@@ -1,14 +1,18 @@
 # .github/workflows/docs.yml
-name: Deploy VuePress to GitHub Pages
+name: Deploy documentation to GitHub Pages
+
 on:
+  # 允许手动触发工作流
   workflow_dispatch:
+
+  # 在主分支有推送时触发
   push:
-    branches: [ master ]
+    branches:
+      - master
     paths:
-      - src/**
-      - package.json
-      - pnpm-lock.yaml
-      - .github/workflows/docs.yml
+      - 'src/**'
+      - '*.md'
+      - '.github/workflows/docs.yml'
 
 permissions:
   contents: read
@@ -16,44 +20,41 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+  deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 安装pnpm
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: '22'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      # 打包并自动在dist生成 .nojekyll
-      - name: Build VuePress
+      - name: Build documentation
         run: pnpm run docs:build
 
-      # 关键：只上传打包后的dist静态文件，不上传md源码
-      - name: Upload static dist
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./src/.vuepress/dist
+          path: './src/.vuepress/dist'
 
-      - name: Deploy Pages
-        id: deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
