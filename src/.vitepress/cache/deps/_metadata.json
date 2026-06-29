@@ -1,61 +1,31 @@
 {
-  "hash": "650237c9",
-  "configHash": "e79f8ddf",
-  "lockfileHash": "de41f7bc",
-  "browserHash": "558ee4de",
+  "hash": "5ab9a037",
+  "configHash": "b0686594",
+  "lockfileHash": "0cc9b55f",
+  "browserHash": "cf92d91f",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "481ed230",
+      "fileHash": "6889a9ab",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
+      "src": "../../../../node_modules/.pnpm/@vue+devtools-api@8.1.5/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "26311ab6",
+      "fileHash": "a94b3036",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../../node_modules/@vueuse/core/index.mjs",
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@14.3.0_vue@3.5.39_typescript@5.9.3_/node_modules/@vueuse/core/dist/index.js",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "54422f65",
-      "needsInterop": false
-    },
-    "vitepress > @vueuse/integrations/useFocusTrap": {
-      "src": "../../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
-      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "9bc8213c",
-      "needsInterop": false
-    },
-    "vitepress > mark.js/src/vanilla.js": {
-      "src": "../../../../node_modules/mark.js/src/vanilla.js",
-      "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "04f16a71",
-      "needsInterop": false
-    },
-    "vitepress > minisearch": {
-      "src": "../../../../node_modules/minisearch/dist/es/index.js",
-      "file": "vitepress___minisearch.js",
-      "fileHash": "f3b87c5c",
-      "needsInterop": false
-    },
-    "vitepress-theme-teek": {
-      "src": "../../../../node_modules/vitepress-theme-teek/es/index.mjs",
-      "file": "vitepress-theme-teek.js",
-      "fileHash": "4cb88357",
+      "fileHash": "eb7bb4f2",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-3JLEWJ6J": {
-      "file": "chunk-3JLEWJ6J.js"
-    },
-    "chunk-CE4NWMDA": {
-      "file": "chunk-CE4NWMDA.js"
-    },
-    "chunk-PZ5AY32C": {
-      "file": "chunk-PZ5AY32C.js"
+    "chunk-U3WM2OI5": {
+      "file": "chunk-U3WM2OI5.js"
     }
   }
 }

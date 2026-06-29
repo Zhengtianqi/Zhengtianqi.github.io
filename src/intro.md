@@ -1,6 +1,7 @@
 ---
 icon: circle-info
 cover: /assets/images/cover3.jpg
+date: 2024-06-16
 ---
 
 # 介绍页

@@ -10,10 +10,22 @@
     "docs:preview": "vitepress preview src"
   },
   "devDependencies": {
-    "vitepress": "^1.6.3",
-    "vitepress-theme-teek": "^1.6.0"
+    "pagefind": "^1.5.2",
+    "typescript": "^5.4.5",
+    "vitepress": "2.0.0-alpha.17"
+  },
+  "directories": {
+    "doc": "src"
   },
   "dependencies": {
-    "pnpm": "^10.34.4"
+    "@sugarat/theme": "^0.5.23"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "search-insights"
+      ]
+    }
   }
 }
