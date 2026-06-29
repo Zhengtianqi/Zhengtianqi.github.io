@@ -1,11 +1,7 @@
-# .github/workflows/docs.yml
 name: Deploy documentation to GitHub Pages
 
 on:
-  # 允许手动触发工作流
   workflow_dispatch:
-
-  # 在主分支有推送时触发
   push:
     branches:
       - master
@@ -35,15 +31,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 1. 安装 pnpm（官方 action）
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9  # 可指定具体版本，如 '9' 或 'latest'
+
+      # 2. 安装 Node.js，并利用已安装的 pnpm 启用缓存
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'
+          cache: 'pnpm'          # 会自动从 pnpm-lock.yaml 计算缓存 key
 
+      # 3. 安装依赖（等同于 npm ci）
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # 4. 构建文档
       - name: Build documentation
         run: pnpm run docs:build
 
