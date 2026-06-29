@@ -2,10 +2,7 @@
 name: Deploy documentation to GitHub Pages
 
 on:
-  # 允许手动触发工作流
   workflow_dispatch:
-
-  # 在主分支有推送时触发
   push:
     branches:
       - master
@@ -28,27 +25,26 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 1. 先安装pnpm，必须放在setup-node前面
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      # 2. 配置node并绑定pnpm缓存
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm' # 缓存改为pnpm
-
-      # 安装pnpm
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9 # 可自行修改稳定版本，如8/9
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile # 等价npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build documentation
         run: pnpm run docs:build
