@@ -3,7 +3,7 @@ import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
 
 export default hopeTheme({
-  hostname: "https://zhengtianqi.gitee.io",
+  hostname: "https://zhengtianqi.github.io",
 
   author: {
     name: "郑天祺",
