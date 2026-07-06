@@ -22,7 +22,13 @@ jobs:
 
       - name: 设置 pnpm
         uses: pnpm/action-setup@v6
-
+        with:
+          version: 9
+          dest: ~/setup-pnpm
+          cache: false
+          cache_dependency_path: pnpm-lock.yaml
+          package_json_file: package.json
+          standalone: false
 
       - name: 设置 Node.js
         uses: actions/setup-node@v6
