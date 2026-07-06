@@ -1,0 +1,39 @@
+import{n as e,o as t,r as n}from"./app-CS-P9NMX.js";import{t as r}from"./plugin-vue_export-helper-BDNMzG2s.js";var i=JSON.parse(`{"path":"/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/hdfs/MapReduce%E6%A6%82%E8%BF%B0.html","title":"MapReduce概述","lang":"zh-CN","frontmatter":{"title":"MapReduce概述","tag":["MapReduce","HADOOP","大数据"],"category":"大数据","date":"2019-12-16T00:00:00.000Z","description":"MapReduce概述 MapReduce概述是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。 本文介绍了MapReduce概述的原理和应用场景，帮助你进入大数据领域。 其中： 二、wordcount （1）拆分输入数据 image-20191216173747383image-20191216173747383 （2）执行Map方法...","head":[["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"MapReduce概述\\",\\"image\\":[\\"https://zhengtianqi.github.io/assets/images/wordcount.png\\",\\"https://zhengtianqi.github.io/assets/images/wordcount-split.png\\",\\"https://zhengtianqi.github.io/assets/images/wordcount-map.png\\",\\"https://zhengtianqi.github.io/assets/images/wordcount-reduce.png\\"],\\"datePublished\\":\\"2019-12-16T00:00:00.000Z\\",\\"dateModified\\":\\"2026-06-29T08:25:12.000Z\\",\\"author\\":[{\\"@type\\":\\"Person\\",\\"name\\":\\"郑天祺\\",\\"url\\":\\"https://zhengtianqi.github.io\\"}]}"],["meta",{"property":"og:url","content":"https://zhengtianqi.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/hdfs/MapReduce%E6%A6%82%E8%BF%B0.html"}],["meta",{"property":"og:site_name","content":"郑天祺的博客"}],["meta",{"property":"og:title","content":"MapReduce概述"}],["meta",{"property":"og:description","content":"MapReduce概述 MapReduce概述是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。 本文介绍了MapReduce概述的原理和应用场景，帮助你进入大数据领域。 其中： 二、wordcount （1）拆分输入数据 image-20191216173747383image-20191216173747383 （2）执行Map方法..."}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:image","content":"https://zhengtianqi.github.io/assets/images/wordcount.png"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:updated_time","content":"2026-06-29T08:25:12.000Z"}],["meta",{"property":"article:tag","content":"大数据"}],["meta",{"property":"article:tag","content":"HADOOP"}],["meta",{"property":"article:tag","content":"MapReduce"}],["meta",{"property":"article:published_time","content":"2019-12-16T00:00:00.000Z"}],["meta",{"property":"article:modified_time","content":"2026-06-29T08:25:12.000Z"}]]},"git":{"createdTime":1718546797000,"updatedTime":1782721512000,"contributors":[{"name":"zhengtianqi","username":"zhengtianqi","email":"270490096@qq.com","commits":9,"url":"https://github.com/zhengtianqi"},{"name":"郑天祺","username":"","email":"270490096@qq.com","commits":3}]},"readingTime":{"minutes":3.55,"words":1066},"filePathRelative":"posts/数据库/hdfs/MapReduce概述.md","excerpt":"\\n<blockquote>\\n<p>MapReduce概述是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。<br>\\n本文介绍了MapReduce概述的原理和应用场景，帮助你进入大数据领域。</p>\\n</blockquote>\\n<pre><code>MapReduce采取了分而治之的基本思想，将一个大的作业分解成若干小的任务，提交给集群的多台计算机处理，这样就大大提高了完成作业的效率。\\n\\n在Hadoop平台上，MapReduce框架负责处理并行编程中分布式存储、工作调度、负载均衡、容错及网络通信等复杂工作，把处理过程高度抽象为两个函数：Map 和 Reduce。\\n\\nMap负责把作业分解成多个任务，Reduce负责把分解后多任务处理的结果汇总起来。\\n</code></pre>","autoDesc":true}`),a={name:`MapReduce概述.md`};function o(r,i,a,o,s,c){return t(),e(`div`,null,[...i[0]||=[n(`<h1 id="mapreduce概述" tabindex="-1"><a class="header-anchor" href="#mapreduce概述"><span>MapReduce概述</span></a></h1><blockquote><p>MapReduce概述是大数据领域的核心技术，它为海量数据的存储和处理提供了强大的支持。<br> 本文介绍了MapReduce概述的原理和应用场景，帮助你进入大数据领域。</p></blockquote><pre><code>MapReduce采取了分而治之的基本思想，将一个大的作业分解成若干小的任务，提交给集群的多台计算机处理，这样就大大提高了完成作业的效率。
+
+在Hadoop平台上，MapReduce框架负责处理并行编程中分布式存储、工作调度、负载均衡、容错及网络通信等复杂工作，把处理过程高度抽象为两个函数：Map 和 Reduce。
+
+Map负责把作业分解成多个任务，Reduce负责把分解后多任务处理的结果汇总起来。
+</code></pre><p>其中：</p><pre><code>执行MapReduce作业的机器角色由两个：JobTracker 和 TaskTracker
+
+（1）JobTracker用于调度作业（一个集群只有一个JobTracker）
+
+（2）TaskTracker用于跟踪任务的执行情况。
+</code></pre><h1 id="二、wordcount" tabindex="-1"><a class="header-anchor" href="#二、wordcount"><span>二、wordcount</span></a></h1><pre><code>统计所有文件中每一个单词出现的次数（频次）。
+
+![image-20191216173559584](/assets/images/wordcount.png)
+
+所做的操作：
+</code></pre><h2 id="_1-拆分输入数据" tabindex="-1"><a class="header-anchor" href="#_1-拆分输入数据"><span>（1）拆分输入数据</span></a></h2><pre><code>拆分数据 属于 Map 的输入阶段，系统会逐行读取文件的数据，得到一系列的（key/value）
+</code></pre><figure><img src="/assets/images/wordcount-split.png" alt="image-20191216173747383" tabindex="0" loading="lazy"><figcaption>image-20191216173747383</figcaption></figure><pre><code>注意：如果只有一个文件，且很小，系统只分配一个Split；
+
+	如果由多个文件，或者文件很大，多个Split
+
+			上图 0、12为偏移量（包含回车）即：H是第0个字符   B是第12个字符
+</code></pre><h2 id="_2-执行map方法" tabindex="-1"><a class="header-anchor" href="#_2-执行map方法"><span>（2）执行Map方法</span></a></h2><pre><code>分割完成后，系统会将分割好的（key/value）对交给用户定义的 Map 方法进行处理，生成新的（key/value）对
+
+![image-20191216174237035](/assets/images/wordcount-map.png)
+
+	注意：后边这个1是个数
+</code></pre><h2 id="_3-排序与合并处理" tabindex="-1"><a class="header-anchor" href="#_3-排序与合并处理"><span>（3）排序与合并处理</span></a></h2><pre><code>系统得到Map方法输出的（key/value）对后，Mapper 会将它们按照 key 值进行排序，并执行Combine 过程，将 key 值相同的 value 值累加，得到 Mapper 的最终输出结果。
+</code></pre><p>即：先排序 后累加</p><h2 id="_4-reduce-阶段的排序与合并" tabindex="-1"><a class="header-anchor" href="#_4-reduce-阶段的排序与合并"><span>（4）Reduce 阶段的排序与合并</span></a></h2><pre><code>Reducer 先对从 Mapper 接收的数据进行排序，再交由用户自定义的 Reduce 方法进行处理，得到新的（key/value）对，并作为WordCount的结果输出
+</code></pre><figure><img src="/assets/images/wordcount-reduce.png" alt="image-20191216174856510" tabindex="0" loading="lazy"><figcaption>image-20191216174856510</figcaption></figure><p>简述上述过程：</p><h3 id="a-map" tabindex="-1"><a class="header-anchor" href="#a-map"><span>（A）Map</span></a></h3><h4 id="a-read" tabindex="-1"><a class="header-anchor" href="#a-read"><span>（a）Read：</span></a></h4><pre><code>	Map Task 通过用户编写的 RecordReader，从输入 InputSplit 中解析出多个（key/value）
+</code></pre><h4 id="b-map" tabindex="-1"><a class="header-anchor" href="#b-map"><span>（b）Map：</span></a></h4><pre><code>	将解析出的（key/value）交给用户编写的Map函数处理，并产生一系列新的（key/value）
+</code></pre><h4 id="c-collect" tabindex="-1"><a class="header-anchor" href="#c-collect"><span>（c）Collect：</span></a></h4><pre><code>	在用户编写的Map函数中，数据处理完成后，一般会调用OutputCollector.collect()收集结果。在该函数内部，它会将生成（key/value）分片（通过Partitioner），并写入一个环形内存缓冲区中。（感觉像
+</code></pre><p>，log4j2用的队列）</p><h4 id="d-spill" tabindex="-1"><a class="header-anchor" href="#d-spill"><span>（d）Spill：</span></a></h4><pre><code>	环形缓冲区填满后，MapReduce会将数据写到本地磁盘上，生成一个临时文件。将数据写入本地磁盘之前，先对数据进行一次本地排序，并在必要时对数据进行合并、压缩等操作。
+</code></pre><h4 id="e-combine" tabindex="-1"><a class="header-anchor" href="#e-combine"><span>（e）Combine：</span></a></h4><pre><code>	当所有数据处理完成后，Map Task 对所有临时文件进行一次合并，以确保最终只会生成一个数据文件
+</code></pre><h3 id="b-reduce" tabindex="-1"><a class="header-anchor" href="#b-reduce"><span>（B）Reduce</span></a></h3><h4 id="a-shuffle" tabindex="-1"><a class="header-anchor" href="#a-shuffle"><span>（a）Shuffle：</span></a></h4><pre><code>	也成为Copy。Reduce Task从各个Map Task上远程复制一片数据，并针对某一篇数据进行判断，如果其大小超过一定阈值，则写到磁盘上，否则直接放到内存中。
+</code></pre><h4 id="b-merge" tabindex="-1"><a class="header-anchor" href="#b-merge"><span>（b）Merge：</span></a></h4><pre><code>	在远程复制的同时，Reduce Task启动了两个后台线程对内存和磁盘上的文件进行合并，以防止内存使用过多或者磁盘上文件过多。（为啥要用两个线程呢？）
+</code></pre><h4 id="c-sort" tabindex="-1"><a class="header-anchor" href="#c-sort"><span>（c）Sort：</span></a></h4><pre><code>	按照MapReduce语义，用户编写的 Reduce 函数输入数据时按 key 进行聚集的一组数据。（采用基于排序的策略）。各个Map Task实现了局部排序，Reduce Task只需对所有的数据进行一次归并排序即可。
+</code></pre><h4 id="d-reduce" tabindex="-1"><a class="header-anchor" href="#d-reduce"><span>（d）Reduce：</span></a></h4><pre><code>	Reduce Task将每组数据一次交给用户编写的 reduce()函数处理
+</code></pre><h4 id="e-write" tabindex="-1"><a class="header-anchor" href="#e-write"><span>（e）Write：</span></a></h4><pre><code>	reduce()函数将计算结果写到HDFS
+</code></pre>`,43)]])}var s=r(a,[[`render`,o]]);export{i as _pageData,s as default};
