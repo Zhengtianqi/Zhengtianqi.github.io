@@ -2,8 +2,10 @@ import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
 import { searchConsolePlugin } from 'vuepress-plugin-china-search-console'
+import { viteBundler } from "@vuepress/bundler-vite";
 
 export default defineUserConfig({
+  bundler: viteBundler(),
   base: "/",
 
   lang: "zh-CN",
