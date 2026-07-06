@@ -1,7 +1,0 @@
-packages:
-  - 'src'
-allowBuilds:
-  '@parcel/watcher': false
-  core-js: false
-  esbuild: false
-  vue-demi: false
