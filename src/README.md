@@ -1,6 +1,6 @@
 ---
 home: true
-layout: BlogHome
+layout: Blog
 icon: home
 title: 郑天祺的博客
 heroImage: /logo.svg
