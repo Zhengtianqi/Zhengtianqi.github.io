@@ -1,12 +1,8 @@
 name: 部署文档
-
-# 仅推送到 master 分支触发
 on:
   push:
     branches:
       - master
-
-# 权限：允许读写仓库内容、部署pages
 permissions:
   contents: write
   pages: write
@@ -16,47 +12,39 @@ jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
     steps:
-      # 拉取代码
       - name: Checkout source code
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          # 有子模块再打开
-          # submodules: true
 
-      # 安装 pnpm（最简标准配置）
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
           version: 9
 
-      # 配置 Node + 自动缓存 pnpm 依赖
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: 'pnpm' # 自动读取 pnpm-lock.yaml 缓存
+          cache: 'pnpm'
 
-      # 安装依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 构建静态文档
-      - name: Build docs site
+      - name: Build docs & print file hash
         env:
           NODE_OPTIONS: --max_old_space_size=12288
         run: |
           pnpm run docs:build
-          # 创建 .nojekyll 关闭 GitHub Jekyll 渲染，避免下划线文件丢失
           touch src/.vuepress/dist/.nojekyll
-          # 打印构建文件列表，方便排错
-          ls -la src/.vuepress/dist
+          ls src/.vuepress/dist
+          find src/.vuepress/dist -type f -print0 | xargs -0 sha256sum > dist-hash.log
+          cat dist-hash.log
 
-      # 自动部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.6.9
         with:
           branch: gh-pages
           folder: src/.vuepress/dist
-          clean: true # 自动清空历史文件，避免残留旧页面
+          clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
