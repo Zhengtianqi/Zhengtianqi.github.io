@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 jobs:
-  deploy-gh-pages:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -41,10 +41,19 @@ jobs:
           find src/.vuepress/dist -type f -print0 | xargs -0 sha256sum > dist-hash.log
           cat dist-hash.log
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.6.9
+      # 先上传产物，此时页面会出现Artifacts
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: src/.vuepress/dist
-          clean: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          path: src/.vuepress/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
