@@ -12,12 +12,4 @@ export default defineUserConfig({
     ['meta', { name: 'bytedance-verification-code', content: 'zjHSprOdFlen2eSs8phv' }]
   ],
   theme,
-  // 1. 关闭「在 GitHub 上编辑此页」
-  editLink: false,
-  prevLink: false,
-  nextLink: false,
-  // 2. 隐藏最近更新时间
-  lastUpdated: false,
-  // 3. 隐藏贡献者
-  contributors: false,
 });

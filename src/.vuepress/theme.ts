@@ -4,6 +4,14 @@ import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
 
 export default hopeTheme({
+  // 关闭页面底部编辑链接、贡献者、更新时间
+  editLink: false,
+  contributors: false,
+  lastUpdated: false,
+  // 上下页翻页按钮（你之前加的）
+  prevLink: false,
+  nextLink: false,
+
   hostname: "https://zhengtianqi.github.io",
 
   author: {
