@@ -50,7 +50,7 @@ export default hopeTheme({
       // Evernote: "https://example.com",
       // Facebook: "https://example.com",
       // Flipboard: "https://example.com",
-      // Gitee: "https://example.com",
+      Gitee: "https://blog.csdn.net/qq_23034755",
       // GitHub: "https://example.com",
       // Gitlab: "https://example.com",
       // Gmail: "mailto:info@example.com",
@@ -107,6 +107,7 @@ export default hopeTheme({
     mark: true,
     plantuml: true,
     spoiler: true,
+    kotlinPlayground: true,
     stylize: [
       {
         matcher: "Recommended",
@@ -159,10 +160,10 @@ export default hopeTheme({
     // },
 
     // 在启用之前安装 @vue/repl
-    // vuePlayground: true,
+    vuePlayground: true,
 
     // 在启用之前安装 sandpack-vue3
-    // sandpack: true,
+    sandpack: true,
 
     // 在启用之前安装 markmap-lib markmap-toolbar markmap-view
     markmap: true,
@@ -171,17 +172,20 @@ export default hopeTheme({
   // 在这里配置主题提供的插件
   plugins: {
     blog: true,
-
+    watermark: false,
     slimsearch: {
       // 插件选项
     },
 
     // 启用之前需安装 @waline/client
     // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
-    // comment: {
-    //   provider: "Waline",
-    //   serverURL: "https://waline-comment.vuejs.press",
-    // },
+    comment: {
+      provider: "Giscus",
+      repo: "Zhengtianqi/Zhengtianqi.github.io",
+      repoId: "MDEwOlJlcG9zaXRvcnkyMDMzNTQyOTk=",
+      category: "Announcements",
+      categoryId: "DIC_kwDODB7wu84DAu8D"
+    },
 
     components: {
       components: ["Badge", "VPCard"],

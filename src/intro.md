@@ -1,6 +1,8 @@
 ---
 icon: circle-info
 cover: /assets/images/cover3.jpg
+watermark: true
+watermarkText: "个人档案 禁止外传"
 sticky: 9999
 ---
 
