@@ -14,6 +14,7 @@
     "@vue/repl": "^4.7.2",
     "@vuepress/bundler-vite": "2.0.0-rc.30",
     "@vuepress/plugin-feed": "2.0.0-rc.3",
+    "@vuepress/plugin-seo": "2.0.0-rc.132",
     "@vuepress/plugin-slimsearch": "2.0.0-rc.131",
     "@vuepress/plugin-watermark": "2.0.0-rc.131",
     "@waline/client": "^3.15.2",
@@ -39,5 +40,6 @@
   },
   "dependencies": {
     "esbuild-wasm": "^0.28.2"
-  }
+  },
+  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }

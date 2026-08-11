@@ -177,6 +177,54 @@ export default hopeTheme({
       // 插件选项
     },
 
+    seo: {
+      fallBackImage: "https://zhengtianqi.github.io/logo.svg",
+      customHead: (head, page) => {
+        const pathSegments = page.path
+          .replace(/\/$/, "")
+          .split("/")
+          .filter((seg) => seg && !seg.endsWith(".html"));
+
+        if (pathSegments.length === 0) return;
+
+        const breadcrumbItems = [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "首页",
+            item: "https://zhengtianqi.github.io/",
+          },
+        ];
+
+        let currentPath = "";
+        pathSegments.forEach((segment, index) => {
+          currentPath += `/${segment}`;
+          const name =
+            (page.titles?.[index + 1]) ||
+            segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+          breadcrumbItems.push({
+            "@type": "ListItem",
+            position: index + 2,
+            name,
+            item: `https://zhengtianqi.github.io${currentPath}.html`,
+          });
+        });
+
+        const breadcrumbSchema = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumbItems,
+        };
+
+        head.push([
+          "script",
+          { type: "application/ld+json" },
+          JSON.stringify(breadcrumbSchema),
+        ]);
+      },
+    },
+
     // 启用之前需安装 @waline/client
     // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
     comment: {
