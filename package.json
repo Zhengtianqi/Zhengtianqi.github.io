@@ -33,11 +33,10 @@
     "vuepress": "2.0.0-rc.30",
     "vuepress-theme-hope": "2.0.0-rc.107"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
-  },
+  "onlyBuiltDependencies": [
+    "esbuild",
+    "@parcel/watcher"
+  ],
   "dependencies": {
     "esbuild-wasm": "^0.28.2"
   },
