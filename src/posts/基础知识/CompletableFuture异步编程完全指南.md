@@ -1,6 +1,6 @@
 ---
 title: CompletableFuture异步编程完全指南
-date: 2026-08-24
+date: 2026-08-19
 category: 基础知识
 tag: ["Java", "异步编程", "CompletableFuture", "并发"]
 ---

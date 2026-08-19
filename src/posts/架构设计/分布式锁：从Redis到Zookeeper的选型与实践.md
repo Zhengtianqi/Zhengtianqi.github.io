@@ -1,6 +1,6 @@
 ---
 title: 分布式锁：从Redis到Zookeeper的选型与实践
-date: 2026-09-03
+date: 2026-08-19
 category: 架构设计
 tag: ["分布式锁", "Redis", "Zookeeper", "分布式"]
 ---

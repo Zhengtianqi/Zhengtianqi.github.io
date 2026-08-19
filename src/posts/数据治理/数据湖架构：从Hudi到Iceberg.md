@@ -1,6 +1,6 @@
 ---
 title: 数据湖架构：从Hudi到Iceberg
-date: 2026-09-05
+date: 2026-08-19
 category: 数据治理
 tag: ["数据湖", "Hudi", "Iceberg", "大数据"]
 ---

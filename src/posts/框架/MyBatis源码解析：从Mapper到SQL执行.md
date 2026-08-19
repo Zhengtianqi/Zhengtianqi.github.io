@@ -1,6 +1,6 @@
 ---
 title: MyBatis源码解析：从Mapper到SQL执行
-date: 2026-08-27
+date: 2026-08-19
 category: 框架
 tag: ["MyBatis", "源码", "ORM", "SQL"]
 ---

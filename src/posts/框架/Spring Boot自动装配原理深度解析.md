@@ -1,6 +1,6 @@
 ---
 title: Spring Boot自动装配原理深度解析
-date: 2026-08-26
+date: 2026-08-19
 category: 框架
 tag: ["Spring Boot", "自动装配", "原理", "源码"]
 ---

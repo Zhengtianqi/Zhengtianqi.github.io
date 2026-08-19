@@ -1,6 +1,6 @@
 ---
 title: Helm：Kubernetes应用包管理实战
-date: 2026-08-30
+date: 2026-08-19
 category: 运维
 tag: ["Helm", "Kubernetes", "包管理", "云原生"]
 ---

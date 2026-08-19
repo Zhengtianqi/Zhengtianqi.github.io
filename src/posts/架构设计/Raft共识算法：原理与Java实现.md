@@ -1,6 +1,6 @@
 ---
 title: Raft共识算法：原理与Java实现
-date: 2026-09-01
+date: 2026-08-19
 category: 架构设计
 tag: ["Raft", "分布式", "共识算法", "一致性"]
 ---

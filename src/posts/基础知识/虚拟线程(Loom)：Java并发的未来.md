@@ -1,6 +1,6 @@
 ---
 title: 虚拟线程(Loom)：Java并发的未来
-date: 2026-08-25
+date: 2026-08-19
 category: 基础知识
 tag: ["Java", "虚拟线程", "Project Loom", "并发", "JDK21"]
 ---
