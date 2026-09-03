@@ -5,17 +5,25 @@
 ## 项目概述
 
 - 名称：郑天祺的博客（`blog`，version 2.0.0）
-- 站点：https://zhengtianqi.github.io
+
+- 站点：<https://zhengtianqi.github.io>
+
 - 作者：郑天祺
+
 - 语言：简体中文（`lang: zh-CN`，`base: "/"`）
+
 - 形态：基于 VuePress 2 + vuepress-theme-hope 的个人技术博客，部署于 GitHub Pages
 
 ## 技术栈
 
 - 包管理器：**pnpm**（已在 `package.json` 中锁定 `packageManager`，GitHub Actions 也使用 pnpm）
+
 - 框架：VuePress 2.0.0-rc.30（`vuepress-vite` bundler）
+
 - 主题：vuepress-theme-hope 2.0.0-rc.107
+
 - 语言：TypeScript（配置文件为 `.ts`）
+
 - Node：CI 使用 Node 24，构建需预留约 12GB 内存（`NODE_OPTIONS=--max-old-space-size=12288`）
 
 ## 常用命令
@@ -83,8 +91,11 @@ date: YYYY-MM-DD
 ```
 
 - `title`：文章标题，会渲染为 `<h1>` 之前的页面标题
+
 - `tag`：标签数组
-- `category`：分类，**必须对应 `src/posts/` 下的实际目录名**（如 `担保`、`大模型`、`刷题`、`架构设计`、`java基础` 等）
+
+- `category`：分类，**必须对应** **`src/posts/`** **下的实际目录名**（如 `担保`、`大模型`、`刷题`、`架构设计`、`java基础` 等）
+
 - `date`：发布日期，ISO `YYYY-MM-DD` 格式
 
 可选 frontmatter 字段（见 `intro.md`）：`icon`、`cover`、`watermark`、`watermarkText`、`sticky`（置顶权重）等。
@@ -110,20 +121,23 @@ date: YYYY-MM-DD
 ### 数学公式与计算
 
 - **禁止使用 LaTeX 数学公式**（项目未启用 katex/mathjax，见 `theme.ts` 中被注释的 `math` 配置）
+
 - 公式与计算过程一律使用 **代码块** 或 **Markdown 表格** 呈现，例如：
 
 ```text
 风险度 = 暴露金额 × 违约概率 × 违约损失率
 ```
 
-| 指标 | 公式 | 说明 |
-| --- | --- | --- |
+| 指标  | 公式           | 说明            |
+| --- | ------------ | ------------- |
 | 风险度 | E × PD × LGD | 暴露×违约概率×违约损失率 |
 
 ### 图片
 
 - 文章配图统一存放于 `src/.vuepress/public/assets/images/`
+
 - Markdown 中引用路径以 `/assets/images/xxx.png` 形式（`public/` 为根）
+
 - 既有图片多为历史快照命名（`image-YYYYMMDDHHmmss.png`、哈希名）或语义命名（`TCP协议通讯过程.png`），新增图片优先使用语义化文件名
 
 ## 主题已启用的 Markdown 能力
@@ -131,8 +145,11 @@ date: YYYY-MM-DD
 `theme.ts` 中已开启（撰写文章时可直接使用）：
 
 - `align` / `figure` / `mark` / `sub` / `sup` / `spoiler` / `tasklist` / `tabs` / `codeTabs` / `imgLazyload` / `imgSize` / `gfm` / `attrs` / `component` / `include` / `vPre` / `plantuml`
+
 - 图表：`chartjs`（Chart.js）、`echarts`、`flowchart`（flowchart.ts）、`mermaid`、`markmap`
+
 - 交互：`vuePlayground`（@vue/repl）、`sandpack`（sandpack-vue3）、`kotlinPlayground`
+
 - 组件：`Badge`、`VPCard`（通过 `components` 插件注入，可在文章中直接使用）
 
 未启用：`math`（katex/mathjax，故不写 LaTeX 公式）、`revealjs`（幻灯片）。
@@ -140,13 +157,17 @@ date: YYYY-MM-DD
 ## SEO 与评论
 
 - `seo` 插件已配置 fallback 图片与 `BreadcrumbList` 结构化数据生成
+
 - 评论使用 `Giscus`（仓库 `Zhengtianqi/Zhengtianqi.github.io`，分类 `Announcements`）
+
 - 站点 `hostname: https://zhengtianqi.github.io`，会影响 SEO/搜索/Feed 的绝对链接
 
 ## 构建与部署
 
 - 触发：推送到 `master` 分支（见 `.github/workflows/deploy-docs.yml`）
+
 - 流程：checkout → pnpm install（frozen-lockfile）→ `docs:build` → 写入 `.nojekyll` → 上传 artifact → 部署到 GitHub Pages
+
 - 本地验证构建时，建议预留内存：`NODE_OPTIONS=--max-old-space-size=12288 pnpm run docs:build`
 
 ## 内容约束（硬性）
@@ -160,3 +181,4 @@ date: YYYY-MM-DD
 ## 不可破坏的产物
 
 - `src/.vuepress/.cache/`、`src/.vuepress/.temp/`、`src/.vuepress/dist/` 均为构建产物（已 gitignore），不要提交、不要手动改
+
