@@ -273,7 +273,7 @@ export default hopeTheme({
         pathSegments.forEach((segment, index) => {
           currentPath += `/${segment}`;
           const name =
-            (page.titles?.[index + 1]) ||
+            ((page.titles as string[] | undefined)?.[index + 1]) ||
             segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
           breadcrumbItems.push({
