@@ -180,6 +180,79 @@ export default hopeTheme({
     seo: {
       fallBackImage: "https://zhengtianqi.github.io/logo.svg",
       customHead: (head, page) => {
+        // —— 仅在首页输出站点级 Sitelinks 引导结构化数据（先于 early-return） ——
+        const isHome =
+          page.path === "/" || page.path === "" || page.path === "/index.html";
+        if (isHome) {
+          // 引导 Bing/Google 展示站点搜索框（Sitelinks Searchbox）
+          const siteLinksSchema = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "郑天祺的博客",
+            url: "https://zhengtianqi.github.io/",
+            description: "携一身温柔烟火，做有温度、懂共情的赶路人。",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://zhengtianqi.github.io/?s={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          };
+          head.push([
+            "script",
+            { type: "application/ld+json" },
+            JSON.stringify(siteLinksSchema),
+          ]);
+
+          // 显式告诉搜索引擎：这些是希望被做成 Sitelinks 的子页候选
+          const navSchema = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "首页",
+                url: "https://zhengtianqi.github.io/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "关于我",
+                url: "https://zhengtianqi.github.io/intro.html",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "文章",
+                url: "https://zhengtianqi.github.io/posts/",
+              },
+              {
+                "@type": "ListItem",
+                position: 4,
+                name: "时间线",
+                url: "https://zhengtianqi.github.io/timeline/",
+              },
+              {
+                "@type": "ListItem",
+                position: 5,
+                name: "标签",
+                url: "https://zhengtianqi.github.io/tags/",
+              },
+              {
+                "@type": "ListItem",
+                position: 6,
+                name: "分类",
+                url: "https://zhengtianqi.github.io/categories/",
+              },
+            ],
+          };
+          head.push([
+            "script",
+            { type: "application/ld+json" },
+            JSON.stringify(navSchema),
+          ]);
+        }
+
         const pathSegments = page.path
           .replace(/\/$/, "")
           .split("/")
